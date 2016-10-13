@@ -16,7 +16,10 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table->double('price');
-            $table->datetime('date');
+            $table->datetime('date')->nullable();
+            $table->string('street_number');
+            $table->integer('postalcode');
+            $table->string('city');
             $table->timestamps();
 
             $table->integer('host_id')->unsigned();
@@ -30,7 +33,10 @@ class CreateBookingsTable extends Migration
      * @return void
      */
     public function down()
-    {
+    {   
+        Schema::drop('dish_images');
+        Schema::drop('dishes');
+        Schema::drop('user_booking');
         Schema::dropIfExists('bookings');
     }
 }

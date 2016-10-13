@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDishesTable extends Migration
+class CreateDishImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateDishesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dishes', function (Blueprint $table) {
+        Schema::create('dish_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description');
+            $table->string('image-url');
             
-            $table->integer('booking_id')->unsigned();
-            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->integer('dish_id')->unsigned();
+            $table->foreign('dish_id')->references('id')->on('dishes');
+        
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateDishesTable extends Migration
      */
     public function down()
     {
-        // Schema::dropIfExists('dishes');
+        //
     }
 }
