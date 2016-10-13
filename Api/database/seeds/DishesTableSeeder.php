@@ -22,5 +22,17 @@ class DishesTableSeeder extends Seeder
             'description' => 'Steak met frieten beschrijving.',
             'booking_id' => 2,
         ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Spaghetti',
+            'description' => 'Spaghetti beschrijving.',
+            'booking_id' => 2,
+        ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Ravioli',
+            'description' => 'Ravioli beschrijving.',
+            'booking_id' => 2,
+        ]);
     }
 }

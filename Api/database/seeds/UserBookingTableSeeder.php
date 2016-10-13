@@ -20,5 +20,15 @@ class UserBookingTableSeeder extends Seeder
             'guest_id' => 2,
             'booking_id' => 2,
         ]);
+
+        DB::table('user_booking')->insert([
+            'guest_id' => 4,
+            'booking_id' => 3,
+        ]);
+
+        DB::table('user_booking')->insert([
+            'guest_id' => 5,
+            'booking_id' => 3,
+        ]);
     }
 }

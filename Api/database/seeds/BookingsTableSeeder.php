@@ -19,7 +19,7 @@ class BookingsTableSeeder extends Seeder
             'street_number' => 'Vlinderstraat 10',
             'postalcode' => 2220,
             'city' => 'Heist-op-den-Berg',
-            'price' => 23,
+            'price' => 25.00,
             'host_id' => 1,
         ]);
 
@@ -28,8 +28,26 @@ class BookingsTableSeeder extends Seeder
             'street_number' => 'Liersesteenweg 201A',
             'postalcode' => 2000,
             'city' => 'Antwerpen',
-            'price' => 95,
+            'price' => 95.00,
             'host_id' => 1,
+        ]);
+
+        DB::table('bookings')->insert([
+        	'date' => '2016/10/14 18:00:00',
+            'street_number' => 'Boekenstraat 180',
+            'postalcode' => 5000,
+            'city' => 'Hasselt',
+            'price' => 99.99,
+            'host_id' => 4,
+        ]);
+
+        DB::table('bookings')->insert([
+        	'date' => '2016/10/14 16:30:00',
+            'street_number' => 'Landweg 1',
+            'postalcode' => 3999,
+            'city' => 'Bavikhove',
+            'price' => 1.95,
+            'host_id' => 3,
         ]);
     }
 }

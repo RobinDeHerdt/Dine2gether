@@ -24,5 +24,19 @@ class ReviewsTableSeeder extends Seeder
             'host_id' => 1,
             'guest_id' => 2,
         ]);
+
+        DB::table('reviews')->insert([
+            'body' => 'You\'re fired!',
+            'rating' => 1,
+            'host_id' => 1,
+            'guest_id' => 5,
+        ]);
+
+        DB::table('reviews')->insert([
+            'body' => 'Great experience.',
+            'rating' => 1,
+            'host_id' => 2,
+            'guest_id' => 1,
+        ]);
     }
 }
