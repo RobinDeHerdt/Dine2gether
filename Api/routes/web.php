@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+        return View::make('index'); // app/views/index.php
+    });
+
+Route::group(array('prefix' => 'api'), function() {
+
+//Route::resource('login', 'loginController');
+  
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index');
