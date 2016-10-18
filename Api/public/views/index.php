@@ -19,9 +19,12 @@
 <!-- angular -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/routes.js"></script>
-<!-- controllers -->
-<script type="text/javascript" src="js/controllers/homeController.js"></script>
-<!-- directives -->
-<script type="text/javascript" src="directives/header/header.js"></script>
+	<!-- controllers -->
+	<script type="text/javascript" src="js/controllers/homeController.js"></script>
+	<!-- directives -->
+	<script type="text/javascript" src="directives/header/header.js"></script>
+
+<!-- Google maps -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqb4o2PhbYGnWwwkdXJLmIjC-al6f7eEw&libraries=places"></script>
 </body>
 </html>

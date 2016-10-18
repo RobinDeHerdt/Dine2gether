@@ -4,13 +4,15 @@ nav {
 }
 nav a { color: #108610 !important; }
 
-#home-bg {
+#home {
 	background-image: url("http://letscooktogether.nl/wp-content/uploads/2016/08/FriendDinnerHome1.jpg");
 }
 #home-form {
-	top: 80%;
+	top: 50%;
 	background-color: rgba(255,255,255,0.8);
 }
 #location::-webkit-input-placeholder, #location:-moz-placeholder {
 	color: #000 !important;
 }
+
+#searchbtn { width: 100%;}
