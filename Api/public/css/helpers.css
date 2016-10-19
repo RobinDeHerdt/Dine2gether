@@ -65,6 +65,10 @@
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
 }
+.under-header
+{
+	margin-top: 100px;
+}
 /* absolute center */
 .absolute-center {
 	position: absolute;

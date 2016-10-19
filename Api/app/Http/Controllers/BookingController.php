@@ -22,22 +22,20 @@ class BookingController extends Controller
         // $booking = Booking::find(1);
         // $booking->users->first_name;
 
-        $usersarray = [];
         $bookingsarray = [];
         $array = [];
 
         foreach ($bookings as $booking) 
         {   
             $user = User::where('id', $booking->host_id)->first();
-            
-            array_push($usersarray, $user);
-            array_push($bookingsarray, $array);
 
-            array_push($array, $usersarray[$bookingsarray]);
+            array_push($array, ["user" => $user], ["booking_details" => $booking]);
+
+            array_push($bookingsarray, ["booking" => $array]);
 
         }
 
-        return response()->json($array);
+        return response()->json($bookingsarray);
     }
 
     /**

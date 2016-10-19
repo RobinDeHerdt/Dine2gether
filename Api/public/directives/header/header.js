@@ -8,6 +8,10 @@ d2gApp.directive("d2gHeader", function () {
 		controllerAs: "header",
 		controller: function () {
 			var vm = this;
+
+			vm.showLogin = function () {
+				$rootScope.showLogin = true;
+			}
 		}
 	}
 });
