@@ -10,4 +10,9 @@ class Dish extends Model
     {
         return $this->belongsTo('App\Booking');
     }
+
+    public function dish_images()
+    {
+        return $this->hasMany('App\Dish_images');
+    }
 }
