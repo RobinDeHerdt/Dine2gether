@@ -22,22 +22,28 @@ class BookingController extends Controller
         $bookings = Booking::all();
 
         $bookingsarray = [];
-        $dishesarray = [];
         $array = [];
 
         foreach ($bookings as $booking) 
         {   
+            $dishesarray = []; 
+
             $user = User::where('id', $booking->host_id)->first();
             $dishes = Dish::where('booking_id', $booking->id)->get();
 
             foreach ($dishes as $dish) {
                 $dish_images = Dish_images::where('dish_id', $dish->id)->get();
-                $dishesarray = array(["dish" => $dishes], ["dish_images" => $dish_images]);
+                // dish_images in $dish steken en deze pushen in dishesarray
+                $dish->dish_images = $dish_images;
+
+                array_push($dishesarray, $dish);
             }
+            // user(s) en de dishesarray in $booking steken
+            $booking->users = $user;
+            $booking->dishes = $dishesarray;
 
-            $array =  array(["user" => $user], ["booking_details" => $booking], ["dishes" => $dishesarray]);
-
-            array_push($bookingsarray, ["booking" => $array]);
+            // deze ene booking toevoegen aan bookingsarray
+            array_push($bookingsarray, ["booking" => $booking]);
         }
 
         return response()->json($bookingsarray);

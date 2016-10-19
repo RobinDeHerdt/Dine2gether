@@ -10,6 +10,7 @@
 </head>
 <body ng-app="d2gApp">
 	<d2g-header></d2g-header>
+	<d2g-login-modal></d2g-login-modal>
 	<div ui-view></div>
 <!-- JS -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
