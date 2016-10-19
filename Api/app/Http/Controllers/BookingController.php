@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Booking;
 
 class BookingController extends Controller
 {
@@ -15,7 +16,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        return Response::json(Booking::get());
+        $bookings = Booking::all();
+        return response()->json($bookings);
     }
 
     /**

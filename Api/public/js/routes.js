@@ -8,4 +8,9 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider) {
 	  templateUrl: "pages/home.html",
 	  controller: "homeController as home"
 	})
+	.state("overview", {
+		url: "/overview",
+		templateUrl: "pages/overview.html",
+		controller: "bookingController as booking"
+	})
 });

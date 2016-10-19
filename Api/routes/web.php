@@ -18,6 +18,7 @@ Route::get('/', function() {
 
 // Route::group(array('prefix' => 'api'), function() {
 
-//Route::resource('login', 'loginController');
+	Route::resource('bookings', 'bookingController', 
+        array('only' => array('index', 'store', 'destroy')));
   
 //php });

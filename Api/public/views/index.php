@@ -19,8 +19,11 @@
 <!-- angular -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/routes.js"></script>
+	<!-- services -->
+	<script type="text/javascript" src="js/services/bookingService.js"></script>
 	<!-- controllers -->
 	<script type="text/javascript" src="js/controllers/homeController.js"></script>
+	<script type="text/javascript" src="js/controllers/bookingController.js"></script>
 	<!-- directives -->
 	<script type="text/javascript" src="directives/header/header.js"></script>
 
