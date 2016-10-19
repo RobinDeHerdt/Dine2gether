@@ -43,7 +43,7 @@ class BookingController extends Controller
             $booking->dishes = $dishesarray;
 
             // deze ene booking toevoegen aan bookingsarray
-            array_push($bookingsarray, ["booking" => $booking]);
+            array_push($bookingsarray, $booking);
         }
 
         return response()->json(["bookings" => $bookingsarray]);
