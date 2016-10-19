@@ -29,7 +29,7 @@ class BookingController extends Controller
         {   
             $user = User::where('id', $booking->host_id)->first();
 
-            array_push($array, ["user" => $user], ["booking_details" => $booking]);
+            $array =  array(["user" => $user], ["booking_details" => $booking]);
 
             array_push($bookingsarray, ["booking" => $array]);
 
