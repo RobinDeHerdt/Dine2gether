@@ -46,7 +46,7 @@ class BookingController extends Controller
             array_push($bookingsarray, ["booking" => $booking]);
         }
 
-        return response()->json($bookingsarray);
+        return response()->json(["bookings" => $bookingsarray]);
     }
 
     /**
