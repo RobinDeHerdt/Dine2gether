@@ -20,7 +20,7 @@ class BookingController extends Controller
     public function index()
     {
         // We want to return the booking including the user(s), dish(es) and dish image(s)
-        $bookings = Booking::all(); // get all bookings
+        $bookings = Booking::all(); 
 
         $bookingsarray = [];
         $array = [];
@@ -44,7 +44,7 @@ class BookingController extends Controller
             $booking->dishes = $dishesarray;
 
             // add this booking to bookingsarray
-            array_push($bookingsarray, $bookingsarray);
+            array_push($bookingsarray, $booking);
         }
 
         return response()->json(["bookings" => $bookingsarray]);
