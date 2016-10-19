@@ -15,8 +15,9 @@ Route::get('/', function() {
         return View::make('index'); // app/views/index.php
     });
 
-Route::group(array('prefix' => 'api'), function() {
+
+// Route::group(array('prefix' => 'api'), function() {
 
 //Route::resource('login', 'loginController');
   
-});
+//php });
