@@ -20,7 +20,7 @@ class BookingController extends Controller
     public function index()
     {
         // We want to return the booking including the user(s), dish(es) and dish image(s)
-        $bookings = Booking::all(); 
+        $bookings = Booking::all(); // get all bookings
 
         $bookingsarray = [];
         $array = [];
