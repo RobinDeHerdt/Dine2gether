@@ -19,7 +19,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::all();
+        // We want to return the booking including the user(s), dish(es) and dish image(s)
+        $bookings = Booking::all(); // get all bookings
 
         $bookingsarray = [];
         $array = [];
@@ -27,23 +28,23 @@ class BookingController extends Controller
         foreach ($bookings as $booking) 
         {   
             $dishesarray = []; 
-
+            // get user(s) and dish(es) for each booking
             $user = User::where('id', $booking->host_id)->first();
             $dishes = Dish::where('booking_id', $booking->id)->get();
 
-            foreach ($dishes as $dish) {
+            foreach ($dishes as $dish) { // get dish images by dish for this booking
                 $dish_images = Dish_images::where('dish_id', $dish->id)->get();
-                // dish_images in $dish steken en deze pushen in dishesarray
+                // put dish_images in $dish and push to dishesarray
                 $dish->dish_images = $dish_images;
 
                 array_push($dishesarray, $dish);
             }
-            // user(s) en de dishesarray in $booking steken
+            // put user(s) and dishesarray in $booking
             $booking->users = $user;
             $booking->dishes = $dishesarray;
 
-            // deze ene booking toevoegen aan bookingsarray
-            array_push($bookingsarray, $booking);
+            // add this booking to bookingsarray
+            array_push($bookingsarray, $bookingsarray);
         }
 
         return response()->json(["bookings" => $bookingsarray]);
