@@ -1,4 +1,4 @@
-d2gApp.controller("bookingController", function (bookingService, $scope) {
+d2gApp.controller("overviewController", function (bookingService, $scope) {
 
 	var vm = this;
 	var bookingSvc = bookingService;

@@ -24,7 +24,7 @@
 	<script type="text/javascript" src="js/services/bookingService.js"></script>
 	<!-- controllers -->
 	<script type="text/javascript" src="js/controllers/homeController.js"></script>
-	<script type="text/javascript" src="js/controllers/bookingController.js"></script>
+	<script type="text/javascript" src="js/controllers/overviewController.js"></script>
 	<!-- directives -->
 	<script type="text/javascript" src="directives/header/header.js"></script>
 

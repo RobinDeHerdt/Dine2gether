@@ -2,15 +2,15 @@
 	<div class="container under-header">
 		<h1>Bookings</h1>
 		<div id="bookingswrapper" class="mar-top-xl">
-			<div ng-repeat="newbooking in booking.bookings" class="mar-top-xl mar-btm-xl">
+			<div ng-repeat="booking in overview.bookings" class="mar-top-xl mar-btm-xl">
 				<h3>Titel booking</h3>
-				<img ng-src="{{ newbooking.dishes[0].dish_images[0]['image-url'] }}">
-				<p>{{ booking.convertToDate(newbooking.date) | date:'dd/MM/y' }}</p>
-				<p>{{ newbooking.users.first_name + " " + newbooking.users.last_name}}</p>
+				<img ng-src="{{ booking.dishes[0].dish_images[0]['image-url'] }}">
+				<p>{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }}</p>
+				<p>{{ booking.users.first_name + " " + booking.users.last_name}}</p>
 				<ul>
-					<li ng-repeat="newdish in newbooking.dishes">{{ newdish.description }}</li>
+					<li ng-repeat="newdish in booking.dishes">{{ newdish.description }}</li>
 				</ul>
-				<p>{{ newbooking.price | currency : "€"}}</p>
+				<p>{{ booking.price | currency : "€"}}</p>
 				<a class="btn waves primary-colour" href="#">Reserveer</a>
 				<div class="divider mar-top-l"></div>
 			</div>
