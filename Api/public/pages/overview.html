@@ -8,7 +8,7 @@
 				<p>{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }}</p>
 				<p>{{ booking.users.first_name + " " + booking.users.last_name}}</p>
 				<ul>
-					<li ng-repeat="newdish in booking.dishes">{{ newdish.description }}</li>
+					<li ng-repeat="newdish in booking.dishes">{{ newdish.name }}</li>
 				</ul>
 				<p>{{ booking.price | currency : "€"}}</p>
 				<a class="btn waves primary-colour" href="#">Reserveer</a>

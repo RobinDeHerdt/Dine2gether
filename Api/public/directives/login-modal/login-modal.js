@@ -9,9 +9,14 @@ d2gApp.directive("d2gLoginModal", function () {
 		controller: function () {
 			var vm = this;
 
-			vm.showLogin = function () {
-				$rootScope.showLogin = true;
-			}
+			$rootScope.$watch(
+			    function() { 
+			        return $rootScope.showLogin; 
+			    },
+    			function(){
+			        console.log($rootScope.showLogin);
+			        console.log("changed");
+    			},true);
 		}
 	}
 });
