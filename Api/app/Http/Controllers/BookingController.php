@@ -68,6 +68,13 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'price' => 'required',
+            'date'  => 'required|date|after:tomorrow',
+            'street_number' => 'required'
+        ]);
+
+
         $booking = new Booking;
         $host    = Auth::user();
 

@@ -12,8 +12,8 @@
 */
 
 Route::get('/', function() {
-        return View::make('index'); // app/views/index.php
-    });
+    return View::make('index'); // app/views/index.php
+});
 
 
  Route::group(array('prefix' => 'api'), function() {
