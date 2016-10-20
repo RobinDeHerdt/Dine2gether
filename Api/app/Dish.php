@@ -13,6 +13,6 @@ class Dish extends Model
 
     public function dish_images()
     {
-        return $this->hasMany('App\Dish_images');
+        return $this->hasMany('App\Dish_image');
     }
 }

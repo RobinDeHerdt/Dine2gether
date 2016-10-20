@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Booking;
 use App\User;
 use App\Dish;
-use App\Dish_images;
+use App\Dish_image;
 
 class BookingController extends Controller
 {
@@ -33,7 +33,7 @@ class BookingController extends Controller
             $dishes = Dish::where('booking_id', $booking->id)->get();
 
             foreach ($dishes as $dish) { // get dish images by dish for this booking
-                $dish_images = Dish_images::where('dish_id', $dish->id)->get();
+                $dish_images = Dish_image::where('dish_id', $dish->id)->get();
                 // put dish_images in $dish and push to dishesarray
                 $dish->dish_images = $dish_images;
 
