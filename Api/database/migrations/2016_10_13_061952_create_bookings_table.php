@@ -15,6 +15,7 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
             $table->double('price');
             $table->datetime('date')->nullable();
             $table->string('street_number');
@@ -34,7 +35,7 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {   
-        Schema::drop('dishImages');
+        Schema::drop('dish_images');
         Schema::drop('dishes');
         Schema::drop('user_booking');
         Schema::dropIfExists('bookings');

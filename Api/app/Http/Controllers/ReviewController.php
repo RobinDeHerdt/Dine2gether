@@ -36,7 +36,17 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $review     = new Review;
+        $author     = Auth::user();
+
+        $review->body            = $request->body;
+        $review->rating          = $request->rating;
+
+        // Not sure about this
+        $review->guest_id        = $request->guest_id;
+        $review->User()->associate($author);
+
+        $review->save();
     }
 
     /**
@@ -70,7 +80,13 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $review = Review::find($id);
+
+        $review->body           = $request->body;
+        $review->rating         = $request->rating;
+        $review->guest_id       = $request->guest_id;
+
+        $review->save();
     }
 
     /**
@@ -81,6 +97,7 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $review = Review::find($id);
+        $review->delete();
     }
 }

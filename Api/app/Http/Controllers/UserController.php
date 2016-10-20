@@ -36,7 +36,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Store happens in RegisterController
     }
 
     /**
@@ -70,7 +70,17 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user =  Auth::user();
+
+        $user->first_name           = $request->first_name;
+        $user->last_name            = $request->last_name;
+        $user->image                = $request->image;
+        $user->email                = $request->email;
+        $user->street_number        = $request->street_number;
+        $user->postalcode           = $request->postalcode;
+        $user->city                 = $request->city;
+
+        $user->save();
     }
 
     /**
@@ -81,6 +91,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user =  Auth::user();
+        $user->delete();
     }
 }
