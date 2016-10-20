@@ -5,6 +5,7 @@ nav {
 }
 nav a { color: #108610 !important; }
 
+#modal1.modal { width: 25% !important; }
 
 #home {
 	background-image: url("http://letscooktogether.nl/wp-content/uploads/2016/08/FriendDinnerHome1.jpg");
