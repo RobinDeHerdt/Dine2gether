@@ -6,11 +6,12 @@ d2gApp.directive("d2gHeader", function () {
 		scope: {},
 		bindToController: true,
 		controllerAs: "header",
-		controller: function ($rootScope) {
+		controller: function ($rootScope, loginService) {
 			var vm = this;
+			var loginSvc = loginService;
 
-			vm.Login = function () {
-				$rootScope.showLogin = true;
+			vm.showLogin = function () {
+				  loginSvc.showLoginModal();
 			}
 		}
 	}

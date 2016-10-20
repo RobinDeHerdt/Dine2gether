@@ -1,22 +1,22 @@
-d2gApp.directive("d2gLoginModal", function () {
+d2gApp.directive("d2gLogin", function (loginService) {
 	return {
 		restrict: "E",
-		templateUrl: "directives/header/login-modal.html",
+		templateUrl: "directives/login-modal/login-modal.html",
 		replace: true,
 		scope: {},
 		bindToController: true,
 		controllerAs: "login",
 		controller: function () {
 			var vm = this;
+			var loginSvc = loginService;
+			
+			vm.email = "";
+			vm.password = "";
 
-			$rootScope.$watch(
-			    function() { 
-			        return $rootScope.showLogin; 
-			    },
-    			function(){
-			        console.log($rootScope.showLogin);
-			        console.log("changed");
-    			},true);
+			vm.login = function () {
+				c
+			}
+			console.log("login modal controller");
 		}
 	}
 });

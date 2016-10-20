@@ -10,7 +10,7 @@
 </head>
 <body ng-app="d2gApp">
 	<d2g-header></d2g-header>
-	<d2g-login-modal></d2g-login-modal>
+	<d2g-login></d2g-login>
 	<div ui-view></div>
 <!-- JS -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
@@ -22,11 +22,13 @@
 <script type="text/javascript" src="js/routes.js"></script>
 	<!-- services -->
 	<script type="text/javascript" src="js/services/bookingService.js"></script>
+	<script type="text/javascript" src="js/services/loginService.js"></script>
 	<!-- controllers -->
 	<script type="text/javascript" src="js/controllers/homeController.js"></script>
 	<script type="text/javascript" src="js/controllers/overviewController.js"></script>
 	<!-- directives -->
 	<script type="text/javascript" src="directives/header/header.js"></script>
+	<script type="text/javascript" src="directives/login-modal/login-modal.js"></script>
 
 <!-- Google maps -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqb4o2PhbYGnWwwkdXJLmIjC-al6f7eEw&libraries=places"></script>
