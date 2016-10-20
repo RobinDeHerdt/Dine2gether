@@ -10,6 +10,7 @@ d2gApp.directive("d2gLogin", function (loginService) {
 			var vm = this;
 			var loginSvc = loginService;
 			
+			vm.currentPage = window.location.href;
 			vm.email = "";
 			vm.password = "";
 
