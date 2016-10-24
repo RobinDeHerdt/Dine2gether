@@ -1,1 +1,1 @@
-var d2gApp = angular.module('d2gApp', [ 'ui.router', ]);
+var d2gApp = angular.module('d2gApp', [ 'ui.router', 'satellizer']);

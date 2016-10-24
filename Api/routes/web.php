@@ -18,7 +18,9 @@ Route::get('/', function() {
 
  Route::group(array('prefix' => 'api'), function() {
 
-	Route::resource('bookings', 'bookingController', 
-        array('only' => array('index', 'store', 'destroy')));
+	Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
+	
+	Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
+    Route::post('authenticate', 'AuthenticateController@authenticate');
   
  });

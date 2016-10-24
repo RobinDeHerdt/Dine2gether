@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -11,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\User::class, 50)->create();
+        /*factory(App\User::class, 50)->create();
 
         DB::table('users')->insert([
             'first_name' => 'Robin',
@@ -46,6 +48,52 @@ class UsersTableSeeder extends Seeder
             'last_name' => 'Trump',
             'email' => 'yourefired@trump.com',
             'password' => bcrypt('qwerty'),
-        ]);
+        ]);*/
+        
+        Model::unguard();
+
+        DB::table('users')->delete();
+
+        $users = array(
+                [
+                    'first_name' => 'Robin',
+                    'last_name' => 'De Herdt', 
+                    'email' => 'robin.deherdt@student.kdg.be',
+                    'password' => bcrypt('123456')
+                ],
+                [
+                    'first_name' => 'Sharon',
+                    'last_name' => 'Meeus',
+                    'email' => 'sharon.meeus@student.kdg.be',
+                    'password' => bcrypt('azerty'),
+                ],
+                [
+                    'first_name' => 'Bob',
+                    'last_name' => 'Bouwman',
+                    'email' => 'bob.bouwman@kdg.be',
+                    'password' => bcrypt('azerty'),
+                ],
+                [
+                    'first_name' => 'Hillary',
+                    'last_name' => 'Clinton',
+                    'email' => 'hillary@secretemailserver.home',
+                    'password' => bcrypt('qwerty'),
+                ],
+                [
+                    'first_name' => 'Donald',
+                    'last_name' => 'Trump',
+                    'email' => 'yourefired@trump.com',
+                    'password' => bcrypt('qwerty'),
+                ]
+                
+        );
+            
+        // Loop through each user above and create the record for them in the database
+        foreach ($users as $user)
+        {
+            User::create($user);
+        }
+
+        Model::reguard();
     }
 }

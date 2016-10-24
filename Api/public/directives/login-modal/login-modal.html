@@ -4,14 +4,14 @@
       	<div class="divider mar-top-xl"></div>
       	<div class="row">
 	        <div class="input-field col s12">
-	          	<input placeholder="Email" id="email" type="email" class="validate" ng-bind="login.email">
+	          	<input placeholder="Email" id="email" type="email" class="validate" ng-model="login.email">
 	        </div>
 	        <div class="input-field col s12">
-	          	<input placeholder="Password" id="password" type="password" class="validate" ng-bind="login.password">
+	          	<input placeholder="Password" id="password" type="password" class="validate" ng-model="login.password">
 	        </div>
       	</div>
     </div>
     <div class="modal-footer">
-      	<a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="vm.login()">Sign in!</a>
+      	<a class="modal-action modal-close waves-effect waves-green btn-flat" ng-click="login.login()">Sign in!</a>
     </div>
 </div>

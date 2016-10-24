@@ -6,18 +6,20 @@ d2gApp.directive("d2gLogin", function (loginService) {
 		scope: {},
 		bindToController: true,
 		controllerAs: "login",
-		controller: function () {
-			var vm = this;
-			var loginSvc = loginService;
+		controller: function ($auth) {
 			
-
-			vm.email = "";
-			vm.password = "";
+			var vm = this;
 
 			vm.login = function () {
-				
+				var credentials = {
+					email: vm.email,
+					password: vm.password,
+				}
+
+				$auth.login(credentials).then(function (data) {
+					console.log(data.data.token);
+				});
 			}
-			console.log("login modal controller");
 		}
 	}
 });

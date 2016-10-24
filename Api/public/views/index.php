@@ -17,6 +17,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
+<script type="text/javascript" src="js/assets/satellizer.js"></script>
 <!-- angular -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/routes.js"></script>
