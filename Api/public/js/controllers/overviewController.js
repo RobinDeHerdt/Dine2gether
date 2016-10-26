@@ -39,7 +39,7 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 				arr_interests.push(interest.interest);
 			}
 		})
-		console.log(arr_interests);
+		return arr_interests;
 	}
 
 	function _init () {

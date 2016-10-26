@@ -9,6 +9,7 @@ use App\Booking;
 use App\User;
 use App\Dish;
 use App\Dish_image;
+use App\Interest;
 
 class BookingController extends Controller
 {
@@ -28,9 +29,12 @@ class BookingController extends Controller
         foreach ($bookings as $booking) 
         {   
             $dishesarray = []; 
-            // get user(s) and dish(es) for each booking
+            // get user(s), interest(s) and dish(es) for each booking
             $user = User::where('id', $booking->host_id)->first();
+            $interests = Interest::where('user_id', $user->id)->get();
             $dishes = Dish::where('booking_id', $booking->id)->get();
+            // put interests in $user
+            $user->interests = $interests;
 
             foreach ($dishes as $dish) { // get dish images by dish for this booking
                 $dish_images = Dish_image::where('dish_id', $dish->id)->get();
@@ -40,7 +44,7 @@ class BookingController extends Controller
                 array_push($dishesarray, $dish);
             }
             // put user(s) and dishesarray in $booking
-            $booking->users = $user;
+            $booking->user = $user;
             $booking->dishes = $dishesarray;
 
             // add this booking to bookingsarray
