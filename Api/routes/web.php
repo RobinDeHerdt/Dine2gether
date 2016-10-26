@@ -17,10 +17,12 @@ Route::get('/', function() {
 
 
  Route::group(array('prefix' => 'api'), function() {
-
-	Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
 	
     Route::post('authenticate', 'AuthenticateController@login');
     Route::get('authenticate/user', 'AuthenticateController@getUser');
+
+    Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
+    
+    Route::get('interests', 'InterestController@index');
   
  });
