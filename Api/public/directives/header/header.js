@@ -6,9 +6,13 @@ d2gApp.directive("d2gHeader", function () {
 		scope: {},
 		bindToController: true,
 		controllerAs: "header",
-		controller: function ($rootScope, loginService) {
+		controller: function ($scope, loginService) {
 			var vm = this;
 			var loginSvc = loginService;
+
+			$scope.$watch(loginSvc.getUser, function (user) {
+				vm.user = user;
+			})			
 
 			vm.showLogin = function () {
 				  loginSvc.showLoginModal();

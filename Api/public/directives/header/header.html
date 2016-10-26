@@ -2,8 +2,9 @@
     <div class="nav-wrapper mar-left-l mar-right-l">
       	<a ui-sref="home" class="brand-logo">D2G</a>
       	<ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a ng-click="header.showLogin()">Login</a></li>
-	        <li><a href="badges.html">Aanmelden</a></li>
+	        <li><a ng-hide="header.user" ng-click="header.showLogin()">Login</a></li>
+	        <li><a ng-hide="header.user" href="badges.html">Aanmelden</a></li>
+	        <li><a ng-show="header.user" href="!#"> Mijn profiel </a></li>
 	        <li><a href="collapsible.html">Word gastheer/vrouw</a></li>
       	</ul>
     </div>

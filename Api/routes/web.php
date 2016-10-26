@@ -20,7 +20,7 @@ Route::get('/', function() {
 
 	Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
 	
-	Route::resource('authenticate', 'AuthenticateController', ['only' => ['index']]);
-    Route::post('authenticate', 'AuthenticateController@authenticate');
+    Route::post('authenticate', 'AuthenticateController@login');
+    Route::get('authenticate/user', 'AuthenticateController@getUser');
   
  });
