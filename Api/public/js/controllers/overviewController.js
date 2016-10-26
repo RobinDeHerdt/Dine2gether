@@ -11,9 +11,23 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 		return convertedString;
 	}
 
-	vm.showFilteredBookings = function () {
-		var interests = getInterestsFilter();
-		//var kitchen = getKitchenFilter();
+	vm.showFilteredInterests = function () {
+		var interestsarray = getInterestsFilter();
+		var arr_x = []
+			return function (booking) {
+				if(interestsarray.length != 0) {
+					for(var i in booking.user.interests) {
+						for(var x=0; x<interestsarray.length; x++) {
+							if(booking.user.interests[i].interest == interestsarray[x]) {
+								console.log("true interest");
+								return booking.user.interests[i].interest == interestsarray[x];
+							}
+						}
+					} 
+				} else {
+					return true;
+				}
+			}
 	}
 	function loadBookings () {
 		bookingSvc.getBookings()
