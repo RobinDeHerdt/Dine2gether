@@ -18,9 +18,9 @@ Route::get('/', function() {
 
  Route::group(array('prefix' => 'api'), function() {
 	
-    Route::post('authenticate', 'AuthenticateController@login');
+    Route::post('authenticate/login', 'AuthenticateController@login');
     Route::get('authenticate/user', 'AuthenticateController@getUser');
-
+    //Route::get('authenticate/logout', 'AuthenticateController@logout');
     Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
     
     Route::get('interests', 'InterestController@index');

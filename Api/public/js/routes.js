@@ -1,6 +1,6 @@
 d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
  
- $authProvider.loginUrl = '/api/authenticate';
+ $authProvider.loginUrl = '/api/authenticate/login';
 
   $urlRouterProvider.otherwise("/home");
 
