@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class KitchenstyleTableSeeder extends Seeder
+class KitchenstylesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewsTableSeeder::class);
         $this->call(DishesTableSeeder::class);
         $this->call(DishImagesTableSeeder::class);
+        $this->call(KitchenstyleTableSeeder::class);
     }
 }
