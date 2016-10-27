@@ -6,7 +6,7 @@ d2gApp.directive("d2gLogin", function (loginService) {
 		scope: {},
 		bindToController: true,
 		controllerAs: "login",
-		controller: function ($auth, $http, loginService) {
+		controller: function (loginService) {
 			
 			var vm = this;
 			var loginSvc = loginService;
@@ -17,15 +17,7 @@ d2gApp.directive("d2gLogin", function (loginService) {
 					password: vm.password,
 				}
 
-				$auth.login(credentials).then(function (data) {
-					loginSvc.setUser();
-				}, function (error) {
-					if(error.data.error = "invalid_credentials") {
-						alert("You've entered the wrong email or password. Please Try again.");
-					} else {
-						alert("Oops, something went wrong. We couldn't get you logged in");
-					}
-				});
+			loginSvc.login(credentials);
 			}
 		}
 	}

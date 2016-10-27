@@ -18,11 +18,19 @@ d2gApp.directive("d2gHeader", function () {
 				  loginSvc.showLoginModal();
 			}
 
+			vm.showRegister = function () {
+				loginSvc.showRegisterModal();
+			}
+
 			vm.logout = function () {
 				$auth.logout().then(function () {
 					console.log("Logged out");
 					loginSvc.user = null;
 				})
+			}
+
+			vm.register = function () {
+				loginSvc.register();
 			}
 		}
 	}
