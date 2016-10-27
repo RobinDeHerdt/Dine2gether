@@ -61,7 +61,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-
+        // return view('createbooking');
     }
 
     /**
@@ -72,25 +72,28 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'price' => 'required',
-            'date'  => 'required|date|after:tomorrow',
-            'street_number' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'price' => 'required',
+        //     'date'  => 'required|date|after:tomorrow',
+        //     'street_number' => 'required'
+        // ]);
 
 
         $booking = new Booking;
-        $host    = Auth::user();
+        // $host    = Auth::user();
 
+        $booking->title         = $request->title;
         $booking->price         = $request->price;
         $booking->date          = $request->date;
         $booking->street_number = $request->street_number;
         $booking->postalcode    = $request->postalcode;
         $booking->city          = $request->city;
-        
-        $booking->User()->associate($host);
+        $booking->host_id       = 1;
+        // $booking->User()->associate($host);
 
         $booking->save();
+
+        return redirect('/#/overview');
     }
 
     /**

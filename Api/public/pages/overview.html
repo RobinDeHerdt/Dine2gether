@@ -12,20 +12,19 @@
 						<li ng-repeat="newdish in booking.dishes">{{ newdish.name }}</li>
 					</ul>
 					<p>{{ booking.price | currency : "€"}}</p>
-					<a class="btn waves primary-colour" href="#">Book this delicious food now</a>
+					<a class="btn waves primary-colour" href="#">More information</a>
 					<div class="divider mar-top-l"></div>
 				</div>
 			</div>
 			<div id="filterwrapper" class="col s4 mar-top-xl">
 				<h3 class="mar-top-xl">Filter</h3>
-				<h5>Interests</h5>
+				<h5>Kitchen style</h5>
 				<ul class="interests-filter">
 					<li ng-repeat="interest in overview.interests">
 						<input ng-click="overview.showFilteredBookings()" type="checkbox" class="filled-in" id="{{interest.interest}}" ng-model="interest.selected"/>
 	      				<label for="{{interest.interest}}">{{ interest.interest }}</label>
 					</li>
 				</ul>
-				<h5>Kitchen style</h5>
 			</div>
 		</div>
 	</div>
