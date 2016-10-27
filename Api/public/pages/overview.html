@@ -3,7 +3,7 @@
 		<h1>Bookings</h1>
 		<div class="row">
 			<div id="bookingswrapper" class="mar-top-xl col s8">
-				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests()" class="mar-top-xl mar-btm-xl">
+				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
 					<h3>{{ booking.title }}</h3>
 					<img ng-src="img/{{ booking.dishes[0].dish_images[0]['image-url'] }}">
 					<p>{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }}</p>
@@ -18,11 +18,18 @@
 			</div>
 			<div id="filterwrapper" class="col s4 mar-top-xl">
 				<h3 class="mar-top-xl">Filter</h3>
-				<h5>Kitchen style</h5>
+				<h5>Interests</h5>
 				<ul class="interests-filter">
 					<li ng-repeat="interest in overview.interests">
-						<input ng-click="overview.showFilteredBookings()" type="checkbox" class="filled-in" id="{{interest.interest}}" ng-model="interest.selected"/>
+						<input type="checkbox" class="filled-in" id="{{interest.interest}}" ng-model="interest.selected"/>
 	      				<label for="{{interest.interest}}">{{ interest.interest }}</label>
+					</li>
+				</ul>
+				<h5>Kitchen Style</h5>
+				<ul class="kitchen-filter">
+					<li ng-repeat="kitchen in overview.kitchenstyles">
+						<input type="checkbox" class="filled-in" id="{{kitchen.style}}" ng-model="kitchen.selected"/>
+	      				<label for="{{kitchen.style}}">{{ kitchen.style }}</label>
 					</li>
 				</ul>
 			</div>

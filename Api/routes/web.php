@@ -25,8 +25,11 @@ Route::get('/', function() {
 
 
     Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
-    
+    Route::post('createbooking', 'BookingController@store');   
+
     Route::get('interests', 'InterestController@index');
-  	Route::post('createbooking', 'BookingController@store');
+
+    Route::get('kitchenstyles', 'KitchenstyleController@index');
+ 
   	//Route::get('/createbooking', 'BookingController@create');
  });

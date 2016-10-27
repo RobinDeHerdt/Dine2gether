@@ -10,6 +10,7 @@ use App\User;
 use App\Dish;
 use App\Dish_image;
 use App\Interest;
+use App\Kitchenstyle;
 
 class BookingController extends Controller
 {
@@ -22,17 +23,16 @@ class BookingController extends Controller
     {
         // We want to return the booking including the user(s), dish(es) and dish image(s)
         $bookings = Booking::all(); // get all bookings
-
         $bookingsarray = [];
-        $array = [];
 
         foreach ($bookings as $booking) 
         {   
             $dishesarray = []; 
-            // get user(s), interest(s) and dish(es) for each booking
+            // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
             $user = User::where('id', $booking->host_id)->first();
             $interests = Interest::where('user_id', $user->id)->get();
             $dishes = Dish::where('booking_id', $booking->id)->get();
+            $kitchenstyles = Kitchenstyle::where('booking_id', $booking->id)->get();
             // put interests in $user
             $user->interests = $interests;
 
@@ -40,11 +40,11 @@ class BookingController extends Controller
                 $dish_images = Dish_image::where('dish_id', $dish->id)->get();
                 // put dish_images in $dish and push to dishesarray
                 $dish->dish_images = $dish_images;
-
                 array_push($dishesarray, $dish);
             }
-            // put user(s) and dishesarray in $booking
+            // put user(s), kitchenstyle(s) and dishesarray in $booking
             $booking->user = $user;
+            $booking->kitchenstyles = $kitchenstyles;
             $booking->dishes = $dishesarray;
 
             // add this booking to bookingsarray

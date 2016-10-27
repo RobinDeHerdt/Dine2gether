@@ -12,17 +12,17 @@ class InterestsTableSeeder extends Seeder
     public function run()
     {
         DB::table('interests')->insert([
-            'interest' => 'Halal',
+            'interest' => 'Music',
             'user_id' => 1,
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Vegetarisch',
-            'user_id' => 1,
+            'interest' => 'Sports',
+            'user_id' => 2,
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Koosjer',
+            'interest' => 'Animals',
             'user_id' => 5,
         ]);
     }
