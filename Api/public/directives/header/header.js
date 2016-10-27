@@ -6,7 +6,7 @@ d2gApp.directive("d2gHeader", function () {
 		scope: {},
 		bindToController: true,
 		controllerAs: "header",
-		controller: function ($scope, loginService) {
+		controller: function ($scope, loginService, $auth) {
 			var vm = this;
 			var loginSvc = loginService;
 
@@ -16,6 +16,13 @@ d2gApp.directive("d2gHeader", function () {
 
 			vm.showLogin = function () {
 				  loginSvc.showLoginModal();
+			}
+
+			vm.logout = function () {
+				$auth.logout().then(function () {
+					console.log("Logged out");
+					loginSvc.user = null;
+				})
 			}
 		}
 	}
