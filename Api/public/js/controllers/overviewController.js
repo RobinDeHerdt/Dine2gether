@@ -14,8 +14,10 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 
 	vm.showFilteredInterests = function () {
 		var interestsarray = getInterestsFilter();
-		var arr_x = [];
-			return function (booking) {
+		return function (booking) {
+			if(booking.user.interests.length == 0 && interestsarray.length == 0) {
+				return true;
+			} else {
 				for(var i in booking.user.interests) {
 					if(interestsarray.length != 0) {
 						for(var x=0; x<interestsarray.length; x++) {
@@ -26,13 +28,16 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 					} else { return true; }
 				} 
 			}
+		}
 	}
 
 	vm.showFilteredKitchenStyles = function () {
 		var kitchenstylessarray = getKitchenStylesFilter();
 		var arr_x = []
-			return function (booking) {
-				console.log(booking);
+		return function (booking) {
+			if(booking.kitchenstyles.length == 0 && kitchenstylessarray.length == 0) {
+				return true;
+			} else {
 				for(var i in booking.kitchenstyles) {
 					if(kitchenstylessarray.length != 0) {
 						for(var x=0; x<kitchenstylessarray.length; x++) {
@@ -43,6 +48,7 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 					} else { return true; }
 				} 
 			}
+		}
 	}
 	function loadBookings () {
 		bookingSvc.getBookings()

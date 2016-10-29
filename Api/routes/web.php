@@ -25,7 +25,8 @@ Route::get('/', function() {
 
 
     Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
-    Route::post('createbooking', 'BookingController@store');   
+    Route::post('createbooking', 'BookingController@store');  
+    Route::get('bookingdetails/{id}', 'BookingController@show'); 
 
     Route::get('interests', 'InterestController@index');
 

@@ -104,7 +104,28 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        //
+        $booking = Booking::findOrFail($id);
+        $dishesarray = []; 
+        // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
+        $user = User::where('id', $booking->host_id)->first();
+        $interests = Interest::where('user_id', $user->id)->get();
+        $dishes = Dish::where('booking_id', $booking->id)->get();
+        $kitchenstyles = Kitchenstyle::where('booking_id', $booking->id)->get();
+        // put interests in $user
+        $user->interests = $interests;
+
+        foreach ($dishes as $dish) { // get dish images by dish for this booking
+            $dish_images = Dish_image::where('dish_id', $dish->id)->get();
+            // put dish_images in $dish and push to dishesarray
+            $dish->dish_images = $dish_images;
+            array_push($dishesarray, $dish);
+        }
+        // put user(s), kitchenstyle(s) and dishesarray in $booking
+        $booking->user = $user;
+        $booking->kitchenstyles = $kitchenstyles;
+        $booking->dishes = $dishesarray;
+
+        return response()->json(["booking" => $booking]);
     }
 
     /**

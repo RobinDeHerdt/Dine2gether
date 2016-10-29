@@ -4,16 +4,13 @@
 		<div class="row">
 			<div id="bookingswrapper" class="mar-top-xl col s8">
 				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
+					<div class="divider mar-top-l"></div>
 					<h3>{{ booking.title }}</h3>
 					<img ng-src="img/{{ booking.dishes[0].dish_images[0]['image-url'] }}">
 					<p>{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }}</p>
-					<p>{{ booking.users.first_name + " " + booking.users.last_name}}</p>
-					<ul>
-						<li ng-repeat="newdish in booking.dishes">{{ newdish.name }}</li>
-					</ul>
+					<p>{{ booking.user.first_name + " " + booking.user.last_name}}</p>
 					<p>{{ booking.price | currency : "€"}}</p>
-					<a class="btn waves primary-colour" href="#">More information</a>
-					<div class="divider mar-top-l"></div>
+					<a class="btn waves primary-colour" href="#" ui-sref="bookingdetails({id: booking.id})">More information</a>
 				</div>
 			</div>
 			<div id="filterwrapper" class="col s4 mar-top-xl">
