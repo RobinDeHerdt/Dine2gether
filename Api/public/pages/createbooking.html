@@ -1,100 +1,113 @@
 <main>
-  <div class="container under-header">
-    <div class="row">
-    <ol>
-      <li>
-        <p>General information</p>
-        <form class="col s12" action="/api/createbooking" method="POST" enctype="multipart/form-data">
-        <div class="row">
-            <div class="input-field col s6">
-              <input  name="title" type="text" class="validate">
-              <label for="title">Short description</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input name="date" type="date" class="validate">
-              <label for="date">Date and time</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input  name="price" type="text" class="validate">
-              <label for="price">Price</label>
-            </div>
-          </div>
-      </li>
-      <li>
-        <p>Location</p>
-          <div class="row">
-            <div class="input-field col s6">
-              <input  name="street_number" type="text" class="validate">
-              <label for="street_number">Street and number</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input  name="postalcode" type="text" class="validate">
-              <label for="postalcode">Postalcode</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s6">
-              <input  name="city" type="text" class="validate">
-              <label for="city">City</label>
-            </div>
-          </div>
-          </li>
-          <li>
-          <p>Your interests</p>
-            <div class="row">
-            <div class="input-field col s6">
-                <!-- Loop door alle interesses hier, data staat op /api/interests -->
-                <input type="checkbox" name="interest1" value="Sports">Sports <br>
-                <input type="checkbox" name="interest2" value="Music">Music <br>
-            </div>
-           </div>
-          <div class="row">
-          </li>
-          <li>
-            <p>Menu</p>
-            <ul>
-              <li>
-                Dish 1: 
-                <div class="row">
-                  <div class="input-field col s6">
-                    <input  name="name" type="text" class="validate">
-                    <label for="name">Name</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s6">
-                    <input  name="description" type="text" class="validate">
-                    <label for="description">Description</label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="input-field col s6">
-                    <input type="file" name="dish_image">
-                    <label for="dish_image">Image</label>
-                  </div>
-                </div>
-              </li>
-              
-              <input type="hidden" name="alldishesjson" value="hierkomthetjsonobject">
+	<div class="container under-header">
+		<div class="row">
+			<ul>
+				<li ng-show="create.currentPage == 1">
+					<h4>1. General information</h4>
+					<form class="col s12" action="/api/createbooking" method="POST" enctype="multipart/form-data">
+						<div class="row">
+							<div class="input-field col s6">
+								<input  name="title" type="text" class="validate" required>
+								<label for="title">Short description</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input name="date" type="text" onfocus="(this.type='date')" class="validate" required>
+								<label for="date">Date and time</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input  name="price" type="text" class="validate" required>
+								<label for="price">Price</label>
+							</div>
+						</div>
+					</li>
+					<li ng-show="create.currentPage == 2">
+						<h4>2. Location</h4>
+						<div class="row">
+							<div class="input-field col s6">
+								<input  name="street_number" type="text" class="validate" required>
+								<label for="street_number">Street and number</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input  name="postalcode" type="text" class="validate" required>
+								<label for="postalcode">Postalcode</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s6">
+								<input  name="city" type="text" class="validate" required>
+								<label for="city">City</label>
+							</div>
+						</div>
+					</li>
+					<li ng-show="create.currentPage == 3">
+						<h4>3. Your interests</h4>
+						<div class="row">
+							<div class="input-field col s6">
+								<!-- Loop door alle interesses hier, data staat op /api/interests -->
+								<input type="checkbox" name="interest1" value="Sports">Sports <br>
+								<input type="checkbox" name="interest2" value="Music">Music <br>
+							</div>
+						</div>
+						<div class="row">
+						</li>
+						<li ng-show="create.currentPage == 4">
+							<h4>4. Menu</h4>
+							<ul>
+								<li>
+									Dish 1: 
+									<div class="row">
+										<div class="input-field col s6">
+											<input  name="name" type="text" class="validate">
+											<label for="name">Name</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s6">
+											<input  name="description" type="text" class="validate">
+											<label for="description">Description</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="file-field input-field col s6">
+											<div class="btn">
+												<span>Add image</span>
+												<input type="file" multiple>
+											</div>
+											<div class="file-path-wrapper">
+												<input class="file-path validate" type="text" placeholder="Upload image">
+											</div>
+										</div>
+									</div>
+								</li>
 
-              <!-- Op buttonklik: Display de toegevoegde dish hier ergens en maak het formulier leeg zodat er meerdere dishes kunnen toegevoegd worden. Zet de dishes allemaal in een json object en zet het in de hidden input hierboven -->
-              <button>Add dish</button>
-            </ul>
-            
-          </li>
-        </ol>
-        <div class="row">
-          <div class="input-field col s6">
-            <input type="submit" value="Save">
-          </div>
-        </div>
-        </form>
-    </div>
-  </div>
-</main>
+								<input type="hidden" name="alldishesjson" value="hierkomthetjsonobject">
+
+								<!-- Op buttonklik: Display de toegevoegde dish hier ergens en maak het formulier leeg zodat er meerdere dishes kunnen toegevoegd worden. Zet de dishes allemaal in een json object en zet het in de hidden input hierboven -->
+								<button>Add dish</button>
+							</ul>
+
+						</li>
+					</ul>
+					<div class="row">
+						<div ng-show="create.currentPage == create.numberOfPages" class="input-field col s6">
+							<input type="submit" value="Save">
+						</div>
+					</div>
+					<ul class="pagination">
+						<li ng-click="create.currentPage = create.currentPage - 1" ng-class="create.currentPage == 1 ? 'disabled': 'waves-effect'"><a href="#!">&laquo;</a></li>
+						<li ng-click="create.currentPage = 1" ng-class="create.currentPage == 1 ? 'active' : waves-effect"><a>1</a></li>
+						<li ng-click="create.currentPage = 2" ng-class="create.currentPage == 2 ? 'active' : waves-effect"><a>2</a></li>
+						<li ng-click="create.currentPage = 3" ng-class="create.currentPage == 3 ? 'active' : waves-effect"><a>3</a></li>
+						<li ng-click="create.currentPage = 4" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
+						<li ng-class="create.currentPage == 4 ? 'disabled' : waves-effect" ng-click="create.currentPage = create.currentPage + 1"><a> &raquo; </a></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</main>

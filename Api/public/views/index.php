@@ -32,6 +32,7 @@
 	<script type="text/javascript" src="js/controllers/homeController.js"></script>
 	<script type="text/javascript" src="js/controllers/overviewController.js"></script>
 	<script type="text/javascript" src="js/controllers/bookingDetailsController.js"></script>
+	<script type="text/javascript" src="js/controllers/createBookingController.js"></script>
 	<!-- directives -->
 	<script type="text/javascript" src="directives/header/header.js"></script>
 	<script type="text/javascript" src="directives/login-modal/login-modal.js"></script>

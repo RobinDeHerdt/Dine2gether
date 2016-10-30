@@ -6,7 +6,7 @@
 	        <li><a ng-hide="header.user" ng-click="header.showRegister()">Sign Up</a></li>
 	        <li><a ng-show="header.user" href="!#"> My Profile </a></li>
 	        <li><a ng-show="header.user" ng-click="header.logout()">Logout</a></li>
-	        <li><a href="/pages/createbooking.html">Become a Host</a></li>
+	        <li><a ui-sref="create_booking">Become a Host</a></li>
       	</ul>
     </div>
 </nav>
