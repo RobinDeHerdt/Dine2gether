@@ -15,7 +15,7 @@ class CreateDishImagesTable extends Migration
     {
         Schema::create('dish_images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image-url');
+            $table->string('image_url');
             
             $table->integer('dish_id')->unsigned();
             $table->foreign('dish_id')->references('id')->on('dishes');

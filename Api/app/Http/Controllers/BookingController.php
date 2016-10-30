@@ -88,10 +88,30 @@ class BookingController extends Controller
         $booking->street_number = $request->street_number;
         $booking->postalcode    = $request->postalcode;
         $booking->city          = $request->city;
-        $booking->host_id       = 1;
+        $booking->host_id       = 1; // Get authenticated user id here
         // $booking->User()->associate($host);
 
         $booking->save();
+
+
+        // Loop through all dishes here
+        $dish = new Dish();
+        $dish->name         = $request->name;
+        $dish->description  = $request->description;
+        $dish->Booking()->associate($booking);
+
+        $dish->save();
+
+
+        $dish_image = new Dish_image();
+
+        $path = $request->dish_image->store('img', 'upload');
+
+        $dish_image->image_url      = $path;
+        $dish_image->Dish()->associate($dish);
+
+        $dish_image->save();
+        
 
         return redirect('/#/overview');
     }

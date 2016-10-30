@@ -1,49 +1,100 @@
 <main>
   <div class="container under-header">
     <div class="row">
-      <form class="col s12" action="/api/createbooking" method="POST">
+    <ol>
+      <li>
+        <p>General information</p>
+        <form class="col s12" action="/api/createbooking" method="POST" enctype="multipart/form-data">
         <div class="row">
-          <div class="input-field col s6">
-            <input  name="title" type="text" class="validate">
-            <label for="title">Title</label>
+            <div class="input-field col s6">
+              <input  name="title" type="text" class="validate">
+              <label for="title">Short description</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input name="date" type="date" class="validate">
-            <label for="date">Date and time</label>
+          <div class="row">
+            <div class="input-field col s6">
+              <input name="date" type="date" class="validate">
+              <label for="date">Date and time</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input  name="price" type="text" class="validate">
-            <label for="price">Price</label>
+          <div class="row">
+            <div class="input-field col s6">
+              <input  name="price" type="text" class="validate">
+              <label for="price">Price</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input  name="street_number" type="text" class="validate">
-            <label for="street_number">Street and number</label>
+      </li>
+      <li>
+        <p>Location</p>
+          <div class="row">
+            <div class="input-field col s6">
+              <input  name="street_number" type="text" class="validate">
+              <label for="street_number">Street and number</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input  name="postalcode" type="text" class="validate">
-            <label for="postalcode">Postalcode</label>
+          <div class="row">
+            <div class="input-field col s6">
+              <input  name="postalcode" type="text" class="validate">
+              <label for="postalcode">Postalcode</label>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s6">
-            <input  name="city" type="text" class="validate">
-            <label for="city">City</label>
+          <div class="row">
+            <div class="input-field col s6">
+              <input  name="city" type="text" class="validate">
+              <label for="city">City</label>
+            </div>
           </div>
-        </div>
+          </li>
+          <li>
+          <p>Your interests</p>
+            <div class="row">
+            <div class="input-field col s6">
+                <!-- Loop door alle interesses hier, data staat op /api/interests -->
+                <input type="checkbox" name="interest1" value="Sports">Sports <br>
+                <input type="checkbox" name="interest2" value="Music">Music <br>
+            </div>
+           </div>
+          <div class="row">
+          </li>
+          <li>
+            <p>Menu</p>
+            <ul>
+              <li>
+                Dish 1: 
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input  name="name" type="text" class="validate">
+                    <label for="name">Name</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input  name="description" type="text" class="validate">
+                    <label for="description">Description</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <input type="file" name="dish_image">
+                    <label for="dish_image">Image</label>
+                  </div>
+                </div>
+              </li>
+              
+              <input type="hidden" name="alldishesjson" value="hierkomthetjsonobject">
+
+              <!-- Op buttonklik: Display de toegevoegde dish hier ergens en maak het formulier leeg zodat er meerdere dishes kunnen toegevoegd worden. Zet de dishes allemaal in een json object en zet het in de hidden input hierboven -->
+              <button>Add dish</button>
+            </ul>
+            
+          </li>
+        </ol>
         <div class="row">
           <div class="input-field col s6">
             <input type="submit" value="Save">
           </div>
         </div>
-      </form>
+        </form>
     </div>
   </div>
 </main>
