@@ -19,4 +19,6 @@ nav a { color: #108610 !important; }
 	color: #000 !important;
 }
 
-#searchbtn { width: 100%;}
+#searchbtn { width: 100%; }
+
+#createbookingpagination li { cursor: pointer; }

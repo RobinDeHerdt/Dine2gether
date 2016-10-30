@@ -1,5 +1,6 @@
-d2gApp.controller("createBookingController", function () {
+d2gApp.controller("createBookingController", function (interestService) {
 	var vm = this;
+	var interestSvc = interestService;
 	var dishes_arr = [];
 
 	vm.numberOfPages = 4;
@@ -9,4 +10,27 @@ d2gApp.controller("createBookingController", function () {
 	vm.addDish = function (dish_name, dish_descr, dish_img) {
 		dishes_arr.push({name: dish_name, description: dish_descr, img: dish_img});
 	}
+
+	function loadInterests () {
+		interestSvc.getInterests().success(function (data) {
+			vm.interests = data.interests;
+			console.log(vm.interests);
+		})
+	}
+
+	function getSelectedInterests () {
+		var arr_interests = [];
+		angular.forEach(vm.interests, function (interest) {
+			if(interest.selected) {
+				arr_interests.push(interest.interest);
+			}
+		})
+		return arr_interests;
+	}
+
+	function _init () {
+		loadInterests();
+	}
+
+	_init();
 });
