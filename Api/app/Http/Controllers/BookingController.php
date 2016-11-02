@@ -111,7 +111,12 @@ class BookingController extends Controller
         $dish_image->Dish()->associate($dish);
 
         $dish_image->save();
-        
+
+        // Loop through all interests here
+        $interest = new Interest();
+        $interest->interest = $request->interest;
+        $interest->user_id  = $request->1; // Get authenticated user id here
+        // $booking->User()->associate($host);
 
         return redirect('/#/overview');
     }
