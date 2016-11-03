@@ -1,6 +1,7 @@
-d2gApp.controller("createBookingController", function (interestService) {
+d2gApp.controller("createBookingController", function (interestService, bookingService) {
 	var vm = this;
 	var interestSvc = interestService;
+	var bookingSvc = bookingService;	
 
 	vm.numberOfPages = 4;
 	vm.currentPage = 1;
@@ -26,11 +27,12 @@ d2gApp.controller("createBookingController", function (interestService) {
 			address: vm.address,
 			postal_code: vm.postal_code,
 			city: vm.city,
-			interest:  getSelectedInterests(),
+			interests:  getSelectedInterests(),
 			dishes: getDishes()
 		}
 
 		console.log(data);
+		bookingSvc.createBooking(data);
 	} 
 
 	function loadInterests () {
@@ -53,12 +55,12 @@ d2gApp.controller("createBookingController", function (interestService) {
 	function getDishes () {
 		var arr_dishes = [];
 		var arr_dish_img = [];
-		for(var x=1; x <= vm.dishes.length; x++) {
+		for(var x=0; x < vm.dishes.length; x++) {
 
 			arr_dishes.push({
-				name: vm.dish_name.x,
-				description: vm.dish_descr.x,
-				dish_img: vm.dish_img.x
+				dish_name: vm.dishes[x].dish_name,
+				description: vm.dishes[x].descr,
+				dish_img: vm.dishes[x].img
 			})
 		}
 
