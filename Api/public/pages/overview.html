@@ -6,7 +6,7 @@
 				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
 					<div class="divider mar-top-l"></div>
 					<h3>{{ booking.title }}</h3>
-					<img ng-src="img/{{ booking.dishes[0].dish_images[0]['image-url'] }}">
+					<img ng-src="img/{{ booking.dishes[0].dish_images[0].image_url }}">
 					<p>{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }}</p>
 					<p>{{ booking.user.first_name + " " + booking.user.last_name}}</p>
 					<p>{{ booking.price | currency : "€"}}</p>

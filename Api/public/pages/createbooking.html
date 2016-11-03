@@ -7,19 +7,19 @@
 					<form class="col s12" action="/api/createbooking" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="input-field col s6">
-								<input ng-model="menu_title"  name="title" type="text" class="validate" required>
+								<input ng-model="create.menu_title"  name="title" type="text" class="validate" required>
 								<label for="title">Short description</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input ng-model="date" name="date" type="text" onfocus="(this.type='date')" class="validate" required>
+								<input ng-model="create.date" name="date" type="text" onfocus="(this.type='date')" class="validate" required>
 								<label for="date">Date and time</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input  ng-model="price" name="price" type="text" class="validate" required>
+								<input  ng-model="create.price" name="price" type="number" step="0.01" class="validate" required>
 								<label for="price">Price</label>
 							</div>
 						</div>
@@ -28,19 +28,19 @@
 						<h4>2. Location</h4>
 						<div class="row">
 							<div class="input-field col s6">
-								<input ng-model="address" name="street_number" type="text" class="validate" required>
+								<input ng-model="create.address" name="street_number" type="text" class="validate" required>
 								<label for="street_number">Street and number</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input  name="postalcode" type="text" class="validate" required>
-								<label ng-model="postal_code" for="postalcode">Postalcode</label>
+								<input ng-model="create.postal_code" name="postalcode" type="text" class="validate" required>
+								<label for="postalcode">Postalcode</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s6">
-								<input ng-model="city" name="city" type="text" class="validate" required>
+								<input ng-model="create.city" name="city" type="text" class="validate" required>
 								<label for="city">City</label>
 							</div>
 						</div>
@@ -61,17 +61,18 @@
 						<li ng-show="create.currentPage == 4">
 							<h4>4. Menu</h4>
 							<ul>
-								<li>
-									Dish 1: 
+								<li ng-repeat="dish in create.dishes">
+									<a ng-click="create.deleteLastDish()" ng-if="$last && dish.number != 1" class="btn red darken-4 btn-small mar-right-m">Delete</a>
+									Dish {{ dish.number }}: 
 									<div class="row">
 										<div class="input-field col s6">
-											<input  name="name" type="text" class="validate">
+											<input ng-model="dish.name" name="name" type="text" class="validate"required>
 											<label for="name">Name</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s6">
-											<input  name="description" type="text" class="validate">
+											<input ng-model="dish.descr" name="description" type="text" class="validate" required>
 											<label for="description">Description</label>
 										</div>
 									</div>
@@ -79,10 +80,10 @@
 										<div class="file-field input-field col s6">
 											<div class="btn">
 												<span>Add image</span>
-												<input type="file" multiple>
+												<input ng-model="dish.img" type="file" multiple>
 											</div>
 											<div class="file-path-wrapper">
-												<input class="file-path validate" type="text" placeholder="Upload image">
+												<input class="file-path validate" type="text" placeholder="Upload image" required>
 											</div>
 										</div>
 									</div>
@@ -91,14 +92,14 @@
 								<input type="hidden" name="alldishesjson" value="hierkomthetjsonobject">
 
 								<!-- Op buttonklik: Display de toegevoegde dish hier ergens en maak het formulier leeg zodat er meerdere dishes kunnen toegevoegd worden. Zet de dishes allemaal in een json object en zet het in de hidden input hierboven -->
-								<button>Add dish</button>
+								<a ng-click="create.addTemplateDish()" class="btn waves">Add dish</a>
 							</ul>
 
 						</li>
 					</ul>
 					<div class="row">
 						<div ng-show="create.currentPage == create.numberOfPages" class="input-field col s6">
-							<input type="submit" value="Save">
+							<a ng-click="create.createBooking()" class="btn waves">Create booking</a>
 						</div>
 					</div>
 					<ul id="createbookingpagination" class="pagination">

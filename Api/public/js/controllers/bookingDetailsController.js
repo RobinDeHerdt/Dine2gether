@@ -8,6 +8,7 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, bookingSer
 	function getCurrentBooking () {
 		bookingSvc.getBookingById(currentBookingId).then(function (data) {
 			vm.currentBooking = data.data.booking;
+			console.log(data.data.booking);
 		})
 	}
 	function _init() {
