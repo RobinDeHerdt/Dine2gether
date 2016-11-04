@@ -1,15 +1,39 @@
-d2gApp.controller("createBookingController", function (interestService) {
+d2gApp.controller("createBookingController", function (interestService, bookingService) {
 	var vm = this;
 	var interestSvc = interestService;
-	var dishes_arr = [];
+	var bookingSvc = bookingService;	
 
 	vm.numberOfPages = 4;
 	vm.currentPage = 1;
+	vm.dishes = [{
+		number: 1,
+	}];
 
-	// dish_img zou eigenlijk dish_images moeten worden en een array zijn. 
-	vm.addDish = function (dish_name, dish_descr, dish_img) {
-		dishes_arr.push({name: dish_name, description: dish_descr, img: dish_img});
+	vm.addTemplateDish = function () {
+		console.log(vm.dishes);
+		var dish_nr = vm.dishes.length + 1;
+		vm.dishes.push({
+			number: dish_nr,
+		});
 	}
+	vm.deleteLastDish = function () {
+		vm.dishes.pop();
+	}
+	vm.createBooking = function () {
+		var data = {
+			menu_title: vm.menu_title,
+			date: vm.date,
+			price: vm.price,
+			address: vm.address,
+			postal_code: vm.postal_code,
+			city: vm.city,
+			interests:  getSelectedInterests(),
+			dishes: getDishes()
+		}
+
+		console.log(data);
+		bookingSvc.createBooking(data);
+	} 
 
 	function loadInterests () {
 		interestSvc.getInterests().success(function (data) {
@@ -26,6 +50,21 @@ d2gApp.controller("createBookingController", function (interestService) {
 			}
 		})
 		return arr_interests;
+	}
+
+	function getDishes () {
+		var arr_dishes = [];
+		var arr_dish_img = [];
+		for(var x=0; x < vm.dishes.length; x++) {
+
+			arr_dishes.push({
+				dish_name: vm.dishes[x].dish_name,
+				description: vm.dishes[x].descr,
+				dish_img: vm.dishes[x].img
+			})
+		}
+
+		return arr_dishes;
 	}
 
 	function _init () {

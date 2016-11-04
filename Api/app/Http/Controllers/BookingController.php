@@ -117,6 +117,7 @@ class BookingController extends Controller
         $interest = new Interest();
         $interest->interest = $request->interest;
         $interest->user_id  = 1; // Get authenticated user id here
+        //$interest->user_id  = $request->1; // Get authenticated user id here
         // $booking->User()->associate($host);
 
         return redirect('/#/overview');
