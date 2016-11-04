@@ -52,31 +52,31 @@ class BookingController extends Controller
         //     'street_number' => 'required'
         // ]);
 
-
         $booking = new Booking;
-        // $host    = Auth::user();
 
-        $booking->title         = $request->title;
+        $booking->title         = $request->menu_title;
         $booking->price         = $request->price;
         $booking->date          = $request->date;
-        $booking->street_number = $request->street_number;
-        $booking->postalcode    = $request->postalcode;
+        $booking->street_number = $request->address;
+        $booking->postalcode    = $request->postal_code;
         $booking->city          = $request->city;
-        $booking->host_id       = 1; // Get authenticated user id here
+        $booking->host_id       = $request->user_id; // Get authenticated user id here
         // $booking->User()->associate($host);
 
         $booking->save();
 
-
+        var_dump($booking);
         // Loop through all dishes here
-        $dish = new Dish();
-        $dish->name         = $request->name;
-        $dish->description  = $request->description;
-        $dish->Booking()->associate($booking);
+        $dishes = $request->dishes;
+        foreach ($dishes as $newdish) {
+            $dish = new Dish();
+            $dish->name         = $newdish->dish_name;
+            $dish->description  = $newdish->description;
+            $dish->Booking()->associate($booking);
 
-        $dish->save();
-
-
+            $dish->save();
+        }
+        /*
         $dish_image = new Dish_image();
 
         $path = $request->dish_image->store('img', 'upload');
@@ -85,15 +85,16 @@ class BookingController extends Controller
         $dish_image->Dish()->associate($dish);
 
         $dish_image->save();
-
+        */
         // Loop through all interests here
-        $interest = new Interest();
-        $interest->interest = $request->interest;
-        $interest->user_id  = 1; // Get authenticated user id here
-        //$interest->user_id  = $request->1; // Get authenticated user id here
-        // $booking->User()->associate($host);
+        /*foreach ($interests as $newinterest {
+            $interest = new Interest();
+            $interest->interest = $request->interest;
+            $interest->user_id  = $request->user_id; // Get authenticated user id here
+        }*/
 
         return redirect('/#/overview');
+        
     }
 
     /**

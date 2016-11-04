@@ -1,7 +1,8 @@
-d2gApp.controller("createBookingController", function (interestService, bookingService) {
+d2gApp.controller("createBookingController", function (interestService, bookingService, loginService, $location) {
 	var vm = this;
 	var interestSvc = interestService;
 	var bookingSvc = bookingService;	
+	var loginSvc = loginService;
 
 	vm.numberOfPages = 4;
 	vm.currentPage = 1;
@@ -20,7 +21,9 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 		vm.dishes.pop();
 	}
 	vm.createBooking = function () {
+		var user = loginSvc.getUser();
 		var data = {
+			user_id: user.id,
 			menu_title: vm.menu_title,
 			date: vm.date,
 			price: vm.price,
@@ -29,10 +32,13 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			city: vm.city,
 			interests:  getSelectedInterests(),
 			dishes: getDishes()
-		}
+		};
 
-		console.log(data);
-		bookingSvc.createBooking(data);
+		bookingSvc.createBooking(data).then(function (data) {
+			console.log(data);
+		}, function (error) {
+			console.log(error);
+		});
 	} 
 
 	function loadInterests () {
@@ -68,7 +74,13 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 	}
 
 	function _init () {
-		loadInterests();
+		if(!loginSvc.getUser()) {
+			loginSvc.errorMessage = "You need to be logged in to create a booking";
+			$location.path('/home');
+		} else {
+			loadInterests();
+		}
+		
 	}
 
 	_init();

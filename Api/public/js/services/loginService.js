@@ -1,4 +1,4 @@
-d2gApp.service('loginService', function($http, $auth) {
+d2gApp.service('loginService', function ($http, $auth) {
 	var svc = this;
 
 	svc.showLoginModal = function () {

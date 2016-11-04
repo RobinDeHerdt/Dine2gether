@@ -16,8 +16,8 @@ d2gApp.service('bookingService', function($http) {
     }
 
     svc.createBooking = function (data) {
-    	return $http.post('api/createbooking', data, {withCredentials: true, headers: {'Content-Type': undefined }, 
-            transformRequest: angular.identity});
+        console.log(data);
+    	return $http.post('api/createbooking', data);
     }
 
 });
