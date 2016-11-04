@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Booking;
@@ -52,7 +53,7 @@ class BookingController extends Controller
         //     'street_number' => 'required'
         // ]);
 
-        $booking = new Booking;
+        /*$booking = new Booking;
 
         $booking->title         = $request->menu_title;
         $booking->price         = $request->price;
@@ -88,11 +89,16 @@ class BookingController extends Controller
         $dish_image->save();
         */
         // Loop through all interests here
-        /*foreach ($interests as $newinterest {
-            $interest = new Interest();
-            $interest->interest = $request->interest;
-            $interest->user_id  = $request->user_id; // Get authenticated user id here
-        }*/
+        $interests = $request->interests;
+        $arr_length = count($interests);
+
+        for ($x = 0; $x < $arr_length; $x++) {
+            $interest = Interest::where('interest', $interests[$x])->first();
+            $interestid = $interest->id;
+            DB::table('user_interest')->insert(
+                ['user_id' => $request->user_id, 'interest_id' => $interestid]
+            );
+        }
 
         return redirect('/#/overview');
         
