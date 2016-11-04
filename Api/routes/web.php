@@ -25,7 +25,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('authenticate/logout', 'AuthenticateController@logout');
 
 
-    Route::resource('bookings', 'bookingController', ['only' => ['index', 'store', 'destroy']]);
+    Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
     Route::post('createbooking', 'BookingController@store');  
     Route::get('bookingdetails/{id}', 'BookingController@show'); 
 

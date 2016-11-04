@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Booking;
 use App\User;
 use App\Dish;
-use App\Dish_image;
+use App\Dish_Image;
 use App\Interest;
 use App\Kitchenstyle;
 use Carbon\Carbon;
@@ -38,7 +38,7 @@ class BookingController extends Controller
             $user->interests = $interests;
 
             foreach ($dishes as $dish) { // get dish images by dish for this booking
-                $dish_images = Dish_image::where('dish_id', $dish->id)->get();
+                $dish_images = Dish_Image::where('dish_id', $dish->id)->get();
                 // put dish_images in $dish and push to dishesarray
                 $dish->dish_images = $dish_images;
                 array_push($dishesarray, $dish);
