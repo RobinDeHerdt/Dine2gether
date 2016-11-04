@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     public function interests()
     {
-        return $this->hasMany('App\Interest');
+        return $this->belongsToMany('App\Interest');
     }
 
     public function reviews()
