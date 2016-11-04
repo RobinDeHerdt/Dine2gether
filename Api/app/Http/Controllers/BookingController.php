@@ -11,6 +11,7 @@ use App\Dish;
 use App\Dish_image;
 use App\Interest;
 use App\Kitchenstyle;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -22,17 +23,17 @@ class BookingController extends Controller
     public function index()
     {
         // We want to return the booking including the user(s), dish(es) and dish image(s)
-        $bookings = Booking::all(); // get all bookings
-        $bookingsarray = [];
+        $bookings       = Booking::all(); // get all bookings
+        $bookingsarray  = [];
 
         foreach ($bookings as $booking) 
         {   
             $dishesarray = []; 
             // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
-            $user = User::where('id', $booking->host_id)->first();
-            $interests = Interest::where('user_id', $user->id)->get();
-            $dishes = Dish::where('booking_id', $booking->id)->get();
-            $kitchenstyles = Kitchenstyle::where('booking_id', $booking->id)->get();
+            $user           = User::where('id', $booking->host_id)->first();
+            $interests      = Interest::where('user_id', $user->id)->get();
+            $dishes         = Dish::where('booking_id', $booking->id)->get();
+            $kitchenstyles  = Kitchenstyle::where('booking_id', $booking->id)->get();
             // put interests in $user
             $user->interests = $interests;
 
@@ -43,9 +44,9 @@ class BookingController extends Controller
                 array_push($dishesarray, $dish);
             }
             // put user(s), kitchenstyle(s) and dishesarray in $booking
-            $booking->user = $user;
+            $booking->user          = $user;
             $booking->kitchenstyles = $kitchenstyles;
-            $booking->dishes = $dishesarray;
+            $booking->dishes        = $dishesarray;
 
             // add this booking to bookingsarray
             array_push($bookingsarray, $booking);
@@ -115,7 +116,7 @@ class BookingController extends Controller
         // Loop through all interests here
         $interest = new Interest();
         $interest->interest = $request->interest;
-        $interest->user_id  = $request->1; // Get authenticated user id here
+        $interest->user_id  = 1; // Get authenticated user id here
         // $booking->User()->associate($host);
 
         return redirect('/#/overview');
@@ -194,5 +195,17 @@ class BookingController extends Controller
     {
         $booking = Booking::find($id);
         $booking->delete();
+    }
+
+    public function search(Request $request)
+    {
+        $location = $request->location;
+
+        $locations  = preg_split('/[;, ]+/', $location);
+
+        $bookings   = Booking::where('city', 'LIKE', $locations[0])
+                             ->where('date', '>=', Carbon::now())->get();
+
+        return response()->json(["bookings" => $bookings]);
     }
 }

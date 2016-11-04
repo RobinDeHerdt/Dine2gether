@@ -15,8 +15,9 @@ Route::get('/', function() {
     return View::make('index'); // app/views/index.php
 });
 
+Route::get('/search', 'BookingController@search');
 
- Route::group(array('prefix' => 'api'), function() {
+Route::group(array('prefix' => 'api'), function() {
 	
     Route::post('authenticate/login', 'AuthenticateController@login');
     Route::get('authenticate/user', 'AuthenticateController@getUser');
@@ -31,6 +32,5 @@ Route::get('/', function() {
     Route::get('interests', 'InterestController@index');
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');
- 
   	//Route::get('/createbooking', 'BookingController@create');
- });
+});

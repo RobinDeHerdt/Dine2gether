@@ -2,13 +2,19 @@
 	<div id="home" class="max-width max-height img-bg">
 		<div id="home-form" class="container absolute-center pad-top-m pad-btm-m pad-left-l pad-right-l">
 			<div class="row">
+				<form action="/search" method="GET">
 		        <div class="input-field col s6">
-		          	<input id="autocomplete" type="text" placeholder="Locatie" validate/>
+		          	<input id="autocomplete" type="text" placeholder="Locatie" name="location" validate/>
 		        </div>
 		        <div class="input-field col s6">
-		        	<div class="col s8"><input placeholder id="Datum" type="date" class="validate"></div>
-		        	<div class="col s4"><a id="searchbtn" ui-sref="overview" class="btn primary-colour">Search</a></div>
+		        	<!-- <div class="col s8">
+		        		<input placeholder id="Datum" type="date" class="validate" name="date">
+		        	</div> -->
+		        	<div class="col s4">
+		        		<input type="submit" id="searchbtn" class="btn primary-colour" value="Search">
+		        	</div>
 		        </div>
+		        </form>
 		    </div>
 		</div>
 	</div>
