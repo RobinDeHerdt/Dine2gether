@@ -65,13 +65,14 @@ class BookingController extends Controller
 
         $booking->save();
 
-        var_dump($booking);
+        
         // Loop through all dishes here
         $dishes = $request->dishes;
+
         foreach ($dishes as $newdish) {
             $dish = new Dish();
-            $dish->name         = $newdish->dish_name;
-            $dish->description  = $newdish->description;
+            $dish->name         = $newdish["dish_name"];
+            $dish->description  = $newdish["description"];
             $dish->Booking()->associate($booking);
 
             $dish->save();
