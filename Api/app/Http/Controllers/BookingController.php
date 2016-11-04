@@ -24,35 +24,8 @@ class BookingController extends Controller
     {
         // We want to return the booking including the user(s), dish(es) and dish image(s)
         $bookings       = Booking::all(); // get all bookings
-        $bookingsarray  = [];
-
-        foreach ($bookings as $booking) 
-        {   
-            $dishesarray = []; 
-            // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
-            $user           = User::where('id', $booking->host_id)->first();
-            $interests      = Interest::where('user_id', $user->id)->get();
-            $dishes         = Dish::where('booking_id', $booking->id)->get();
-            $kitchenstyles  = Kitchenstyle::where('booking_id', $booking->id)->get();
-            // put interests in $user
-            $user->interests = $interests;
-
-            foreach ($dishes as $dish) { // get dish images by dish for this booking
-                $dish_images = Dish_Image::where('dish_id', $dish->id)->get();
-                // put dish_images in $dish and push to dishesarray
-                $dish->dish_images = $dish_images;
-                array_push($dishesarray, $dish);
-            }
-            // put user(s), kitchenstyle(s) and dishesarray in $booking
-            $booking->user          = $user;
-            $booking->kitchenstyles = $kitchenstyles;
-            $booking->dishes        = $dishesarray;
-
-            // add this booking to bookingsarray
-            array_push($bookingsarray, $booking);
-        }
-
-        return response()->json(["bookings" => $bookingsarray]);
+        $response = $this->addToEachBooking($bookings);
+        return response()->json(["bookings" => $response]);
     }
 
     /**
@@ -205,8 +178,43 @@ class BookingController extends Controller
         $locations  = preg_split('/[;, ]+/', $location);
 
         $bookings   = Booking::where('city', 'LIKE', $locations[0])
-                             ->where('date', '>=', Carbon::now())->get();
+                             /*->where('date', '>=', Carbon::now())*/->get();
 
-        return response()->json(["bookings" => $bookings]);
+        $response = $this->addToEachBooking($bookings);
+        return response()->json(["bookings" => $response]);
+    }
+
+    // aparte functie (properder)
+    public function addToEachBooking ($bookings) {
+
+        $bookingsarray  = [];
+
+        foreach ($bookings as $booking) 
+        {   
+            $dishesarray = []; 
+            // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
+            $user           = User::where('id', $booking->host_id)->first();
+            $interests      = Interest::where('user_id', $user->id)->get();
+            $dishes         = Dish::where('booking_id', $booking->id)->get();
+            $kitchenstyles  = Kitchenstyle::where('booking_id', $booking->id)->get();
+            // put interests in $user
+            $user->interests = $interests;
+
+            foreach ($dishes as $dish) { // get dish images by dish for this booking
+                $dish_images = Dish_Image::where('dish_id', $dish->id)->get();
+                // put dish_images in $dish and push to dishesarray
+                $dish->dish_images = $dish_images;
+                array_push($dishesarray, $dish);
+            }
+            // put user(s), kitchenstyle(s) and dishesarray in $booking
+            $booking->user          = $user;
+            $booking->kitchenstyles = $kitchenstyles;
+            $booking->dishes        = $dishesarray;
+
+            // add this booking to bookingsarray
+            array_push($bookingsarray, $booking);
+        }
+
+        return $bookingsarray;
     }
 }

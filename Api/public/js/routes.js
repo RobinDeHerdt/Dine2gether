@@ -2,13 +2,18 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
  
  $authProvider.loginUrl = '/api/authenticate/login';
 
-  $urlRouterProvider.otherwise("/home");
+ //$urlRouterProvider.otherwise("/home");
 
   $stateProvider
 	.state("home", {
 	  url: "/home",
 	  templateUrl: "pages/home.html",
 	  controller: "homeController as home"
+	})
+	.state("overviewsearch", {
+		url: "/overview/:search",
+		templateUrl: "pages/overview.html",
+		controller: "overviewController as overview"
 	})
 	.state("overview", {
 		url: "/overview",
