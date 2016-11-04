@@ -52,20 +52,15 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 	}
 	function loadBookings () {
 		if($stateParams.search) {
-			console.log($stateParams.search);
 			bookingSvc.getBookingsByLocation($stateParams.search)
 				.then(function (data) {
-					console.log(data);
 					vm.bookings = data.data.bookings;
-					console.log(vm.bookings);
 				}, function(error) {
 					console.log(error);
 				});
 		} else {
 			bookingSvc.getBookings()
 				.success(function (data) {
-					//console.log(data.bookings[0].dishes[0].dish_images[0]['image-url'])
-					console.log(data);
 					vm.bookings = data.bookings;
 				});
 		}
