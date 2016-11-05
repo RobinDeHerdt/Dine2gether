@@ -53,7 +53,7 @@ class BookingController extends Controller
         //     'street_number' => 'required'
         // ]);
 
-        /*$booking = new Booking;
+        $booking = new Booking;
 
         $booking->title         = $request->menu_title;
         $booking->price         = $request->price;
@@ -95,8 +95,8 @@ class BookingController extends Controller
         for ($x = 0; $x < $arr_length; $x++) {
             $interest = Interest::where('interest', $interests[$x])->first();
             $interestid = $interest->id;
-            DB::table('user_interest')->insert(
-                ['user_id' => $request->user_id, 'interest_id' => $interestid]
+            DB::table('booking_interest')->insert(
+                ['booking_id' => $booking->id, 'interest_id' => $interestid]
             );
         }
 
