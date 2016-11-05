@@ -1,7 +1,8 @@
-d2gApp.service('loginService', function ($http, $auth) {
+d2gApp.service('loginService', function ($http, $auth, $cookies) {
 	var svc = this;
 
-	svc.user = null;
+	svc.user = $cookies.get("user");
+
 	svc.showLoginModal = function () {
 		$("#modal1").openModal();
 	}
@@ -24,13 +25,13 @@ d2gApp.service('loginService', function ($http, $auth) {
 				swal({
 				  title: "Login Failed",
 				  text: "You've entered the wrong emailaddress or password, please try again.",
-				  type: error,
+				  type: "error",
 				});
 			} else {
 				swal({
 				  title: "Oops",
 				  text: "Something went wrong. We couldn't get you logged in. Try again, or contact user if this problem keeps occuring",
-				  type: error,
+				  type: "error",
 				});
 			}
 		});
@@ -52,7 +53,8 @@ d2gApp.service('loginService', function ($http, $auth) {
 				    sendActivationMail(user.data.user);
 				})
 			} else {
-				svc.user = user.data.user;
+				$cookies.putObject("user", user.data.user);
+				svc.user = $cookies.getObject("user");
 			}
 		});
 	}

@@ -6,10 +6,10 @@ d2gApp.directive("d2gHeader", function () {
 		scope: {},
 		bindToController: true,
 		controllerAs: "header",
-		controller: function ($scope, loginService, $auth) {
+		controller: function ($scope, loginService, $auth, $cookies, $location) {
 			var vm = this;
 			var loginSvc = loginService;
-
+			
 			$scope.$watch(loginSvc.getUser, function (user) {
 				vm.user = user;
 			})			
@@ -23,10 +23,9 @@ d2gApp.directive("d2gHeader", function () {
 			}
 
 			vm.logout = function () {
-				$auth.logout().then(function () {
-					console.log("Logged out");
-					loginSvc.user = null;
-				})
+				$cookies.remove("user");
+				loginSvc.user = null;
+				$location.path("home");
 			}
 
 			vm.register = function () {

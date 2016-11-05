@@ -22,6 +22,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
 <script type="text/javascript" src="js/assets/satellizer.js"></script>
 <script type="text/javascript" src="js/assets/sweetalert2.min.js"></script>
+<script type="text/javascript" src="js/assets/ng-file-upload-shim.min.js"></script>
+<script type="text/javascript" src="js/assets/angular-cookies.min.js"></script>
 <!-- angular -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/routes.js"></script>

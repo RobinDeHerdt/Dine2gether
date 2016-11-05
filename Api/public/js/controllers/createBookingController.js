@@ -44,7 +44,18 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 	} 
 
 	vm.uploadImage = function (file, errFiles) {
-		
+		if(file) {
+			file.upload = Upload.upload({url: "img", data: {file: file}});
+			file.upload.then(function (response) {
+				console.log(response);
+			}, function (error) {
+				if(error.status > 0) {
+					console.log(error);
+				}
+			})
+		} else {
+			console.log("no file??");	
+		}
 	}
 
 	function loadInterests () {
