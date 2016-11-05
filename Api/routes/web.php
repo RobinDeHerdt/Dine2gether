@@ -23,11 +23,10 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('authenticate/user', 'AuthenticateController@getUser');
     Route::post('authenticate/register', 'AuthenticateController@register');
     Route::get('authenticate/logout', 'AuthenticateController@logout');
+    Route::post('user/activation', 'Auth\LoginController@activateUser');
 
     Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
-    Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail');
-    Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
-    
+    Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail'); 
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
     Route::post('createbooking', 'BookingController@store');  

@@ -10,6 +10,11 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 	  templateUrl: "pages/home.html",
 	  controller: "homeController as home"
 	})
+	.state("activate-user", {
+		url:"/activation/:token",
+		templateUrl: "pages/activation.html",
+	  	controller: "activationController as controller"
+	})
 	.state("overviewsearch", {
 		url: "/overview/:search",
 		templateUrl: "pages/overview.html",

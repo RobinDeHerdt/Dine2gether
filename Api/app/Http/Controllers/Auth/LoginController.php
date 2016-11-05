@@ -39,4 +39,13 @@ class LoginController extends Controller
         $this->middleware('guest', ['except' => 'logout']);
         $this->activationService = $activationService;
     }
+
+    public function activateUser(Request $request)
+    {
+        if ($user = $this->activationService->activateUser($token)) {
+            return redirect ("/");
+        } else {
+            //return redirect ("/");
+        }
+    }
 }

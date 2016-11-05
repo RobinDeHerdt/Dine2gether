@@ -25,7 +25,7 @@ class ActivationService
 
         $token = $this->activationRepo->createActivation($user);
 
-        $link = route('user.activate', $token);
+        $link = url('activation/') . "/" .$token;
         $message = sprintf('Activate account <a href="%s">%s</a>', $link, $link);
 
         /*$this->mailer->send('mails.verification_mail',['username' => $user->name, 'link' => $link], function 

@@ -70,6 +70,14 @@ d2gApp.service('loginService', function ($http, $auth, $cookies) {
 		});
 	}
 
+	svc.activateUser = function (token) {
+		$http.post('api/user/activation', token).then(function (data) {
+			console.log(data);
+		}, function (error) {
+			console.log(data);
+		})
+	}
+
 	function sendActivationMail (user) {
 		$http.post('api/sendactivationmail', user).then(function (data) {
 			console.log(data);

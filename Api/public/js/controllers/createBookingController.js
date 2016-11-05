@@ -11,6 +11,7 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 	}];
 
 	vm.addTemplateDish = function () {
+		console.log(vm.dishes);
 		var dish_nr = vm.dishes.length + 1;
 		vm.dishes.push({
 			number: dish_nr,
@@ -31,7 +32,6 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			city: vm.city,
 			interests:  getSelectedInterests(),
 			dishes: getDishes(),
-			dish_imgs: getImages()
 		};
 
 		bookingSvc.createBooking(data).then(function (data) {
