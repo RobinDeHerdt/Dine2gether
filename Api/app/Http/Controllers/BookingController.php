@@ -207,7 +207,7 @@ class BookingController extends Controller
             $dishesarray = []; 
             // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
             $user           = User::where('id', $booking->host_id)->first();
-            $interests      = Interest::where('user_id', $user->id)->get();
+            $interests      = Booking::where('id', $booking->id)->with('interests')->get();
             $dishes         = Dish::where('booking_id', $booking->id)->get();
             $kitchenstyles  = Kitchenstyle::where('booking_id', $booking->id)->get();
             // put interests in $user
