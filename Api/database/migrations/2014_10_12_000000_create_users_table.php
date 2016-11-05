@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('street_number')->nullable();
             $table->string('postalcode')->nullable();
             $table->string('password');
+            $table->boolean('activated')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

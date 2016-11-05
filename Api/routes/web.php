@@ -24,6 +24,9 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('authenticate/register', 'AuthenticateController@register');
     Route::get('authenticate/logout', 'AuthenticateController@logout');
 
+    Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
+    Route::get('user/activation/{token}', 'Auth\LoginController@activateUser')->name('user.activate');
+    
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
     Route::post('createbooking', 'BookingController@store');  

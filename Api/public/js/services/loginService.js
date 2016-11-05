@@ -40,9 +40,20 @@ d2gApp.service('loginService', function ($http, $auth) {
 
 	svc.register = function (o_newuser) {
 		$http.post('api/authenticate/register', o_newuser).success(function (data) {
-			svc.login({"email": o_newuser.email, "password": o_newuser.password});
+			sendActivationMail(data)
+			//svc.login({"email": o_newuser.email, "password": o_newuser.password});
 		});
 	}
+
+	function sendActivationMail (user) {
+		$http.post('sendactivationmail', user).then(function (data) {
+			console.log(data);
+		}, function (error) {
+			console.log(error);
+		});
+	}
+
+
 
 	
 
