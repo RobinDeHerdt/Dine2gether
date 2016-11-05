@@ -13,17 +13,14 @@ class InterestsTableSeeder extends Seeder
     {
         DB::table('interests')->insert([
             'interest' => 'Music',
-            'user_id' => 1,
         ]);
 
         DB::table('interests')->insert([
             'interest' => 'Sports',
-            'user_id' => 2,
         ]);
 
         DB::table('interests')->insert([
             'interest' => 'Animals',
-            'user_id' => 5,
         ]);
     }
 }

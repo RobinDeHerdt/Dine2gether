@@ -27,6 +27,6 @@ class CreateUserActivationsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('user_activations');
     }
 }

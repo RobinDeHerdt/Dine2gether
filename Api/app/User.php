@@ -32,11 +32,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Booking');
     }
 
-    public function interests()
-    {
-        return $this->belongsToMany('App\Interest');
-    }
-
     public function reviews()
     {
         return $this->hasMany('App\Review');

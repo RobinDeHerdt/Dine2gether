@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Interest extends Model
 {
-    public function users()
+    public function bookings()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\Booking');
     }
 }
