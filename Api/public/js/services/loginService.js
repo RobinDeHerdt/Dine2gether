@@ -20,17 +20,39 @@ d2gApp.service('loginService', function ($http, $auth) {
 			svc.setUser();
 		}, function (error) {
 			if(error.data.error = "invalid_credentials") {
-				alert("You've entered the wrong email or password. Please Try again.");
+				swal({
+				  title: "Login Failed",
+				  text: "You've entered the wrong emailaddress or password, please try again.",
+				  type: error,
+				});
 			} else {
-				alert("Oops, something went wrong. We couldn't get you logged in");
+				swal({
+				  title: "Oops",
+				  text: "Something went wrong. We couldn't get you logged in. Try again, or contact user if this problem keeps occuring",
+				  type: error,
+				});
 			}
 		});
 	}
 
 	svc.setUser = function () {
 		$http.get('api/authenticate/user').then(function (user) {
-			svc.user = user.data.user;
-			console.log(svc.user);
+			if(user.data.user.activated == 0) {
+				swal({
+				  title: 'Activate your account',
+				  text: "You haven't activated your account yet. Please check your mailbox.",
+				  type: 'error',
+				  showCancelButton: true,
+				  confirmButtonColor: '#108610',
+				  cancelButtonColor: '#9e9e9e',
+				  confirmButtonText: 'Resend activation mail',
+				  cancelButtonText: "Okay, I'll check"
+				}).then(function() {
+				    sendActivationMail(user.data.user);
+				})
+			} else {
+				svc.user = user.data.user;
+			}
 		});
 	}
 
@@ -46,15 +68,18 @@ d2gApp.service('loginService', function ($http, $auth) {
 	}
 
 	function sendActivationMail (user) {
-		$http.post('sendactivationmail', user).then(function (data) {
+		$http.post('api/sendactivationmail', user).then(function (data) {
+			console.log(data);
+			swal({
+				  title: "Mail sent",
+				  text: data.data.info,
+				  type: "info",
+				});
 			console.log(data);
 		}, function (error) {
+			//alert met error
 			console.log(error);
 		});
 	}
-
-
-
-	
 
 });

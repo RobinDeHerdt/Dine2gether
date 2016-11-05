@@ -19,7 +19,7 @@ class ActivationService
 
     public function sendActivationMail($user)
     {
-        if ($user->activated || !$this->shouldSend($user)) {
+        if ($user->activated /*|| !$this->shouldSend($user)*/) {
             return;
         }
 
