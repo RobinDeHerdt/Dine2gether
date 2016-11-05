@@ -4,7 +4,7 @@
       	<ul id="nav-mobile" class="right hide-on-med-and-down">
 	        <li><a ng-hide="header.user" ng-click="header.showLogin()">Login</a></li>
 	        <li><a ng-hide="header.user" ng-click="header.showRegister()">Sign Up</a></li>
-	        <li><a ng-show="header.user" href="!#"> My Profile </a></li>
+	        <li><a ng-show="header.user" ui-sref="profile"> My Profile </a></li>
 	        <li><a ng-show="header.user" ng-click="header.logout()">Logout</a></li>
 	        <li><a ng-show="header.user" ui-sref="create_booking">Become a Host</a></li>
       	</ul>

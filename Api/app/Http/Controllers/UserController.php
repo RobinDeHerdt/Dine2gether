@@ -9,6 +9,7 @@ use AppHttpControllersController;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuthExceptions\JWTException;
 use App\User;   
+use Response;
 
 class UserController extends Controller
 {
@@ -102,6 +103,4 @@ class UserController extends Controller
         $user =  Auth::user();
         $user->delete();
     }
-
-    public function 
 }

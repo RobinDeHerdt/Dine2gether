@@ -30,4 +30,9 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 	templateUrl: "pages/createbooking.html",
 	controller: "createBookingController as create"
 	})
+	.state("profile", {
+	url: "/profile",
+	templateUrl: "pages/profile.html",
+	controller: "profileController as profile"
+	})
 });
