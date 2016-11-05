@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/helpers.css">
+	<link rel="stylesheet" href="css/assets/sweetalert2.min.css">
 </head>
 <body ng-app="d2gApp">
 	<d2g-header></d2g-header>
@@ -20,6 +21,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.js"></script>
 <script type="text/javascript" src="js/assets/satellizer.js"></script>
+<script type="text/javascript" src="js/assets/sweetalert2.min.js"></script>
 <!-- angular -->
 <script type="text/javascript" src="js/app.js"></script>
 <script type="text/javascript" src="js/routes.js"></script>

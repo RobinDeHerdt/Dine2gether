@@ -16,7 +16,14 @@ class activationMailController extends Controller
     public function sendActivationMail (Request $request) {
 
     	$this->activationService->sendActivationMail($request);
-    	$info = "We hebben je een mail gestuurd om je account te activeren. Neem eens een kijkje.";
+    	$info = "We've sent you an email to activate your account. Please check your mailbox.";
+
+    	return response()->json(["info" => $info]);
+    }
+
+    public function resendActivationMail (Request $request) {
+    	$this->activationService->resendActivationMail($request);
+    	$info = "We've resent you an email to activate your account. Please check your mailbox.";
 
     	return response()->json(["info" => $info]);
     }

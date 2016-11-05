@@ -59,31 +59,36 @@ class UsersTableSeeder extends Seeder
                     'first_name' => 'Robin',
                     'last_name' => 'De Herdt', 
                     'email' => 'robin.deherdt@student.kdg.be',
-                    'password' => bcrypt('123456')
+                    'password' => bcrypt('123456'),
+                    'activated' => true
                 ],
                 [
                     'first_name' => 'Sharon',
                     'last_name' => 'Meeus',
                     'email' => 'sharon.meeus@student.kdg.be',
                     'password' => bcrypt('azerty'),
+                    'activated' => true
                 ],
                 [
                     'first_name' => 'Bob',
                     'last_name' => 'Bouwman',
                     'email' => 'bob.bouwman@kdg.be',
                     'password' => bcrypt('azerty'),
+                    'activated' => true
                 ],
                 [
                     'first_name' => 'Hillary',
                     'last_name' => 'Clinton',
                     'email' => 'hillary@secretemailserver.home',
                     'password' => bcrypt('qwerty'),
+                    'activated' => true
                 ],
                 [
                     'first_name' => 'Donald',
                     'last_name' => 'Trump',
                     'email' => 'yourefired@trump.com',
                     'password' => bcrypt('qwerty'),
+                    'activated' => true
                 ]
                 
         );

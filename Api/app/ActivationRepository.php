@@ -28,7 +28,7 @@ class ActivationRepository
     }
     private function regenerateToken ($user) {
     	$token = $this->getToken();
-    	DB::table($table)->where('user_id', $user->id)->update([
+    	DB::table("user_activations")->where('user_id', $user->id)->update([
     		'token' => $token,
     		'created_at' => new Carbon()
     	]);
