@@ -1,4 +1,4 @@
-d2gApp.controller("createBookingController", function (interestService, bookingService, loginService, $location, $scope) {
+d2gApp.controller("createBookingController", function (interestService, bookingService, loginService, $location, $scope, Upload) {
 	var vm = this;
 	var interestSvc = interestService;
 	var bookingSvc = bookingService;	
@@ -9,10 +9,8 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 	vm.dishes = [{
 		number: 1,
 	}];
-	vm.dish_imgs = [];
 
 	vm.addTemplateDish = function () {
-		console.log(vm.dishes);
 		var dish_nr = vm.dishes.length + 1;
 		vm.dishes.push({
 			number: dish_nr,
@@ -43,19 +41,13 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 		});
 	} 
 
-	vm.uploadImage = function (file, errFiles) {
-		if(file) {
-			file.upload = Upload.upload({url: "img", data: {file: file}});
-			file.upload.then(function (response) {
-				console.log(response);
-			}, function (error) {
-				if(error.status > 0) {
-					console.log(error);
-				}
-			})
-		} else {
-			console.log("no file??");	
-		}
+	vm.createImageFile = function (files, errFiles, dish_nr) {
+		console.log(files)
+		var arr_nr = dish_nr - 1;
+		if(files && files.length) {
+			vm.dishes[arr_nr].img = files;
+			console.log(vm.dishes);
+		} 
 	}
 
 	function loadInterests () {

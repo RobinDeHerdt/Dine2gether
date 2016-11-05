@@ -80,7 +80,7 @@
 										<div class="file-field input-field col s6">
 											<div class="btn">
 												<span>Add image</span>
-												<input ng-model="dish.img" ngf-select="create.uploadImage($file, $invalidFiles)" accept="image/*" ngf-max-size="2MB" type="file" multiple>
+												<input ngf-select="create.createImageFile($files, $invalidFiles, dish.number)" accept="image/*" ngf-max-size="2MB" type="file" multiple>
 											</div>
 											<div class="file-path-wrapper">
 												<input class="file-path validate" type="text" placeholder="Upload image" required>
