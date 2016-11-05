@@ -33,6 +33,7 @@
 	<script type="text/javascript" src="js/controllers/overviewController.js"></script>
 	<script type="text/javascript" src="js/controllers/bookingDetailsController.js"></script>
 	<script type="text/javascript" src="js/controllers/createBookingController.js"></script>
+	<script type="text/javascript" src="js/controllers/profileController.js"></script>
 	<!-- directives -->
 	<script type="text/javascript" src="directives/header/header.js"></script>
 	<script type="text/javascript" src="directives/login-modal/login-modal.js"></script>
