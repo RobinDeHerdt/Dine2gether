@@ -53,7 +53,7 @@ class BookingController extends Controller
         //     'street_number' => 'required'
         // ]);
 
-        $booking = new Booking;
+        /*$booking = new Booking;
 
         $booking->title         = $request->menu_title;
         $booking->price         = $request->price;
@@ -77,17 +77,22 @@ class BookingController extends Controller
             $dish->Booking()->associate($booking);
 
             $dish->save();
-        }
-        /*
+        }*/
+        
         $dish_image = new Dish_image();
 
-        $path = $request->dish_image->store('img', 'upload');
+        $file = array("image" => $request->dish_imgs);
+        $destinationpath = "public/img";
+        $img = $request->dish_imgs;
+        $extension = $img->getClientOriginalExtension();
+        $filename = rand(11111, 99999).$request->user_id.'.'.$extension;
+        $img->move($destinationpath, $filename);
 
-        $dish_image->image_url      = $path;
+        $dish_image->image_url      = $filename;
         $dish_image->Dish()->associate($dish);
 
         $dish_image->save();
-        */
+        /*
         // Loop through all interests here
         $interests = $request->interests;
         $arr_length = count($interests);
@@ -99,7 +104,7 @@ class BookingController extends Controller
                 ['booking_id' => $booking->id, 'interest_id' => $interestid]
             );
         }
-
+        */
         return redirect('/#/overview');
         
     }

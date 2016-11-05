@@ -1,15 +1,21 @@
-d2gApp.controller("profileController", function (loginService) {
+d2gApp.controller("profileController", function (loginService, $location) {
 	var vm = this;
 	var loginSvc = loginService;
 
 	function loadUser () {
-		loginSvc.getUser().then(function (data) {
-				console.log(data);
-			});
+		if(loginSvc.getUser()) {
+			vm.user = loginSvc.getUser();
+			console.log(vm.user);
+		}
 	}
 
 	function _init() {
-		loadUser();
+		if(!loginSvc.getUser()) {
+			loginSvc.errorMessage = "You need to be logged in to see your profile";
+			$location.path('/home');
+		} else {
+			loadUser();
+		}
 	}
 	_init();
 });

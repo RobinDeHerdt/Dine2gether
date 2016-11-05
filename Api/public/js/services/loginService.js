@@ -1,6 +1,7 @@
 d2gApp.service('loginService', function ($http, $auth) {
 	var svc = this;
 
+	svc.user = null;
 	svc.showLoginModal = function () {
 		$("#modal1").openModal();
 	}
