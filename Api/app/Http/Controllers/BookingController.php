@@ -79,7 +79,7 @@ class BookingController extends Controller
             $dish->Booking()->associate($booking);
 
             $dish->save();
-        }*/
+        }
         
         /*$dish_image = new Dish_image();
 

@@ -42,7 +42,7 @@ class LoginController extends Controller
 
     public function activateUser(Request $request)
     {
-        if ($user = $this->activationService->activateUser($token)) {
+        if ($user = $this->activationService->activateUser($request->token)) {
             return redirect ("/");
         } else {
             //return redirect ("/");
