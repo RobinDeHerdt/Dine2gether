@@ -54,7 +54,8 @@ class BookingController extends Controller
         //     'street_number' => 'required'
         // ]);
 
-        //return $request;
+        dd($request->dishes[0]["dish_img"]);
+
         $booking = new Booking;
 
         $booking->title         = $request->menu_title;
@@ -79,14 +80,21 @@ class BookingController extends Controller
             $dish->Booking()->associate($booking);
 
             $dish->save();
+
+            foreach ($newdish["dish_img"] as $key=>$newdishimage)
+            {
+                $dish_image = new Dish_image();
+
+                $path = $request->$newdishimage[$key]->store('img', 'upload');
+
+                $dish_image->image_url      = $path;
+                $dish_image->Dish()->associate($dish);
+
+                $dish_image->save();
+            }
         }
         
-        /*$dish_image = new Dish_image();
 
-        $dish_image->image_url      = $filename;
-        $dish_image->Dish()->associate($dish);
-
-        $dish_image->save();*/
         
         // Loop through all interests here
         $interests = $request->interests;
