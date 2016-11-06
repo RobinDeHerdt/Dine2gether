@@ -71,14 +71,16 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        
-        // $this->validate($request, [
-        //     'price' => 'required',
-        //     'date'  => 'required|date|after:tomorrow',
-        //     'street_number' => 'required'
-        // ]);
+        $this->validate($request, [
+            'menu_title'         => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'date'          => 'required|date|after:tomorrow',
+            'price'         => 'required|numeric',
+            'address' => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'postal_code'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'city'          => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+        ]);
 
-        //dd($request->dishes[0]["dish_img"]);
+        // dd($request->all());
 
         $booking = new Booking;
 
@@ -88,8 +90,7 @@ class BookingController extends Controller
         $booking->street_number = $request->address;
         $booking->postalcode    = $request->postal_code;
         $booking->city          = $request->city;
-        $booking->host_id       = $request->user_id; // Get authenticated user id here
-        // $booking->User()->associate($host);
+        $booking->host_id       = $request->user_id;
 
         $booking->save();
 
@@ -104,21 +105,7 @@ class BookingController extends Controller
             $dish->Booking()->associate($booking);
 
             $dish->save();
-
-            // foreach ($newdish["dish_img"] as $key=>$newdishimage)
-            // {
-            //     $dish_image = new Dish_image();
-
-            //     $path = $request->$newdishimage[$key]->store('img', 'upload');
-
-            //     $dish_image->image_url      = $path;
-            //     $dish_image->Dish()->associate($dish);
-
-            //     $dish_image->save();
-            // }
         }
-        
-
         
         // Loop through all interests here
         $interests = $request->interests;
@@ -131,9 +118,7 @@ class BookingController extends Controller
                 ['booking_id' => $booking->id, 'interest_id' => $interestid]
             );
         }
-        
-        return redirect('/#/overview');
-        
+        return response()->json(['status' => 'success']);
     }
 
     /**

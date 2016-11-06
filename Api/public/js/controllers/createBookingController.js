@@ -34,11 +34,14 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			dishes: getDishes(),
 		};
 		console.log(data);
-		/*bookingSvc.createBooking(data).then(function (data) {
-			console.log(data);
+		bookingSvc.createBooking(data).then(function (data) {
+			if(data.data.status == 'success')
+			{
+				$location.path('/overview');
+			}
 		}, function (error) {
 			console.log(error);
-		});*/
+		});
 	} 
 
 	vm.createImageFile = function (files, errFiles, dish_nr) {
