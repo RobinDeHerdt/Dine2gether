@@ -18,7 +18,10 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 	}
 
 	vm.deleteBooking = function (id) {
-		bookingSvc.deleteBooking(id);
+		bookingSvc.deleteBooking(id).then(function()
+		{
+			getUserBookings();
+		});
 	}
 
 	vm.saveProfile = function() {

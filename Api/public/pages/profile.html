@@ -58,10 +58,10 @@
               <ul class="collection">
                 <li class="collection-item">
                   <span class="title"><strong>{{booking.title}}</strong></span>
-                  <p>{{ booking.postalcode + " " + booking.city}} <br>
-                     {{ booking.street_number}}
-                  </p>
-                  <a href="" class="secondary-content" ng-click="profile.deleteBooking(booking.id)">Delete</a>
+                  <p>{{ booking.postalcode + " " + booking.city}}</p>
+                    <p>{{ booking.street_number}}</p>
+                     <p>{{ booking.max_guests + " people | €" + booking.price + "/person"}}</p>
+                  <a href="" class="secondary-content" ng-click="profile.deleteBooking(booking.id)"><i class="material-icons">delete_forever</i></a>
                 </li>
               </ul>    
             </div>        

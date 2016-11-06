@@ -17,7 +17,7 @@ d2gApp.service('bookingService', function($http) {
 
     svc.createBooking = function (data) {
         console.log(data);
-    	return $http.post('api/createbooking', data);
+    	return $http.post('api/bookings', data);
     }
 
     svc.deleteBooking = function (id) {
