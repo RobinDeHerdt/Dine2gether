@@ -33,6 +33,7 @@
 	<script type="text/javascript" src="js/services/loginService.js"></script>
 	<script type="text/javascript" src="js/services/interestService.js"></script>
 	<script type="text/javascript" src="js/services/kitchenstyleService.js"></script>
+	<script type="text/javascript" src="js/services/requestService.js"></script>
 	<!-- controllers -->
 	<script type="text/javascript" src="js/controllers/homeController.js"></script>
 	<script type="text/javascript" src="js/controllers/overviewController.js"></script>

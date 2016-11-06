@@ -22,9 +22,11 @@
 				</div>
 				<div>
 					<h5>Number of guests</h5>
-					<input ng-model="request.requestdata.nr_of_guests" type="number">
+					<div class="col s4">
+						<input ng-model="request.requestdata.nr_of_guests" type="number">
+					</div>
 				</div>
-				<div>
+				<div class="col s12">
 					<h5>Total price of this meal:</h5>
 					<p>{{request.booking.price | currency: "€"}}</p>
 				</div>
@@ -37,6 +39,6 @@
 				</form>
 			</div>
 		</div>
-		<a href="" class="btn">Confirm request</a>
+		<a ng-click="request.sendRequest()" class="btn">Confirm request</a>
 	</div>
 </main>
