@@ -45,6 +45,8 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 			}
 			}).then(function (data) {
 				loginSvc.setUser();
+				vm.user.image = data.data.filename;
+				vm.path = '';
 			}); 
 	}
 

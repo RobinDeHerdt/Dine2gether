@@ -17,7 +17,7 @@
                         <input ngf-select="profile.uploadProfilePicture($file)" accept="image/*" ngf-max-size="2MB" type="file" multiple>
                       </div>
                       <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text" placeholder="Upload" required>
+                        <input class="file-path validate" type="text" placeholder="Upload" required ng-model="profile.path">
                       </div>
                     </div>
             </div>

@@ -36,6 +36,8 @@ class UserController extends Controller
         $user->image  = $path;
 
         $user->save();
+
+        return response()->json(['filename' => $path]);
     }
 
     /**
