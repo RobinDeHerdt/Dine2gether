@@ -33,7 +33,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('/profile/upload', 'UserController@upload');
     Route::post('createbooking', 'BookingController@store');  
     Route::get('bookingdetails/{id}', 'BookingController@show'); 
-
+    Route::get('userbookings/{id}', 'BookingController@getUserBookings');
     Route::get('interests', 'InterestController@index');
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');

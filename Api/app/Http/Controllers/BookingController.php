@@ -259,4 +259,11 @@ class BookingController extends Controller
 
         return $bookingsarray;
     }
+
+    public function getUserBookings($id)
+    {
+        $bookings = Booking::where('host_id', $id)->get();
+
+        return response()->json(['bookings' => $bookings]);
+    }
 }
