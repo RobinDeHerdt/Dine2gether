@@ -17,8 +17,22 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		})
 	}
 
-	vm.deleteBooking = function (id)	 {
+	vm.deleteBooking = function (id) {
 		bookingSvc.deleteBooking(id);
+	}
+
+	vm.saveProfile = function() {
+		var data = {
+			first_name: vm.user.first_name,
+			last_name: vm.user.last_name,
+			email: vm.user.email,
+			street_number: vm.user.street_number,
+			postalcode: vm.user.postalcode,
+			city: vm.user.city,
+		};
+		loginSvc.updateProfile(vm.user.id,data).then(function(data) {
+			console.log(data);
+		});
 	}
 
 	function _init() {

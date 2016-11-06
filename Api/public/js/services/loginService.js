@@ -63,6 +63,11 @@ d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
 		return svc.user;
 	}
 
+	svc.updateProfile = function (id, data) {
+        console.log(data);
+    	return $http.post('api/updateprofile/' + id, data);
+    }
+
 	svc.register = function (o_newuser) {
 		$http.post('api/authenticate/register', o_newuser).success(function (data) {
 			sendActivationMail(data)

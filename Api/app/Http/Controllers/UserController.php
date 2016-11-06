@@ -41,7 +41,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return response()->json(['filename' => $path])
+        return response()->json(['filename' => $path]);
     }
 
     /**
@@ -96,17 +96,18 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user =  Auth::user();
+        $user = User::find($id);
 
         $user->first_name           = $request->first_name;
         $user->last_name            = $request->last_name;
-        $user->image                = $request->image;
         $user->email                = $request->email;
         $user->street_number        = $request->street_number;
         $user->postalcode           = $request->postalcode;
         $user->city                 = $request->city;
 
         $user->save();
+
+        return response()->json(['status' => 'success']);
     }
 
     /**

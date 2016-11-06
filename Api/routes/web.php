@@ -24,6 +24,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('authenticate/register', 'AuthenticateController@register');
     Route::get('authenticate/logout', 'AuthenticateController@logout');
     Route::post('user/activation', 'Auth\LoginController@activateUser');
+    Route::post('updateprofile/{id}', 'UserController@update');
 
     Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
     Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail'); 
