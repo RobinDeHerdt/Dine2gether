@@ -1,28 +1,39 @@
 <main>
-	<div class="container">
+	<div class="container under-header">
+		<div class="row">
+			<div class="col s12">
+				<h1>{{request.booking.title}}</h1>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col s6">
-				<h1>Request {{$booking.title}}</h1>
-				<div>
-					<p>{{if booking has date}}</p>
-					<h3>Time and date you'll be expected:</h3>
-					<p>dd/mm/yyyy at hh:00/between hh:00 and hh:00</p>
+				<div ng-show="request.booking.date">
+					<h5>Time and date you'll be expected:</h5>
+					<p>{{request.booking.date}} at {{request.booking.hour}}</p>
+				</div>
+				<div ng-hide="request.booking.date">
+					<h5>Request a time and date</h5>
+					<div class="col s6">
+						<input ng-model="request.requestdata.date" type="date">
+					</div>
+					<div class="col s6">
+						<input ng-model="request.requestdata.time" type="time">
+					</div>
 				</div>
 				<div>
-					<p>Else {{if booking has no date yet}}</p>
-					<h3>Request a time and date</h3>
-					<input type="date"> at <input type="time">
+					<h5>Number of guests</h5>
+					<input ng-model="request.requestdata.nr_of_guests" type="number">
 				</div>
 				<div>
-					<h3>Total price of this meal:</h3>
-					<p>{{booking.price}}}</p>
+					<h5>Total price of this meal:</h5>
+					<p>{{request.booking.price | currency: "€"}}</p>
 				</div>
 			</div>
 			<div class="col s6">
-				<h3>Something else you'd like to ask this host?</h3>
+				<h5>Something else you'd like to ask this host?</h5>
 				<form action="">
 					<input type="textarea">
-					<a href="" class="btn">Contact {{host.firstname}}</a>
+					<a href="" class="btn">Contact {{request.booking.user.first_name}}</a>
 				</form>
 			</div>
 		</div>
