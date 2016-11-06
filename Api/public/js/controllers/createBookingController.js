@@ -46,7 +46,7 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 		var arr_nr = dish_nr - 1;
 		if(files && files.length) {
 			Upload.upload({
-				url: '',
+				url: '/api/upload',
 				data: {
 					files:files
 					}

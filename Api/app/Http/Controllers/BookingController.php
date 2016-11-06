@@ -13,6 +13,7 @@ use App\Dish_Image;
 use App\Interest;
 use App\Kitchenstyle;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Input;
 
 class BookingController extends Controller
 {
@@ -37,6 +38,22 @@ class BookingController extends Controller
     public function create()
     {
         // return view('createbooking');
+    }
+    public function upload(Request $request)
+    {
+        // return view('createbooking');
+        $uploadedFile = $request->all();
+        //dd( $uploadedFile["files"][0]);
+
+        $dish_image = new Dish_image();
+
+        $path = $uploadedFile["files"][0]->store('img', 'upload');
+
+        $dish_image->image_url      = $path;
+        $dish_image->dish_id = 1;
+        // $dish_image->Dish()->associate($dish);
+
+        $dish_image->save();
     }
 
     /**

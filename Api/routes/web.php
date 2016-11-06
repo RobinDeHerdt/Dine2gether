@@ -29,6 +29,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail'); 
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
+    Route::post('upload', 'BookingController@upload');
     Route::post('createbooking', 'BookingController@store');  
     Route::get('bookingdetails/{id}', 'BookingController@show'); 
 
