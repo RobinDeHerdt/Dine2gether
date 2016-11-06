@@ -12,14 +12,14 @@ class RequestController extends Controller
 
     	$requestbooking = new RequestBooking;
 
-    	$requestbooking->datetime = $request->datetime;
+    	$requestbooking->date_time = $request->datetime;
     	$requestbooking->number_of_guests = $request->number_of_guests;
-    	$requestbooking->booking_id = $request->id;
+    	$requestbooking->booking_id = $request->booking_id;
     	$requestbooking->user_id = $request->user_id;
 
     	$requestbooking->save();
 
-    	 
+
 
     }
 }

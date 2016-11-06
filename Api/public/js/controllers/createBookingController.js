@@ -34,6 +34,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 			city: vm.city,
 			interests:  getSelectedInterests(),
 			kitchenstyles:  getSelectedKitchenstyles(),
+			max_nr_guests: vm.max_nr_guests,
 			dishes: getDishes(),
 		};
 		console.log(data);

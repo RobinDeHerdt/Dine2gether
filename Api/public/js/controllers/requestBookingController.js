@@ -1,4 +1,4 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, $stateParams) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, $stateParams, $location) {
 	
 	var vm = this;
 	var bookingSvc = bookingService;
@@ -24,7 +24,23 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 		console.log(data);
 
-		requestSvc.addRequest(data);
+		requestSvc.addRequest(data).then(function (data) {
+			swal({
+				title: "Your request was sent",
+				text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
+				type: "success"
+			}).then(function () {
+				$location.path("/overview");
+			}, function () {
+				$location.path("/overview");
+			});
+		}, function (error) {
+			swal({
+				title: "Couldn't send request",
+				text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
+				type: "error"
+			})
+		});
 	}
 
 	function loadBookingById() {
