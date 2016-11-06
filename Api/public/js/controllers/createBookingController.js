@@ -45,8 +45,20 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 		console.log(files)
 		var arr_nr = dish_nr - 1;
 		if(files && files.length) {
-			vm.dishes[arr_nr].img = files;
-			console.log(vm.dishes);
+			Upload.upload({
+				url: '',
+				data: {
+					files:files
+					}
+				}).then(function (response) {
+					console.log(response.data);
+				}, function (error) {
+					if(error.status > 0) {
+						console.log(response);
+					}
+				});
+			// vm.dishes[arr_nr].img = files;
+			// console.log(vm.dishes);
 		} 
 	}
 
