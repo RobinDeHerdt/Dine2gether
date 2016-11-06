@@ -41,19 +41,26 @@ class BookingController extends Controller
     }
     public function upload(Request $request)
     {
-        // return view('createbooking');
-        $uploadedFile = $request->all();
-        //dd( $uploadedFile["files"][0]);
+        $uploadedFiles = $request->all();
+        
+        $i = 0;
+        $pathNames = array();
 
-        $dish_image = new Dish_image();
+        foreach ($uploadedFiles["files"] as $uploadedFile) 
+        {
+            $dish_image = new Dish_image();
 
-        $path = $uploadedFile["files"][0]->store('img', 'upload');
+            $path = $uploadedFile->store('img', 'upload');
+            array_push($pathNames, $path);
+            $i++;
 
-        $dish_image->image_url      = $path;
-        $dish_image->dish_id = 1;
-        // $dish_image->Dish()->associate($dish);
+            $dish_image->image_url  = $path;
+            $dish_image->dish_id    = 1;
 
-        $dish_image->save();
+            $dish_image->save();
+        }
+
+        return response()->json(["filenaam" => $pathNames]);
     }
 
     /**
@@ -71,7 +78,7 @@ class BookingController extends Controller
         //     'street_number' => 'required'
         // ]);
 
-        dd($request->dishes[0]["dish_img"]);
+        //dd($request->dishes[0]["dish_img"]);
 
         $booking = new Booking;
 
@@ -98,17 +105,17 @@ class BookingController extends Controller
 
             $dish->save();
 
-            foreach ($newdish["dish_img"] as $key=>$newdishimage)
-            {
-                $dish_image = new Dish_image();
+            // foreach ($newdish["dish_img"] as $key=>$newdishimage)
+            // {
+            //     $dish_image = new Dish_image();
 
-                $path = $request->$newdishimage[$key]->store('img', 'upload');
+            //     $path = $request->$newdishimage[$key]->store('img', 'upload');
 
-                $dish_image->image_url      = $path;
-                $dish_image->Dish()->associate($dish);
+            //     $dish_image->image_url      = $path;
+            //     $dish_image->Dish()->associate($dish);
 
-                $dish_image->save();
-            }
+            //     $dish_image->save();
+            // }
         }
         
 
