@@ -27,6 +27,23 @@ class UserController extends Controller
         return Response::json(User::get());
     }
 
+    public function upload()
+    {
+        $uploadedFile = $request->all();
+        
+        dd($uploadedFile);
+
+        $user = User::find();
+
+        $path = $uploadedFile->store('img/profile', 'upload');
+
+        $user->image  = $path;
+
+        $user->save();
+
+        return response()->json(['filename' => $path])
+    }
+
     /**
      * Show the form for creating a new resource.
      *
