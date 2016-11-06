@@ -1,10 +1,12 @@
-d2gApp.controller("createBookingController", function (interestService, bookingService, loginService, $location, $scope, Upload) {
+d2gApp.controller("createBookingController", function (kitchenstyleService, interestService, bookingService, loginService, $location, $scope, Upload) {
 	var vm = this;
-	var interestSvc = interestService;
-	var bookingSvc = bookingService;	
-	var loginSvc = loginService;
 
-	vm.numberOfPages = 4;
+	var interestSvc 	= interestService;
+	var bookingSvc 		= bookingService;	
+	var loginSvc 		= loginService;
+	var kitchenstyleSvc = kitchenstyleService;
+
+	vm.numberOfPages = 5;
 	vm.currentPage = 1;
 	vm.dishes = [{
 		number: 1,
@@ -31,6 +33,7 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			postal_code: vm.postal_code,
 			city: vm.city,
 			interests:  getSelectedInterests(),
+			kitchenstyles:  getSelectedKitchenstyles(),
 			dishes: getDishes(),
 		};
 		console.log(data);
@@ -79,6 +82,13 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 		})
 	}
 
+	function loadKitchenstyles () {
+		kitchenstyleSvc.getKitchenStyles().success(function (data) {
+			vm.kitchenstyles = data.kitchenstyles;
+			console.log(vm.kitchenstyles);
+		})
+	}
+
 	function getSelectedInterests () {
 		var arr_interests = [];
 		angular.forEach(vm.interests, function (interest) {
@@ -87,6 +97,16 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			}
 		})
 		return arr_interests;
+	}
+
+	function getSelectedKitchenstyles () {
+		var arr_kitchenstyles = [];
+		angular.forEach(vm.kitchenstyles, function (kitchenstyle) {
+			if(kitchenstyle.selected) {
+				arr_kitchenstyles.push(kitchenstyle.style);
+			}
+		})
+		return arr_kitchenstyles;
 	}
 
 	function getDishes () {
@@ -109,6 +129,7 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			$location.path('/home');
 		} else {
 			loadInterests();
+			loadKitchenstyles();
 		}
 		
 	}

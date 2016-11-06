@@ -56,10 +56,22 @@
 						    </p>
 							</div>
 						</div>
-						<div class="row">
+						
 						</li>
 						<li ng-show="create.currentPage == 4">
-							<h4>4. Menu</h4>
+						<h4>4. Kitchenstyles</h4>
+						<div class="row">
+							<div class="input-field col s6">
+								<p ng-repeat="kitchenstyle in create.kitchenstyles">
+						      <input type="checkbox" ng-model="kitchenstyle.selected" class="filled-in" id="{{ kitchenstyle.style }}" />
+						      <label for="{{ kitchenstyle.style }}">{{kitchenstyle.style}}</label>
+						    </p>
+							</div>
+						</div>
+						
+						</li>
+						<li ng-show="create.currentPage == 5">
+							<h4>5. Menu</h4>
 							<ul>
 								<li ng-repeat="dish in create.dishes">
 									<a ng-click="create.deleteLastDish()" ng-if="$last && dish.number != 1" class="btn red darken-4 btn-small mar-right-m">Delete</a>
@@ -108,7 +120,8 @@
 						<li ng-click="create.currentPage = 2" ng-class="create.currentPage == 2 ? 'active' : waves-effect"><a>2</a></li>
 						<li ng-click="create.currentPage = 3" ng-class="create.currentPage == 3 ? 'active' : waves-effect"><a>3</a></li>
 						<li ng-click="create.currentPage = 4" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
-						<li ng-class="create.currentPage == 4 ? 'disabled' : waves-effect" ng-click="create.currentPage = create.currentPage + 1"><a> &raquo; </a></li>
+						<li ng-click="create.currentPage = 5" ng-class="create.currentPage == 5 ? 'active' : waves-effect"><a>5</a></li>
+						<li ng-class="create.currentPage == 5 ? 'disabled' : waves-effect" ng-click="create.currentPage = create.currentPage + 1"><a> &raquo; </a></li>
 					</ul>
 				</form>
 			</div>

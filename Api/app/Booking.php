@@ -20,4 +20,9 @@ class Booking extends Model
     {
         return $this->belongsToMany('App\Interest');
     }
+
+    public function kitchenstyles()
+    {
+        return $this->belongsToMany('App\Kitchenstyle');
+    }
 }

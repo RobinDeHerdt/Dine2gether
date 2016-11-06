@@ -111,7 +111,14 @@ class BookingController extends Controller
             }
         }
 
+        $kitchenstyles = $request->kitchenstyles;
 
+        foreach ($kitchenstyles as $style) 
+        {
+            $style = Kitchenstyle::where('style',$style)->first();
+
+            DB::table('booking_kitchenstyle')->insert(['booking_id' => $booking->id, 'kitchenstyle_id' => $style->id]);
+        }
        
         
         // Loop through all interests here
@@ -125,6 +132,7 @@ class BookingController extends Controller
                 ['booking_id' => $booking->id, 'interest_id' => $interestid]
             );
         }
+
         return response()->json(['status' => 'success']);
     }
 
@@ -226,11 +234,10 @@ class BookingController extends Controller
             $dishesarray = []; 
             // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
             $user           = User::where('id', $booking->host_id)->first();
-            $interests      = Booking::where('id', $booking->id)->with('interests')->get();
+            $interests      = $booking->interests()->get();
             $dishes         = Dish::where('booking_id', $booking->id)->get();
-            $kitchenstyles  = Kitchenstyle::where('booking_id', $booking->id)->get();
+            $kitchenstyles  = $booking->kitchenstyles()->get();
             // put interests in $user
-            $user->interests = $interests;
 
             foreach ($dishes as $dish) { // get dish images by dish for this booking
                 $dish_images = Dish_Image::where('dish_id', $dish->id)->get();
@@ -238,14 +245,17 @@ class BookingController extends Controller
                 $dish->dish_images = $dish_images;
                 array_push($dishesarray, $dish);
             }
+
             // put user(s), kitchenstyle(s) and dishesarray in $booking
             $booking->user          = $user;
-            $booking->kitchenstyles = $kitchenstyles;
             $booking->dishes        = $dishesarray;
-
+            $booking->interests     = $interests;
+            $booking->kitchenstyles = $kitchenstyles;
             // add this booking to bookingsarray
             array_push($bookingsarray, $booking);
         }
+
+        dd($bookingsarray);
 
         return $bookingsarray;
     }

@@ -38,6 +38,7 @@ class CreateBookingsTable extends Migration
         Schema::drop('dish_images');
         Schema::drop('dishes');
         Schema::dropIfExists('booking_interest');
+        Schema::dropIfExists('booking_kitchenstyles');
         Schema::drop('user_booking');
         Schema::drop('kitchenstyles');
         Schema::dropIfExists('bookings');
