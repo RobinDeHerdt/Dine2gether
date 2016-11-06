@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 	<head>
-		<!-- NAME: MEMBER WELCOME -->
+		<!-- NAME: 1 COLUMN - BANDED -->
 		<!--[if gte mso 15]>
 		<xml>
 			<o:OfficeDocumentSettings>
@@ -13,7 +13,7 @@
 		<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Welcome To Dine2Gether!</title>
+		<title>*|MC:SUBJECT|*</title>
         
     <style type="text/css">
 		p{
@@ -98,15 +98,13 @@
 			table-layout:fixed !important;
 		}
 	/*
-	Page
 	Background Style
 	Set the background color and top border for your email. You may want to choose colors that match your company's branding.
 	*/
 		body,#bodyTable{
-			/*@editable*/background-color:#1F2934;
+			/*@editable*/background-color:#FAFAFA;
 		}
 	/*
-	Page
 	Background Style
 	Set the background color and top border for your email. You may want to choose colors that match your company's branding.
 	*/
@@ -114,23 +112,21 @@
 			/*@editable*/border-top:0;
 		}
 	/*
-	Page
 	Heading 1
 	Set the styling for all first-level headings in your emails. These should be the largest of your headings.
 	@style heading 1
 	*/
 		h1{
 			/*@editable*/color:#202020;
-			/*@editable*/font-family:Georgia;
-			/*@editable*/font-size:30px;
+			/*@editable*/font-family:Helvetica;
+			/*@editable*/font-size:26px;
 			/*@editable*/font-style:normal;
-			/*@editable*/font-weight:normal;
+			/*@editable*/font-weight:bold;
 			/*@editable*/line-height:125%;
 			/*@editable*/letter-spacing:normal;
-			/*@editable*/text-align:center;
+			/*@editable*/text-align:left;
 		}
 	/*
-	Page
 	Heading 2
 	Set the styling for all second-level headings in your emails.
 	@style heading 2
@@ -138,31 +134,29 @@
 		h2{
 			/*@editable*/color:#202020;
 			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:24px;
+			/*@editable*/font-size:22px;
 			/*@editable*/font-style:normal;
 			/*@editable*/font-weight:bold;
-			/*@editable*/line-height:150%;
+			/*@editable*/line-height:125%;
 			/*@editable*/letter-spacing:normal;
-			/*@editable*/text-align:center;
+			/*@editable*/text-align:left;
 		}
 	/*
-	Page
 	Heading 3
 	Set the styling for all third-level headings in your emails.
 	@style heading 3
 	*/
 		h3{
-			/*@editable*/color:#989898;
+			/*@editable*/color:#202020;
 			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:24px;
+			/*@editable*/font-size:20px;
 			/*@editable*/font-style:normal;
 			/*@editable*/font-weight:bold;
-			/*@editable*/line-height:150%;
+			/*@editable*/line-height:125%;
 			/*@editable*/letter-spacing:normal;
-			/*@editable*/text-align:center;
+			/*@editable*/text-align:left;
 		}
 	/*
-	Page
 	Heading 4
 	Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
 	@style heading 4
@@ -173,9 +167,9 @@
 			/*@editable*/font-size:18px;
 			/*@editable*/font-style:normal;
 			/*@editable*/font-weight:bold;
-			/*@editable*/line-height:200%;
+			/*@editable*/line-height:125%;
 			/*@editable*/letter-spacing:normal;
-			/*@editable*/text-align:center;
+			/*@editable*/text-align:left;
 		}
 	/*
 	Preheader
@@ -183,7 +177,7 @@
 	Set the background color and borders for your email's preheader area.
 	*/
 		#templatePreheader{
-			/*@editable*/background-color:#ffffff;
+			/*@editable*/background-color:#FAFAFA;
 			/*@editable*/background-image:none;
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:center;
@@ -203,7 +197,7 @@
 			/*@editable*/font-family:Helvetica;
 			/*@editable*/font-size:12px;
 			/*@editable*/line-height:150%;
-			/*@editable*/text-align:center;
+			/*@editable*/text-align:left;
 		}
 	/*
 	Preheader
@@ -221,14 +215,9 @@
 	Set the background color and borders for your email's header area.
 	*/
 		#templateHeader{
-			/*@editable*/background-color:#dff0f4;
-			/*@editable*/background-repeat:no-repeat;
-			/*@editable*/background-position:center;
-			/*@editable*/background-size:cover;
-			/*@editable*/border-top:0;
-			/*@editable*/border-bottom:0;
-			/*@editable*/padding-top:250px;
-			/*@editable*/padding-bottom:200px;
+			/*@editable*/background-color:#ffffff;
+			/*@editable*/background-image:url();
+			/*@editable*/
 		}
 	/*
 	Header
@@ -238,7 +227,7 @@
 		#templateHeader .mcnTextContent,#templateHeader .mcnTextContent p{
 			/*@editable*/color:#202020;
 			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:18px;
+			/*@editable*/font-size:16px;
 			/*@editable*/line-height:150%;
 			/*@editable*/text-align:left;
 		}
@@ -248,7 +237,7 @@
 	Set the styling for your email's header links. Choose a color that helps them stand out from your text.
 	*/
 		#templateHeader .mcnTextContent a,#templateHeader .mcnTextContent p a{
-			/*@editable*/color:#202020;
+			/*@editable*/color:#2BAADF;
 			/*@editable*/font-weight:normal;
 			/*@editable*/text-decoration:underline;
 		}
@@ -258,15 +247,15 @@
 	Set the background color and borders for your email's body area.
 	*/
 		#templateBody{
-			/*@editable*/background-color:#ffffff;
+			/*@editable*/background-color:#FFFFFF;
 			/*@editable*/background-image:none;
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:center;
 			/*@editable*/background-size:cover;
 			/*@editable*/border-top:0;
 			/*@editable*/border-bottom:0;
-			/*@editable*/padding-top:80px;
-			/*@editable*/padding-bottom:80px;
+			/*@editable*/padding-top:9px;
+			/*@editable*/padding-bottom:9px;
 		}
 	/*
 	Body
@@ -274,11 +263,11 @@
 	Set the styling for your email's body text. Choose a size and color that is easy to read.
 	*/
 		#templateBody .mcnTextContent,#templateBody .mcnTextContent p{
-			/*@editable*/color:#666666;
-			/*@editable*/font-family:Georgia;
+			/*@editable*/color:#202020;
+			/*@editable*/font-family:Helvetica;
 			/*@editable*/font-size:16px;
 			/*@editable*/line-height:150%;
-			/*@editable*/text-align:center;
+			/*@editable*/text-align:left;
 		}
 	/*
 	Body
@@ -286,45 +275,7 @@
 	Set the styling for your email's body links. Choose a color that helps them stand out from your text.
 	*/
 		#templateBody .mcnTextContent a,#templateBody .mcnTextContent p a{
-			/*@editable*/color:#999999;
-			/*@editable*/font-weight:normal;
-			/*@editable*/text-decoration:underline;
-		}
-	/*
-	Columns
-	Column Style
-	Set the background color and borders for your email's columns.
-	*/
-		#templateColumns{
-			/*@editable*/background-color:#6d7d81;
-			/*@editable*/background-image:url("");
-			/*@editable*/background-repeat:no-repeat;
-			/*@editable*/background-position:top;
-			/*@editable*/background-size:cover;
-			/*@editable*/border-top:0;
-			/*@editable*/border-bottom:0;
-			/*@editable*/padding-top:350px;
-			/*@editable*/padding-bottom:100px;
-		}
-	/*
-	Columns
-	Column Text
-	Set the styling for your email's column text. Choose a size and color that is easy to read.
-	*/
-		#templateColumns .columnContainer .mcnTextContent,#templateColumns .columnContainer .mcnTextContent p{
-			/*@editable*/color:#202020;
-			/*@editable*/font-family:Helvetica;
-			/*@editable*/font-size:16px;
-			/*@editable*/line-height:200%;
-			/*@editable*/text-align:center;
-		}
-	/*
-	Columns
-	Column Link
-	Set the styling for your email's column links. Choose a color that helps them stand out from your text.
-	*/
-		#templateColumns .columnContainer .mcnTextContent a,#templateColumns .columnContainer .mcnTextContent p a{
-			/*@editable*/color:#202020;
+			/*@editable*/color:#2BAADF;
 			/*@editable*/font-weight:normal;
 			/*@editable*/text-decoration:underline;
 		}
@@ -334,15 +285,15 @@
 	Set the background color and borders for your email's footer area.
 	*/
 		#templateFooter{
-			/*@editable*/background-color:#1f2934;
+			/*@editable*/background-color:#fafafa;
 			/*@editable*/background-image:none;
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:center;
 			/*@editable*/background-size:cover;
 			/*@editable*/border-top:0;
 			/*@editable*/border-bottom:0;
-			/*@editable*/padding-top:10px;
-			/*@editable*/padding-bottom:10px;
+			/*@editable*/padding-top:0px;
+			/*@editable*/padding-bottom:9px;
 		}
 	/*
 	Footer
@@ -350,7 +301,7 @@
 	Set the styling for your email's footer text. Choose a size and color that is easy to read.
 	*/
 		#templateFooter .mcnTextContent,#templateFooter .mcnTextContent p{
-			/*@editable*/color:#FFFFFF;
+			/*@editable*/color:#656565;
 			/*@editable*/font-family:Helvetica;
 			/*@editable*/font-size:12px;
 			/*@editable*/line-height:150%;
@@ -362,7 +313,7 @@
 	Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
 	*/
 		#templateFooter .mcnTextContent a,#templateFooter .mcnTextContent p a{
-			/*@editable*/color:#FFFFFF;
+			/*@editable*/color:#656565;
 			/*@editable*/font-weight:normal;
 			/*@editable*/text-decoration:underline;
 		}
@@ -383,9 +334,8 @@
 		}
 
 }	@media only screen and (max-width: 480px){
-		.columnWrapper{
-			max-width:100% !important;
-			width:100% !important;
+		#bodyCell{
+			padding-top:10px !important;
 		}
 
 }	@media only screen and (max-width: 480px){
@@ -556,17 +506,6 @@
 }	@media only screen and (max-width: 480px){
 	/*
 	Mobile Styles
-	Column Text
-	Make the column text larger in size for better readability on small screens. We recommend a font size of at least 16px.
-	*/
-		#templateColumns .columnContainer .mcnTextContent,#templateColumns .columnContainer .mcnTextContent p{
-			/*@editable*/font-size:16px !important;
-			/*@editable*/line-height:150% !important;
-		}
-
-}	@media only screen and (max-width: 480px){
-	/*
-	Mobile Styles
 	Footer Text
 	Make the footer content text larger in size for better readability on small screens.
 	*/
@@ -583,27 +522,8 @@
                     <td align="center" valign="top" id="bodyCell">
                         <!-- BEGIN TEMPLATE // -->
                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                            <tr>
-								<td align="center" valign="top" id="templatePreheader">
-									<!--[if gte mso 9]>
-									<table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
-									<tr>
-									<td align="center" valign="top" width="600" style="width:600px;">
-									<![endif]-->
-									<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
-										<tr>
-                                			<td valign="top" class="preheaderContainer"></td>
-										</tr>
-									</table>
-									<!--[if gte mso 9]>
-									</td>
-									</tr>
-									</table>
-									<![endif]-->
-								</td>
-                            </tr>
 							<tr>
-								<td align="center" valign="top" id="templateHeader" height="500px" style="background-position:center" background="https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/493a1be9-b57e-4498-969c-889c20dd2090.jpg">
+								<td align="center" valign="top" id="templateHeader" background="https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/7ef044a3-ff07-43f4-ad6a-68585c33264b.jpg" style="background-repeat:no-repeat; background-position:center; background-size:cover; border-top:0; border-bottom:0; padding-top:150px; padding-bottom:200px;">
 									<!--[if gte mso 9]>
 									<table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
 									<tr>
@@ -628,7 +548,8 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            
+                            <div style="text-align: center;"><span style="color:#FFFFFF"><span style="font-size:64px;">Welcome to Dine2Gether!</span></span></div>
+
                         </td>
                     </tr>
                 </tbody></table>
@@ -677,13 +598,13 @@
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
                         
-                        <td valign="top" class="mcnTextContent" style="text-align:center; padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
+                        <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <h2><span style="font-size:23px">WELCOME TO</span><span style="font-size:32px"> Dine2gether</span></h2>
+                            <h1 style="text-align: center;">Hey {{$username}},</h1>
 
-<p>Hey {{$username}}<br>
-&nbsp;We are really happy that you want to join our delicious community!<br>
-But before you can get started, you need to confirm your email address.</p>
+<p style="text-align: center;">We are so happy to hear that you'd like to join our awesome community.<br>
+But before we you can share your delicious meals,<br>
+you have to activate your account.*</p>
 
                         </td>
                     </tr>
@@ -706,7 +627,7 @@ But before you can get started, you need to confirm your email address.</p>
                 <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-radius: 3px;background-color: #00C77C;">
                     <tbody>
                         <tr>
-                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: &quot;Open Sans&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 16px; padding: 15px;">
+                            <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
                                 <a class="mcnButton " title="Activate your account" href="{{$link}}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Activate your account</a>
                             </td>
                         </tr>
@@ -725,49 +646,6 @@ But before you can get started, you need to confirm your email address.</p>
 									<![endif]-->
 								</td>
                             </tr>
-							<tr>
-								<td align="center" valign="top" id="templateColumns" height="500px" style="background-position:center" background="https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/7ef044a3-ff07-43f4-ad6a-68585c33264b.jpg">
-									<table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
-                                        <tr>
-                                            <td valign="top">
-												<!--[if gte mso 9]>
-												<table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
-												<tr>
-												<td align="center" valign="top" width="200" style="width:200px;">
-												<![endif]-->
-												<table align="left" border="0" cellpadding="0" cellspacing="0" width="200" class="columnWrapper">
-													<tr>
-														<td valign="top" class="columnContainer"></td>
-													</tr>
-												</table>
-												<!--[if gte mso 9]>
-												</td>
-												<td align="center" valign="top" width="200" style="width:200px;">
-												<![endif]-->
-												<table align="left" border="0" cellpadding="0" cellspacing="0" width="200" class="columnWrapper">
-													<tr>
-														<td valign="top" class="columnContainer"></td>
-													</tr>
-												</table>
-												<!--[if gte mso 9]>
-												</td>
-												<td align="center" valign="top" width="200" style="width:200px;">
-												<![endif]-->
-												<table align="left" border="0" cellpadding="0" cellspacing="0" width="200" class="columnWrapper">
-													<tr>
-														<td valign="top" class="columnContainer"></td>
-													</tr>
-												</table>
-												<!--[if gte mso 9]>
-												</td>
-												</tr>
-												</table>
-												<![endif]-->
-											</td>
-										</tr>
-									</table>
-								</td>
-                            </tr>
                             <tr>
 								<td align="center" valign="top" id="templateFooter">
 									<!--[if gte mso 9]>
@@ -777,7 +655,25 @@ But before you can get started, you need to confirm your email address.</p>
 									<![endif]-->
 									<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
 										<tr>
-                                			<td valign="top" class="footerContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+                                			<td valign="top" class="footerContainer"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width:100%;">
+    <tbody class="mcnDividerBlockOuter">
+        <tr>
+            <td class="mcnDividerBlockInner" style="min-width: 100%; padding: 10px 18px 25px;">
+                <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top: 2px solid #EEEEEE;">
+                    <tbody><tr>
+                        <td>
+                            <span></span>
+                        </td>
+                    </tr>
+                </tbody></table>
+<!--            
+                <td class="mcnDividerBlockInner" style="padding: 18px;">
+                <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+-->
+            </td>
+        </tr>
+    </tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
     <tbody class="mcnTextBlockOuter">
         <tr>
             <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
@@ -792,10 +688,11 @@ But before you can get started, you need to confirm your email address.</p>
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
                         
-                        <td valign="top" class="mcnTextContent" style="text-align:center; padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
+                        <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;">
                         
-                            <em>Copyright © 2016 DineTogether.</em><br>
-
+                            <em>Copyright © 2016 Dine2Gether, All rights reserved.</em><br>
+<br>
+*If you didn't register yourself to our website, you can just ignore this mail.
                         </td>
                     </tr>
                 </tbody></table>
