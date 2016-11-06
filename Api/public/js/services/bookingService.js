@@ -20,6 +20,10 @@ d2gApp.service('bookingService', function($http) {
     	return $http.post('api/createbooking', data);
     }
 
+    svc.deleteBooking = function (id) {
+        return $http.delete('api/bookings/' + id);
+    }
+
     svc.getBookingsByUserId = function (id) {
         return $http.get('api/userbookings/' + id);
     }

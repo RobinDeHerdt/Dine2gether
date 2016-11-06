@@ -11,22 +11,22 @@ class UserBookingTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_booking')->insert([
+        DB::table('booking_user')->insert([
             'guest_id' => 2,
             'booking_id' => 1,
         ]);
 
-        DB::table('user_booking')->insert([
+        DB::table('booking_user')->insert([
             'guest_id' => 2,
             'booking_id' => 2,
         ]);
 
-        DB::table('user_booking')->insert([
+        DB::table('booking_user')->insert([
             'guest_id' => 4,
             'booking_id' => 3,
         ]);
 
-        DB::table('user_booking')->insert([
+        DB::table('booking_user')->insert([
             'guest_id' => 5,
             'booking_id' => 3,
         ]);

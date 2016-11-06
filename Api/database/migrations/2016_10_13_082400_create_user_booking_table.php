@@ -13,7 +13,7 @@ class CreateUserBookingTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_booking', function (Blueprint $table) {
+        Schema::create('booking_user', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             

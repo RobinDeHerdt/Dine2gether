@@ -16,13 +16,13 @@ class CreateRequestBookingTable extends Migration
         Schema::create('request_booking', function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('date_time');
-            $table->int('number_of_guests');
+            $table->integer('number_of_guests');
             $table->boolean('acccepted')->default(false);
             $table->timestamps();
 
-            $table->int('user_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->int('booking_id')->unsigned();
+            $table->integer('booking_id')->unsigned();
             $table->foreign('booking_id')->references('id')->on('bookings');
         });
 

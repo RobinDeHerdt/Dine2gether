@@ -17,6 +17,10 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		})
 	}
 
+	vm.deleteBooking = function (id)	 {
+		bookingSvc.deleteBooking(id);
+	}
+
 	function _init() {
 		if(!loginSvc.getUser()) {
 			loginSvc.errorMessage = "You need to be logged in to see your profile";

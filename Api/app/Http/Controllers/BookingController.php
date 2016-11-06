@@ -206,8 +206,20 @@ class BookingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {   
         $booking = Booking::find($id);
+
+        $booking->users()->detach();
+        $booking->interests()->detach();
+        $booking->kitchenstyles()->detach();
+
+        $dishes = $booking->dishes()->get();
+
+        foreach ($dishes as $dish) {
+            $dish->dish_images()->delete();
+            $dish->delete();
+        }
+
         $booking->delete();
     }
 
