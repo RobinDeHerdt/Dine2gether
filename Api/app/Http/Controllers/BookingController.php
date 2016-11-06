@@ -255,8 +255,6 @@ class BookingController extends Controller
             array_push($bookingsarray, $booking);
         }
 
-        dd($bookingsarray);
-
         return $bookingsarray;
     }
 }

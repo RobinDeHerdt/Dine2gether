@@ -28,7 +28,7 @@ class ActivationService
         $link = url('/#/activation/') . "/" .$token;
         $message = sprintf('Activate account <a href="%s">%s</a>', $link, $link);
 
-        $this->mailer->send('mails.activationmail',['username' => $user->name, 'link' => $link], function 
+        $this->mailer->send('mails.activationmail',['username' => $user->first_name, 'link' => $link], function 
             (Message $m) use ($user) {
                 $m->to($user->email)->from("info@d2g.be")->subject('Welcome to Dine2gether!');
 

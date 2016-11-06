@@ -13,7 +13,7 @@
 		<meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>*|MC:SUBJECT|*</title>
+		<title>Welcome To Dine2Gether!</title>
         
     <style type="text/css">
 		p{
@@ -98,25 +98,25 @@
 			table-layout:fixed !important;
 		}
 	/*
-	@tab Page
-	@section Background Style
-	@tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+	Page
+	Background Style
+	Set the background color and top border for your email. You may want to choose colors that match your company's branding.
 	*/
 		body,#bodyTable{
 			/*@editable*/background-color:#1F2934;
 		}
 	/*
-	@tab Page
-	@section Background Style
-	@tip Set the background color and top border for your email. You may want to choose colors that match your company's branding.
+	Page
+	Background Style
+	Set the background color and top border for your email. You may want to choose colors that match your company's branding.
 	*/
 		#bodyCell{
 			/*@editable*/border-top:0;
 		}
 	/*
-	@tab Page
-	@section Heading 1
-	@tip Set the styling for all first-level headings in your emails. These should be the largest of your headings.
+	Page
+	Heading 1
+	Set the styling for all first-level headings in your emails. These should be the largest of your headings.
 	@style heading 1
 	*/
 		h1{
@@ -127,12 +127,12 @@
 			/*@editable*/font-weight:normal;
 			/*@editable*/line-height:125%;
 			/*@editable*/letter-spacing:normal;
-			/*@editable*/text-align:left;
+			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Page
-	@section Heading 2
-	@tip Set the styling for all second-level headings in your emails.
+	Page
+	Heading 2
+	Set the styling for all second-level headings in your emails.
 	@style heading 2
 	*/
 		h2{
@@ -146,9 +146,9 @@
 			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Page
-	@section Heading 3
-	@tip Set the styling for all third-level headings in your emails.
+	Page
+	Heading 3
+	Set the styling for all third-level headings in your emails.
 	@style heading 3
 	*/
 		h3{
@@ -162,9 +162,9 @@
 			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Page
-	@section Heading 4
-	@tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+	Page
+	Heading 4
+	Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
 	@style heading 4
 	*/
 		h4{
@@ -178,9 +178,9 @@
 			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Preheader
-	@section Preheader Style
-	@tip Set the background color and borders for your email's preheader area.
+	Preheader
+	Preheader Style
+	Set the background color and borders for your email's preheader area.
 	*/
 		#templatePreheader{
 			/*@editable*/background-color:#ffffff;
@@ -194,21 +194,21 @@
 			/*@editable*/padding-bottom:9px;
 		}
 	/*
-	@tab Preheader
-	@section Preheader Text
-	@tip Set the styling for your email's preheader text. Choose a size and color that is easy to read.
+	Preheader
+	Preheader Text
+	Set the styling for your email's preheader text. Choose a size and color that is easy to read.
 	*/
 		#templatePreheader .mcnTextContent,#templatePreheader .mcnTextContent p{
 			/*@editable*/color:#656565;
 			/*@editable*/font-family:Helvetica;
 			/*@editable*/font-size:12px;
 			/*@editable*/line-height:150%;
-			/*@editable*/text-align:left;
+			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Preheader
-	@section Preheader Link
-	@tip Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
+	Preheader
+	Preheader Link
+	Set the styling for your email's preheader links. Choose a color that helps them stand out from your text.
 	*/
 		#templatePreheader .mcnTextContent a,#templatePreheader .mcnTextContent p a{
 			/*@editable*/color:#656565;
@@ -216,13 +216,12 @@
 			/*@editable*/text-decoration:underline;
 		}
 	/*
-	@tab Header
-	@section Header Style
-	@tip Set the background color and borders for your email's header area.
+	Header
+	Header Style
+	Set the background color and borders for your email's header area.
 	*/
 		#templateHeader{
 			/*@editable*/background-color:#dff0f4;
-			/*@editable*/background-image:url("https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/194e99d6-ffde-446b-89a7-887400b1b744.jpg");
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:center;
 			/*@editable*/background-size:cover;
@@ -232,9 +231,9 @@
 			/*@editable*/padding-bottom:200px;
 		}
 	/*
-	@tab Header
-	@section Header Text
-	@tip Set the styling for your email's header text. Choose a size and color that is easy to read.
+	Header
+	Header Text
+	Set the styling for your email's header text. Choose a size and color that is easy to read.
 	*/
 		#templateHeader .mcnTextContent,#templateHeader .mcnTextContent p{
 			/*@editable*/color:#202020;
@@ -244,9 +243,9 @@
 			/*@editable*/text-align:left;
 		}
 	/*
-	@tab Header
-	@section Header Link
-	@tip Set the styling for your email's header links. Choose a color that helps them stand out from your text.
+	Header
+	Header Link
+	Set the styling for your email's header links. Choose a color that helps them stand out from your text.
 	*/
 		#templateHeader .mcnTextContent a,#templateHeader .mcnTextContent p a{
 			/*@editable*/color:#202020;
@@ -254,9 +253,9 @@
 			/*@editable*/text-decoration:underline;
 		}
 	/*
-	@tab Body
-	@section Body Style
-	@tip Set the background color and borders for your email's body area.
+	Body
+	Body Style
+	Set the background color and borders for your email's body area.
 	*/
 		#templateBody{
 			/*@editable*/background-color:#ffffff;
@@ -270,9 +269,9 @@
 			/*@editable*/padding-bottom:80px;
 		}
 	/*
-	@tab Body
-	@section Body Text
-	@tip Set the styling for your email's body text. Choose a size and color that is easy to read.
+	Body
+	Body Text
+	Set the styling for your email's body text. Choose a size and color that is easy to read.
 	*/
 		#templateBody .mcnTextContent,#templateBody .mcnTextContent p{
 			/*@editable*/color:#666666;
@@ -282,9 +281,9 @@
 			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Body
-	@section Body Link
-	@tip Set the styling for your email's body links. Choose a color that helps them stand out from your text.
+	Body
+	Body Link
+	Set the styling for your email's body links. Choose a color that helps them stand out from your text.
 	*/
 		#templateBody .mcnTextContent a,#templateBody .mcnTextContent p a{
 			/*@editable*/color:#999999;
@@ -292,13 +291,13 @@
 			/*@editable*/text-decoration:underline;
 		}
 	/*
-	@tab Columns
-	@section Column Style
-	@tip Set the background color and borders for your email's columns.
+	Columns
+	Column Style
+	Set the background color and borders for your email's columns.
 	*/
 		#templateColumns{
 			/*@editable*/background-color:#6d7d81;
-			/*@editable*/background-image:url("https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/7ef044a3-ff07-43f4-ad6a-68585c33264b.jpg");
+			/*@editable*/background-image:url("");
 			/*@editable*/background-repeat:no-repeat;
 			/*@editable*/background-position:top;
 			/*@editable*/background-size:cover;
@@ -308,9 +307,9 @@
 			/*@editable*/padding-bottom:100px;
 		}
 	/*
-	@tab Columns
-	@section Column Text
-	@tip Set the styling for your email's column text. Choose a size and color that is easy to read.
+	Columns
+	Column Text
+	Set the styling for your email's column text. Choose a size and color that is easy to read.
 	*/
 		#templateColumns .columnContainer .mcnTextContent,#templateColumns .columnContainer .mcnTextContent p{
 			/*@editable*/color:#202020;
@@ -320,9 +319,9 @@
 			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Columns
-	@section Column Link
-	@tip Set the styling for your email's column links. Choose a color that helps them stand out from your text.
+	Columns
+	Column Link
+	Set the styling for your email's column links. Choose a color that helps them stand out from your text.
 	*/
 		#templateColumns .columnContainer .mcnTextContent a,#templateColumns .columnContainer .mcnTextContent p a{
 			/*@editable*/color:#202020;
@@ -330,9 +329,9 @@
 			/*@editable*/text-decoration:underline;
 		}
 	/*
-	@tab Footer
-	@section Footer Style
-	@tip Set the background color and borders for your email's footer area.
+	Footer
+	Footer Style
+	Set the background color and borders for your email's footer area.
 	*/
 		#templateFooter{
 			/*@editable*/background-color:#1f2934;
@@ -346,9 +345,9 @@
 			/*@editable*/padding-bottom:10px;
 		}
 	/*
-	@tab Footer
-	@section Footer Text
-	@tip Set the styling for your email's footer text. Choose a size and color that is easy to read.
+	Footer
+	Footer Text
+	Set the styling for your email's footer text. Choose a size and color that is easy to read.
 	*/
 		#templateFooter .mcnTextContent,#templateFooter .mcnTextContent p{
 			/*@editable*/color:#FFFFFF;
@@ -358,9 +357,9 @@
 			/*@editable*/text-align:center;
 		}
 	/*
-	@tab Footer
-	@section Footer Link
-	@tip Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
+	Footer
+	Footer Link
+	Set the styling for your email's footer links. Choose a color that helps them stand out from your text.
 	*/
 		#templateFooter .mcnTextContent a,#templateFooter .mcnTextContent p a{
 			/*@editable*/color:#FFFFFF;
@@ -458,9 +457,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Heading 1
-	@tip Make the first-level headings larger in size for better readability on small screens.
+	Mobile Styles
+	Heading 1
+	Make the first-level headings larger in size for better readability on small screens.
 	*/
 		h1{
 			/*@editable*/font-size:22px !important;
@@ -469,9 +468,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Heading 2
-	@tip Make the second-level headings larger in size for better readability on small screens.
+	Mobile Styles
+	Heading 2
+	Make the second-level headings larger in size for better readability on small screens.
 	*/
 		h2{
 			/*@editable*/font-size:20px !important;
@@ -480,9 +479,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Heading 3
-	@tip Make the third-level headings larger in size for better readability on small screens.
+	Mobile Styles
+	Heading 3
+	Make the third-level headings larger in size for better readability on small screens.
 	*/
 		h3{
 			/*@editable*/font-size:18px !important;
@@ -491,9 +490,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Heading 4
-	@tip Make the fourth-level headings larger in size for better readability on small screens.
+	Mobile Styles
+	Heading 4
+	Make the fourth-level headings larger in size for better readability on small screens.
 	*/
 		h4{
 			/*@editable*/font-size:16px !important;
@@ -502,9 +501,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Boxed Text
-	@tip Make the boxed text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+	Mobile Styles
+	Boxed Text
+	Make the boxed text larger in size for better readability on small screens. We recommend a font size of at least 16px.
 	*/
 		.mcnBoxedTextContentContainer .mcnTextContent,.mcnBoxedTextContentContainer .mcnTextContent p{
 			/*@editable*/font-size:14px !important;
@@ -513,9 +512,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Preheader Visibility
-	@tip Set the visibility of the email's preheader on small screens. You can hide it to save space.
+	Mobile Styles
+	Preheader Visibility
+	Set the visibility of the email's preheader on small screens. You can hide it to save space.
 	*/
 		#templatePreheader{
 			/*@editable*/display:block !important;
@@ -523,9 +522,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Preheader Text
-	@tip Make the preheader text larger in size for better readability on small screens.
+	Mobile Styles
+	Preheader Text
+	Make the preheader text larger in size for better readability on small screens.
 	*/
 		#templatePreheader .mcnTextContent,#templatePreheader .mcnTextContent p{
 			/*@editable*/font-size:14px !important;
@@ -534,9 +533,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Header Text
-	@tip Make the header text larger in size for better readability on small screens.
+	Mobile Styles
+	Header Text
+	Make the header text larger in size for better readability on small screens.
 	*/
 		#templateHeader .mcnTextContent,#templateHeader .mcnTextContent p{
 			/*@editable*/font-size:16px !important;
@@ -545,9 +544,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Body Text
-	@tip Make the body text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+	Mobile Styles
+	Body Text
+	Make the body text larger in size for better readability on small screens. We recommend a font size of at least 16px.
 	*/
 		#templateBody .mcnTextContent,#templateBody .mcnTextContent p{
 			/*@editable*/font-size:16px !important;
@@ -556,9 +555,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Column Text
-	@tip Make the column text larger in size for better readability on small screens. We recommend a font size of at least 16px.
+	Mobile Styles
+	Column Text
+	Make the column text larger in size for better readability on small screens. We recommend a font size of at least 16px.
 	*/
 		#templateColumns .columnContainer .mcnTextContent,#templateColumns .columnContainer .mcnTextContent p{
 			/*@editable*/font-size:16px !important;
@@ -567,9 +566,9 @@
 
 }	@media only screen and (max-width: 480px){
 	/*
-	@tab Mobile Styles
-	@section Footer Text
-	@tip Make the footer content text larger in size for better readability on small screens.
+	Mobile Styles
+	Footer Text
+	Make the footer content text larger in size for better readability on small screens.
 	*/
 		#templateFooter .mcnTextContent,#templateFooter .mcnTextContent p{
 			/*@editable*/font-size:14px !important;
@@ -604,7 +603,7 @@
 								</td>
                             </tr>
 							<tr>
-								<td align="center" valign="top" id="templateHeader">
+								<td align="center" valign="top" id="templateHeader" height="500px" style="background-position:center" background="https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/493a1be9-b57e-4498-969c-889c20dd2090.jpg">
 									<!--[if gte mso 9]>
 									<table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
 									<tr>
@@ -678,13 +677,13 @@
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
                         
-                        <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
+                        <td valign="top" class="mcnTextContent" style="text-align:center; padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
                             <h2><span style="font-size:23px">WELCOME TO</span><span style="font-size:32px"> Dine2gether</span></h2>
 
-<p>Hey $username,<br>
+<p>Hey {{$username}}<br>
 &nbsp;We are really happy that you want to join our delicious community!<br>
-But before you can get started, you need to confirm your email address*.</p>
+But before you can get started, you need to confirm your email address.</p>
 
                         </td>
                     </tr>
@@ -727,7 +726,7 @@ But before you can get started, you need to confirm your email address*.</p>
 								</td>
                             </tr>
 							<tr>
-								<td align="center" valign="top" id="templateColumns">
+								<td align="center" valign="top" id="templateColumns" height="500px" style="background-position:center" background="https://gallery.mailchimp.com/a691a25ff2c949305a23cb193/images/7ef044a3-ff07-43f4-ad6a-68585c33264b.jpg">
 									<table border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer">
                                         <tr>
                                             <td valign="top">
@@ -793,10 +792,10 @@ But before you can get started, you need to confirm your email address*.</p>
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:100%; min-width:100%;" width="100%" class="mcnTextContentContainer">
                     <tbody><tr>
                         
-                        <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
+                        <td valign="top" class="mcnTextContent" style="text-align:center; padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
                             <em>Copyright © 2016 DineTogether.</em><br>
-							<p>*If you didn't register, you can just ignore this mail</p>
+
                         </td>
                     </tr>
                 </tbody></table>

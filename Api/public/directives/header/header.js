@@ -6,7 +6,7 @@ d2gApp.directive("d2gHeader", function () {
 		scope: {},
 		bindToController: true,
 		controllerAs: "header",
-		controller: function ($scope, loginService, $auth, $cookies, $rootScope) {
+		controller: function ($scope, loginService, $auth, $cookies, $rootScope, $location) {
 			var vm = this;
 			var loginSvc = loginService;
 			

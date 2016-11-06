@@ -15,14 +15,14 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 	vm.showFilteredInterests = function () {
 		var interestsarray = getInterestsFilter();
 		return function (booking) {
-			if(booking.user.interests.length == 0 && interestsarray.length == 0) {
+			if(booking.interests.length == 0 && interestsarray.length == 0) {
 				return true;
 			} else {
-				for(var i in booking.user.interests) {
+				for(var i in booking.interests) {
 					if(interestsarray.length != 0) {
 						for(var x=0; x<interestsarray.length; x++) {
-							if(booking.user.interests[i].interest == interestsarray[x]) {
-								return booking.user.interests[i].interest == interestsarray[x];
+							if(booking.interests[i].interest == interestsarray[x]) {
+								return booking.interests[i].interest == interestsarray[x];
 							}
 						}
 					} else { return true; }
@@ -62,6 +62,7 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 			bookingSvc.getBookings()
 				.success(function (data) {
 					vm.bookings = data.bookings;
+					console.log(data);
 				});
 		}
 	}

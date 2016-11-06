@@ -2,6 +2,7 @@
 nav { 
 	position: fixed;
 	background-color: transparent;
+	box-shadow: none !important;
 	top: 0;
 }
 
