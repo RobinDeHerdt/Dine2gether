@@ -1,14 +1,61 @@
 <main>
 	<div class="container under-header">
-		<div class="row">
+			<a href="/#/overview"><h5>Back</h5></a>
 			<h1>{{ bookingdetails.currentBooking.title}}</h1>
-			<img ng-src="{{bookingdetails.imageUrlBase + bookingdetails.currentBooking.dishes[0].dish_images[0].image_url}}">
-			<h2>About This Menu</h2>
-			<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
-				<h5>{{dish.name}}</h5>
-				<p>{{dish.description}}</p>
+			<br>
+			<h3>About the host</h3>
+			<div class="row">
+				<div class="card">
+					<div class="col s12">
+						<div class="row">
+						<div class="col s12 m4">
+							<div class="card">
+							   	<div class="card-image waves-effect waves-block waves-light">
+							      <img ng-src="{{bookingdetails.currentBooking.user.image}}" class="activator">
+							    </div>
+						  	</div>
+						</div>
+						<div class="col s12 m4">
+							<h5>{{bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name}}</h5>
+							<h5>{{ bookingdetails.currentBooking.city }}</h5>
+							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
+							<h5>Interests:</h5>
+							<div ng-repeat="interest in bookingdetails.currentBooking.interests">
+								<ul>
+									<li>{{ interest.interest}}</li>
+								</ul>
+							</div>
+							<h5>Kitchenstyles:</h5>
+							<div ng-repeat="style in bookingdetails.currentBooking.Kitchenstyles">
+								<ul>
+									<li>{{ style.style}}</li>
+								</ul>
+							</div>
+							<a href="#"><h5>Reviews about this user</h5></a>
+						</div>
+					</div>
+				</div>
 			</div>
-			<a href="" class="btn mar-btm-l">Book This Delicious Meal</a>
-		</div>
+			<h3>Menu</h3>
+			<div class="row">
+				<div class="card">
+					<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
+						<div class="col s12 m4">
+							<div class="card">
+							   	<div class="card-image waves-effect waves-block waves-light">
+							      <img ng-src="{{dish.dish_images[0].image_url}}" class="activator">
+							    </div>
+							    <div class="card-content">
+							      <span class="card-title activator grey-text text-darken-4"><h5>{{dish.name}}</h5></span>
+							    	<p>{{dish.description}}</p>
+							    </div>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a href="" class="btn mar-btm-l">Send request</a>
+		
+
 	</div>
 </main>
