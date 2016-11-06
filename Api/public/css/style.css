@@ -4,6 +4,7 @@ nav {
 	background-color: transparent;
 	box-shadow: none !important;
 	top: 0;
+	z-index: 10;
 }
 
 #modal1.modal { width: 25% !important; }
