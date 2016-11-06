@@ -25,7 +25,7 @@ class ActivationService
 
         $token = $this->activationRepo->createActivation($user);
 
-        $link = url('activation/') . "/" .$token;
+        $link = url('/#/activation/') . "/" .$token;
         $message = sprintf('Activate account <a href="%s">%s</a>', $link, $link);
 
         /*$this->mailer->send('mails.verification_mail',['username' => $user->name, 'link' => $link], function 
@@ -49,7 +49,7 @@ class ActivationService
         $user = User::find($activation->user_id);
         $user->activated = true;
         $user->save();
-        $this->activationRepo->deleteActivation($token);
+        //$this->activationRepo->deleteActivation($token);
 
         return $user;
     }

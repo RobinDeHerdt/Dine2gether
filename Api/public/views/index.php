@@ -9,6 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/helpers.css">
 	<link rel="stylesheet" href="css/assets/sweetalert2.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
 </head>
 <body ng-app="d2gApp">
 	<d2g-header></d2g-header>

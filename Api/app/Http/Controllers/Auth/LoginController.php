@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    //protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -43,9 +43,9 @@ class LoginController extends Controller
     public function activateUser(Request $request)
     {
         if ($user = $this->activationService->activateUser($request->token)) {
-            return redirect ("/");
+            return response()->json([$user]);
         } else {
-            //return redirect ("/");
+            abort(404);
         }
     }
 }

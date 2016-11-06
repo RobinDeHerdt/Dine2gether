@@ -1,4 +1,4 @@
-d2gApp.service('loginService', function ($http, $auth, $cookies) {
+d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
 	var svc = this;
 
 	svc.user = $cookies.getObject("user");
@@ -72,7 +72,18 @@ d2gApp.service('loginService', function ($http, $auth, $cookies) {
 
 	svc.activateUser = function (token) {
 		$http.post('api/user/activation', token).then(function (data) {
-			console.log(data);
+			if(data.data !== "") {
+				console.log(data);
+				$cookies.putObject("user", data.data);
+				svc.user = $cookies.getObject("user");
+				$location.path("home");
+			} else {
+				swal({
+				  title: "Wrong activation link",
+				  text: "Sorry, we couldn't find a user with this activation link",
+				  type: "error",
+				});
+			}
 		}, function (error) {
 			console.log(data);
 		})

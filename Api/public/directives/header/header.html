@@ -1,12 +1,12 @@
-<nav>
+<nav ng-style='header.navstyle'>
     <div class="nav-wrapper mar-left-l mar-right-l">
-      	<a ui-sref="home" class="brand-logo">D2G</a>
+      	<a ui-sref="home" class="brand-logo"></a>
       	<ul id="nav-mobile" class="right hide-on-med-and-down">
-	        <li><a ng-hide="header.user" ng-click="header.showLogin()">Login</a></li>
-	        <li><a ng-hide="header.user" ng-click="header.showRegister()">Sign Up</a></li>
-	        <li><a ng-show="header.user" ui-sref="profile"> My Profile </a></li>
-	        <li><a ng-show="header.user" ng-click="header.logout()">Logout</a></li>
-	        <li><a ng-show="header.user" ui-sref="create_booking">Become a Host</a></li>
+	        <li><a ng-style="header.navtext" ng-hide="header.user" ng-click="header.showLogin()">Login</a></li>
+	        <li><a ng-style="header.navtext" ng-hide="header.user" ng-click="header.showRegister()">Sign Up</a></li>
+	        <li><a ng-style="header.navtext" ng-show="header.user" ui-sref="profile"> My Profile </a></li>
+	        <li><a ng-style="header.navtext" ng-show="header.user" ng-click="header.logout()">Logout</a></li>
+	        <li><a ng-style="header.navtext" ng-show="header.user" ui-sref="create_booking">Become a Host</a></li>
       	</ul>
     </div>
 </nav>
