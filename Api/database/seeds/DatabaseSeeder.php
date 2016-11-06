@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DishImagesTableSeeder::class);
         $this->call(KitchenstylesTableSeeder::class);
         $this->call(BookingInterestTableSeeder::class);
+        $this->call(BookingKitchenstyleTableSeeder::class);
     }
 }
