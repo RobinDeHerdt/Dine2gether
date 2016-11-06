@@ -27,21 +27,15 @@ class UserController extends Controller
         return Response::json(User::get());
     }
 
-    public function upload()
+    public function upload(Request $request)
     {
-        $uploadedFile = $request->all();
+        $user = User::find($request->user_id);
+
+        $path = $request->file->store('img/profile', 'upload');
         
-        dd($uploadedFile);
-
-        $user = User::find();
-
-        $path = $uploadedFile->store('img/profile', 'upload');
-
         $user->image  = $path;
 
         $user->save();
-
-        return response()->json(['filename' => $path]);
     }
 
     /**

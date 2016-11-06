@@ -1,4 +1,4 @@
-d2gApp.controller("profileController", function (loginService,bookingService, $location) {
+d2gApp.controller("profileController", function (loginService,bookingService, $location, Upload) {
 	var vm = this;
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
@@ -31,8 +31,21 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 			city: vm.user.city,
 		};
 		loginSvc.updateProfile(vm.user.id,data).then(function(data) {
-			console.log(data);
+			loginSvc.setUser();
 		});
+	}
+
+	vm.uploadProfilePicture = function (file) {
+		Upload.upload({
+			url: '/api/profile/upload',
+			data: 
+			{
+				file	: file,
+				user_id	: vm.user.id
+			}
+			}).then(function (data) {
+				loginSvc.setUser();
+			}); 
 	}
 
 	function _init() {

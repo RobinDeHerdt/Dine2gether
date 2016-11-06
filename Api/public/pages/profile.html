@@ -8,10 +8,18 @@
             	<span class="card-title">Profile picture</span>
             </div>
             <div class="card-image">
-              <img src="{{profile.user.image}}">
+              <img ng-src="{{profile.user.image}}">
             </div>
             <div class="card-action">
-              <a class="waves-effect waves-light btn">Upload</a>
+              <div class="file-field input-field ">
+                      <div class="btn">
+                        <span>Upload</span>
+                        <input ngf-select="profile.uploadProfilePicture($file)" accept="image/*" ngf-max-size="2MB" type="file" multiple>
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text" placeholder="Upload" required>
+                      </div>
+                    </div>
             </div>
           </div>
         </div>
