@@ -33,12 +33,12 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 			interests:  getSelectedInterests(),
 			dishes: getDishes(),
 		};
-
-		bookingSvc.createBooking(data).then(function (data) {
+		console.log(data);
+		/*bookingSvc.createBooking(data).then(function (data) {
 			console.log(data);
 		}, function (error) {
 			console.log(error);
-		});
+		});*/
 	} 
 
 	vm.createImageFile = function (files, errFiles, dish_nr) {
@@ -51,14 +51,21 @@ d2gApp.controller("createBookingController", function (interestService, bookingS
 					files:files
 					}
 				}).then(function (response) {
-					console.log(response.data);
+					var response_arr = response.data.filenaam;
+					var imgs_arr = [];
+					for(var i=0; i<response_arr.length; i++) {
+						imgs_arr.push(response_arr[i]);
+					}
+					console.log(imgs_arr);
+
+					vm.dishes[arr_nr].img = imgs_arr;
 				}, function (error) {
 					if(error.status > 0) {
-						console.log(response);
+						console.log(error);
 					}
 				});
-			// vm.dishes[arr_nr].img = files;
-			// console.log(vm.dishes);
+			
+			console.log(vm.dishes);
 		} 
 	}
 
