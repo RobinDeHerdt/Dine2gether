@@ -48,16 +48,9 @@ class BookingController extends Controller
 
         foreach ($uploadedFiles["files"] as $uploadedFile) 
         {
-            $dish_image = new Dish_image();
-
             $path = $uploadedFile->store('img', 'upload');
             array_push($pathNames, $path);
-            $i++;
-
-            $dish_image->image_url  = $path;
-            $dish_image->dish_id    = 1;
-
-            $dish_image->save();
+            $i++;           
         }
 
         return response()->json(["filenaam" => $pathNames]);
@@ -98,14 +91,28 @@ class BookingController extends Controller
         // Loop through all dishes here
         $dishes = $request->dishes;
 
-        foreach ($dishes as $newdish) {
+        foreach ($dishes as $newdish) 
+        {
             $dish = new Dish();
             $dish->name         = $newdish["dish_name"];
             $dish->description  = $newdish["description"];
             $dish->Booking()->associate($booking);
 
             $dish->save();
+
+            foreach ($newdish["dish_img"] as $newdishimage) 
+            {
+                $dish_image = new Dish_image();
+
+                $dish_image->image_url  = $newdishimage;
+                $dish_image->Dish()->associate($dish);
+
+                $dish_image->save();
+            }
         }
+
+
+       
         
         // Loop through all interests here
         $interests = $request->interests;

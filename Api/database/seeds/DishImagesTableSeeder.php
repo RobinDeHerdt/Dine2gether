@@ -12,27 +12,27 @@ class DishImagesTableSeeder extends Seeder
     public function run()
     {
         DB::table('dish_images')->insert([
-            'image_url' => 'foodImage1.jpg',
+            'image_url' => 'img/foodImage1.jpg',
             'dish_id' => 1,
         ]);
 
         DB::table('dish_images')->insert([
-            'image_url' => 'foodImage2.jpg',
+            'image_url' => 'img/foodImage2.jpg',
             'dish_id' => 2,
         ]);
 
         DB::table('dish_images')->insert([
-            'image_url' => 'foodImage3.jpg',
+            'image_url' => 'img/foodImage3.jpg',
             'dish_id' => 3,
         ]);
 
         DB::table('dish_images')->insert([
-            'image_url' => 'foodImage4.jpg',
+            'image_url' => 'img/foodImage4.jpg',
             'dish_id' => 4,
         ]);
 
         DB::table('dish_images')->insert([
-            'image_url' => 'foodImage5.jpg',
+            'image_url' => 'img/foodImage5.jpg',
             'dish_id' => 4,
         ]);
     }
