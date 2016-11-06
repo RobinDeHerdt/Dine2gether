@@ -1,7 +1,8 @@
 <main>
 	<div class="container under-header">
-			<a href="/#/overview"><h5>Back</h5></a>
+		<div class="row">
 			<h1>{{ bookingdetails.currentBooking.title}}</h1>
+
 			<br>
 			<h3>About the host</h3>
 			<div class="row">
@@ -35,27 +36,15 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<h3>Menu</h3>
-			<div class="row">
-				<div class="card">
-					<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
-						<div class="col s12 m4">
-							<div class="card">
-							   	<div class="card-image waves-effect waves-block waves-light">
-							      <img ng-src="{{dish.dish_images[0].image_url}}" class="activator">
-							    </div>
-							    <div class="card-content">
-							      <span class="card-title activator grey-text text-darken-4"><h5>{{dish.name}}</h5></span>
-							    	<p>{{dish.description}}</p>
-							    </div>
-						  	</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a href="" class="btn mar-btm-l">Send request</a>
-		
 
+			<img ng-src="{{bookingdetails.imageUrlBase + bookingdetails.currentBooking.dishes[0].dish_images[0].image_url}}">
+			<h2>About This Menu</h2>
+			<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
+				<h5>{{dish.name}}</h5>
+				<p>{{dish.description}}</p>
+
+			</div>
+			<a href="" class="btn mar-btm-l">Book This Delicious Meal</a>
+		</div>
 	</div>
 </main>
