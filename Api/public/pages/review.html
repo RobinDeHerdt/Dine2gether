@@ -1,24 +1,42 @@
 <main>
 	<div class="container under-header">
-		<div class="row" ng-repeat="booking in review.bookings">
-	        <div class="col s12 m3" ng-repeat="guest in booking.users">
+		<h5>Recent guests</h5>
+		<div class="row" ng-repeat="guestbooking in review.guestbookings">
+	        <div class="col s12 m3" ng-repeat="guest in guestbooking.users">
 	          <div class="card">
 	            <div class="card-image">
 	              <img ng-src="{{guest.image}}">
 	              <span class="card-title">{{ guest.first_name + " " + guest.last_name }}</span>
 	            </div>
 	            <div class="card-content">
-					<strong>{{ booking.title }}</strong>
+					<strong>{{ guestbooking.title }}</strong>
 	            </div>
 	            <div class="card-action">
-	              <a href="" ng-click="review.getSelectedGuest(guest.id)">Review</a>
+	              <a href="" ng-click="review.getSelectedUser(guest.id)">Review</a>
+	            </div>
+	          </div>
+	        </div>
+	     </div>
+	     <h5>Recent hosts</h5>
+	     <div class="row">
+	        <div class="col s12 m3" ng-repeat="host in review.hostbookings">
+	          <div class="card">
+	            <div class="card-image">
+	              <img ng-src="{{host[0].image}}">
+	              <span class="card-title">{{ host[0].first_name + " " + host[0].last_name }}</span>
+	            </div>
+	            <div class="card-content">
+	            	<strong>Host</strong>
+	            </div>
+	            <div class="card-action">
+	              <a href="" ng-click="review.getSelectedUser(host[0].id)">Review</a>
 	            </div>
 	          </div>
 	        </div>
 	     </div>
 		<div class="row">
 			<div class="col s12">
-				<h1>Write review for {{ review.selectedGuest }}</h1>
+				<h1>Write review for {{ review.selectedUser }}</h1>
 			</div>
 		</div>
 		<div class="row">

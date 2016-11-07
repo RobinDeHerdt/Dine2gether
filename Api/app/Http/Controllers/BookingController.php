@@ -285,7 +285,7 @@ class BookingController extends Controller
         foreach($user->bookings as $booking) {
             array_push($booking_arr, $booking);
         }
-
+        
         return response()->json(["bookings" => $booking_arr]);
     }
 }

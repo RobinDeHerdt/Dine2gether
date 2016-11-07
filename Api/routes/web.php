@@ -30,7 +30,8 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail'); 
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
-    Route::get('getUserBookingsFromPast/{id}', 'ReviewController@show');
+    Route::get('review/guests/{id}', 'ReviewController@getGuests');
+    Route::get('review/hosts/{id}', 'ReviewController@getHosts');
     Route::post('upload', 'BookingController@upload');
     Route::post('/profile/upload', 'UserController@upload');
     Route::post('createreview', 'ReviewController@store');  

@@ -6,7 +6,11 @@ d2gApp.service('reviewService', function ($http) {
 		return $http.post('api/createreview', data);
 	}
 
-	svc.getBookings = function (id) {
-		return $http.get('api/getUserBookingsFromPast/' + id);
+	svc.getGuests = function (id) {
+		return $http.get('api/review/guests/' + id);
+	}
+
+	svc.getHosts = function (id) {
+		return $http.get('api/review/hosts/' + id);
 	}
 });

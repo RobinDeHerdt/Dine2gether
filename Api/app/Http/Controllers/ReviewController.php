@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Booking;
 use App\Review;
+use App\User;
+use DB;
 
 class ReviewController extends Controller
 {
@@ -53,17 +55,26 @@ class ReviewController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function getGuests($id)
     {
         $bookings = Booking::where('host_id', $id)->with('users')->get();
-        // $guestsArray = [];
-
-        // foreach ($bookings as $booking) {
-        //     $guests = $booking->users()->get();
-        //     array_push($guestsArray, $guests);
-        // }
 
         return response()->json(['bookings' => $bookings]);
+    }
+
+    public function getHosts($id)
+    {
+        $user = User::where('id', $id)->first();
+
+        $booking_arr = [];
+
+        foreach($user->bookings as $booking) {
+            $hostInfo = $booking->user()->get();
+
+            array_push($booking_arr, $hostInfo);
+        }
+        
+        return response()->json(["bookings" => $booking_arr]);
     }
 
     /**

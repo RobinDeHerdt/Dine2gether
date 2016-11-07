@@ -17,10 +17,10 @@ class CreateReviewsTable extends Migration
             $table->increments('id');
             $table->text('body');
             
-            $table->integer('guest_id')->unsigned();
-            $table->foreign('guest_id')->references('id')->on('users');
-            $table->integer('host_id')->unsigned();
-            $table->foreign('host_id')->references('id')->on('users');
+            $table->integer('receiver_id')->unsigned();
+            $table->foreign('receiver_id')->references('id')->on('users');
+            $table->integer('author_id')->unsigned();
+            $table->foreign('author_id')->references('id')->on('users');
 
             $table->timestamps();
         });

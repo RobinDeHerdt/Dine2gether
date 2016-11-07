@@ -13,26 +13,26 @@ class ReviewsTableSeeder extends Seeder
     {
         DB::table('reviews')->insert([
             'body' => 'Toffe avond.',
-            'host_id' => 1,
-            'guest_id' => 2,
+            'author_id' => 1,
+            'receiver_id' => 2,
         ]);
 
         DB::table('reviews')->insert([
             'body' => 'Amai da trok op niks.',
-            'host_id' => 1,
-            'guest_id' => 2,
+            'author_id' => 1,
+            'receiver_id' => 2,
         ]);
 
         DB::table('reviews')->insert([
             'body' => 'You\'re fired!',
-            'host_id' => 1,
-            'guest_id' => 5,
+            'author_id' => 1,
+            'receiver_id' => 5,
         ]);
 
         DB::table('reviews')->insert([
             'body' => 'Great experience.',
-            'host_id' => 2,
-            'guest_id' => 1,
+            'author_id' => 2,
+            'receiver_id' => 1,
         ]);
     }
 }

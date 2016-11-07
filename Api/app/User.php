@@ -29,7 +29,13 @@ class User extends Authenticatable
 
     public function bookings()
     {
-        return $this->belongsToMany('App\Booking', 'booking_user', 'booking_id', 'guest_id');
+        return $this->belongsToMany('App\Booking');
+        // return $this->belongsToMany('App\Booking','booking_user', 'booking_id', 'guest_id');
+    }
+
+    public function booking()
+    {
+        return $this->hasMany('App\Booking', 'host_id');
     }
 
     public function reviews()

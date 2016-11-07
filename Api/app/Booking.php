@@ -16,6 +16,11 @@ class Booking extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'host_id');
+    }
+
     public function interests()
     {
         return $this->belongsToMany('App\Interest');
