@@ -31,8 +31,11 @@
 		<div ng-repeat="guestrequest in profile.guestrequests">
 		  <ul class="collection">
 			<li class="collection-item">
-			  <span class="title">Booking by: <a href="/#/user/{{guestrequest.host.host_id}}/reviews"><strong>{{guestrequest.host.first_name + " " + guestrequest.host.last_name}}</strong></a></span>
+			  <span ng-if="!guestrequest.accepted == 0 && !guestrequest.declined == 0" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
+			  <span ng-if="guestrequest.accepted == 1" class="badge green darken-1 white-text" data-badge-caption="Accepted"></span>
+			  <span ng-if="guestrequest.declined == 1" class="badge red darken-1 white-text" data-badge-caption="Declined"></span>
 			  <p>Booking: <a href="/#/booking/{{guestrequest.booking.id}}/details"><strong>{{ guestrequest.booking.title}}</strong></a></p>
+			  <span class="title">Booking by: <a href="/#/user/{{guestrequest.host.host_id}}/reviews"><strong>{{guestrequest.host.first_name + " " + guestrequest.host.last_name}}</strong></a></span>
 			  <p ng-if="hostrequest.date">Date and time: {{ guestrequest.date }} at {{guestrequest.time}}</p>
 			  <p>Guests: {{ guestrequest.number_of_guests}}</p>
 			</li>
