@@ -284,14 +284,17 @@ class BookingController extends Controller
     public function getUserBookings($id)
     {
         $bookings = Booking::where('host_id', $id)->get();
-
+        $arr_requests = [];
         foreach($bookings as $booking) {
             $requests = RequestBooking::where("booking_id", $booking->id)->get();
 
-            $booking->requests = $requests;
+            foreach ($requests as $request) {
+                array_push($arr_requests, $request);
+            }
+
         }
 
-        return response()->json(['bookings' => $bookings]);
+        return response()->json(['bookings' => $bookings, "requests" => $arr_requests]);
 
     }
 
