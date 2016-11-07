@@ -1,7 +1,8 @@
-d2gApp.controller("reviewController", function (reviewService, loginService, $stateParams, $location) {
+d2gApp.controller("reviewController", function (reviewService, loginService, $stateParams, $location, $anchorScroll) {
 	vm = this;
 	var reviewSvc = reviewService;
 	var loginSvc  = loginService;
+	vm.name = "...";
 
 	function getGuestsInfo() {
 		var user = loginSvc.getUser();
@@ -33,6 +34,10 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 	{
 		vm.selectedUser = id;
 		vm.name = first_name + " " + last_name;
+
+		// Scroll down
+		$location.hash('reviewtextarea');
+      	$anchorScroll();
 	}
 
 	vm.sendReview = function()
