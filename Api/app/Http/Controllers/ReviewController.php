@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App\Booking;
 use App\Review;
 use App\User;
-use DB;
 
 class ReviewController extends Controller
 {
@@ -19,9 +18,9 @@ class ReviewController extends Controller
      */
     public function index($id)
     {
-        $reviews = Review::where('receiver_id', $id)->get();
+        $receiver   = User::with('receiverreviews')->where('id',$id)->first();
 
-        return response()->json(['reviews' => $reviews]);
+        return response()->json(['user' => $receiver]);
     }
 
     /**

@@ -30,7 +30,7 @@ class User extends Authenticatable
     public function bookings()
     {
         // return $this->belongsToMany('App\Booking');
-        return $this->belongsToMany('App\Booking','booking_user', 'booking_id', 'guest_id');
+        return $this->belongsToMany('App\Booking','booking_user', 'booking_id', 'user_id');
     }
 
     public function booking()
@@ -38,8 +38,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Booking', 'host_id');
     }
 
-    public function reviews()
+    public function authorreviews()
     {
-        return $this->hasMany('App\Review');
+        return $this->hasMany('App\Review', 'author_id');
+    }
+
+    public function receiverreviews()
+    {
+        return $this->hasMany('App\Review', 'receiver_id');
     }
 }

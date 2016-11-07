@@ -23,8 +23,8 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 
 	function loadReviews() {
 		reviewSvc.getReviewsByUser($stateParams.id).then(function(data) {
-			vm.userreviews = data.data.reviews;
-			vm.receiver_id = $stateParams.id;
+			vm.reviews  	= data.data.user.receiverreviews;
+			vm.receiver 	= data.data.user;
 			console.log(data);
 		});
 	}
