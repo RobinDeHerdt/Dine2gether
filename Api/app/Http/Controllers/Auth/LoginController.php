@@ -43,7 +43,7 @@ class LoginController extends Controller
     public function activateUser(Request $request)
     {
         if ($user = $this->activationService->activateUser($request->token)) {
-            return response()->json([$user]);
+            return response()->json($user);
         } else {
             abort(404);
         }
