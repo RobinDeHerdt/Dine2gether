@@ -11,7 +11,7 @@
 		  <ul class="collection">
 			<li class="collection-item">
 			  <span class="title">Request by: <a href="/#/user/{{hostrequest.user.id}}/reviews"><strong>{{hostrequest.user.first_name + " " + hostrequest.user.last_name}}</strong></a></span>
-			  <p>Booking: <a href="/#/booking/{{hostrequest.booking.id}}/details}}/reviews"><strong>{{ hostrequest.booking.title}}</strong></a></p>
+			  <p>Booking: <a href="/#/booking/{{hostrequest.booking.id}}/details"><strong>{{ hostrequest.booking.title}}</strong></a></p>
 			  <p>Date and time: {{ hostrequest.date }} at {{hostrequest.time}}</p>
 			  <p>Guests: {{ hostrequest.number_of_guests}}</p>
 			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.declineRequest(hostrequest.id)"><i class="material-icons right">delete</i>Decline</a>
