@@ -12,29 +12,16 @@
           </div>
         </div>
     </div>
-		<!-- <div class="row" ng-repeat="review in review.reviews">
-        <div class="col s12 m12">
-          <div class="card">
-            <div class="card-content">
-              <span class="card-title">{{review.author_id}}</span>
-              <p>{{ review.body }}</p>
-              <i class="material-icons">delete_forever</i>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="row">
   <div class="col s12 m12">
-   
-    
     <p ng-if="profile.guestbookings.length < 1">No bookings yet as a guest.</p>
     <div ng-repeat="reviewObj in review.reviews">
       <ul class="collection">
       <li class="collection-item avatar">
          <img src="{{ reviewObj.user.image }}" alt="" class="circle">
-        <span class="title"><a href="/#/booking/{{booking.id}}/details"><strong>{{reviewObj.user.first_name + " " + reviewObj.user.last_name }}</strong></a></span>
+        <span class="title"><a href="/#/user/{{reviewObj.author_id}}/reviews"><strong>{{reviewObj.user.first_name + " " + reviewObj.user.last_name }}</strong></a></span>
         <p>{{reviewObj.body}}</p>
-        <a href="" class="secondary-content" ng-click="deleteReview" ng-show="review.userid === reviewObj.author_id">
+        <a href="" class="secondary-content" ng-click="review.deleteReview(reviewObj.id)" ng-show="review.userid === reviewObj.author_id">
           <i class="material-icons">delete_forever</i>
         </a>
       </li>

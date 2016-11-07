@@ -31,6 +31,7 @@ Route::group(array('prefix' => 'api'), function() {
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
     Route::delete('bookings/detach/{id}/user/{userid}','BookingController@detach');
+    Route::delete('review/{id}', 'ReviewController@destroy');
     Route::get('review/guests/{id}', 'ReviewController@getGuests');
     Route::get('review/hosts/{id}', 'ReviewController@getHosts');
     Route::get('user/{id}/reviews', 'ReviewController@index');

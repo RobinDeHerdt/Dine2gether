@@ -59,20 +59,13 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 		});
 	}
 
-	vm.deleteReview = function()
+	vm.deleteReview = function(id)
 	{
-		var author = loginSvc.getUser();
-		var review = { 
-			review 		: vm.reviewinput,
-			author 		: author,
-			guest_id 	: vm.selectedUser,
-		};
-
-		reviewSvc.postReview(review).then(function(data)
+		reviewSvc.deleteReviews(id).then(function(data)
 		{
 			if(data.status == 200)
 			{
-				$location.path('/user/'+vm.selectedUser+'/reviews');
+				loadReviews();
 			}
 		});
 	}

@@ -18,8 +18,7 @@ d2gApp.service('reviewService', function ($http) {
 		return $http.get('api/user/' + id + '/reviews');
 	}
 
-	// getReviews = function(id)
-	// {
-	// 	return $http.get('api/user')
-	// }
+	svc.deleteReviews = function(id) {
+		return $http.delete('api/review/' + id);
+	}
 });
