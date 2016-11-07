@@ -28,4 +28,8 @@ d2gApp.service('bookingService', function($http) {
         return $http.get('api/userbookings/' + id);
     }
 
+    svc.getGuestBookingsById = function (id) {
+        return $http.get('api/guestbookings/' +id);
+    }  
+
 });

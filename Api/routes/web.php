@@ -36,6 +36,7 @@ Route::group(array('prefix' => 'api'), function() {
     // Route::post('createbooking', 'BookingController@store');  
     Route::get('bookingdetails/{id}', 'BookingController@show'); 
     Route::get('userbookings/{id}', 'BookingController@getUserBookings');
+    Route::get('guestbookings/{id}', 'BookingController@getGuestBookings');
     Route::get('interests', 'InterestController@index');
     Route::post('requestbooking', 'RequestController@storeRequest');
 

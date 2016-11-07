@@ -278,4 +278,14 @@ class BookingController extends Controller
 
         return response()->json(['bookings' => $bookings]);
     }
+
+    public function getGuestBookings($id) {
+        $user = User::where('id', $id)->first();
+        $booking_arr = [];
+        foreach($user->bookings as $booking) {
+            array_push($booking_arr, $booking);
+        }
+
+        return response()->json(["bookings" => $booking_arr]);
+    }
 }
