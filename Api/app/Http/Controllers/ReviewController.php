@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Booking;
 
 class ReviewController extends Controller
 {
@@ -37,14 +38,13 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $review     = new Review;
-        $author     = Auth::user();
+        // $author     = Auth::user();
 
         $review->body            = $request->body;
-        $review->rating          = $request->rating;
 
         // Not sure about this
         $review->guest_id        = $request->guest_id;
-        $review->User()->associate($author);
+        // $review->User()->associate($author);
 
         $review->save();
     }
@@ -57,7 +57,15 @@ class ReviewController extends Controller
      */
     public function show($id)
     {
-        //
+        $bookings = Booking::where('host_id', $id)->with('users')->get();
+        // $guestsArray = [];
+
+        // foreach ($bookings as $booking) {
+        //     $guests = $booking->users()->get();
+        //     array_push($guestsArray, $guests);
+        // }
+
+        return response()->json(['bookings' => $bookings]);
     }
 
     /**

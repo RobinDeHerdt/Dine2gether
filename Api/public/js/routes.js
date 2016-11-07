@@ -36,13 +36,18 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 		controller: "requestBookingController as request"
 	})
 	.state("create_booking", {
-	url: "/create_booking",
-	templateUrl: "pages/createbooking.html",
-	controller: "createBookingController as create"
+		url: "/create_booking",
+		templateUrl: "pages/createbooking.html",
+		controller: "createBookingController as create"
 	})
 	.state("profile", {
-	url: "/profile",
-	templateUrl: "pages/profile.html",
-	controller: "profileController as profile"
+		url: "/profile",
+		templateUrl: "pages/profile.html",
+		controller: "profileController as profile"
+	})
+	.state("writereview", {
+		url: "/writereview",
+		templateUrl: "pages/review.html",
+		controller: "reviewController as review"
 	})
 });

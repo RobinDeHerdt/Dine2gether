@@ -17,8 +17,8 @@ class CreateUserBookingTable extends Migration
             $table->increments('id');
             $table->timestamps();
             
-            $table->integer('guest_id')->unsigned();
-            $table->foreign('guest_id')->references('id')->on('users');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('booking_id')->unsigned();
             $table->foreign('booking_id')->references('id')->on('bookings');
         });
