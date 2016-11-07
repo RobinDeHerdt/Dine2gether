@@ -1,4 +1,4 @@
-d2gApp.controller("reviewController", function (reviewService, loginService, $stateParams) {
+d2gApp.controller("reviewController", function (reviewService, loginService, $stateParams, $location) {
 	vm = this;
 	var reviewSvc = reviewService;
 	var loginSvc  = loginService;
@@ -29,9 +29,10 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 		});
 	}
 
-	vm.getSelectedUser = function(id)
+	vm.getSelectedUser = function(id, first_name, last_name)
 	{
 		vm.selectedUser = id;
+		vm.name = first_name + " " + last_name;
 	}
 
 	vm.sendReview = function()
@@ -45,7 +46,10 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 
 		reviewSvc.postReview(review).then(function(data)
 		{
-			console.log(data);
+			if(data.status == 200)
+			{
+				$location.path('/user/'+vm.selectedUser+'/reviews');
+			}
 		});
 	}
 
