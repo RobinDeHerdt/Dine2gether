@@ -17,6 +17,21 @@ d2gApp.controller("reviewController", function (reviewService, loginService) {
 		vm.selectedGuest = id;
 	}
 
+	vm.sendReview = function()
+	{
+		var author = loginSvc.getUser();
+		var review = { 
+			review 		: vm.reviewinput,
+			author 		: author,
+			guest_id 	: vm.selectedGuest,
+		};
+
+		reviewSvc.postReview(review).then(function(data)
+		{
+			console.log(data);
+		});
+	}
+
 	function _init() {
 		getPastBookings();
 	}

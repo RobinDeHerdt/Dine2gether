@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Booking;
+use App\Review;
 
 class ReviewController extends Controller
 {
@@ -38,13 +39,10 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $review     = new Review;
-        // $author     = Auth::user();
 
-        $review->body            = $request->body;
-
-        // Not sure about this
-        $review->guest_id        = $request->guest_id;
-        // $review->User()->associate($author);
+        $review->body       = $request->review;
+        $review->guest_id   = $request->guest_id;
+        $review->host_id    = $request->author["id"];
 
         $review->save();
     }

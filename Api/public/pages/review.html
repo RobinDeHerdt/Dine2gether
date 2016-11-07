@@ -22,8 +22,8 @@
 			</div>
 		</div>
 		<div class="row">
-			<input type="text"  placeholder="Review">
-           	<a class="btn waves waves-light">Post review</a>
+				<textarea id="textarea1" class="materialize-textarea" placeholder="Review" ng-model="review.reviewinput"></textarea>
+           		<a class="btn waves waves-light" ng-click="review.sendReview()">Post review</a>
 		</div>
 	</div>
 </main>

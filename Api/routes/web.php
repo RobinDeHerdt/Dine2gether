@@ -33,7 +33,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('getUserBookingsFromPast/{id}', 'ReviewController@show');
     Route::post('upload', 'BookingController@upload');
     Route::post('/profile/upload', 'UserController@upload');
-    // Route::post('createbooking', 'BookingController@store');  
+    Route::post('createreview', 'ReviewController@store');  
     Route::get('bookingdetails/{id}', 'BookingController@show'); 
     Route::get('userbookings/{id}', 'BookingController@getUserBookings');
     Route::get('guestbookings/{id}', 'BookingController@getGuestBookings');
