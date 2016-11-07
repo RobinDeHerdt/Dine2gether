@@ -75,3 +75,7 @@ nav {
 	position: fixed;
 	right: 50px;
 }
+
+span.badge {
+	border-radius: 5px !important;
+}
