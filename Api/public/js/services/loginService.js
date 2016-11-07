@@ -60,7 +60,7 @@ d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
 	}
 
 	svc.getUser = function () {
-		return svc.user[0];
+		return svc.user;
 	}
 
 	svc.updateProfile = function (id, data) {
