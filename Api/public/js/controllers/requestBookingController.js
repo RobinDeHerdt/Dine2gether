@@ -1,4 +1,4 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, $stateParams, $location) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, $stateParams, $location, $filter) {
 	
 	var vm = this;
 	var bookingSvc = bookingService;
@@ -12,7 +12,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		if(vm.booking.date) {
 			datetime = vm.booking.date;
 		} else {
-			var datetime = vm.requestdata.date + " " + vm.requestdata.time; + ":00";
+			var datetime = $filter('date')(vm.requestdata.date, "yyyy-MM-dd") + " " + $filter('date')(vm.requestdata.time, "HH:mm:ss");
 		}
 
 		var data = {
