@@ -43,6 +43,11 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'review'     => 'required|max:1024|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'guest_id'   => 'required|numeric|regex:/(^[A-Za-z0-9 -]+$)+/',
+        ]);
+
         $review     = new Review;
 
         $review->body           = $request->review;

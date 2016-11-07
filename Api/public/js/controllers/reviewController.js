@@ -36,7 +36,6 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 		vm.selectedUser = id;
 		vm.name = first_name + " " + last_name;
 
-		// Scroll down
 		$location.hash('reviewtextarea');
       	$anchorScroll();
 	}
@@ -56,6 +55,9 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 			{
 				$location.path('/user/'+vm.selectedUser+'/reviews');
 			}
+		}, function (error) {
+			vm.sendreviewerror = error.data.review[0];
+			console.log(error);
 		});
 	}
 

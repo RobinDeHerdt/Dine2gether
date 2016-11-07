@@ -43,6 +43,9 @@
 				<h1>Write review for {{ review.name }}</h1>
 			</div>
 		</div>
+		<ul class="collection" ng-show="review.sendreviewerror">
+		    <li class="collection-item red lighten-1">{{review.sendreviewerror}}</li>
+		</ul>
 		<div class="row">
 				<a id="reviewtextarea"></a>
 				<textarea id="" class="materialize-textarea" placeholder="Write your review here" ng-model="review.reviewinput"></textarea>
