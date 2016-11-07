@@ -11,8 +11,9 @@
 						</div>
 						<div class="text_container col s7">
 							<h3>{{ booking.title }}</h3>
-							<p>{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }}</p>
 							<p>{{ booking.user.first_name + " " + booking.user.last_name}}</p>
+							<p ng-if="booking.date">{{ overview.convertToDate(booking.date) | date:'dd/MM/y' }} at {{ overview.convertToDate(booking.date) | date:'HH:mm' }} </p>
+							<p>Seats booked: {{booking.guests_booked}}/{{booking.max_guests}}</p>
 							<p>{{ booking.price | currency : "€"}}</p>
 							<a class="btn waves waves-light" href="#" ui-sref="bookingdetails({id: booking.id})">More information</a>
 						</div>

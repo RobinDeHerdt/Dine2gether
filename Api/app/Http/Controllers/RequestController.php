@@ -8,6 +8,19 @@ use App\RequestBooking;
 
 class RequestController extends Controller
 {
+	public function showUnacceptedRequests ($userid) {
+
+		$bookings = User::where("id", $userid)->bookings()->get();
+
+		$request_collection = [];
+		foreach($bookings as $booking) {
+			$requests = RequestBooking::where("booking_id", $booking->id)->where("accepted", false)->get();
+			array_push($request_collection, $requests);
+		}
+
+		return response()->json(["requests" => $request_collection]);
+	}
+	
     public function storeRequest (Request $request) {
 
     	$requestbooking = new RequestBooking;

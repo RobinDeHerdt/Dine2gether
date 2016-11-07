@@ -6,7 +6,7 @@ d2gApp.service('requestService', function ($http) {
 		return $http.post('api/requestbooking', data);
 	}
 
-	svc.getRequests = function () {
-		return $http.get('api/requestbooking');
+	svc.getUnacceptedRequests = function (id) {
+		return $http.get('api/requestunacceptedbookings/'+ id);
 	}
 });
