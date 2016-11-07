@@ -94,11 +94,8 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'first_name'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'last_name'     => 'required|numeric',
-            'email'         => 'required|numeric',
-            'street_nmber'  => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'postalcode'    => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'city'          => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'last_name'     => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'email'         => 'required|email|max:255',
         ]);
 
         $user = User::find($id);
