@@ -1,0 +1,26 @@
+<main>
+	<div class="container under-header profile">
+		<a href="" ng-click="review.goBack()"><h5>Back</h5></a>
+		<h1>Reviews for {{ review.receiver_id }} </h1>
+		
+		<div class="row" ng-show="!review.userreviews.length">
+        <div class="col s12 m12">
+          <div class="card">
+            <div class="card-content">
+              <p >There are no reviews for this person yet.</p>
+            </div>
+          </div>
+        </div>
+      	</div>
+		<div class="row" ng-repeat="review in review.userreviews">
+        <div class="col s12 m12">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">{{review.author_id}}</span>
+              <p>{{ review.body }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+	</div>
+</main>

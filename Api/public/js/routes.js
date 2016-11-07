@@ -47,7 +47,12 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 	})
 	.state("writereview", {
 		url: "/writereview",
-		templateUrl: "pages/review.html",
+		templateUrl: "pages/createreview.html",
+		controller: "reviewController as review"
+	})
+	.state("reviews", {
+		url: "/user/:id/reviews",
+		templateUrl: "pages/showreviews.html",
 		controller: "reviewController as review"
 	})
 });

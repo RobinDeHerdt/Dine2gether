@@ -13,6 +13,17 @@ class ReviewsTableSeeder extends Seeder
     {
         DB::table('reviews')->insert([
             'body' => 'Toffe avond.',
+            'author_id' => 5,
+            'receiver_id' => 1,
+        ]);
+
+        DB::table('reviews')->insert([
+            'body' => 'Toffe avond.',
+            'author_id' => 4,
+            'receiver_id' => 1,
+        ]);
+        DB::table('reviews')->insert([
+            'body' => 'Toffe avond.',
             'author_id' => 1,
             'receiver_id' => 2,
         ]);

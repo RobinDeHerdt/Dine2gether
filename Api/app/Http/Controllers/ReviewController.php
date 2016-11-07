@@ -17,9 +17,11 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return Response::json(Review::get());
+        $reviews = Review::where('receiver_id', $id)->get();
+
+        return response()->json(['reviews' => $reviews]);
     }
 
     /**

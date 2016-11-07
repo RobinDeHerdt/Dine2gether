@@ -1,4 +1,4 @@
-d2gApp.controller("reviewController", function (reviewService, loginService) {
+d2gApp.controller("reviewController", function (reviewService, loginService, $stateParams) {
 	vm = this;
 	var reviewSvc = reviewService;
 	var loginSvc  = loginService;
@@ -17,6 +17,14 @@ d2gApp.controller("reviewController", function (reviewService, loginService) {
 		reviewSvc.getHosts(user.id).then(function(data)
 		{
 			vm.hostbookings = data.data.bookings;
+			console.log(data);
+		});
+	}
+
+	function loadReviews() {
+		reviewSvc.getReviewsByUser($stateParams.id).then(function(data) {
+			vm.userreviews = data.data.reviews;
+			vm.receiver_id = $stateParams.id;
 			console.log(data);
 		});
 	}
@@ -41,9 +49,14 @@ d2gApp.controller("reviewController", function (reviewService, loginService) {
 		});
 	}
 
+	vm.goBack = function() {
+		window.history.back();
+	}
+
 	function _init() {
 		getGuestsInfo();
 		getHostsInfo();
+		loadReviews();
 	}
 
 	_init();

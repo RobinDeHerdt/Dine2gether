@@ -33,6 +33,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::delete('bookings/detach/{id}/user/{userid}','BookingController@detach');
     Route::get('review/guests/{id}', 'ReviewController@getGuests');
     Route::get('review/hosts/{id}', 'ReviewController@getHosts');
+    Route::get('user/{id}/reviews', 'ReviewController@index');
     Route::post('upload', 'BookingController@upload');
     Route::post('/profile/upload', 'UserController@upload');
     Route::post('createreview', 'ReviewController@store');  
