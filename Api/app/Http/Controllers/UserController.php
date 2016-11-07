@@ -92,6 +92,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'first_name'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'last_name'     => 'required|numeric',
+            'email'         => 'required|numeric',
+            'street_nmber'  => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'postalcode'    => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'city'          => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+        ]);
+
         $user = User::find($id);
 
         $user->first_name           = $request->first_name;
@@ -114,7 +123,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user =  Auth::user();
-        $user->delete();
+
     }
 }

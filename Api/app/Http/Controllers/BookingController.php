@@ -42,6 +42,10 @@ class BookingController extends Controller
     }
     public function upload(Request $request)
     {
+        // $this->validate($request, [
+        //     'files'    => 'required|mimes:jpg,jpeg,png,bmp|max:20000',
+        // ]);
+
         $uploadedFiles = $request->all();
         
         $i = 0;
@@ -66,11 +70,11 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'menu_title'         => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            //'date'          => 'required|date|after:tomorrow',
+            'menu_title'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'max_guests'    => 'required|numeric',
             'price'         => 'required|numeric',
-            'address' => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'postal_code'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'address'       => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'postal_code'   => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
             'city'          => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
         ]);
 

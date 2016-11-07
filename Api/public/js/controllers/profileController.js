@@ -56,7 +56,12 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 			city: vm.user.city,
 		};
 		loginSvc.updateProfile(vm.user.id,data).then(function(data) {
-			loginSvc.setUser();
+			if ( data.status == 200)
+			{
+				loginSvc.setUser();
+			}
+		}, function (error) {
+			vm.showerrormessage = true;
 		});
 	}
 
