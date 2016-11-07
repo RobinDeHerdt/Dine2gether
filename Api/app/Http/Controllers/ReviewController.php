@@ -42,9 +42,9 @@ class ReviewController extends Controller
     {
         $review     = new Review;
 
-        $review->body       = $request->review;
-        $review->guest_id   = $request->guest_id;
-        $review->host_id    = $request->author["id"];
+        $review->body           = $request->review;
+        $review->receiver_id    = $request->guest_id;
+        $review->author_id      = $request->author["id"];
 
         $review->save();
     }
