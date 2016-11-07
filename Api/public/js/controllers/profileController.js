@@ -31,6 +31,14 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		});
 	}
 
+	vm.detachFromBooking = function (id, userid) {
+		var user = loginSvc.getUser();
+		bookingSvc.detachBooking(id, user.id).then(function()
+		{
+			getGuestBookings();
+		});
+	}
+
 	vm.saveProfile = function() {
 		var data = {
 			first_name: vm.user.first_name,

@@ -32,4 +32,8 @@ d2gApp.service('bookingService', function($http) {
         return $http.get('api/guestbookings/' +id);
     }  
 
+    svc.detachBooking = function (id, userid) {
+        return $http.delete('api/bookings/detach/' + id + '/user/' + userid);
+    }
+
 });

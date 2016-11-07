@@ -225,6 +225,14 @@ class BookingController extends Controller
         $booking->delete();
     }
 
+    public function detach($id, $userid)
+    {
+        $user = User::find($userid);
+        $user->bookings()->detach($id);
+
+        $user->save();
+    }
+
     public function search(Request $request)
     {
         $location = $request->location;
