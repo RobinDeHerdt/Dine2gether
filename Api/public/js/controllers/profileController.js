@@ -15,6 +15,8 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
+			vm.hostrequests.date = $filter(date)(vm.hostrequests.date_time, "dd/MM/yyyy");
+			vm.hostrequests.time = $filter(date)(vm.hostrequests.date_time, "HH:mm");
 			console.log(data.data);
 		})
 	}
