@@ -35,8 +35,6 @@
 			  <p>Booking: <a href="/#/booking/{{guestrequest.booking.id}}/details"><strong>{{ guestrequest.booking.title}}</strong></a></p>
 			  <p ng-if="hostrequest.date">Date and time: {{ guestrequest.date }} at {{guestrequest.time}}</p>
 			  <p>Guests: {{ guestrequest.number_of_guests}}</p>
-			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.declineRequest(hostrequest.id)"><i class="material-icons right">delete</i>Decline</a>
-			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.acceptRequest(hostrequest.id)"><i class="material-icons right">done</i>Accept</a>
 			</li>
 		  </ul>    
 		</div>        

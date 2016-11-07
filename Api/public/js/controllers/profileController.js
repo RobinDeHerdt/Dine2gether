@@ -39,6 +39,8 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 				text: "Request was accepted. User is booked and will get a notification.",
 				type: "success"
 			})
+
+			getGuestBookings();
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't accept this request. Please try again or contact us if this problem keeps occuring.",
@@ -53,6 +55,7 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 				text: "Request was declined. We'll notificate the user",
 				type: "success"
 			})
+			getGuestBookings();
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't decline this request. Please try again or contact us if this problem keeps occuring.",
