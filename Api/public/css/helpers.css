@@ -69,6 +69,10 @@ h1 {
 	font-family: 'Open Sans', sans-serif !important;
 }
 
+.bold {
+	font-weight: bold;
+}
+
 /* CUSTOM */
 /* 100% width heigth */
 .max-width { width: 100vw !important; }

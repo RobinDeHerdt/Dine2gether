@@ -64,8 +64,8 @@
 			  <p>Booking: {{ hostrequest.booking.title}}</p>
 			  <p>Date and time: {{ hostrequest.date }} at {{hostrequest.time}}</p>
 			  <p>Guests: {{ hostrequest.number_of_guests}}</p>
-			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.deleteBooking(booking.id)"><i class="material-icons right">delete</i>Decline</a>
-			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.deleteBooking(booking.id)"><i class="material-icons right">done</i>Accept</a>
+			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.declineRequest(hostrequest.id)"><i class="material-icons right">delete</i>Decline</a>
+			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.acceptRequest(hostrequest.id)"><i class="material-icons right">done</i>Accept</a>
 			</li>
 		  </ul>    
 		</div>        

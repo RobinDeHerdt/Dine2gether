@@ -42,7 +42,8 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('guestbookings/{id}', 'BookingController@getGuestBookings');
     Route::get('interests', 'InterestController@index');
     Route::post('requestbooking', 'RequestController@storeRequest');
-    Route::get('hostrequestbookings/{id}', 'RequestController@showHostRequests');
+    Route::get('acceptrequest/{id}', 'RequestController@acceptRequest');
+    Route::get('declinerequest/{id}', 'RequestController@declineRequest');
 
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');

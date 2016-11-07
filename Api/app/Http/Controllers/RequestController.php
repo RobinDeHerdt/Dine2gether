@@ -9,24 +9,6 @@ use App\User;
 
 class RequestController extends Controller
 {
-/*	public function showHostRequests ($userid) {
-
-		$user = User::where("id", $userid)->get();
-
-		$request_collection = [];
-		foreach($bookings as $booking) {
-			$requests = RequestBooking::where("booking_id", $booking->id)->get();
-
-			foreach($requests as $request) {
-				$guest = User::where("id", $request->user_id);
-				$request->guest = $guest;
-			}
-
-			array_push($request_collection, $requests);
-		}
-
-		return response()->json(["requests" => $request_collection]);
-	}*/
 	
     public function storeRequest (Request $request) {
 
@@ -39,7 +21,19 @@ class RequestController extends Controller
 
     	$requestbooking->save();
 
+    }
 
+    public function acceptRequest ($id) {
+    	$requestbooking = RequestBooking::where('id', $id)->first();
 
+    	$requestbooking->accepted = true;
+    	$requestbooking->save();
+    }
+
+    public function declineRequest ($id) {
+    	$requestbooking = RequestBooking::where('id', $id)->first();
+
+    	$requestbooking->declined = true;
+    	$requestbooking->save();
     }
 }

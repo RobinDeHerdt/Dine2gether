@@ -18,6 +18,7 @@ class CreateRequestBookingTable extends Migration
             $table->datetime('date_time');
             $table->integer('number_of_guests');
             $table->boolean('acccepted')->default(false);
+            $table->boolean('declined')->default(false);
             $table->timestamps();
 
             $table->integer('user_id')->unsigned();

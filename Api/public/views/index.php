@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/assets/sweetalert2.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Pacifico" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Pacifico" rel="stylesheet">
 </head>
 <body ng-app="d2gApp">
 	<d2g-header></d2g-header>
