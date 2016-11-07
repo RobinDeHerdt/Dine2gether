@@ -67,7 +67,7 @@ class BookingController extends Controller
     {
         $this->validate($request, [
             'menu_title'         => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'date'          => 'required|date|after:tomorrow',
+            //'date'          => 'required|date|after:tomorrow',
             'price'         => 'required|numeric',
             'address' => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
             'postal_code'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',

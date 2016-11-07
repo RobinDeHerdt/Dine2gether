@@ -83,7 +83,6 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 			loadUser();
 			getUserBookings();
 			getGuestBookings();
-			getHostRequests();
 		}
 	}
 	_init();
