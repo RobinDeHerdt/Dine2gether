@@ -289,6 +289,10 @@ class BookingController extends Controller
             $requests = RequestBooking::where("booking_id", $booking->id)->get();
 
             foreach ($requests as $request) {
+                $user = User::where('id', $request->user_id)->first();
+                $booking = Booking::where('id', $request->booking_id)->first();
+                $request->user = $user;
+                $request->booking = $booking;
                 array_push($arr_requests, $request);
             }
 
