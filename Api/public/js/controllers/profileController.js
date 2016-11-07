@@ -1,4 +1,4 @@
-d2gApp.controller("profileController", function (loginService,bookingService, $location, Upload, requestService) {
+d2gApp.controller("profileController", function (loginService,bookingService, $location, $filter, Upload, requestService) {
 	var vm = this;
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
@@ -14,6 +14,9 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 	function getUserBookings () {
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
 			vm.hostbookings = data.data.bookings;
+			vm.hostrequests = data.data.requests;
+			vm.hostrequests.date = $filter(date)(vm.hostrequests.date_time, "dd/MM/yyyy");
+			vm.hostrequests.time = $filter(date)(vm.hostrequests.date_time, "HH:mm");
 			console.log(data.data);
 		})
 	}
