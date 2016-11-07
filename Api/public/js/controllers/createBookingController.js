@@ -44,9 +44,11 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 			{
 				$location.path('/overview');
 			}
-		}, function (error) {
-			console.log(error);
-		});
+			}, function (error) {
+				console.log(error);
+				vm.errors = error.data;
+				console.log(error.data);
+			});
 	} 
 
 	vm.createImageFile = function (files, errFiles, dish_nr) {

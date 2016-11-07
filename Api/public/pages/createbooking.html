@@ -1,6 +1,11 @@
 <main>
 	<div class="container under-header">
 		<div class="row">
+			<ul class="collection" ng-repeat="error in create.errors">
+		      <li class="collection-item">{{error[0]}}</li>
+		    </ul>
+	    </div>
+		<div class="row">
 			<ul>
 				<li ng-show="create.currentPage == 1">
 					<h4>1. General information</h4>
