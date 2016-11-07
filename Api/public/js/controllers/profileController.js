@@ -4,6 +4,8 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
 
+	var shouldHide = false;
+
 	function loadUser () {
 		if(loginSvc.getUser()) {
 			vm.user = loginSvc.getUser();
@@ -15,23 +17,20 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
-			vm.hostrequests.date = $filter(date)(vm.hostrequests.date_time, "dd/MM/yyyy");
-			vm.hostrequests.time = $filter(date)(vm.hostrequests.date_time, "HH:mm");
+			if(vm.hostrequests.date_time) {
+				vm.hostrequests.date = $filter(date)(vm.hostrequests.date_time, "dd/MM/yyyy");
+				vm.hostrequests.time = $filter(date)(vm.hostrequests.date_time, "HH:mm");
+			}
 			console.log(data.data);
 		})
 	}
 
 	function getGuestBookings () {
 		bookingSvc.getGuestBookingsById(vm.user.id).then(function (data) {
-			console.log(data.data.bookings);
+			console.log(data.data);
 			vm.guestbookings = data.data.bookings;
+			vm.guestrequests = data.data.requests;
 		}) 
-	}
-
-	function getHostRequests () {
-		requestSvc.getHostRequests(vm.user.id).then(function (data) {
-			console.log(data);
-		})
 	}
 
 	vm.acceptRequest = function (id) {
@@ -40,6 +39,8 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 				text: "Request was accepted. User is booked and will get a notification.",
 				type: "success"
 			})
+
+			getGuestBookings();
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't accept this request. Please try again or contact us if this problem keeps occuring.",
@@ -54,6 +55,7 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 				text: "Request was declined. We'll notificate the user",
 				type: "success"
 			})
+			getGuestBookings();
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't decline this request. Please try again or contact us if this problem keeps occuring.",
