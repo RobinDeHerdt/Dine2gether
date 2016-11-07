@@ -24,8 +24,9 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 
 	function loadReviews() {
 		reviewSvc.getReviewsByUser($stateParams.id).then(function(data) {
-			vm.reviews  	= data.data.user.receiverreviews;
-			vm.receiver 	= data.data.user;
+			var user = loginSvc.getUser();
+			vm.userid = user['id'];
+			vm.reviews  	= data.data.reviews;
 			console.log(data);
 		});
 	}
@@ -41,6 +42,24 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 	}
 
 	vm.sendReview = function()
+	{
+		var author = loginSvc.getUser();
+		var review = { 
+			review 		: vm.reviewinput,
+			author 		: author,
+			guest_id 	: vm.selectedUser,
+		};
+
+		reviewSvc.postReview(review).then(function(data)
+		{
+			if(data.status == 200)
+			{
+				$location.path('/user/'+vm.selectedUser+'/reviews');
+			}
+		});
+	}
+
+	vm.deleteReview = function()
 	{
 		var author = loginSvc.getUser();
 		var review = { 

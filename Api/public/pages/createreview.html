@@ -3,21 +3,23 @@
 		<h1>Write a review</h1>
 		<br>
 		<h5>Recent guests</h5>
-		<div class="row" ng-repeat="guestbooking in review.guestbookings">
-	        <div class="col s12 m3" ng-repeat="guest in guestbooking.users">
-	          <div class="card">
-	            <div class="card-image">
-	              <img ng-src="{{guest.image}}">
-	              <span class="card-title">{{ guest.first_name + " " + guest.last_name }}</span>
-	            </div>
-	            <div class="card-content">
-					<strong>{{ guestbooking.title }}</strong>
-	            </div>
-	            <div class="card-action">
-	              <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
-	            </div>
-	          </div>
-	        </div>
+		<div class="row">
+			<div ng-repeat="guestbooking in review.guestbookings">
+		        <div class="col s12 m3" ng-repeat="guest in guestbooking.users">
+		          <div class="card">
+		            <div class="card-image">
+		              <img ng-src="{{guest.image}}">
+		              <span class="card-title">{{ guest.first_name + " " + guest.last_name }}</span>
+		            </div>
+		            <div class="card-content">
+						<strong>{{ guestbooking.title }}</strong>
+		            </div>
+		            <div class="card-action">
+		              <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
+		            </div>
+		          </div>
+		        </div>
+		     </div>
 	     </div>
 	     <h5>Recent hosts</h5>
 	     <div class="row">

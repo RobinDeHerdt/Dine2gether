@@ -38,13 +38,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Booking', 'host_id');
     }
 
-    public function authorreviews()
+    public function reviews()
     {
         return $this->hasMany('App\Review', 'author_id');
-    }
-
-    public function receiverreviews()
-    {
-        return $this->hasMany('App\Review', 'receiver_id');
     }
 }

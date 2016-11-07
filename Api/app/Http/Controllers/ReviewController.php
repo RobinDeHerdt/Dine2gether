@@ -18,9 +18,11 @@ class ReviewController extends Controller
      */
     public function index($id)
     {
-        $receiver   = User::with('receiverreviews')->where('id',$id)->first();
+        // $receiver   = User::with('receiverreviews')->where('id',$id)->first();
 
-        return response()->json(['user' => $receiver]);
+        $reviews = Review::where('receiver_id', $id)->with('user')->get();
+
+        return response()->json(['reviews' => $reviews]);
     }
 
     /**

@@ -17,4 +17,9 @@ d2gApp.service('reviewService', function ($http) {
 	svc.getReviewsByUser = function(id) {
 		return $http.get('api/user/' + id + '/reviews');
 	}
+
+	// getReviews = function(id)
+	// {
+	// 	return $http.get('api/user')
+	// }
 });
