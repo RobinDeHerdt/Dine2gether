@@ -12,9 +12,16 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 	
 	function getUserBookings () {
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
-			vm.bookings = data.data.bookings;
+			vm.hostbookings = data.data.bookings;
 			console.log(data.data.bookings);
 		})
+	}
+
+	function getGuestBookings () {
+		bookingSvc.getGuestBookingsById(vm.user.id).then(function (data) {
+			console.log(data.data.bookings);
+			vm.guestbookings = data.data.bookings;
+		}) 
 	}
 
 	vm.deleteBooking = function (id) {
@@ -60,6 +67,7 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		} else {
 			loadUser();
 			getUserBookings();
+			getGuestBookings();
 		}
 	}
 	_init();
