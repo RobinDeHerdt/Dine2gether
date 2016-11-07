@@ -153,7 +153,7 @@ class BookingController extends Controller
         $dishes = Dish::where('booking_id', $booking->id)->get();
         $kitchenstyles = $booking->kitchenstyles()->get();
         // put interests in $user
-        $user->interests = $interests;
+        
 
         foreach ($dishes as $dish) { // get dish images by dish for this booking
             $dish_images = Dish_image::where('dish_id', $dish->id)->get();
@@ -162,9 +162,10 @@ class BookingController extends Controller
             array_push($dishesarray, $dish);
         }
         // put user(s), kitchenstyle(s) and dishesarray in $booking
-        $booking->user = $user;
+        $booking->user          = $user;
         $booking->kitchenstyles = $kitchenstyles;
-        $booking->dishes = $dishesarray;
+        $booking->dishes        = $dishesarray;
+        $booking->interests     = $interests;
 
         return response()->json(["booking" => $booking]);
     }
