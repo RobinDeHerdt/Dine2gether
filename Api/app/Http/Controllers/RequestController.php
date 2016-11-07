@@ -20,7 +20,8 @@ class RequestController extends Controller
     	$requestbooking->user_id = $request->user_id;
 
     	$requestbooking->save();
-
+        
+        return response()->json(["status"=>"succes"]);
     }
 
     public function acceptRequest ($id) {
@@ -28,6 +29,10 @@ class RequestController extends Controller
 
     	$requestbooking->accepted = true;
     	$requestbooking->save();
+
+        DB::table('booking_user')->insert(["user_id" => $requestbooking->user_id, "booking_id" => $requestbooking->booking_id]);
+
+        return response()->json(["status"=>"succes"]);
     }
 
     public function declineRequest ($id) {
@@ -35,6 +40,8 @@ class RequestController extends Controller
 
     	$requestbooking->declined = true;
     	$requestbooking->save();
+
+        return response()->json(["status"=>"succes"]);
     }
 
     public function deleteRequest ($id) {
