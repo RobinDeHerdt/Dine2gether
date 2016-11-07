@@ -12,6 +12,7 @@ use App\Dish;
 use App\Dish_Image;
 use App\Interest;
 use App\Kitchenstyle;
+use App\RequestBooking;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 
@@ -284,13 +285,23 @@ class BookingController extends Controller
     {
         $bookings = Booking::where('host_id', $id)->get();
 
+        foreach($bookings as $booking) {
+            $requests = RequestBooking::where("booking_id", $booking->id)->get();
+
+            $booking->requests = $requests;
+        }
+
         return response()->json(['bookings' => $bookings]);
+
     }
 
     public function getGuestBookings($id) {
         $user = User::where('id', $id)->first();
         $booking_arr = [];
         foreach($user->bookings as $booking) {
+            $requests = RequestBooking::where("booking_id", $booking->id)->get();
+
+            $booking->requests = $requests;
             array_push($booking_arr, $booking);
         }
         

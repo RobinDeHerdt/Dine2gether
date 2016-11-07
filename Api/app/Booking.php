@@ -13,7 +13,7 @@ class Booking extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User', 'booking_user', 'guest_id', 'booking_id');
     }
 
     public function user()

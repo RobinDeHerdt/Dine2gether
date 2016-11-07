@@ -1,7 +1,8 @@
-d2gApp.controller("profileController", function (loginService,bookingService, $location, Upload) {
+d2gApp.controller("profileController", function (loginService,bookingService, $location, Upload, requestService) {
 	var vm = this;
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
+	var requestSvc = requestService;
 
 	function loadUser () {
 		if(loginSvc.getUser()) {
@@ -22,6 +23,12 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 			console.log(data.data.bookings);
 			vm.guestbookings = data.data.bookings;
 		}) 
+	}
+
+	function getHostRequests () {
+		requestSvc.getHostRequests(vm.user.id).then(function (data) {
+			console.log(data);
+		})
 	}
 
 	vm.deleteBooking = function (id) {
@@ -76,6 +83,7 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 			loadUser();
 			getUserBookings();
 			getGuestBookings();
+			getHostRequests();
 		}
 	}
 	_init();
