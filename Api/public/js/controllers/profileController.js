@@ -14,7 +14,7 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 	function getUserBookings () {
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
 			vm.hostbookings = data.data.bookings;
-			console.log(data.data.bookings);
+			console.log(data.data);
 		})
 	}
 

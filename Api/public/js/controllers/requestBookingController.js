@@ -1,4 +1,4 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, loginService $stateParams, $location, $filter) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, loginService, $stateParams, $location, $filter) {
 	
 	var vm = this;
 	var bookingSvc = bookingService;
@@ -84,7 +84,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				type: "error"
 			}).then(function () {
 				$location.path("/");
-			}, then(function () {
+			}, function () {
 				$location.path("/");
 			});
 		}
