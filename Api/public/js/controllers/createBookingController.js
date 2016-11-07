@@ -24,6 +24,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	}
 	vm.createBooking = function () {
 		var user = loginSvc.getUser();
+		console.log(user.id);
 		var data = {
 			user_id: user.id,
 			menu_title: vm.menu_title,

@@ -84,6 +84,7 @@ class BookingController extends Controller
         $booking->postalcode    = $request->postal_code;
         $booking->city          = $request->city;
         $booking->host_id       = $request->user_id;
+        $booking->max_guests    = $request->max_nr_guests;
 
         $booking->save();
 
