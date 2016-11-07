@@ -1,9 +1,11 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, $stateParams, $location, $filter) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, loginService $stateParams, $location, $filter) {
 	
 	var vm = this;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
+	var loginSvc = loginService;
 
+	vm.user = loginSvc.getUser();
 	vm.booking = {};
 
 	vm.sendRequest = function () {
@@ -74,7 +76,18 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		return [newdate, time];
 	}
 	function _init() {
-		loadBookingById();
+		if(vm.user) {
+			loadBookingById();
+		} else {
+			swal({
+				text: "You need to be logged in to request a meal",
+				type: "error"
+			}).then(function () {
+				$location.path("/");
+			}, then(function () {
+				$location.path("/");
+			});
+		}
 	}
 
 	_init();
