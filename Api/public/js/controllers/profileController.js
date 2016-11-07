@@ -1,4 +1,4 @@
-d2gApp.controller("profileController", function (loginService,bookingService, $location, $filter, Upload, requestService) {
+d2gApp.controller("profileController", function (loginService, bookingService, requestService, $http, $location, $filter, Upload) {
 	var vm = this;
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
@@ -33,14 +33,21 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		}) 
 	}
 
-	vm.acceptRequest = function (id) {
-		requestSvc.acceptRequest(id).then(function () {
-			swal({
-				text: "Request was accepted. User is booked and will get a notification.",
-				type: "success"
-			})
+	vm.acceptRequest = function (requestid, userid) {
+		requestSvc.acceptRequest(requestid).then(function () {
+			var data = {
+				user_id: userid,
+				host_id: vm.user.id
+			}
+			$http.post("sendconfirmationmails", data).then( function () {
+				swal({
+					text: "Request was accepted. User is booked and will get a notification.",
+					type: "success"
+				})
+				getGuestBookings();
 
-			getGuestBookings();
+			});
+
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't accept this request. Please try again or contact us if this problem keeps occuring.",
@@ -55,7 +62,7 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 				text: "Request was declined. We'll notificate the user",
 				type: "success"
 			})
-			getGuestBookings();
+			getUserBookings();
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't decline this request. Please try again or contact us if this problem keeps occuring.",

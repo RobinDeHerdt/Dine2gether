@@ -30,7 +30,7 @@ class ActivationService
 
         $this->mailer->send('mails.activationmail',['username' => $user->first_name, 'link' => $link], function 
             (Message $m) use ($user) {
-                $m->to($user->email)->from("info@d2g.be")->subject('Welcome to Dine2gether!');
+                $m->to($user->email)->from("info@d2g.com")->subject('Welcome to Dine2gether!');
 
         });
         /*$this->mailer->raw($message, function (Message $m) use ($user) {

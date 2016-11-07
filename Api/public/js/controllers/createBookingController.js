@@ -65,8 +65,11 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 					var response_arr = response.data.filenaam;
 					var imgs_arr = [];
 					var arr_nr = vm.dishes.length - 1;
-					for(var i=0; i<response_arr.length; i++) {
-						imgs_arr.push(response_arr[i]);
+					if(response_arr.length > 0)
+					{
+						for(var i=0; i<response_arr.length; i++) {
+							imgs_arr.push(response_arr[i]);
+						}
 					}
 					console.log(imgs_arr);
 
