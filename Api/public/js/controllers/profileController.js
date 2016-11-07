@@ -71,6 +71,22 @@ d2gApp.controller("profileController", function (loginService,bookingService, $l
 		});
 	}
 
+	vm.deleteUserRequest = function (id) {
+		requestSvc.deleteRequest(id).then(function () {
+			swal({
+				title: "Request deleted",
+				type: "success"
+			});
+			getGuestBookings();
+		}, function () {
+			swal({
+				title: "Couldn't delete request",
+				text: "We couldn't delete your request. Try again later or contact us if this problem keeps occuring",
+				type: "error"
+			})
+		});
+	}
+
 	vm.detachFromBooking = function (id, userid) {
 		var user = loginSvc.getUser();
 		bookingSvc.detachBooking(id, user.id).then(function()

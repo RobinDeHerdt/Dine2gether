@@ -45,6 +45,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('requestbooking', 'RequestController@storeRequest');
     Route::get('acceptrequest/{id}', 'RequestController@acceptRequest');
     Route::get('declinerequest/{id}', 'RequestController@declineRequest');
+    Route::get('deleterequest/{id}', 'RequestController@deleteRequest');
 
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');

@@ -36,4 +36,11 @@ class RequestController extends Controller
     	$requestbooking->declined = true;
     	$requestbooking->save();
     }
+
+    public function deleteRequest ($id) {
+
+        $requestbooking = RequestBooking::where('id', $id)->delete();
+
+        return response()->json(["status" => "success"]);
+    }
 }

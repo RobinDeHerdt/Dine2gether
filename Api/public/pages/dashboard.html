@@ -38,6 +38,7 @@
 			  <span class="title">Booking by: <a href="/#/user/{{guestrequest.host.host_id}}/reviews"><strong>{{guestrequest.host.first_name + " " + guestrequest.host.last_name}}</strong></a></span>
 			  <p ng-if="hostrequest.date">Date and time: {{ guestrequest.date }} at {{guestrequest.time}}</p>
 			  <p>Guests: {{ guestrequest.number_of_guests}}</p>
+			  <a href="" class="secondary-content" ng-click="profile.deleteUserRequest(guestrequest.id)"><i class="material-icons">delete_forever</i></a>
 			</li>
 		  </ul>    
 		</div>        

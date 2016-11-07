@@ -14,4 +14,8 @@ d2gApp.service('requestService', function ($http) {
 		return $http.get('api/declinerequest/' + id);
 	}
 
+	svc.deleteRequest = function(id) {
+		return $http.get('api/deleterequest/' + id);
+	}
+
 });
