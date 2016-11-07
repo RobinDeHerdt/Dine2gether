@@ -21,7 +21,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			datetime: datetime,
 			number_of_guests: vm.requestdata.nr_of_guests,
 			booking_id: vm.booking.id,
-			user_id: vm.booking.user.id
+			user_id: vm.user.id
 		};
 
 		console.log(data);

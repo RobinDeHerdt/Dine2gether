@@ -290,7 +290,7 @@ class BookingController extends Controller
         $bookings = Booking::where('host_id', $id)->get();
         $arr_requests = [];
         foreach($bookings as $booking) {
-            $requests = RequestBooking::where("booking_id", $booking->id)->get();
+            $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();
 
             foreach ($requests as $request) {
                 $user = User::where('id', $request->user_id)->first();
