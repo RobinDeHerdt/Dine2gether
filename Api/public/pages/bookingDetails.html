@@ -19,20 +19,27 @@
  							<h5>{{bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name}}</h5>
  							<h5>{{ bookingdetails.currentBooking.city }}</h5>
  							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
- 							<h5>Interests:</h5>
- 							<div ng-repeat="interest in bookingdetails.currentBooking.interests">
- 								<ul>
- 									<li>{{ interest.interest}}</li>
-  								</ul>
-  							</div>
-  							<h5>Kitchenstyles:</h5>
- 
- 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
-  								<ul>
-  									<li>{{ style.style}}</li>
-  								</ul>
- 							</div>
+ 							
  							<a href="#"><h5>Reviews about this user</h5></a>
+ 						</div>
+ 						<div class="col s12 m4">
+ 							<h5>Interests:</h5>
+
+ 							<ul class="collection">
+ 								<li ng-if="!bookingdetails.currentBooking.interests.length" class="collection-item">No interests added</li>
+	 							<div ng-repeat="interest in bookingdetails.currentBooking.interests">
+	 								
+								    <li class="collection-item">{{ interest.interest}}</li>
+	  							</div>
+  							</ul>
+  							<h5>Kitchenstyles:</h5>
+ 							
+ 							<ul class="collection">
+ 								<li ng-if="!bookingdetails.currentBooking.kitchenstyles.length">No style added</li>
+	 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
+  									<li class="collection-item">{{ style.style}}</li>
+	 							</div>
+ 							</ul>
  						</div>
  					</div>
  				</div>

@@ -57,7 +57,7 @@
               <div ng-repeat="booking in profile.bookings">
               <ul class="collection">
                 <li class="collection-item">
-                  <span class="title"><strong>{{booking.title}}</strong></span>
+                  <span class="title"><a href="/#/booking/{{booking.id}}/details"><strong>{{booking.title}}</strong></a></span>
                   <p>{{ booking.postalcode + " " + booking.city}}</p>
                     <p>{{ booking.street_number}}</p>
                      <p>{{ booking.max_guests + " people | €" + booking.price + "/person"}}</p>
