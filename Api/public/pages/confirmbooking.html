@@ -1,0 +1,61 @@
+<main>
+	<div class="container">
+		<div class="row">
+			<div class="col s12">
+				<h1>{{booking.title}}</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="divider"></div>
+			<form>
+				<input type="number">
+				<input type="date">
+				<input type="number">
+			</form>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<p>Date:</p>
+			</div>
+			<div class="col s10">
+				{{booking.date}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<p>Guests:</p>
+			</div>
+			<div class="col s10">
+				{{booking.guests}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<p>Subtotal:</p>
+			</div>
+			<div class="col s10">
+				{{booking.date}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<p>Service fee/guest:</p>
+			</div>
+			<div class="col s10">
+				<p>{{5 | currency}}</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col s2">
+				<p>Total:</p>
+			</div>
+			<div class="col s10">
+				{{booking.date}}
+			</div>
+		</div>
+		<div class="divider">
+			<a href="" class="btn">Book this delicious meal</a>
+		</div>
+
+		
+</main>

@@ -35,6 +35,11 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 		templateUrl: "pages/requestbooking.html",
 		controller: "requestBookingController as request"
 	})
+	.state("booknow", {
+		url: "/booknow/:id",
+		templateUrl: "pages/confirmbooking.html",
+		controller: "ConfirmBookingController as confirmbooking"
+	})
 	.state("create_booking", {
 		url: "/create_booking",
 		templateUrl: "pages/createbooking.html",
