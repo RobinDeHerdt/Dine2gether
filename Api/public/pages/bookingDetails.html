@@ -62,7 +62,10 @@
  					</div>
  				</div>
  			</div>
- 			<a ui-sref="requestbooking({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Send request</a>
+ 			<a ng-class="bookingdetails.request == 'pending' ? 'disabled' : ''" ng-hide="bookingdetails.request == 'accepted'" ui-sref="requestbooking({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Send request</a>
+ 			<p ng-if="bookingdetails.request == 'pending'">*You already sent a request. Please wait until the host has responded.</p>
+ 			<a ng-if="bookingdetails.request == 'accepted'" ui-sref="booknow({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Book now</a>
+
  		
  
  	</div>

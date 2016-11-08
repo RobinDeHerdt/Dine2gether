@@ -619,7 +619,7 @@
                             <h1 style="text-align: center;">Hey {{$username}},</h1>
 
 <div style="text-align: center;"><br>
-We are really happy to tell you that {{$hostname}} seems to like you and would love to have you over for a delicious meal. If you're not certain yet, you can take another look at the booking <a href="{{$link_bookingdetails}}" target="_blank">here</a>, Or you can book right now.</div>
+We are really happy to tell you that {{$hostname}} seems to like you and would love to have you over for a delicious meal. <br/> If you're not certain yet, you can take another look at the booking <a href="{{$link_bookingdetails}}" target="_blank">here</a>, Or you can book right now.</div>
 <br>
 &nbsp;
                         </td>

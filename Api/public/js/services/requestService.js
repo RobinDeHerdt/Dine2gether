@@ -18,4 +18,8 @@ d2gApp.service('requestService', function ($http) {
 		return $http.get('api/deleterequest/' + id);
 	}
 
+	svc.checkIfHasRequest = function (data) {
+		return $http.post('api/hasrequest', data);
+	}
+
 });

@@ -48,4 +48,16 @@ class RequestController extends Controller
 
         return response()->json(["status" => "success"]);
     }
+
+    public function checkIfRequest (Request $request) {
+
+        $user_request = RequestBooking::where('user_id', $request->user_id)->where("booking_id", $request->booking_id)->first();
+
+        $response = "none";
+        if($user_request) {
+            $response = $user_request;
+        }
+
+        return response()->json(["request" => $response]);
+    }
 }
