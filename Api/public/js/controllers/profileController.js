@@ -33,18 +33,19 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 		}) 
 	}
 
-	vm.acceptRequest = function (requestid, userid) {
+	vm.acceptRequest = function (requestid, userid, bookingid) {
 		requestSvc.acceptRequest(requestid).then(function () {
 			var data = {
 				user_id: userid,
-				host_id: vm.user.id
+				host_id: vm.user.id,
+				booking_id: bookingid
 			}
-			$http.post("sendconfirmationmails", data).then( function () {
+			$http.post("api/sendconfirmationrequestmail", data).then( function () {
 				swal({
 					text: "Request was accepted. User is booked and will get a notification.",
 					type: "success"
 				})
-				getGuestBookings();
+				getUserBookings();
 
 			});
 

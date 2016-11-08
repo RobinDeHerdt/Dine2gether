@@ -61,7 +61,12 @@ nav {
 .branding p {
 	font-size: 20px;
 }
-#createbookingpagination li { cursor: pointer; }
+
+#createbookingpagination li {cursor: pointer; }
+
+#createbookingpagination li.active { 
+	background-color: #00C77C !important;
+}
 
 .overview .img_container {
 	width: 100%;

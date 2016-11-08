@@ -6,10 +6,10 @@
 		    </ul>
 	    </div>
 		<div class="row">
+			<form class="col s12" action="/api/createbooking" method="POST" enctype="multipart/form-data">
 			<ul>
 				<li ng-show="create.currentPage == 1">
 					<h4>1. General information</h4>
-					<form class="col s12" action="/api/createbooking" method="POST" enctype="multipart/form-data">
 						<div class="row">
 							<div class="input-field col s6">
 								<input ng-model="create.menu_title"  name="title" type="text" class="validate" required>
@@ -118,13 +118,13 @@
 						</div>
 					</div>
 					<ul id="createbookingpagination" class="pagination">
-						<li ng-click="create.currentPage = create.currentPage - 1" ng-class="create.currentPage == 1 ? 'disabled': 'waves-effect'"><a href="#!">&laquo;</a></li>
-						<li ng-click="create.currentPage = 1" ng-class="create.currentPage == 1 ? 'active' : waves-effect"><a>1</a></li>
-						<li ng-click="create.currentPage = 2" ng-class="create.currentPage == 2 ? 'active' : waves-effect"><a>2</a></li>
-						<li ng-click="create.currentPage = 3" ng-class="create.currentPage == 3 ? 'active' : waves-effect"><a>3</a></li>
-						<li ng-click="create.currentPage = 4" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
-						<li ng-click="create.currentPage = 5" ng-class="create.currentPage == 5 ? 'active' : waves-effect"><a>5</a></li>
-						<li ng-class="create.currentPage == 5 ? 'disabled' : waves-effect" ng-click="create.currentPage = create.currentPage + 1"><a> &raquo; </a></li>
+						<li tabindex="0" ng-click="create.currentPage = create.currentPage - 1" ng-class="create.currentPage == 1 ? 'disabled': 'waves-effect'"><a>&laquo;</a></li>
+						<li tabindex="0" ng-click="create.currentPage = 1" ng-class="create.currentPage == 1 ? 'active' : waves-effect"><a>1</a></li>
+						<li tabindex="0" ng-click="create.currentPage = 2" ng-class="create.currentPage == 2 ? 'active' : waves-effect"><a>2</a></li>
+						<li tabindex="0" ng-click="create.currentPage = 3" ng-class="create.currentPage == 3 ? 'active' : waves-effect"><a>3</a></li>
+						<li tabindex="0" ng-click="create.currentPage = 4" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
+						<li tabindex="0" ng-click="create.currentPage = 5" ng-class="create.currentPage == 5 ? 'active' : waves-effect"><a>5</a></li>
+						<li tabindex="0" ng-class="create.currentPage == 5 ? 'disabled' : waves-effect" ng-click="create.currentPage = create.currentPage + 1"><a> &raquo; </a></li>
 					</ul>
 				</form>
 			</div>

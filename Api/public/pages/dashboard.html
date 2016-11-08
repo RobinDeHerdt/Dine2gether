@@ -15,7 +15,7 @@
 			  <p ng-if="hostrequest.date">Date and time: {{ hostrequest.date }} at {{hostrequest.time}}</p>
 			  <p>Guests: {{ hostrequest.number_of_guests}}</p>
 			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.declineRequest(hostrequest.id)"><i class="material-icons right">delete</i>Decline</a>
-			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.acceptRequest(hostrequest.id, hostrequest.user.id)"><i class="material-icons right">done</i>Accept</a>
+			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.acceptRequest(hostrequest.id, hostrequest.user.id, hostrequest.booking.id)"><i class="material-icons right">done</i>Accept</a>
 			</li>
 		  </ul>    
 		</div>        
@@ -31,7 +31,7 @@
 		<div ng-repeat="guestrequest in profile.guestrequests">
 		  <ul class="collection">
 			<li class="collection-item">
-			  <span ng-if="!guestrequest.accepted == 0 && !guestrequest.declined == 0" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
+			  <span ng-if="guestrequest.accepted == 0 && guestrequest.declined == 0" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
 			  <span ng-if="guestrequest.accepted == 1" class="badge green darken-1 white-text" data-badge-caption="Accepted"></span>
 			  <span ng-if="guestrequest.declined == 1" class="badge red darken-1 white-text" data-badge-caption="Declined"></span>
 			  <p>Booking: <a href="/#/booking/{{guestrequest.booking.id}}/details"><strong>{{ guestrequest.booking.title}}</strong></a></p>
@@ -39,6 +39,7 @@
 			  <p ng-if="hostrequest.date">Date and time: {{ guestrequest.date }} at {{guestrequest.time}}</p>
 			  <p>Guests: {{ guestrequest.number_of_guests}}</p>
 			  <a href="" class="secondary-content" ng-click="profile.deleteUserRequest(guestrequest.id)"><i class="material-icons">delete_forever</i></a>
+			  <a ng-if="guestrequest.accepted == 1" href="" class="btn" ui-sref="confirmbooking">Book now!</a>
 			</li>
 		  </ul>    
 		</div>        

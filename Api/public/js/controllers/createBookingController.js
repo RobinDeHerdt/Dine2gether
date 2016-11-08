@@ -23,6 +23,14 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 		vm.dishes.pop();
 	}
 	vm.createBooking = function () {
+		for(i=0; i < vm.dishes.length; i++) {
+			if(vm.dishes[i].img) {
+				console.log(vm.dishes[i]);
+			} else {
+				console.log(vm.dishes[i]);
+				return false;
+			}
+		}
 		var user = loginSvc.getUser();
 		console.log(user.id);
 		var data = {
