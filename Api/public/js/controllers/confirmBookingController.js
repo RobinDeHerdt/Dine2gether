@@ -1,4 +1,4 @@
-d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams, $location) {
+d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams, $location, $filter) {
 
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
@@ -16,6 +16,16 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 			vm.booking = data.data.booking;
 
 			if(vm.booking) {
+				if(vm.booking.host_id == vm.user.id) {
+					swal({
+						title: "You can't book your own meal...",
+						type: "error";
+					}).then(function () {
+						window.location.href = "#/dashboard"
+					}, function () {
+						window.location.href = "#/dashboard"
+					})
+				}
 				vm.booking.availableseats = vm.booking.max_guests - vm.booking.guests_booked;
 				vm.booking.newprice = vm.booking.price;
 				vm.booking.fee = 5;
@@ -47,6 +57,9 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 				var filteredDate = splitDateTime(vm.request.date_time);
 				vm.request.date = filteredDate[0];
 				vm.request.time = filteredDate[1];
+
+				vm.datetime = $filter('date')(vm.request.date_time, "yyyy-MM-dd");
+				console.log(vm.datetime);
 				}
 		})
 	}
@@ -65,11 +78,18 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 	function checkForErrors () {
 		var cardnumber = vm.card.toString();
 		var cvv = vm.cvv.toString();
+		var today = new Date();
+
 		if(cardnumber.length !== 16 || vm.card == undefined) {
 			vm.showcarderror = true;
 			console.log("showcarderror");
 		} else {
 			vm.showcarderror = false;
+		}
+		if(vm.expirationdate < today) {
+			vm.showexpirationerror = true;
+		} else {
+			vm.expirationerror = false;
 		}
 		if(cvv.length < 3 || cvv.length > 4 || vm.cvv == undefined ) {
 			vm.showcvverror = true;
@@ -83,7 +103,7 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 			vm.showguesterror = false;
 		}
 
-		if(vm.selected_guests && cardnumber == 16 && cvv >= 3 && cvv <= 4 ) {
+		if(vm.selected_guests && cardnumber.length == 16 && cvv.length >= 3 && cvv.length <= 4 && vm.expirationdate > today ) {
 			console.log("no errors");
 			return false;
 		}
@@ -103,15 +123,14 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 	}
 
 	vm.confirmBooking = function () {
-		console.log(vm.card);
-		console.log(vm.cvv);
-
+		
 		var hasErrors = checkForErrors();
 		if(!hasErrors) {
 			var data = {
 				user_id: vm.user.id,
 				booking_id: booking_id,
-				nr_guests: vm.selected_guests
+				nr_guests: vm.selected_guests,
+				booking_date: vm.datetime
 			}
 			bookingSvc.createUserBooking(data).then(function (data) {
 				swal({
@@ -119,9 +138,9 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 					text: "You booked this meal. We hope you'll enjoy it!",
 					type: "success"
 				}).then(function () {
-					$location.path("/dashboard");
+					window.location.href("#/dashboard");
 				}, function () {
-					$location.path("/dashboard");
+					window.location.href("#/dashboard");
 				})
 			});
 		} 

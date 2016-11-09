@@ -333,10 +333,14 @@ class BookingController extends Controller
             );
 
         $booking = Booking::where('id', $request->booking_id)->first();
+        if($booking->date == null) 
+        {
+            $booking->date = $request->booking_date;
+        } 
 
         $new_nr_guests = $booking->guests_booked + $request->nr_guests;
         $booking->guests_booked =  $new_nr_guests;
-        $booking->save()
+        $booking->save();
 
         return response()->json(["status" => "success"]);
     }

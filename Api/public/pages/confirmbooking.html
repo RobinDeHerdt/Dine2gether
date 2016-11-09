@@ -14,7 +14,8 @@
 						<p ng-show="confirmbooking.showcarderror" class="red-text">Please enter a 16 digit number</p>
 						<input ng-model="confirmbooking.card" class="mar-btm-m" id="credit_card_nr" placeholder="•••• •••• •••• ••••" type="number">
 						<label class="mar-btm-m mar-top-m" for="expiration_date">Expiration Date</label><br/>
-						<input class="mar-btm-m mar-top-m" id="expiration_date" placeholder="MM/YY" type="month"> <br/>
+						<p ng-show="confirmbooking.showexpirationerror" class="red-text">Your card is expired!</p>
+						<input ng-model="confirmbooking.expirationdate" class="mar-btm-m mar-top-m" id="expiration_date" placeholder="MM/YY" type="month"> <br/>
 						<p ng-show="confirmbooking.showcvverror" class="red-text">Please enter a 3 or 4 digit number</p>
 						<label class="mar-top-m" for="cvv">CVV</label>
 						<input ng-model="confirmbooking.cvv" class="mar-btm-m" id="cvv" placeholder="•••(•)" type="number">
