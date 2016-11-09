@@ -16,7 +16,6 @@ class BookingsTableSeeder extends Seeder
     {
         DB::table('bookings')->insert([
             'title' => 'Home cooked vegan meal',
-        	'date' => '2016/12/14 19:00:00',
             'max_guests' => 5,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Vlinderstraat 10',
@@ -28,7 +27,6 @@ class BookingsTableSeeder extends Seeder
 
         DB::table('bookings')->insert([
             'title' => 'Vegan meal',
-        	'date' => '2016/12/14 17:30:00',
             'max_guests' => 10,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Liersesteenweg 201A',
@@ -40,7 +38,6 @@ class BookingsTableSeeder extends Seeder
 
         DB::table('bookings')->insert([
             'title' => 'Italian home cooking',
-        	'date' => '2016/12/14 18:00:00',
             'max_guests' => 4,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Boekenstraat 180',
@@ -52,8 +49,6 @@ class BookingsTableSeeder extends Seeder
 
         DB::table('bookings')->insert([
             'title' => 'Sexy salsas',
-        	'date' => '2016/12/14 16:30:00',
-            'telephone_number' => '012/34.56.78',
             'max_guests' => 3,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Landweg 1',
