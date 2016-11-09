@@ -7,11 +7,6 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 
 	vm.bookings = {};
 
-	vm.convertToDate = function (dateString) {
-		var convertedString = new Date(dateString);
-		return convertedString;
-	}
-
 	vm.showFilteredInterests = function () {
 		var interestsarray = getInterestsFilter();
 		return function (booking) {
