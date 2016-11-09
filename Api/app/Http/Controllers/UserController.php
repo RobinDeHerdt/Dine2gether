@@ -22,9 +22,11 @@ class UserController extends Controller
         $this->middleware('jwt.auth', ['except' => ['create']]);
     }
 
-    public function index()
+    public function index($id)
     {
-        return Response::json(User::get());
+        $user = User::find($id);
+
+        return Response::json($user);
     }
 
     public function upload(Request $request)

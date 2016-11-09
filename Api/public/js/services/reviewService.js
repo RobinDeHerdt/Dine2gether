@@ -18,6 +18,10 @@ d2gApp.service('reviewService', function ($http) {
 		return $http.get('api/user/' + id + '/reviews');
 	}
 
+	svc.getUserInfo = function(id) {
+		return $http.get('api/user/'+id);
+	}
+
 	svc.deleteReviews = function(id) {
 		return $http.delete('api/review/' + id);
 	}
