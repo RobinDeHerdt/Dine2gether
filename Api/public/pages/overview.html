@@ -13,11 +13,10 @@
 							<h3>{{ booking.title }}</h3>
 							<p>{{ booking.user.first_name + " " + booking.user.last_name}}</p>
 							<p>Seats booked: {{booking.guests_booked}}/{{booking.max_guests}}</p>
-							<p>{{ booking.price | currency : "€"}}</p>
+							<p>{{ booking.price | currency : "€"}}/person</p>
 							<a class="btn waves waves-light" href="#" ui-sref="bookingdetails({id: booking.id})">More information</a>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 			<div id="filterwrapper">
