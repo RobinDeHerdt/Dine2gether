@@ -21,9 +21,9 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 						title: "You can't book your own meal...",
 						type: "error";
 					}).then(function () {
-						window.location.href = "#/dashboard"
+						window.location.href = "#/dashboard";
 					}, function () {
-						window.location.href = "#/dashboard"
+						window.location.href = "#/dashboard";
 					})
 				}
 				vm.booking.availableseats = vm.booking.max_guests - vm.booking.guests_booked;

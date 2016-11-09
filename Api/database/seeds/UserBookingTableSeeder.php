@@ -13,27 +13,27 @@ class UserBookingTableSeeder extends Seeder
     {
         DB::table('booking_user')->insert([
             'user_id' => 2,
-            'booking_id' => 1,
+            'bookingdate_id' => 1,
         ]);
 
         DB::table('booking_user')->insert([
             'user_id' => 1,
-            'booking_id' => 3,
+            'bookingdate_id' => 3,
         ]);
 
         DB::table('booking_user')->insert([
             'user_id' => 2,
-            'booking_id' => 2,
+            'bookingdate_id' => 2,
         ]);
 
         DB::table('booking_user')->insert([
             'user_id' => 4,
-            'booking_id' => 3,
+            'bookingdate_id' => 3,
         ]);
 
         DB::table('booking_user')->insert([
             'user_id' => 5,
-            'booking_id' => 3,
+            'bookingdate_id' => 3,
         ]);
     }
 }
