@@ -292,9 +292,12 @@ class BookingController extends Controller
 
     public function getUserBookings($id)
     {
-        $bookings = Booking::where('host_id', $id)->get();
+        $bookingdates = Bookingdate::where('user_id', $id)->get();
         $arr_requests = [];
-        foreach($bookings as $booking) {
+        $bookings = [];
+        foreach($bookingdates as $bookingdate) {
+            $booking = $bookingdate->booking;
+            array_pusg($bookings,$booking);
             $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();
 
             foreach ($requests as $request) {
@@ -307,7 +310,7 @@ class BookingController extends Controller
 
         }
 
-        return response()->json(['bookings' => $bookings, "requests" => $arr_requests]);
+        return response()->json(['bookingdates' => $bookings, "requests" => $arr_requests]);
 
     }
 
