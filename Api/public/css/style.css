@@ -51,6 +51,10 @@ select {
 	font-family: 'Open Sans', sans-serif;
 }
 
+#searchbutton {
+	background-color: #11dd93;
+}
+
 .pac-container {
 	height: 120px;
 	overflow-y: scroll;
