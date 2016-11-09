@@ -11,11 +11,13 @@
 					<div class="divider"></div>
 					<form class="mar-top-l">
 						<label for="credit_card_nr">Credit Card Number</label>
-						<input class="mar-btm-m" id="credit_card_nr" placeholder="•••• •••• •••• ••••" type="number">
+						<p ng-show="confirmbooking.showcarderror" class="red-text">Please enter a 16 digit number</p>
+						<input ng-model="confirmbooking.card" class="mar-btm-m" id="credit_card_nr" placeholder="•••• •••• •••• ••••" type="number">
 						<label class="mar-btm-m mar-top-m" for="expiration_date">Expiration Date</label><br/>
 						<input class="mar-btm-m mar-top-m" id="expiration_date" placeholder="MM/YY" type="month"> <br/>
+						<p ng-show="confirmbooking.showcvverror" class="red-text">Please enter a 3 or 4 digit number</p>
 						<label class="mar-top-m" for="cvv">CVV</label>
-						<input class="mar-btm-m" id="cvv" placeholder="•••(•)" type="number">
+						<input ng-model="confirmbooking.cvv" class="mar-btm-m" id="cvv" placeholder="•••(•)" type="number">
 					</form>
 				</div>
 				<div class="row">
@@ -28,7 +30,7 @@
 				</div>
 				<div class="row">
 					<p class="red-text" ng-if="confirmbooking.showguesterror">*Please enter a number between 1 and {{confirmbooking.booking.availableseats}}</p>
-					<div class="col s2">
+					<div class="col s2 mar-top-m">
 						<p>Guests:</p>
 					</div>
 					<div class="col s2 offset-s8 input-field right-align">

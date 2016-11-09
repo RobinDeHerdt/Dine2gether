@@ -1,4 +1,4 @@
-d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams) {
+d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams, $location) {
 
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
@@ -62,6 +62,35 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 		return [newdate, time];
 	}
 
+	function checkForErrors () {
+		var cardnumber = vm.card.toString();
+		var cvv = vm.cvv.toString();
+		if(cardnumber.length !== 16 || vm.card == undefined) {
+			vm.showcarderror = true;
+			console.log("showcarderror");
+		} else {
+			vm.showcarderror = false;
+		}
+		if(cvv.length < 3 || cvv.length > 4 || vm.cvv == undefined ) {
+			vm.showcvverror = true;
+			console.log("showcvverror");
+		} else {
+			vm.showcvverror = false;
+		}
+		if(vm.selected_guests == undefined ) {
+			vm.showguesterror = true;
+		} else {
+			vm.showguesterror = false;
+		}
+
+		if(vm.selected_guests && cardnumber == 16 && cvv >= 3 && cvv <= 4 ) {
+			console.log("no errors");
+			return false;
+		}
+
+		return true;
+	}
+
 	vm.calcPrice = function () {
 		if(vm.selected_guests) {
 			vm.showguesterror = false;
@@ -74,12 +103,29 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 	}
 
 	vm.confirmBooking = function () {
+		console.log(vm.card);
+		console.log(vm.cvv);
 
-		if(vm.selected_guests == undefined ) {
-			vm.showguesterror = true;
-		} else {
-			vm.showguesterror = false;
-		}
+		var hasErrors = checkForErrors();
+		if(!hasErrors) {
+			var data = {
+				user_id: vm.user.id,
+				booking_id: booking_id,
+				nr_guests: vm.selected_guests
+			}
+			bookingSvc.createUserBooking(data).then(function (data) {
+				swal({
+					title: "Awesome!",
+					text: "You booked this meal. We hope you'll enjoy it!",
+					type: "success"
+				}).then(function () {
+					$location.path("/dashboard");
+				}, function () {
+					$location.path("/dashboard");
+				})
+			});
+		} 
+
 	}
 
 	function _init() {

@@ -326,4 +326,18 @@ class BookingController extends Controller
         
         return response()->json(["bookings" => $booking_arr, "requests" => $requests]);
     }
+
+    public function createUserBooking(Request $request) {
+        DB::table('booking_user')->insert(
+                ['booking_id' => $request->booking_id, 'user_id' => $request->user_id]
+            );
+
+        $booking = Booking::where('id', $request->booking_id)->first();
+
+        $new_nr_guests = $booking->guests_booked + $request->nr_guests;
+        $booking->guests_booked =  $new_nr_guests;
+        $booking->save()
+
+        return response()->json(["status" => "success"]);
+    }
 }
