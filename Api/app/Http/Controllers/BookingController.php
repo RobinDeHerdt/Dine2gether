@@ -238,7 +238,7 @@ class BookingController extends Controller
     public function detach($id, $userid)
     {
         $user = User::find($userid);
-        $user->bookings()->detach($id);
+        $user->bookingdates()->detach($id);
 
         $user->save();
     }
