@@ -1,5 +1,5 @@
  <main>
- 	<div class="container under-header">
+ 	<div class="container under-header bookingdetails">
  			<a href="/#/overview"><h5>Back</h5></a>
  			<h1>{{ bookingdetails.currentBooking.title}}</h1>
  			<br>
@@ -39,6 +39,15 @@
 	 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
   									<li class="collection-item">{{ style.style}}</li>
 	 							</div>
+ 							</ul>
+ 							<h5>Dates available:</h5>
+ 							
+ 							<ul class="collection">
+ 								<li ng-if="!bookingdetails.currentBooking.bookingdates.length">No dates yet</li>
+ 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.bookingdates"> <p>{{ bookingdetails.convertToDate(date.booking_date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.booking_date) | date: "HH:mm"}}<a href=""><span class="secondary-colour white-text badge" data-badge-caption="request this"></span></a></p>
+								<p ng-if="date.guests_booked < bookingdetails.currentBooking.max_guests">seats booked:{{date.guests_booked}}/{{bookingdetails.currentBooking.max_guests}}</p>
+								<p ng-if="date.guests_booked == bookingdetails.currentBooking.max_guests" class="red-text">Fully booked!</p>
+ 								</li>
  							</ul>
  						</div>
  					</div>

@@ -16,7 +16,6 @@ class CreateRequestBookingTable extends Migration
         Schema::create('request_booking', function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('date_time');
-            $table->integer('number_of_guests');
             $table->boolean('accepted')->default(false);
             $table->boolean('declined')->default(false);
             $table->timestamps();

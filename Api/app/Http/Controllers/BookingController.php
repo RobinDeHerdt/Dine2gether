@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use App\Booking;
+use App\Bookingdate;
 use App\User;
 use App\Dish;
 use App\Dish_Image;
@@ -159,6 +160,8 @@ class BookingController extends Controller
         $interests = $booking->interests()->get();;
         $dishes = Dish::where('booking_id', $booking->id)->get();
         $kitchenstyles = $booking->kitchenstyles()->get();
+        $bookingdates = Bookingdate::where('booking_id', $booking->id)->where('booking_date', '>', Carbon::now())->get();
+        $booking->bookingdates = $bookingdates;
         // put interests in $user
         
 

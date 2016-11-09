@@ -10,6 +10,11 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, bookingSer
 
 	vm.imageUrlBase = "img/";
 
+	vm.convertToDate = function (dateString) {
+		var convertedString = new Date(dateString);
+		return convertedString;
+	}
+
 	function getCurrentBooking () {
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
 			vm.currentBooking = data.data.booking;

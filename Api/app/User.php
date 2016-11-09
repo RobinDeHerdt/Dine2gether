@@ -29,7 +29,6 @@ class User extends Authenticatable
 
     public function bookingdates()
     {
-        // return $this->belongsToMany('App\Booking');
         return $this->belongsToMany('App\Bookingdate','bookingdate_user', 'user_id', 'bookingdate_id');
     }
 

@@ -1,4 +1,4 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, loginService, $stateParams, $location, $filter) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, loginService, $stateParams, $location, $filter, $timeout) {
 	
 	var vm = this;
 	var bookingSvc = bookingService;
@@ -11,49 +11,69 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 	vm.sendRequest = function () {
 		var datetime = "";
 
-		if(vm.booking.date) {
-			datetime = vm.booking.date;
+		if(vm.requestdata.selectedDate && !vm.daterequest) {
+			console.log(vm.requestdata.selectedDate);
+			datetime = vm.requestdata.selectedDate;
 		} else {
-			var datetime = $filter('date')(vm.requestdata.date, "yyyy-MM-dd") + " " + $filter('date')(vm.requestdata.time, "HH:mm:ss");
+			var today = new Date();
+			if(vm.requestdata.newdate < today) {
+				vm.showdate_error = true;
+				return false;
+			} else {
+				datetime = $filter('date')(vm.requestdata.newdate, "yyyy-MM-dd") + " " + $filter('date')(vm.requestdata.newtime, "HH:mm:ss");
+				vm.showdate_error = false;
+			}
 		}
 
-		var data = {
-			datetime: datetime,
-			number_of_guests: vm.requestdata.nr_of_guests,
-			booking_id: vm.booking.id,
-			user_id: vm.user.id
-		};
+		if(!vm.showdate_error) {
+			var data = {
+				datetime: datetime,
+				booking_id: vm.booking.id,
+				user_id: vm.user.id
+			};
 
-		console.log(data);
+			console.log(data);
 
-		requestSvc.addRequest(data).then(function (data) {
-			swal({
-				title: "Your request was sent",
-				text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
-				type: "success"
-			}).then(function () {
-				$location.path("/overview");
-			}, function () {
-				$location.path("/overview");
+			requestSvc.addRequest(data).then(function (data) {
+				swal({
+					title: "Your request was sent",
+					text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
+					type: "success"
+				}).then(function () {
+					$location.path("/overview");
+				}, function () {
+					$location.path("/overview");
+				});
+			}, function (error) {
+				swal({
+					title: "Couldn't send request",
+					text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
+					type: "error"
+				})
 			});
-		}, function (error) {
-			swal({
-				title: "Couldn't send request",
-				text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
-				type: "error"
-			})
-		});
+		}
+	}
+
+	vm.convertToDate = function (dateString) {
+		var convertedString = new Date(dateString);
+		return convertedString;
+	}
+
+	vm.resetSelect = function () {
+		$timeout(function() {
+			$('select:not([multiple])').material_select();
+		}, 1)
+		vm.daterequest = false;
 	}
 
 	function loadBookingById() {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
 			console.log(data.data.booking);
 			vm.booking = data.data.booking;
-			if(vm.booking.date) {
-				var datetime = splitDateTime(vm.booking.date);		
-				vm.booking.onlydate = datetime[0];
-				vm.booking.hour = datetime[1];	
-			}
+			$timeout(function() {
+				$('select:not([multiple])').material_select();
+			}, 1)
+			
 		}, function (error) {
 			swal({
 				title: "Oops",
