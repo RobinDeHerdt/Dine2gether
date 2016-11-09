@@ -292,7 +292,7 @@ class BookingController extends Controller
 
     public function getUserBookings($id)
     {
-        $bookingdates = Bookingdate::where('user_id', $id)->get();
+        $bookingdates = Bookingdate::where('host_id', $id)->get();
         $arr_requests = [];
         $bookings = [];
         foreach($bookingdates as $bookingdate) {
@@ -310,7 +310,7 @@ class BookingController extends Controller
 
         }
 
-        return response()->json(['bookingdates' => $bookings, "requests" => $arr_requests]);
+        return response()->json(['bookings' => $bookings, "requests" => $arr_requests]);
 
     }
 
@@ -318,11 +318,12 @@ class BookingController extends Controller
         $user = User::where('id', $id)->first();
         $requests = RequestBooking::where("user_id", $user->id)->get();
 
-        $booking_arr = [];
+        $bookingdates_arr = [];
         $requests_arr = [];
 
-        foreach($user->bookings as $booking) {
-            array_push($booking_arr, $booking);
+        foreach($user->bookingdates as $bookingdate) {
+            $bookingdate->booking;
+            array_push($bookingdates_arr, $bookingdate);
         }
         foreach($requests as $request) {
                 $requestbooking = Booking::where('id', $request->booking_id)->first();
@@ -332,7 +333,7 @@ class BookingController extends Controller
                 array_push($requests_arr, $request);
             }
         
-        return response()->json(["bookings" => $booking_arr, "requests" => $requests]);
+        return response()->json(["bookingdates" => $bookingdates_arr, "requests" => $requests]);
     }
 
     public function createUserBooking(Request $request) {
