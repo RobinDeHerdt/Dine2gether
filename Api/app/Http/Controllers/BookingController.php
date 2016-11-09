@@ -295,19 +295,22 @@ class BookingController extends Controller
         $bookingdates = Bookingdate::where('host_id', $id)->get();
         $arr_requests = [];
         $bookings = [];
+        $arr_id = [];
         foreach($bookingdates as $bookingdate) {
             $booking = $bookingdate->booking;
             array_push($bookings,$booking);
-            $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();
+            if(!in_array($booking->id, $arr_id)) {
+                $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();
 
-            foreach ($requests as $request) {
-                $user = User::where('id', $request->user_id)->first();
-                $booking = Booking::where('id', $request->booking_id)->first();
-                $request->user = $user;
-                $request->booking = $booking;
-                array_push($arr_requests, $request);
+                foreach ($requests as $request) {
+                    $user = User::where('id', $request->user_id)->first();
+                    $booking = Booking::where('id', $request->booking_id)->first();
+                    $request->user = $user;
+                    $request->booking = $booking;
+                    array_push($arr_requests, $request);
+                }
             }
-
+            array_push($arr_id, $booking->id);
         }
 
         return response()->json(['bookings' => $bookings, "requests" => $arr_requests]);
