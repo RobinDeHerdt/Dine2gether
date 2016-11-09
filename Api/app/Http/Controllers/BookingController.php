@@ -156,14 +156,14 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
         $dishesarray = []; 
         // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
-        $user = User::where('id', $booking->host_id)->first();
         $interests = $booking->interests()->get();;
         $dishes = Dish::where('booking_id', $booking->id)->get();
         $kitchenstyles = $booking->kitchenstyles()->get();
         $bookingdates = Bookingdate::where('booking_id', $booking->id)->where('booking_date', '>', Carbon::now())->get();
         $booking->bookingdates = $bookingdates;
         // put interests in $user
-        
+        $user_id = $bookingdates[0]->host_id;
+        $user = User::where('id', $user_id)->first();
 
         foreach ($dishes as $dish) { // get dish images by dish for this booking
             $dish_images = Dish_image::where('dish_id', $dish->id)->get();
@@ -341,21 +341,4 @@ class BookingController extends Controller
         return response()->json(["bookingdates" => $bookingdates_arr, "requests" => $requests]);
     }
 
-    public function createUserBooking(Request $request) {
-        DB::table('booking_user')->insert(
-                ['booking_id' => $request->booking_id, 'user_id' => $request->user_id]
-            );
-
-        $booking = Booking::where('id', $request->booking_id)->first();
-        if($booking->date == null) 
-        {
-            $booking->date = $request->booking_date;
-        } 
-
-        $new_nr_guests = $booking->guests_booked + $request->nr_guests;
-        $booking->guests_booked =  $new_nr_guests;
-        $booking->save();
-
-        return response()->json(["status" => "success"]);
-    }
 }

@@ -9,6 +9,7 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 	vm.user = loginSvc.getUser();
 	vm.selected_guests = 1;
 	vm.showguesterror = false;
+	vm.bookingExists = false;
 
 	function getBookingById() {
 		bookingSvc.getBookingById(booking_id).then(function (data) {
@@ -26,7 +27,6 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 						window.location.href = "#/dashboard";
 					})
 				}
-				vm.booking.availableseats = vm.booking.max_guests - vm.booking.guests_booked;
 				vm.booking.newprice = vm.booking.price;
 				vm.booking.fee = 5;
 				vm.booking.totalprice = vm.booking.price + vm.booking.fee;
@@ -60,8 +60,32 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 
 				vm.datetime = $filter('date')(vm.request.date_time, "yyyy-MM-dd");
 				console.log(vm.datetime);
+			}
+
+			var interval = setInterval(function () {
+				if(vm.booking && vm.request) {
+					clearInterval(interval);
+					checkIfBookingDateExists();
+					console.log(vm.bookingExists);
 				}
-		})
+			}, 50)
+		});
+	}
+
+	function checkIfBookingDateExists() {
+		for(var i=0; i<vm.booking.bookingdates.length; i++) {
+			if(vm.request.date_time == vm.booking.bookingdates[i].booking_date) {
+				vm.bookingExists = true;
+				var data = {
+					booking_id: vm.booking.id, 
+					date_time: vm.booking.bookingdates[i].booking_date
+				}
+				bookingSvc.getBookingdateByDate(data).then(function (data) {
+					vm.bookingdate = data.data.bookingdate;
+					vm.booking.availableseats = vm.booking.max_guests - vm.bookingdate.guests_booked;
+				});
+			}
+		} 
 	}
 
 	function splitDateTime(datetime) {
@@ -126,22 +150,36 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 		
 		var hasErrors = checkForErrors();
 		if(!hasErrors) {
-			var data = {
-				user_id: vm.user.id,
-				booking_id: booking_id,
-				nr_guests: vm.selected_guests,
-				booking_date: vm.datetime
-			}
-			bookingSvc.createUserBooking(data).then(function (data) {
-				swal({
-					title: "Awesome!",
-					text: "You booked this meal. We hope you'll enjoy it!",
-					type: "success"
-				}).then(function () {
-					window.location.href("#/dashboard");
-				}, function () {
-					window.location.href("#/dashboard");
-				})
+			if(vm.bookingdate) {
+				var data = {
+					user_id: vm.user.id,
+					guests: vm.selected_guests,
+					bookingdate_id: vm.bookingdate.id
+				}
+
+				bookingSvc.addUserToBookingdate(data).then(function (data) {
+
+				});
+
+			} else {
+				var data = {
+					user_id: vm.user.id,
+					booking_id: booking_id,
+					guests: vm.selected_guests,
+					booking_date: vm.datetime;
+					host_id: vm.booking.user.id;
+				}
+
+				bookingSvc.createNewBookingdate(data).then(function (data) {
+					swal({
+						title: "Awesome!",
+						text: "You booked this meal. We hope you'll enjoy it!",
+						type: "success"
+					}).then(function () {
+						window.location.href("#/dashboard");
+					}, function () {
+						window.location.href("#/dashboard");
+					})
 			});
 		} 
 

@@ -13,7 +13,6 @@
 			  <span class="title">Request by: <a href="/#/user/{{hostrequest.user.id}}/reviews"><strong>{{hostrequest.user.first_name + " " + hostrequest.user.last_name}}</strong></a></span>
 			  <p>Booking: <a href="/#/booking/{{hostrequest.booking.id}}/details"><strong>{{ hostrequest.booking.title}}</strong></a></p>
 			  <p>Date and time: {{ hostrequest.date }} at {{hostrequest.time}}</p>
-			  <p>Guests: {{ hostrequest.number_of_guests}}</p>
 			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.declineRequest(hostrequest.id)"><i class="material-icons right">delete</i>Decline</a>
 			  <a href="" class="secondary-content btn-flat mar-right-m mar-btm-m" ng-click="profile.acceptRequest(hostrequest.id, hostrequest.user.id, hostrequest.booking.id)"><i class="material-icons right">done</i>Accept</a>
 			</li>
@@ -37,7 +36,6 @@
 			  <p>Booking: <a href="/#/booking/{{guestrequest.booking.id}}/details"><strong>{{ guestrequest.booking.title}}</strong></a></p>
 			  <span class="title">Booking by: <a href="/#/user/{{guestrequest.host.host_id}}/reviews"><strong>{{guestrequest.host.first_name + " " + guestrequest.host.last_name}}</strong></a></span>
 			  <p>Date and time: {{ guestrequest.date }} at {{guestrequest.time}}</p>
-			  <p>Guests: {{ guestrequest.number_of_guests}}</p>
 			  <a href="" class="secondary-content" ng-click="profile.deleteUserRequest(guestrequest.id)"><i class="material-icons">delete_forever</i></a>
 			  <a ng-if="guestrequest.accepted == 1" href="" class="btn" ui-sref="booknow({id:guestrequest.booking.id})">Book now!</a>
 			</li>
