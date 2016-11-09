@@ -297,7 +297,7 @@ class BookingController extends Controller
         $bookings = [];
         foreach($bookingdates as $bookingdate) {
             $booking = $bookingdate->booking;
-            array_pusg($bookings,$booking);
+            array_push($bookings,$booking);
             $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();
 
             foreach ($requests as $request) {
@@ -323,6 +323,8 @@ class BookingController extends Controller
 
         foreach($user->bookingdates as $bookingdate) {
             $bookingdate->booking;
+            $host = User::where('id', $bookingdate->host_id)->first();
+            $bookingdate->host = $host;
             array_push($bookingdates_arr, $bookingdate);
         }
         foreach($requests as $request) {

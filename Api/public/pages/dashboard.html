@@ -73,14 +73,15 @@
 	<div class="card">
 	  <div class="card-content black-text">
 		<span class="card-title">My active bookings as a guest</span>
-		<p ng-if="profile.guestbookings.length < 1">No bookings yet as a guest.</p>
-		<div ng-repeat="booking in profile.guestbookings">
+		<p ng-if="profile.guestbookingdates.length < 1">No bookings yet as a guest.</p>
+		<div ng-repeat="bookingdate in profile.guestbookingdates">
 		  <ul class="collection">
 			<li class="collection-item">
-			  <span class="title"><a href="/#/booking/{{booking.id}}/details"><strong>{{booking.title}}</strong></a></span>
-			  <p>{{ booking.postalcode + " " + booking.city}}</p>
-			  <p>{{ booking.street_number}}</p>
-			  <p>{{ booking.max_guests + " people | €" + booking.price + "/person"}}</p>
+			  <span class="title"><a href="/#/booking/{{booking.id}}/details"><strong>{{bookingdate.booking.title}}</strong></a></span>
+			  <p>{{ bookingdate.host.first_name}} {{bookingdate.host.last_name}}</p>
+			  <p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>
+			  <p>{{ bookingdate.booking.street_number}}</p>
+			  <p>{{ bookingdate.booking.max_guests + " people | €" + bookingdate.booking.price + "/person"}}</p>
 			  <a href="" class="secondary-content" ng-click="profile.detachFromBooking(booking.id)"><i class="material-icons">delete_forever</i></a>
 			</li>
 		  </ul>    

@@ -23,7 +23,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 	function getGuestBookings () {
 		bookingSvc.getGuestBookingsById(vm.user.id).then(function (data) {
 			console.log(data);
-			vm.guestbookings = data.data.bookings;
+			vm.guestbookingdates = data.data.bookingdates;
 			vm.guestrequests = data.data.requests;
 
 			if(vm.guestrequests) {
