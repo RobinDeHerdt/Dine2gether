@@ -86,11 +86,11 @@ class BookingController extends Controller
 
         $booking->title             = $request->menu_title;
         $booking->price             = $request->price;
-        $booking->date              = $request->date;
+        // $booking->date              = $request->date;
         $booking->street_number     = $request->address;
         $booking->postalcode        = $request->postal_code;
         $booking->city              = $request->city;
-        $booking->host_id           = $request->user_id;
+        $booking->user_id           = $request->user_id;
         $booking->max_guests        = $request->max_nr_guests;
         $booking->telephone_number  = $request->telephone_number;
 
