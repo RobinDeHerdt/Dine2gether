@@ -151,6 +151,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 	}
 
 	function _init() {
+		console.log(loginSvc.getUser());
 		if(!loginSvc.getUser()) {
 			loginSvc.errorMessage = "You need to be logged in to see your profile";
 			$location.path('/home');

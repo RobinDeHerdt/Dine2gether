@@ -19,6 +19,8 @@ d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
 
 	svc.login = function (credentials) {
 		$auth.login(credentials).then(function (data) {
+			//$cookies.putObject("token", data.data.token);
+			svc.token = data.data.token;
 			svc.setUser();
 		}, function (error) {
 			if(error.data.error = "invalid_credentials") {
@@ -65,7 +67,7 @@ d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
 
 	svc.updateProfile = function (id, data) {
         console.log(data);
-    	return $http.post('api/updateprofile/' + id, data);
+    	return $http.post('api/updateprofile/' + id, data, {headers: {"Bearer" : svc.token}});
     }
 
 	svc.register = function (o_newuser) {
