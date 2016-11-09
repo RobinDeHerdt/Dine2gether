@@ -18,8 +18,8 @@ d2gApp.service('reviewService', function ($http) {
 		return $http.get('api/user/' + id + '/reviews');
 	}
 
-	svc.getUserInfo = function(id) {
-		return $http.get('api/user/'+id);
+	svc.getUserInfo = function(id, token) {
+		return $http.get('api/user/'+ id, {headers: {"Bearer" : token}});
 	}
 
 	svc.deleteReviews = function(id) {

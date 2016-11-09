@@ -19,7 +19,7 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 				if(vm.booking.host_id == vm.user.id) {
 					swal({
 						title: "You can't book your own meal...",
-						type: "error";
+						type: "error",
 					}).then(function () {
 						window.location.href = "#/dashboard";
 					}, function () {

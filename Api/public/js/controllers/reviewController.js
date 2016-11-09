@@ -33,7 +33,9 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 	}
 
 	function getUserById(id) {
-		reviewSvc.getUserInfo(id).then(function(data)
+		var token = loginSvc.token;
+
+		reviewSvc.getUserInfo(id, token).then(function(data)
 		{
 			vm.name = data.data.first_name + " " + data.data.last_name;
 		});

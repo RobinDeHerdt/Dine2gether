@@ -80,11 +80,13 @@ class ReviewController extends Controller
     public function getHosts($id)
     {
         $user = User::where('id', $id)->first();
+        $bookingdates = $user->bookingdates()->get();
 
         $booking_arr = [];
 
-        foreach($user->bookings as $booking) {
-            $hostInfo = $booking->user()->get();
+        foreach($bookingdates as $bookingdate) {
+            $host_id    = $bookingdate->host_id;
+            $hostInfo   = User::where('id', $host_id)->get();
 
             array_push($booking_arr, $hostInfo);
         }
