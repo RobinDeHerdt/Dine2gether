@@ -127,6 +127,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 		loginSvc.updateProfile(vm.user.id,data).then(function(data) {
 			if ( data.status == 200)
 			{
+				vm.showsuccessmessage = true;
 				loginSvc.setUser();
 			}
 		}, function (error) {
