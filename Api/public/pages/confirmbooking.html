@@ -1,61 +1,69 @@
 <main>
-	<div class="container">
+	<div class="container under-header">
 		<div class="row">
-			<div class="col s12">
-				<h1>{{booking.title}}</h1>
+			<div class="col s6 offset-s3">
+				<div class="row">
+					<div class="col s12">
+						<h1>{{confirmbooking.booking.title}}</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="divider"></div>
+					<form>
+						<label for="credit_card_nr">Credit Card Number</label>
+						<input id="credit_card_nr" placeholder="•••• •••• •••• ••••" type="number">
+						<label for="expiration_date">Expiration Date</label>
+						<input id="expiration_date" placeholder="MM/YY" type="month">
+						<label for="cvv">CVV</label>
+						<input id="cvv" placeholder="CVV" type="number">
+					</form>
+				</div>
+				<div class="row">
+					<div class="col s2">
+						<p>Date:</p>
+					</div>
+					<div class="col s10 right-align">
+						<p>{{confirmbooking.request.date}} at {{confirmbooking.request.time}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<p class="red-text" ng-if="confirmbooking.showguesterror">*Please enter a number between 1 and {{confirmbooking.booking.availableseats}}</p>
+					<div class="col s2">
+						<p>Guests:</p>
+					</div>
+					<div class="col s2 offset-s8 input-field right-align">
+						<input ng-change="confirmbooking.calcPrice()" ng-model="confirmbooking.selected_guests" type="number" min="1" max="{{confirmbooking.booking.availableseats}}">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s2">
+						<p>Subtotal:</p>
+					</div>
+					<div class="col s10 right-align">
+						<p>{{confirmbooking.booking.newprice | currency}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s2">
+						<p>Service fee/guest:</p>
+					</div>
+					<div class="col s10 right-align">
+						<p>{{confirmbooking.booking.fee | currency}}</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s2">
+						<p>Total:</p>
+					</div>
+					<div class="col s10 right-align">
+						<p>{{confirmbooking.booking.totalprice |currency}}</p>
+					</div>
+				</div>
+				<div class="divider mar-top-xl mar-btm-xl"></div>
+				<div class="col s12">
+					<a ng-click="confirmbooking.confirmBooking()" class="btn right">Book this delicious meal</a>
+				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="divider"></div>
-			<form>
-				<input type="number">
-				<input type="date">
-				<input type="number">
-			</form>
-		</div>
-		<div class="row">
-			<div class="col s2">
-				<p>Date:</p>
-			</div>
-			<div class="col s10">
-				{{booking.date}}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s2">
-				<p>Guests:</p>
-			</div>
-			<div class="col s10">
-				{{booking.guests}}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s2">
-				<p>Subtotal:</p>
-			</div>
-			<div class="col s10">
-				{{booking.date}}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s2">
-				<p>Service fee/guest:</p>
-			</div>
-			<div class="col s10">
-				<p>{{5 | currency}}</p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col s2">
-				<p>Total:</p>
-			</div>
-			<div class="col s10">
-				{{booking.date}}
-			</div>
-		</div>
-		<div class="divider">
-			<a href="" class="btn">Book this delicious meal</a>
-		</div>
-
-		
+	</div>
 </main>

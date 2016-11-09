@@ -22,4 +22,8 @@ d2gApp.service('requestService', function ($http) {
 		return $http.post('api/hasrequest', data);
 	}
 
+	svc.getRequestById = function (data) {
+		return $http.post('api/getrequest', data);
+	}
+
 });

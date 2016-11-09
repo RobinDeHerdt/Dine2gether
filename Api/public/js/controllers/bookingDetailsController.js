@@ -26,7 +26,6 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, bookingSer
 			booking_id: vm.currentBooking.id
 		}
 		requestSvc.checkIfHasRequest(data).then(function (data) {
-			console.log(data.data.request);
 				if (data.data.request == "none") {
 					vm.request == "none";
 				} else if(data.data.request.accepted === 1) {

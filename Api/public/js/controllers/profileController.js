@@ -9,7 +9,6 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 	function loadUser () {
 		if(loginSvc.getUser()) {
 			vm.user = loginSvc.getUser();
-			console.log(vm.user);
 		}
 	}
 	
@@ -17,20 +16,33 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
-			if(vm.hostrequests.date_time) {
-				vm.hostrequests.date = $filter(date)(vm.hostrequests.date_time, "dd/MM/yyyy");
-				vm.hostrequests.time = $filter(date)(vm.hostrequests.date_time, "HH:mm");
-			}
-			console.log(data.data);
 		})
 	}
 
 	function getGuestBookings () {
 		bookingSvc.getGuestBookingsById(vm.user.id).then(function (data) {
-			console.log(data.data);
 			vm.guestbookings = data.data.bookings;
 			vm.guestrequests = data.data.requests;
+
+			if(vm.guestrequests) {
+				for(var i=0; i < vm.guestrequests.length; i++) {
+					var newdate = splitDateTime(vm.guestrequests[i].date_time);
+					vm.guestrequests[i].date = newdate[0];
+					vm.guestrequests[i].time = newdate[1];
+				}
+			}
 		}) 
+	}
+
+	function splitDateTime(datetime) {
+		var datetimesplit = datetime.split(" ");
+		var date = datetimesplit[0];
+		var datesplit = date.split("-");
+
+		var newdate = datesplit[2] + "/" + datesplit[1] + "/" + datesplit[0];
+		var time = datetimesplit[1].substring(0,5);
+
+		return [newdate, time];
 	}
 
 	vm.acceptRequest = function (requestid, userid, bookingid) {

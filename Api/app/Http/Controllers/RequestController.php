@@ -60,4 +60,11 @@ class RequestController extends Controller
 
         return response()->json(["request" => $response]);
     }
+
+    public function getRequestById (Request $request) {
+
+        $myrequest = RequestBooking::where('user_id', $request->user_id)->where('booking_id', $request->booking_id)->first();
+
+        return response()->json(["request" => $myrequest]);
+    }
 }

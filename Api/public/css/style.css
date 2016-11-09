@@ -7,6 +7,9 @@ nav {
 	z-index: 10;
 }
 
+select {
+	display: block !important;
+}
 .logo {
 	height: 64px;
 }
