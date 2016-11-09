@@ -14,7 +14,7 @@
 		  <div class="file-field input-field ">
 			<div class="btn">
 			  <span>Upload</span>
-			  <input ngf-select="profile.uploadProfilePicture($file)" accept="image/*" ngf-max-size="2MB" type="file" multiple>
+			  <input ngf-select="profile.uploadProfilePicture($file)" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="2MB" type="file" multiple>
 			</div>
 			<div class="file-path-wrapper">
 			  <input class="file-path validate" type="text" placeholder="Upload" required ng-model="profile.path">

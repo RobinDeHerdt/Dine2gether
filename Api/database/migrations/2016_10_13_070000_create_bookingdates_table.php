@@ -21,6 +21,8 @@ class CreateBookingdatesTable extends Migration
 
             $table->integer('booking_id')->unsigned();
             $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->integer('host_id')->unsigned();
+            $table->foreign('host_id')->references('id')->on('users');
         });
     }
 

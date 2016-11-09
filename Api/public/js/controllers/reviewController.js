@@ -9,7 +9,7 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 		reviewSvc.getGuests(user.id).then(function(data)
 		{
 			vm.guestbookings = data.data.bookings;
-			console.log(data);
+			console.log(data.data.bookings);
 		});
 	}
 

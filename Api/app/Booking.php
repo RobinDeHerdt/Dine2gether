@@ -11,14 +11,9 @@ class Booking extends Model
     	return $this->hasMany('App\Dish');
     }
 
-    public function users()
+    public function bookingdates() 
     {
-        return $this->belongsToMany('App\User');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\User', 'host_id');
+        return $this->hasMany('App\Bookingdate', 'booking_id','user_id');
     }
 
     public function interests()

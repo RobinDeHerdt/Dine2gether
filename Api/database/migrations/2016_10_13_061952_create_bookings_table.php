@@ -23,9 +23,6 @@ class CreateBookingsTable extends Migration
             $table->integer('postalcode');
             $table->string('city');
             $table->timestamps();
-
-            $table->integer('host_id')->unsigned();
-            $table->foreign('host_id')->references('id')->on('users');
         });
     }
 
@@ -42,6 +39,7 @@ class CreateBookingsTable extends Migration
         Schema::dropIfExists('booking_kitchenstyle');
         Schema::dropIfExists('request_booking');
         Schema::drop('booking_user');
+        Schema::dropIfExists('bookingdates');
         Schema::drop('kitchenstyles');
         Schema::dropIfExists('bookings');
     }

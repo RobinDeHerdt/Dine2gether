@@ -98,9 +98,9 @@ class UserController extends Controller
             'first_name'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
             'last_name'     => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
             'email'         => 'required|email|max:255',
-            'street_number' => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'postalcode'    => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'city'          => 'max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'street_number' => 'max:255',
+            'postalcode'    => 'max:255',
+            'city'          => 'max:255',
         ]);
 
         $user = User::find($id);

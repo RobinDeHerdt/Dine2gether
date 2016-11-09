@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Bookingdate;
 use App\Booking;
 use App\Review;
 use App\User;
@@ -45,7 +46,7 @@ class ReviewController extends Controller
     {
         $this->validate($request, [
             'review'     => 'required|max:1024|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'guest_id'   => 'required|numeric|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'guest_id'   => 'required|numeric',
         ]);
 
         $review     = new Review;
@@ -65,9 +66,15 @@ class ReviewController extends Controller
      */
     public function getGuests($id)
     {
-        $bookings = Booking::where('host_id', $id)->with('users')->get();
+        $bookingdates = Bookingdate::where('host_id', $id)->with('users', 'booking')->get();
 
-        return response()->json(['bookings' => $bookings]);
+        // $arrBooking = [];
+
+        // foreach ($bookingdates as $bookingdate) {
+        //     array_push($arrBooking, $bookingdate->with('booking')->get());
+        // }
+
+        return response()->json(['bookings' => $bookingdates]);
     }
 
     public function getHosts($id)

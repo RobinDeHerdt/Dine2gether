@@ -22,7 +22,6 @@ class BookingsTableSeeder extends Seeder
             'postalcode' => 2220,
             'city' => 'Heist-op-den-Berg',
             'price' => 25.00,
-            'host_id' => 1,
         ]);
 
         DB::table('bookings')->insert([
@@ -33,7 +32,6 @@ class BookingsTableSeeder extends Seeder
             'postalcode' => 2000,
             'city' => 'Antwerpen',
             'price' => 95.00,
-            'host_id' => 1,
         ]);
 
         DB::table('bookings')->insert([
@@ -44,7 +42,6 @@ class BookingsTableSeeder extends Seeder
             'postalcode' => 5000,
             'city' => 'Hasselt',
             'price' => 99.99,
-            'host_id' => 4,
         ]);
 
         DB::table('bookings')->insert([
@@ -55,7 +52,6 @@ class BookingsTableSeeder extends Seeder
             'postalcode' => 3999,
             'city' => 'Bavikhove',
             'price' => 1.95,
-            'host_id' => 3,
         ]);
     }
 }
