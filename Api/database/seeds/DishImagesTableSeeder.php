@@ -33,7 +33,22 @@ class DishImagesTableSeeder extends Seeder
 
         DB::table('dish_images')->insert([
             'image_url' => 'img/foodImage5.jpg',
-            'dish_id' => 4,
+            'dish_id' => 5,
+        ]);
+
+        DB::table('dish_images')->insert([
+            'image_url' => 'img/foodImage6.jpg',
+            'dish_id' => 6,
+        ]);
+
+        DB::table('dish_images')->insert([
+            'image_url' => 'img/foodImage7.jpg',
+            'dish_id' => 7,
+        ]);
+
+        DB::table('dish_images')->insert([
+            'image_url' => 'img/foodImage1.jpg',
+            'dish_id' => 8,
         ]);
     }
 }

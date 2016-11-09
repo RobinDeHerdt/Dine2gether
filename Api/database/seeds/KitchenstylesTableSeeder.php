@@ -16,7 +16,7 @@ class KitchenstylesTableSeeder extends Seeder
         ]);
 
         DB::table('kitchenstyles')->insert([
-            'style' => 'Chinese',
+            'style' => 'Greek',
         ]);
 
         DB::table('kitchenstyles')->insert([
@@ -29,6 +29,10 @@ class KitchenstylesTableSeeder extends Seeder
 
         DB::table('kitchenstyles')->insert([
             'style' => 'Koosjer',
+        ]);
+
+        DB::table('kitchenstyles')->insert([
+            'style' => 'Vegan',
         ]);
     }
 }
