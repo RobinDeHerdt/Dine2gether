@@ -17,6 +17,14 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 			console.log(data);
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
+
+			if(vm.hostrequests) {
+				for(var i=0; i < vm.hostrequests.length; i++) {
+					var newdate = splitDateTime(vm.hostrequests[i].date_time);
+					vm.hostrequests[i].date = newdate[0];
+					vm.hostrequests[i].time = newdate[1];
+				}
+			}
 		})
 	}
 
