@@ -18,10 +18,6 @@ d2gApp.service('bookingService', function($http) {
     svc.createBooking = function (data) {
     	return $http.post('api/bookings', data);
     }
-
-    svc.createUserBooking = function (data) {
-        return $http.post('api/userbooking', data);
-    }
     
     svc.deleteBooking = function (id) {
         return $http.delete('api/bookings/' + id);
@@ -37,6 +33,18 @@ d2gApp.service('bookingService', function($http) {
 
     svc.detachBooking = function (id, userid) {
         return $http.delete('api/bookings/detach/' + id + '/user/' + userid);
+    }
+
+    svc.getBookingdateByDate = function (data) {
+        return $http.post('api/getbookingdatebydate', data);
+    }
+
+    svc.createNewBookingdate = function (data) {
+        return $http.post('api/createbookingdate', data);
+    }
+
+    svc.addUserToBookingdate = function (data) {
+        return $http.post('api/addtobookingdate', data);
     }
 
 });

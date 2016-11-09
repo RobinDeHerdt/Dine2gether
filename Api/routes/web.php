@@ -36,7 +36,6 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('bookingdetails/{id}', 'BookingController@show'); 
     Route::get('userbookings/{id}', 'BookingController@getUserBookings');
     Route::get('guestbookings/{id}', 'BookingController@getGuestBookings');
-    Route::post('userbooking', 'BookingController@createUserBooking');
 
     Route::get('user/{id}', 'UserController@index');
     Route::post('/profile/upload', 'UserController@upload');
@@ -55,6 +54,10 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('deleterequest/{id}', 'RequestController@deleteRequest');
     Route::post('hasrequest', 'RequestController@checkIfRequest');
     Route::post('getrequest', 'RequestController@getRequestById');
+
+    Route::post('getbookingdatebydate', 'BookingDateController@getBookingDateByDate');
+    Route::post('createbookingdate', 'BookingDateController@createNewBookingDate');
+    Route::post('addtobookingdate','BookingDateController@addUserToBookingdate')
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');
   	//Route::get('/createbooking', 'BookingController@create');
