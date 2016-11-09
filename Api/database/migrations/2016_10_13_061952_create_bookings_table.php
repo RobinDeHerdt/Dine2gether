@@ -20,6 +20,7 @@ class CreateBookingsTable extends Migration
             $table->datetime('date')->nullable();
             $table->integer('max_guests');
             $table->integer('guests_booked')->default(0);
+            $table->string('telephone_number');
             $table->string('street_number');
             $table->integer('postalcode');
             $table->string('city');

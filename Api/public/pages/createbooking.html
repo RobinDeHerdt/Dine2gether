@@ -17,12 +17,17 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="input-field col s6">
+								<input ng-model="create.telephone_number" type="tel" required>
+								<label for="telephone_number">Telephone number</label>
+							</div>
+						</div>
+						<div class="row">
 							<div class="input-field col s2">
 								<input  ng-model="create.price" name="price" type="number" step="0.01" class="validate" required>
 								<label for="price">Price per person</label>
 							</div>
 						</div>
-						<p>Available places (max. guests)</p>
 						<div class="row">
 							<div class="input-field col s2">
 								<input ng-model="create.max_nr_guests" type="number" required>

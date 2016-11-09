@@ -41,6 +41,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 			address: vm.address,
 			postal_code: vm.postal_code,
 			city: vm.city,
+			telephone_number: vm.telephone_number,
 			interests:  getSelectedInterests(),
 			kitchenstyles:  getSelectedKitchenstyles(),
 			max_nr_guests: vm.max_nr_guests,

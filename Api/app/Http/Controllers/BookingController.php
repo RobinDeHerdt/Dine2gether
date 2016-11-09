@@ -70,26 +70,28 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'menu_title'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'max_nr_guests'    => 'required|numeric',
-            'price'         => 'required|numeric',
-            'address'       => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'postal_code'   => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'city'          => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'menu_title'        => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'max_nr_guests'     => 'required|numeric',
+            'price'             => 'required|numeric',
+            'address'           => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'postal_code'       => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'city'              => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'telephone_number'  => 'required|max:255',
         ]);
 
         // dd($request->all());
 
         $booking = new Booking;
 
-        $booking->title         = $request->menu_title;
-        $booking->price         = $request->price;
-        $booking->date          = $request->date;
-        $booking->street_number = $request->address;
-        $booking->postalcode    = $request->postal_code;
-        $booking->city          = $request->city;
-        $booking->host_id       = $request->user_id;
-        $booking->max_guests    = $request->max_nr_guests;
+        $booking->title             = $request->menu_title;
+        $booking->price             = $request->price;
+        $booking->date              = $request->date;
+        $booking->street_number     = $request->address;
+        $booking->postalcode        = $request->postal_code;
+        $booking->city              = $request->city;
+        $booking->host_id           = $request->user_id;
+        $booking->max_guests        = $request->max_nr_guests;
+        $booking->telephone_number  = $request->telephone_number;
 
         $booking->save();
 
