@@ -141,6 +141,22 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 		return arr_dishes;
 	}
 
+	vm.getAddress = function()	{
+		if(vm.selectedAddress)
+		{
+			var user = loginSvc.getUser(); 
+			vm.address 		= user.street_number;
+			vm.postal_code 	= user.postalcode;
+			vm.city 		= user.city;
+		}	
+		else 
+		{
+			vm.address 		= '';
+			vm.postal_code 	= '';
+			vm.city 		= '';
+		}
+	}
+
 	function _init () {
 		if(!loginSvc.getUser()) {
 			loginSvc.errorMessage = "You need to be logged in to create a booking";
