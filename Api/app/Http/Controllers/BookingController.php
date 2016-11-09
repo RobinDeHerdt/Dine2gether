@@ -221,7 +221,13 @@ class BookingController extends Controller
     {   
         $booking = Booking::find($id);
 
-        $booking->users()->detach();
+        $bookingdates = $booking->bookingdates()->get();
+
+        foreach ($bookingdates as $bookingdate) {
+            $bookingdate->users()->detach();
+        }
+
+        $booking->bookingdates()->delete();
         $booking->interests()->detach();
         $booking->kitchenstyles()->detach();
 
