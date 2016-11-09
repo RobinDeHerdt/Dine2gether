@@ -57,7 +57,7 @@ Route::group(array('prefix' => 'api'), function() {
 
     Route::post('getbookingdatebydate', 'BookingDateController@getBookingDateByDate');
     Route::post('createbookingdate', 'BookingDateController@createNewBookingDate');
-    Route::post('addtobookingdate','BookingDateController@addUserToBookingdate')
+    Route::post('addtobookingdate','BookingDateController@addUserToBookingdate');
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');
   	//Route::get('/createbooking', 'BookingController@create');
