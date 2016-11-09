@@ -13,26 +13,56 @@ class DishesTableSeeder extends Seeder
     {
         DB::table('dishes')->insert([
             'name' => 'Pizza',
-            'description' => 'Generische pizza.',
+            'description' => 'Pizza hawai',
             'booking_id' => 1,
         ]);
 
         DB::table('dishes')->insert([
-            'name' => 'Steak met frieten.',
-            'description' => 'Steak met frieten beschrijving.',
+            'name' => 'Steak with fries.',
+            'description' => 'Steak with fries description.',
             'booking_id' => 2,
         ]);
 
         DB::table('dishes')->insert([
             'name' => 'Spaghetti',
-            'description' => 'Spaghetti beschrijving.',
+            'description' => 'Spaghetti description.',
             'booking_id' => 2,
         ]);
 
         DB::table('dishes')->insert([
             'name' => 'Ravioli',
-            'description' => 'Ravioli beschrijving.',
+            'description' => 'Ravioli description.',
             'booking_id' => 2,
+        ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Ravioli',
+            'description' => 'Ravioli description.',
+            'booking_id' => 3,
+        ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Macaroni',
+            'description' => 'Macaroni with ham and cheese',
+            'booking_id' => 3,
+        ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Ravioli',
+            'description' => 'Ravioli description.',
+            'booking_id' => 1,
+        ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Ravioli',
+            'description' => 'Ravioli description.',
+            'booking_id' => 4,
+        ]);
+
+        DB::table('dishes')->insert([
+            'name' => 'Macaroni',
+            'description' => 'Macaroni with ham and cheese.',
+            'booking_id' => 4,
         ]);
     }
 }

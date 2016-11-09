@@ -13,7 +13,8 @@ class Booking extends Model
 
     public function bookingdates() 
     {
-        return $this->hasMany('App\Bookingdate', 'booking_id','user_id');
+        // return $this->hasMany('App\Bookingdate', 'booking_id','user_id');
+        return $this->hasMany('App\Bookingdate');
     }
 
     public function interests()
