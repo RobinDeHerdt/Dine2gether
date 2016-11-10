@@ -30,13 +30,13 @@
 					<p>{{request.booking.price | currency: "€"}}</p>
 				</div>
 			</div>
-			<div class="col s6">
+			<!-- <div class="col s6">
 				<h5>Something else you'd like to ask this host?</h5>
 				<form action="">
 					<input type="textarea">
 					<a href="" class="btn">Contact {{request.booking.user.first_name}}</a>
 				</form>
-			</div>
+			</div> -->
 		</div>
 		<a ng-click="request.sendRequest()" class="btn">Confirm request</a>
 	</div>

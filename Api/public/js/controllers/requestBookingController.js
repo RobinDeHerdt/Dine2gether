@@ -89,7 +89,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			$timeout(function() {
 				$('select:not([multiple])').material_select();
 
-				if(vm.user.id == vm.booking.id) {
+				if(vm.user.id == vm.booking.user.id) {
 					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
 						window.location.href = "#/overview";
 					}, function () {
