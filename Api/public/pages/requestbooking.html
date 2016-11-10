@@ -7,7 +7,7 @@
 		</div>
 		<div class="row">
 			<div class="col s6">
-				<div ng-show="request.booking.bookingdates.length">
+				<div>
 					<h5>Pick your date:</h5>
 					<div ng-if="!request.daterequest" class="input-field col s12">
 						<select ng-model="request.requestdata.selectedDate">
@@ -22,7 +22,7 @@
 						<div class="col s6">
 							<input ng-model="request.requestdata.newtime" type="time">
 						</div>
-						<a ng-if="request.daterequest" ng-click="request.resetSelect()">Choose from available dates</a>
+						<a ng-if="request.daterequest && request.otherdates" ng-click="request.resetSelect()">Choose from available dates</a>
 					</div>
 				</div>
 				<div class="col s12">
@@ -30,13 +30,13 @@
 					<p>{{request.booking.price | currency: "€"}}</p>
 				</div>
 			</div>
-			<div class="col s6">
+			<!-- <div class="col s6">
 				<h5>Something else you'd like to ask this host?</h5>
 				<form action="">
 					<input type="textarea">
 					<a href="" class="btn">Contact {{request.booking.user.first_name}}</a>
 				</form>
-			</div>
+			</div> -->
 		</div>
 		<a ng-click="request.sendRequest()" class="btn">Confirm request</a>
 	</div>
