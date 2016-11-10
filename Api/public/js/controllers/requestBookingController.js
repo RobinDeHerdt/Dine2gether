@@ -40,9 +40,9 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 					text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
 					type: "success"
 				}).then(function () {
-					$location.path("/overview");
+					window.location.href = "#/overview";
 				}, function () {
-					$location.path("/overview");
+					window.location.href = "#/overview";
 				});
 			}, function (error) {
 				swal({
