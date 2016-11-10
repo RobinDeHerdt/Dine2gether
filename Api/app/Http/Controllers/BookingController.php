@@ -162,7 +162,8 @@ class BookingController extends Controller
         $bookingdates = Bookingdate::where('booking_id', $booking->id)->where('booking_date', '>', Carbon::now())->get();
         $booking->bookingdates = $bookingdates;
         // put interests in $user
-        $user_id = $bookingdates[0]->host_id;
+        // $user_id = $bookingdates[0]->host_id;
+        $user_id = $booking->user_id;
         $user = User::where('id', $user_id)->first();
 
         foreach ($dishes as $dish) { // get dish images by dish for this booking
