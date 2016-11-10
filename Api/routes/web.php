@@ -29,6 +29,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
     Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail'); 
     Route::post('sendconfirmationrequestmail', 'ConfirmationMailController@sendConfirmationRequestMail');
+    Route::post('sendbookingmails','ConfirmationMailController@sendBookingMails');
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
     Route::delete('bookings/detach/{id}/user/{userid}','BookingController@detach');

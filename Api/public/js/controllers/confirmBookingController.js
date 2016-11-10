@@ -1,4 +1,4 @@
-d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams, $location, $filter) {
+d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams, $location, $filter, $http) {
 
 	var loginSvc = loginService;
 	var bookingSvc = bookingService;
@@ -194,7 +194,9 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 
 				bookingSvc.addUserToBookingdate(data).then(function (data) {
 					requestSvc.deleteRequest(vm.request.id).then(function () {
-						mealBooked();
+						$http.post("api/sendbookingmails", maildata).then(function () {
+							mealBooked();
+						});
 					});
 				});
 
