@@ -80,7 +80,17 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 						window.location.href = "#/overview";
 					});
 				}
-			}, 1)
+
+				if(vm.booking.bookingdates) {
+					vm.daterequest = false;
+					vm.otherdates = true;
+				} else {
+					vm.daterequest = true;
+					vm.otherdates = false;
+				}
+
+				console.log(vm.daterequest);
+			}, 50)
 			
 		}, function (error) {
 			swal({
