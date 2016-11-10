@@ -72,6 +72,14 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			vm.booking = data.data.booking;
 			$timeout(function() {
 				$('select:not([multiple])').material_select();
+
+				if(vm.user.id == vm.booking.id) {
+					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
+						window.location.href = "#/overview";
+					}, function () {
+						window.location.href = "#/overview";
+					});
+				}
 			}, 1)
 			
 		}, function (error) {
@@ -103,9 +111,9 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				text: "You need to be logged in to request a meal",
 				type: "error"
 			}).then(function () {
-				$location.path("/");
+				window.location.href = "/";
 			}, function () {
-				$location.path("/");
+				window.location.href = "/";
 			});
 		}
 	}

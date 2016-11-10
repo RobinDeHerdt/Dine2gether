@@ -1,4 +1,4 @@
-d2gApp.controller("bookingDetailsController", function ($stateParams, bookingService, requestService, loginService) {
+d2gApp.controller("bookingDetailsController", function ($stateParams, $location, bookingService, requestService, loginService) {
 	var vm = this;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
@@ -15,12 +15,23 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, bookingSer
 		return convertedString;
 	}
 
+	vm.redirect = function () {
+		if(vm.request != "own_booking" && vm.request != "pending") {
+			$location.path("requestbooking/"+ vm.currentBookingId);
+		}
+	}
+
 	function getCurrentBooking () {
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
 			vm.currentBooking = data.data.booking;
 			console.log(data.data.booking);
 			if(vm.user) {
-				checkIfUserHasRequest();
+				if(vm.user.id == vm.currentBooking.user.id) {
+					vm.request = "own_booking";
+					console.log(vm.request);
+				} else {
+					checkIfUserHasRequest();
+				}
 			}
 		})
 	}
