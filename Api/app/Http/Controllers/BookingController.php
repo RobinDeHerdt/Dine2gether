@@ -304,6 +304,7 @@ class BookingController extends Controller
         $arr_id = [];
         foreach($bookingdates as $bookingdate) {
             $booking = $bookingdate->booking;
+            $booking->date_time = $bookingdate->booking_date;
             array_push($bookings,$booking);
             if(!in_array($booking->id, $arr_id)) {
                 $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();

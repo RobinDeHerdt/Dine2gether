@@ -18,13 +18,6 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
 
-			if(vm.hostrequests) {
-				for(var i=0; i < vm.hostrequests.length; i++) {
-					var newdate = splitDateTime(vm.hostrequests[i].date_time);
-					vm.hostrequests[i].date = newdate[0];
-					vm.hostrequests[i].time = newdate[1];
-				}
-			}
 		})
 	}
 
@@ -34,25 +27,12 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 			vm.guestbookingdates = data.data.bookingdates;
 			vm.guestrequests = data.data.requests;
 
-			if(vm.guestrequests) {
-				for(var i=0; i < vm.guestrequests.length; i++) {
-					var newdate = splitDateTime(vm.guestrequests[i].date_time);
-					vm.guestrequests[i].date = newdate[0];
-					vm.guestrequests[i].time = newdate[1];
-				}
-			}
 		}) 
 	}
 
-	function splitDateTime(datetime) {
-		var datetimesplit = datetime.split(" ");
-		var date = datetimesplit[0];
-		var datesplit = date.split("-");
-
-		var newdate = datesplit[2] + "/" + datesplit[1] + "/" + datesplit[0];
-		var time = datetimesplit[1].substring(0,5);
-
-		return [newdate, time];
+	vm.convertToDate =function (dateString) {
+		var convertedString = new Date(dateString);
+  		return convertedString;
 	}
 
 	vm.acceptRequest = function (requestid, userid, bookingid) {
