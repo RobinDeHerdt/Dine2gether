@@ -10,7 +10,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 	vm.sendRequest = function () {
 		var datetime = "";
-
 		if(vm.requestdata.selectedDate && !vm.daterequest) {
 			console.log(vm.requestdata.selectedDate);
 			datetime = vm.requestdata.selectedDate;
@@ -66,6 +65,23 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		vm.daterequest = false;
 	}
 
+	function checkIfUserHasRequest() {
+		var data = {
+			user_id: vm.user.id,
+			booking_id: vm.booking.id
+		}
+		requestSvc.checkIfHasRequest(data).then(function (data) {
+			var request = data.data.request;
+				if (request.accepted == 0 && request.declined == 0) {
+					swal({ text: "You already sent a request. Please wait for the host to respond.", type: "error"}).then(function () {
+						window.location.href = "#/overview";
+					}, function () {
+						window.location.href = "#/overview";
+					});
+				}
+		});
+	}
+
 	function loadBookingById() {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
 			console.log(data.data.booking);
@@ -81,15 +97,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 					});
 				}
 
-				if(vm.booking.bookingdates) {
-					vm.daterequest = false;
-					vm.otherdates = true;
-				} else {
-					vm.daterequest = true;
-					vm.otherdates = false;
-				}
-
-				console.log(vm.daterequest);
+				checkIfUserHasRequest();
 			}, 50)
 			
 		}, function (error) {
