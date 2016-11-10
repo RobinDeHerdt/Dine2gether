@@ -18,7 +18,7 @@ class BookingKitchenstyleTableSeeder extends Seeder
 
         DB::table('booking_kitchenstyle')->insert([
             'booking_id' => 2,
-            'kitchenstyle_id' => 2,
+            'kitchenstyle_id' => 6,
         ]);
 
         DB::table('booking_kitchenstyle')->insert([
@@ -28,7 +28,7 @@ class BookingKitchenstyleTableSeeder extends Seeder
 
         DB::table('booking_kitchenstyle')->insert([
             'booking_id' => 1,
-            'kitchenstyle_id' => 4,
+            'kitchenstyle_id' => 6,
         ]);
     }
 }

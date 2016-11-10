@@ -22,11 +22,6 @@ class UserBookingTableSeeder extends Seeder
         ]);
 
         DB::table('bookingdate_user')->insert([
-            'user_id' => 1,
-            'bookingdate_id' => 3,
-        ]);
-
-        DB::table('bookingdate_user')->insert([
             'user_id' => 2,
             'bookingdate_id' => 2,
         ]);
