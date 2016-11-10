@@ -57,7 +57,7 @@
 			  <span class="title"><a href="/#/booking/{{booking.id}}/details"><strong>{{booking.title}}</strong></a></span>
 			  <p>{{ booking.postalcode + " " + booking.city}}</p>
 			  <p>{{ booking.street_number}}</p>
-			  <p>{{ booking.max_guests + " people | €" + booking.price + "/person"}}</p>
+			  <p>{{ "€" + booking.price + "/person"}}</p>
 			  <a href="" class="secondary-content" ng-click="profile.deleteBooking(booking.id)"><i class="material-icons">delete_forever</i></a>
 			</li>
 		  </ul>    
@@ -79,7 +79,7 @@
 			  <p>{{ bookingdate.host.first_name}} {{bookingdate.host.last_name}}</p>
 			  <p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>
 			  <p>{{ bookingdate.booking.street_number}}</p>
-			  <p>{{ bookingdate.booking.max_guests + " people | €" + bookingdate.booking.price + "/person"}}</p>
+			  <p>{{ "€" + bookingdate.booking.price + "/person"}}</p>
 			  <a href="" class="secondary-content" ng-click="profile.detachFromBooking(bookingdate.booking.id)"><i class="material-icons">delete_forever</i></a>
 			</li>
 		  </ul>    

@@ -30,6 +30,7 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 				vm.booking.newprice = vm.booking.price;
 				vm.booking.fee = 5;
 				vm.booking.totalprice = vm.booking.price + vm.booking.fee;
+				checkIfAcceptedRequest();
 			}
 		},function () {
 			swal({
@@ -135,6 +136,40 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 		return true;
 	}
 
+	function mealBooked() {
+		swal({
+			title: "Awesome!",
+			text: "You booked this meal. We hope you'll enjoy it!",
+			type: "success"
+		}).then(function () {
+			window.location.href = "#/dashboard";
+		}, function () {
+			window.location.href = "#/dashboard";
+		});
+	}
+
+	function goToOverview () {
+		window.location.href = "#/overview";
+	}
+
+	function checkIfAcceptedRequest () {
+		var data = {
+			user_id: vm.user.id,
+			booking_id: vm.booking.id
+		}
+		requestSvc.checkIfHasRequest(data).then(function (data) {
+				if (data.data.request == "none") {
+					swal({text: "You have to make a request first!", type: "error"}).then(function () { goToOverview(); },function () { goToOverview(); })
+				} else if(data.data.request.accepted === 1) {
+					
+				} else if (data.data.request.declined === 1) {
+					swal({text: "Sorry! You're request has been declined. You can't book this meal", type: "error"}).then(function () { goToOverview(); },function () { goToOverview(); })
+				} else {
+					swal({text: "You're request is still pending. Please wait a bit longer", type: "error"}).then(function () { goToOverview(); },function () { goToOverview(); })
+				}
+		});
+	}
+
 	vm.calcPrice = function () {
 		if(vm.selected_guests) {
 			vm.showguesterror = false;
@@ -158,7 +193,9 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 				}
 
 				bookingSvc.addUserToBookingdate(data).then(function (data) {
-
+					requestSvc.deleteRequest(vm.request.id).then(function () {
+						mealBooked();
+					});
 				});
 
 			} else {
@@ -166,27 +203,25 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 					user_id: vm.user.id,
 					booking_id: booking_id,
 					guests: vm.selected_guests,
-					booking_date: vm.datetime;
-					host_id: vm.booking.user.id;
+					booking_date: vm.datetime,
+					host_id: vm.booking.user.id
 				}
 
 				bookingSvc.createNewBookingdate(data).then(function (data) {
-					swal({
-						title: "Awesome!",
-						text: "You booked this meal. We hope you'll enjoy it!",
-						type: "success"
-					}).then(function () {
-						window.location.href("#/dashboard");
-					}, function () {
-						window.location.href("#/dashboard");
-					})
-			});
+					requestSvc.deleteRequest(vm.request.id).then(function () {
+						mealBooked();
+					});
+				});
+			}
 		} 
 
 	}
 
+
+
 	function _init() {
 		if(vm.user) {
+
 			getBookingById();
 			getRequestById();
 		} else {
