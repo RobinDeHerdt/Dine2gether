@@ -81,7 +81,7 @@ nav {
 }
 
 #filterwrapper {
-	position: fixed;
+	position: absolute;
 	right: 80px;
 }
 
