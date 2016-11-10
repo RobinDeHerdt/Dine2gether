@@ -618,7 +618,7 @@
                         
                             <h1 style="text-align: center;">Enjoy you meal 2gether!</h1>
 
-<p style="text-align: center;">Hi&nbsp;{{$hostname}}! How are you? We're just passing by to tell you that {{$guest-&gt;first_name}} will be enjoying your company while eating one of your delicious meals. You'll find your guest's email address below. If you have any more questions, don't hesitate to ask us!<br>
+<p style="text-align: center;">Hi&nbsp;{{$username}}! How are you? We're just passing by to tell you that {{$guest->first_name}} will be enjoying your company while eating one of your delicious meals. You'll find your guest's email address below. If you have any more questions, don't hesitate to ask us!<br>
 <br>
 Kind regards from D2G<br>
 &nbsp;</p>
@@ -692,11 +692,11 @@ Date &amp; time:
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:9px; padding-right:18px;">
                         
-                            {{$guest-&gt;first_name}}<br>
-{{$guest-&gt;last_name}}<br>
-{{$guest-&gt;email}}<br>
+                            {{$guest->first_name}}<br>
+{{$guest->last_name}}<br>
+{{$guest->email}}<br>
 <br>
-{{$booking-&gt;date}} at {{$booking-&gt;time}}
+{{$date}} at {{$time}}
                         </td>
                     </tr>
                 </tbody></table>

@@ -88,7 +88,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			vm.booking = data.data.booking;
 			$timeout(function() {
 				$('select:not([multiple])').material_select();
-
+				deleteEmptyoption();
 				if(vm.user.id == vm.booking.user.id) {
 					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
 						window.location.href = "#/overview";
@@ -107,6 +107,12 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				type: "error"
 			});
 		});
+	}
+
+	function deleteEmptyoption() {
+		setTimeout(function () {
+			$('.ng-empty').first().remove();
+		}, 1000)
 	}
 
 	function splitDateTime(datetime) {

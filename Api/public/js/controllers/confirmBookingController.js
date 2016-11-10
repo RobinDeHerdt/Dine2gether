@@ -195,9 +195,13 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 				bookingSvc.addUserToBookingdate(data).then(function (data) {
 					requestSvc.deleteRequest(vm.request.id).then(function () {
 						var maildata = {
-							$guest: vm.user,
-							
+							guest_id: vm.user.id,
+							host_id: vm.booking.user.id,
+							booking_id: vm.booking.id,
+							date: vm.request.date,
+							time: vm.request.time
 						}
+						console.log(maildata);
 						$http.post("api/sendbookingmails", maildata).then(function () {
 							mealBooked();
 						});
