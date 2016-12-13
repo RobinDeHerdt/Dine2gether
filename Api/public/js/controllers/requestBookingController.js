@@ -11,14 +11,8 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 	vm.sendRequest = function () {
 		var datetime = "";
 		if(vm.requestdata.selectedDate && !vm.daterequest) {
-			if(vm.requestdata.selectedDate != undefined)
-			{
-				showselectdate_error = false;
-				console.log(vm.requestdata.selectedDate);
-				datetime = vm.requestdata.selectedDate;
-			} else {
-				showselectdate_error = true;
-			}
+			console.log(vm.requestdata.selectedDate);
+			datetime = vm.requestdata.selectedDate;
 		} else {
 			var today = new Date();
 			if(vm.requestdata.newdate < today) {
@@ -118,7 +112,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 	function deleteEmptyoption() {
 		setTimeout(function () {
 			$('.ng-empty').first().remove();
-		}, 2000)
+		}, 1000)
 	}
 
 	function splitDateTime(datetime) {

@@ -2,24 +2,7 @@
 	<div class="container under-header overview">
 		<h1>Bookings</h1>
 		<div class="row">
-			<div id="filterwrapper" class="col l2 m4 s12">
-				<h3 class="mar-top-xl">Filter</h3>
-				<h5>Interests</h5>
-				<ul class="interests-filter">
-					<li ng-repeat="interest in overview.interests">
-						<input type="checkbox" class="filled-in" id="{{interest.interest}}" ng-model="interest.selected"/>
-	      				<label for="{{interest.interest}}">{{ interest.interest }}</label>
-					</li>
-				</ul>
-				<h5>Kitchen Style</h5>
-				<ul class="kitchen-filter">
-					<li ng-repeat="kitchen in overview.kitchenstyles">
-						<input type="checkbox" class="filled-in" id="{{kitchen.style}}" ng-model="kitchen.selected"/>
-	      				<label for="{{kitchen.style}}">{{ kitchen.style }}</label>
-					</li>
-				</ul>
-			</div>
-			<div id="bookingswrapper" class="mar-top-xl col m10 s12">
+			<div id="bookingswrapper" class="mar-top-xl col s10">
 				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
 					<div class="divider mar-top-l"></div>
 					<div class="wrapper row">
@@ -36,7 +19,23 @@
 					</div>
 				</div>
 			</div>
-			
+			<div id="filterwrapper">
+				<h3 class="mar-top-xl">Filter</h3>
+				<h5>Interests</h5>
+				<ul class="interests-filter">
+					<li ng-repeat="interest in overview.interests">
+						<input type="checkbox" class="filled-in" id="{{interest.interest}}" ng-model="interest.selected"/>
+	      				<label for="{{interest.interest}}">{{ interest.interest }}</label>
+					</li>
+				</ul>
+				<h5>Kitchen Style</h5>
+				<ul class="kitchen-filter">
+					<li ng-repeat="kitchen in overview.kitchenstyles">
+						<input type="checkbox" class="filled-in" id="{{kitchen.style}}" ng-model="kitchen.selected"/>
+	      				<label for="{{kitchen.style}}">{{ kitchen.style }}</label>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </main>
