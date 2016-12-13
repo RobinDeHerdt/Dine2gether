@@ -44,7 +44,7 @@ d2gApp.directive("d2gHeader", function () {
 			}
 
 			function _init() {
-				$(".button-collapse").sideNav({closeOnClick: true});
+				
 			}
 
 			_init();

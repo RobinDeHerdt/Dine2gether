@@ -1,8 +1,6 @@
 <nav ng-style='header.navstyle'>
     <div class="nav-wrapper mar-left-l mar-right-l">
       	<a ng-style="header.navtext" ui-sref="home" class="brand-logo open-sans bold"><img src="img/logo d2g 2.png" class="logo left mar-right-s" alt="logo">D2G</a>
-		<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-
       	<ul id="nav-mobile" class="right hide-on-med-and-down">
 	        <li><a ng-style="header.navtext" ng-hide="header.user" ng-click="header.showLogin()">Login</a></li>
 	        <li><a ng-style="header.navtext" ng-hide="header.user" ng-click="header.showRegister()">Sign Up</a></li>
@@ -12,12 +10,4 @@
 	        <li><a ng-style="header.navtext" ng-show="header.user" ng-click="header.logout()">Logout</a></li>
       	</ul>
     </div>
-	<ul class="side-nav" id="mobile-demo">
-		<li><a ng-click="header.showLogin()">Login</a></li>
-		<li><a ng-click="header.showRegister()">Signup</a></li>
-		<li><a ui-sref="dashboard">Dashboard</a></li>
-		<li><a ui-sref="profile">Profile</a></li>
-		<li><a ui-sref="create_booking">Become a host</a></li>
-		<li><a ng-click="header.logout()">logout</a></li>
-	</ul>
 </nav>
