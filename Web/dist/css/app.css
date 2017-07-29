@@ -205,18 +205,16 @@ nav {
   width: 25% !important; }
 
 #home {
-  background-image: url("../img/friendseating_edit.jpg"); }
+  background-image: url("/dist/img/friendseating_edit.jpg"); }
 
 #home-form {
-  margin-top: -64px;
-  top: 80%; }
+  margin-top: 10%; }
 
 #home input[type=text], #home input[type=text]:focus {
   border-bottom: 1px solid #15f8a5 !important;
-  box-shadow: 0 1px 0 0 #15f8a5;
   color: #fff;
   font-size: 24px;
-  text-align: center; }
+  box-shadow: 0 1px 0 0 #15f8a5; }
 
 .profile input[type=text], .profile input[type=text]:focus {
   border-bottom: 1px solid #26a69a !important;
@@ -242,11 +240,12 @@ nav {
   overflow-y: scroll; }
 
 .branding h1 {
-  margin-top: 25%;
+  margin-top: 15%;
   font-size: 70pt; }
 
 .branding p {
-  font-size: 20px; }
+  font-size: 22px;
+  padding-top: 20px; }
 
 #createbookingpagination li {
   cursor: pointer; }
