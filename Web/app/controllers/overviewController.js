@@ -7,6 +7,10 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 
 	vm.bookings = {};
 
+	vm.bookingImage = function(booking) {
+		return CONSTANTS.PUBLIC_BASE_URL  + "/" + booking.dishes[0].dish_images[0].image_url;
+	}
+
 	vm.showFilteredInterests = function () {
 		var interestsarray = getInterestsFilter();
 		return function (booking) {
@@ -45,6 +49,7 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 			}
 		}
 	}
+
 	function loadBookings () {
 		if($stateParams.search) {
 			bookingSvc.getBookingsByLocation($stateParams.search)

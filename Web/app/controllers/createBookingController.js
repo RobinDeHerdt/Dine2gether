@@ -65,7 +65,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 		var arr_nr = dish_nr - 1;
 		if(files && files.length) {
 			Upload.upload({
-				url: '/api/upload',
+				url: CONSTANTS.API_BASE_URL + '/upload',
 				data: {
 					files:files
 					}

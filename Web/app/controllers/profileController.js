@@ -42,7 +42,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				host_id: vm.user.id,
 				booking_id: bookingid
 			}
-			$http.post("api/sendconfirmationrequestmail", data).then( function () {
+			$http.post(CONSTANTS.API_BASE_URL + "/sendconfirmationrequestmail", data).then( function () {
 				swal({
 					text: "Request was accepted. User is booked and will get a notification.",
 					type: "success"
@@ -127,7 +127,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 
 	vm.uploadProfilePicture = function (file) {
 		Upload.upload({
-			url: '/api/profile/upload',
+			url: CONSTANTS.API_BASE_URL + '/profile/upload',
 			data: 
 			{
 				file	: file,
@@ -139,6 +139,10 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				vm.path = '';
 			}); 
 	}
+
+    vm.userImage = function() {
+        return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.user.image;
+    }
 
 	function _init() {
 		console.log(loginSvc.getUser());

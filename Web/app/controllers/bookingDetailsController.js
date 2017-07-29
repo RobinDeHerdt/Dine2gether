@@ -1,8 +1,8 @@
 d2gApp.controller("bookingDetailsController", function ($stateParams, $location, bookingService, requestService, loginService) {
 	var vm = this;
-	var bookingSvc = bookingService;
-	var requestSvc = requestService;
-	var loginSvc = loginService;
+	var bookingSvc 	= bookingService;
+	var requestSvc 	= requestService;
+	var loginSvc 	= loginService;
 
 	vm.user = loginSvc.getUser();
 	vm.currentBookingId = $stateParams.id;
@@ -17,6 +17,14 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $location,
 		if(vm.request != "own_booking" && vm.request != "pending") {
 			$location.path("requestbooking/"+ vm.currentBookingId);
 		}
+	}
+
+    vm.userImage = function(currentBooking) {
+        return CONSTANTS.PUBLIC_BASE_URL + "/" + currentBooking.user.image;
+    }
+
+    vm.dishImage = function(dish) {
+        return CONSTANTS.PUBLIC_BASE_URL + "/" + dish.dish_images[0].image_url;
 	}
 
 	function getCurrentBooking () {

@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         $user = User::find($request->user_id);
 
-        $path = $request->file->store('img/profile', 'upload');
+        $path = $request->file->store('images/profile', 'upload');
         
         $user->image  = $path;
 

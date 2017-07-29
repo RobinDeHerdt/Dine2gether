@@ -18,7 +18,7 @@
     <div ng-repeat="reviewObj in review.reviews">
       <ul class="collection">
       <li class="collection-item avatar">
-         <img ng-src="{{ reviewObj.user.image }}" alt="" class="circle">
+         <img ng-src="{{review.userImage(reviewObj.user)}}" alt="" class="circle">
         <span class="title"><a href="/#/user/{{reviewObj.author_id}}/reviews"><strong>{{reviewObj.user.first_name + " " + reviewObj.user.last_name }}</strong></a></span>
         <p>{{reviewObj.body}}</p>
         <a href="" class="secondary-content" ng-click="review.deleteReview(reviewObj.id)" ng-show="review.userid === reviewObj.author_id">

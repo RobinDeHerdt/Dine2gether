@@ -202,7 +202,7 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 							time: vm.request.time
 						}
 						console.log(maildata);
-						$http.post("api/sendbookingmails", maildata).then(function () {
+						$http.post(CONSTANTS.API_BASE_URL + "/sendbookingmails", maildata).then(function () {
 							mealBooked();
 						});
 					});

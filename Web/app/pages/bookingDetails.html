@@ -11,7 +11,7 @@
  						<div class="col s12 m4">
  							<div class="card">
  							   	<div class="card-image waves-effect waves-block waves-light">
- 							      <img ng-src="{{bookingdetails.currentBooking.user.image}}" class="activator">
+ 							      <img ng-src="{{bookingdetails.userImage(bookingdetails.currentBooking)}}" class="activator">
  							    </div>
  						  	</div>
  						</div>
@@ -19,21 +19,17 @@
  							<h5>{{bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name}}</h5>
  							<h5>{{ bookingdetails.currentBooking.city }}</h5>
  							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
- 							
  							<a href="/#/user/{{bookingdetails.currentBooking.user.id}}/reviews"><h5>Reviews about this user</h5></a>
  						</div>
  						<div class="col s12 m4">
  							<h5>Interests:</h5>
-
  							<ul class="collection">
  								<li ng-if="!bookingdetails.currentBooking.interests.length" class="collection-item">No interests added</li>
 	 							<div ng-repeat="interest in bookingdetails.currentBooking.interests">
-	 								
 								    <li class="collection-item">{{ interest.interest}}</li>
 	  							</div>
   							</ul>
   							<h5>Kitchenstyles:</h5>
- 							
  							<ul class="collection">
  								<li ng-if="!bookingdetails.currentBooking.kitchenstyles.length">No style added</li>
 	 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
@@ -41,7 +37,6 @@
 	 							</div>
  							</ul>
  							<h5>Dates available:</h5>
- 							
  							<ul class="collection">
  								<li class="collection-item" ng-if="!bookingdetails.currentBooking.bookingdates.length">No dates yet</li>
  								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.bookingdates"> <p>{{ bookingdetails.convertToDate(date.booking_date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.booking_date) | date: "HH:mm"}}<a ng-hide="bookingdetails.request == 'own_booking'" href=""><span class="secondary-colour white-text badge" data-badge-caption="request this"></span></a></p>
@@ -60,7 +55,7 @@
  						<div class="col s12 m4">
  							<div class="card">
  							   	<div class="card-image waves-effect waves-block waves-light">
- 							      <img ng-src="{{dish.dish_images[0].image_url}}" class="activator">
+ 							      <img ng-src="{{bookingdetails.dishImage(dish)}}" class="activator">
  							    </div>
  							    <div class="card-content">
  							      <span class="card-title activator grey-text text-darken-4"><h5>{{dish.name}}</h5></span>

@@ -8,7 +8,7 @@
 		        <div class="col s12 m3" ng-repeat="guest in guestbooking.users">
 		          <div class="card">
 		            <div class="card-image">
-		              <img ng-src="{{guest.image}}">
+		              <img ng-src="{{review.userImage(guest)}}">
 		              <span class="card-title">{{ guest.first_name + " " + guest.last_name }}</span>
 		            </div>
 		            <div class="card-content">
@@ -26,7 +26,7 @@
 	        <div class="col s12 m3" ng-repeat="host in review.hostbookings">
 	          <div class="card">
 	            <div class="card-image">
-	              <img ng-src="{{host[0].image}}">
+	              <img ng-src="{{review.userImage(host[0])}}">
 	              <span class="card-title">{{ host[0].first_name + " " + host[0].last_name }}</span>
 	            </div>
 	            <div class="card-content">

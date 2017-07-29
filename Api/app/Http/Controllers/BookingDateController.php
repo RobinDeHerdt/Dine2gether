@@ -20,7 +20,7 @@ class BookingDateController extends Controller
 
     	$bookingdate->booking_date 	= $request->booking_date;
     	$bookingdate->guests_booked = $request->guests;
-    	$bookingdate->booking_id 	= $request->$booking_id;
+    	$bookingdate->booking_id 	= $request->booking_id;
     	$bookingdate->host_id 		= $request->host_id;
 
     	$bookingdate->save();

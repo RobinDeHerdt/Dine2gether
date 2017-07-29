@@ -6,6 +6,7 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 
 	function getGuestsInfo() {
 		var user = loginSvc.getUser();
+		vm.user = user;
 		reviewSvc.getGuests(user.id).then(function(data)
 		{
 			vm.guestbookings = data.data.bookings;
@@ -63,13 +64,21 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 		{
 			if(data.status == 200)
 			{
-				$location.path('/user/'+vm.selectedUser+'/reviews');
+				$location.path('/user/'+ vm.selectedUser+'/reviews');
 			}
 		}, function (error) {
 			vm.sendreviewerror = error.data.review[0];
 			console.log(error);
 		});
 	}
+
+    vm.bookingImage = function(user) {
+		return CONSTANTS.PUBLIC_BASE_URL + "/" + user.image;
+    }
+
+    vm.userImage = function(user) {
+        return CONSTANTS.PUBLIC_BASE_URL + "/" + user.image;
+    }
 
 	vm.deleteReview = function(id)
 	{

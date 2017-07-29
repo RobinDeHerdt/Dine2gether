@@ -4,10 +4,10 @@ d2gApp.service('bookingService', function($http) {
 
 	svc.getBookings = function () {
 		return $http.get(CONSTANTS.API_BASE_URL + '/bookings');
-    	}
+    }
 
     svc.getBookingsByLocation = function (location) {
-        var url = '/search?location='+location;
+        var url = CONSTANTS.PUBLIC_BASE_URL + '/search?location='+location;
         return $http.get(url);
     }
     
