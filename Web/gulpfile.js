@@ -46,7 +46,7 @@ gulp.task("js", function() {
 // This task bundles your application styles into dist/styles.css //
 // -------------------------------------------------------------- //
 gulp.task("sass", function() {
-    return gulp.src('assets/sass/*.scss')
+    return gulp.src('assets/sass/app.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('dist/css'));
 });

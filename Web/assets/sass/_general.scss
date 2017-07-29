@@ -10,7 +10,9 @@ nav {
 	height: 64px;
 }
 
-#modal1.modal { width: 25% !important; }
+#modal1.modal {
+	width: 25% !important;
+}
 
 #home {
 	background-image: url("/dist/img/friendseating_edit.jpg");
@@ -55,7 +57,8 @@ nav {
 }
 
 .branding h1 {
-	margin-top: 15%;
+	padding-top: 15%;
+	margin: 0;
 	font-size: 70pt;
 }
 
@@ -64,7 +67,9 @@ nav {
 	padding-top: 20px;
 }
 
-#createbookingpagination li {cursor: pointer; }
+#createbookingpagination li {
+	cursor: pointer;
+}
 
 #createbookingpagination li.active { 
 	background-color: #00C77C !important;

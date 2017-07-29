@@ -6,8 +6,7 @@
 	<title>Dine2gether</title>
 
     <!-- CDN styles -->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
 
     <!-- Application styles -->
     <link rel="stylesheet" type="text/css" href="dist/css/app.css">
