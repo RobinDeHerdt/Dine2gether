@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
                     'first_name' => 'Robin',
                     'last_name' => 'De Herdt', 
                     'email' => 'robin.deherdt@student.kdg.be',
-                    'image' => 'img/friendseating.jpg',
+                    'image' => 'friendseating.jpg',
                     'street_number' => 'Vlinderstraat 10',
                     'city' => 'Heist-op-den-Berg',
                     'postalcode' => '2220',
@@ -69,7 +69,7 @@ class UsersTableSeeder extends Seeder
                 [
                     'first_name' => 'Sharon',
                     'last_name' => 'Meeus',
-                    'image' => 'img/friendseating.jpg',
+                    'image' => 'friendseating.jpg',
                     'street_number' => 'Molenstraat 123',
                     'city' => 'Olen',
                     'postalcode' => '2000',

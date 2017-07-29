@@ -1,0 +1,79 @@
+ <main>
+ 	<div class="container under-header bookingdetails">
+ 			<a href="/#/overview"><h5>Back</h5></a>
+ 			<h1>{{ bookingdetails.currentBooking.title}}</h1>
+ 			<br>
+ 			<h3>About the host</h3>
+ 			<div class="row">
+ 				<div class="card">
+ 					<div class="col s12">
+ 						<div class="row">
+ 						<div class="col s12 m4">
+ 							<div class="card">
+ 							   	<div class="card-image waves-effect waves-block waves-light">
+ 							      <img ng-src="{{bookingdetails.currentBooking.user.image}}" class="activator">
+ 							    </div>
+ 						  	</div>
+ 						</div>
+ 						<div class="col s12 m4">
+ 							<h5>{{bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name}}</h5>
+ 							<h5>{{ bookingdetails.currentBooking.city }}</h5>
+ 							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
+ 							
+ 							<a href="/#/user/{{bookingdetails.currentBooking.user.id}}/reviews"><h5>Reviews about this user</h5></a>
+ 						</div>
+ 						<div class="col s12 m4">
+ 							<h5>Interests:</h5>
+
+ 							<ul class="collection">
+ 								<li ng-if="!bookingdetails.currentBooking.interests.length" class="collection-item">No interests added</li>
+	 							<div ng-repeat="interest in bookingdetails.currentBooking.interests">
+	 								
+								    <li class="collection-item">{{ interest.interest}}</li>
+	  							</div>
+  							</ul>
+  							<h5>Kitchenstyles:</h5>
+ 							
+ 							<ul class="collection">
+ 								<li ng-if="!bookingdetails.currentBooking.kitchenstyles.length">No style added</li>
+	 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
+  									<li class="collection-item">{{ style.style}}</li>
+	 							</div>
+ 							</ul>
+ 							<h5>Dates available:</h5>
+ 							
+ 							<ul class="collection">
+ 								<li class="collection-item" ng-if="!bookingdetails.currentBooking.bookingdates.length">No dates yet</li>
+ 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.bookingdates"> <p>{{ bookingdetails.convertToDate(date.booking_date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.booking_date) | date: "HH:mm"}}<a ng-hide="bookingdetails.request == 'own_booking'" href=""><span class="secondary-colour white-text badge" data-badge-caption="request this"></span></a></p>
+								<p ng-if="date.guests_booked < bookingdetails.currentBooking.max_guests">seats booked:{{date.guests_booked}}/{{bookingdetails.currentBooking.max_guests}}</p>
+								<p ng-if="date.guests_booked == bookingdetails.currentBooking.max_guests" class="red-text">Fully booked!</p>
+ 								</li>
+ 							</ul>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<h3>Menu</h3>
+ 			<div class="row">
+ 				<div class="card">
+ 					<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
+ 						<div class="col s12 m4">
+ 							<div class="card">
+ 							   	<div class="card-image waves-effect waves-block waves-light">
+ 							      <img ng-src="{{dish.dish_images[0].image_url}}" class="activator">
+ 							    </div>
+ 							    <div class="card-content">
+ 							      <span class="card-title activator grey-text text-darken-4"><h5>{{dish.name}}</h5></span>
+ 							    	<p>{{dish.description}}</p>
+ 							    </div>
+ 						  	</div>
+ 						</div>
+ 					</div>
+ 				</div>
+ 			</div>
+ 			<a ng-class="bookingdetails.request == 'pending' || bookingdetails.request == 'own_booking' ? 'disabled' : ''" ng-hide="bookingdetails.request == 'accepted'" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
+ 			<p ng-if="bookingdetails.request == 'pending'">*You already sent a request. Please wait until the host has responded.</p>
+ 			<a ng-if="bookingdetails.request == 'accepted'" ui-sref="booknow({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Book now</a>
+		</div>
+ 	</div>
+ </main>
