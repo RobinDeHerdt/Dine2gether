@@ -69,18 +69,18 @@ nav {
 
 #createbookingpagination li {
 	cursor: pointer;
-}
 
-#createbookingpagination li.active { 
-	background-color: #00C77C !important;
+	&.active {
+		background-color: #26a69a;
+	}
 }
 
 .overview .img_container {
 	width: 100%;
-}
 
-.overview .img_container img {
-	width: 100%;
+	img {
+		width: 100%;
+	}
 }
 
 #filterwrapper {
