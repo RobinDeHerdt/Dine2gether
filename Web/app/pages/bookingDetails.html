@@ -11,12 +11,12 @@
  						<div class="col s12 m4">
  							<div class="card">
  							   	<div class="card-image waves-effect waves-block waves-light">
- 							      <img ng-src="{{bookingdetails.userImage(bookingdetails.currentBooking)}}" class="activator">
+ 							      	<img ng-src="{{bookingdetails.currentBooking.user.image}}" class="activator">
  							    </div>
  						  	</div>
  						</div>
  						<div class="col s12 m4">
- 							<h5>{{bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name}}</h5>
+ 							<h5>{{ bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name }}</h5>
  							<h5>{{ bookingdetails.currentBooking.city }}</h5>
  							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
  							<a href="/#/user/{{bookingdetails.currentBooking.user.id}}/reviews"><h5>Reviews about this user</h5></a>

@@ -50,7 +50,7 @@ class BookingController extends Controller
         $paths_array = [];
 
         foreach ($uploaded_files["files"] as $uploaded_file) {
-            $path = $uploaded_file->store('img', 'upload');
+            $path = $uploaded_file->store('images', 'upload');
             array_push($paths_array, $path);
         }
 
@@ -81,7 +81,7 @@ class BookingController extends Controller
 
         $booking->title             = $request->menu_title;
         $booking->price             = $request->price;
-        $booking->date              = $request->date;
+        // $booking->date              = $request->date;
         $booking->street_number     = $request->address;
         $booking->postalcode        = $request->postal_code;
         $booking->city              = $request->city;
@@ -95,17 +95,17 @@ class BookingController extends Controller
 
         foreach ($input_dishes as $input_dish) {
             $dish = new Dish();
-            $dish->name         = $input_dish->dish_name;
-            $dish->description  = $input_dish->description;
+            $dish->name = $input_dish["dish_name"];
+            $dish->description = $input_dish["description"];
 
             $dish->booking()->associate($booking);
 
             $dish->save();
 
-            foreach ($input_dish->dish_img as $input_dishimage) {
+            foreach ($input_dish["dish_img"] as $input_dishimage) {
                 $dish_image = new DishImage();
 
-                $dish_image->image_url  = $input_dishimage;
+                $dish_image->image_url = $input_dishimage;
                 $dish_image->dish()->associate($dish);
 
                 $dish_image->save();
@@ -113,22 +113,22 @@ class BookingController extends Controller
         }
 
         $kitchenstyles = $request->kitchenstyles;
+        $kitchenstyles_array = [];
 
-        foreach ($kitchenstyles as $style) {
-            $style = Kitchenstyle::where('style', $style)->first();
-
-            DB::table('booking_kitchenstyle')->insert(['booking_id' => $booking->id, 'kitchenstyle_id' => $style->id]);
+        foreach ($kitchenstyles as $kitchenstyle) {
+            array_push($kitchenstyles_array, $kitchenstyle);
         }
+
+        $booking->kitchenstyles()->attach($kitchenstyles_array);
 
         $interests = $request->interests;
+        $interests_array = [];
 
-        for ($x = 0; $x < count($interests); $x++) {
-            $interest = Interest::where('interest', $interests[$x])->first();
-            $interestid = $interest->id;
-            DB::table('booking_interest')->insert(
-                ['booking_id' => $booking->id, 'interest_id' => $interestid]
-            );
+        foreach ($interests as $interest) {
+            array_push($interests_array, $interest);
         }
+
+        $booking->interests()->attach($interests_array);
 
         return response()->json([
             'status' => 'success'
@@ -143,7 +143,7 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        $booking = $booking->with([
+        $booking = Booking::where('id', $booking->id)->with([
             'user',
             'interests',
             'kitchenstyles',

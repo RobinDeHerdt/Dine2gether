@@ -9,30 +9,24 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	vm.numberOfPages = 5;
 	vm.currentPage = 1;
 	vm.dishes = [{
-		number: 1,
+		number: 1
 	}];
 
 	vm.addTemplateDish = function () {
 		console.log(vm.dishes);
 		var dish_nr = vm.dishes.length + 1;
 		vm.dishes.push({
-			number: dish_nr,
+			number: dish_nr
 		});
-	}
+	};
+
 	vm.deleteLastDish = function () {
 		vm.dishes.pop();
-	}
+	};
+
 	vm.createBooking = function () {
-		for(i=0; i < vm.dishes.length; i++) {
-			if(vm.dishes[i].img) {
-				console.log(vm.dishes[i]);
-			} else {
-				console.log(vm.dishes[i]);
-				return false;
-			}
-		}
 		var user = loginSvc.getUser();
-		console.log(user.id);
+
 		var data = {
 			user_id: user.id,
 			menu_title: vm.menu_title,
@@ -45,54 +39,45 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 			interests:  getSelectedInterests(),
 			kitchenstyles:  getSelectedKitchenstyles(),
 			max_nr_guests: vm.max_nr_guests,
-			dishes: getDishes(),
+			dishes: getDishes()
 		};
 		console.log(data);
 		bookingSvc.createBooking(data).then(function (data) {
-			if(data.data.status == 'success')
-			{
+			if(data.data.status === 'success') {
 				$location.path('/overview');
 			}
-			}, function (error) {
-				console.log(error);
-				vm.errors = error.data;
-				console.log(error.data);
-			});
-	} 
+		}, function (error) {
+			console.log(error);
+			vm.errors = error.data;
+		});
+	};
 
 	vm.createImageFile = function (files, errFiles, dish_nr) {
-		console.log(files)
 		var arr_nr = dish_nr - 1;
+
 		if(files && files.length) {
 			Upload.upload({
 				url: CONSTANTS.API_BASE_URL + '/upload',
 				data: {
 					files:files
-					}
-				}).then(function (response) {
-					console.log(response);
-					var response_arr = response.data.filenaam;
-					var imgs_arr = [];
-					var arr_nr = vm.dishes.length - 1;
-					if(response_arr.length > 0)
-					{
-						for(var i=0; i<response_arr.length; i++) {
-							imgs_arr.push(response_arr[i]);
-						}
-					}
-					console.log(imgs_arr);
+				}
+			}).then(function (response) {
+				var response_arr = response.data.paths;
+				var imgs_arr = [];
+				var arr_nr = vm.dishes.length - 1;
 
-					vm.dishes[arr_nr].img = imgs_arr;
-					console.log(vm.dishes[arr_nr]);
-				}, function (error) {
-					if(error.status > 0) {
-						console.log(error);
+				if(response_arr.length > 0) {
+					for(var i = 0; i < response_arr.length; i++) {
+						imgs_arr.push(response_arr[i]);
 					}
-				});
-			
-			console.log(vm.dishes);
+				}
+
+				vm.dishes[arr_nr].img = imgs_arr;
+			}, function (error) {
+				console.log(error);
+			});
 		} 
-	}
+	};
 
 	function loadInterests () {
 		interestSvc.getInterests().success(function (data) {
@@ -109,33 +94,38 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	}
 
 	function getSelectedInterests () {
-		var arr_interests = [];
+		var selected_interests = [];
+
 		angular.forEach(vm.interests, function (interest) {
 			if(interest.selected) {
-				arr_interests.push(interest.interest);
+                selected_interests.push(interest.id);
 			}
-		})
-		return arr_interests;
+		});
+
+		return selected_interests;
 	}
 
 	function getSelectedKitchenstyles () {
-		var arr_kitchenstyles = [];
+		var selected_kitchenstyles = [];
+
 		angular.forEach(vm.kitchenstyles, function (kitchenstyle) {
 			if(kitchenstyle.selected) {
-				arr_kitchenstyles.push(kitchenstyle.style);
+                selected_kitchenstyles.push(kitchenstyle.id);
 			}
-		})
-		return arr_kitchenstyles;
+		});
+
+		return selected_kitchenstyles;
 	}
 
 	function getDishes () {
 		var arr_dishes = [];
-		for(var x=0; x < vm.dishes.length; x++) {
+
+		for(var i = 0; i < vm.dishes.length; i++) {
 
 			arr_dishes.push({
-				dish_name: vm.dishes[x].dish_name,
-				description: vm.dishes[x].descr,
-				dish_img: vm.dishes[x].img
+				dish_name: vm.dishes[i].dish_name,
+				description: vm.dishes[i].descr,
+				dish_img: vm.dishes[i].img
 			})
 		}
 
@@ -143,20 +133,18 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	}
 
 	vm.getAddress = function()	{
-		if(vm.selectedAddress)
-		{
+		if(vm.selectedAddress) {
 			var user = loginSvc.getUser(); 
 			vm.address 		= user.street_number;
 			vm.postal_code 	= user.postalcode;
 			vm.city 		= user.city;
-		}	
-		else 
+		} else
 		{
 			vm.address 		= '';
 			vm.postal_code 	= '';
 			vm.city 		= '';
 		}
-	}
+	};
 
 	function _init () {
 		if(!loginSvc.getUser()) {
