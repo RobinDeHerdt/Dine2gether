@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Dish_image extends Model
+class DishImage extends Model
 {
     public function dish()
     {

@@ -27,16 +27,21 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function bookingdates()
+    /**
+     * A user belongs to a booking dates.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function bookingDates()
     {
-        return $this->belongsToMany('App\Bookingdate','bookingdate_user', 'user_id', 'bookingdate_id');
+        return $this->belongsToMany('App\Bookingdate', 'bookingdate_user', 'user_id', 'bookingdate_id');
     }
 
-    // public function bookingdate()
-    // {
-    //     return $this->hasMany('App\Bookingdate', 'host_id');
-    // }
-
+    /**
+     * A user has many reviews.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function reviews()
     {
         return $this->hasMany('App\Review', 'author_id');

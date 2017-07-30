@@ -2,68 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
-use App\Http\Requests;
 use App\Booking;
 use App\Bookingdate;
 use App\User;
 use App\Dish;
-use App\Dish_Image;
+use App\DishImage;
 use App\Interest;
 use App\Kitchenstyle;
 use App\RequestBooking;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Fetch all bookings.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        // We want to return the booking including the user(s), dish(es) and dish image(s)
-        $bookings       = Booking::all(); // get all bookings
-        $response = $this->addToEachBooking($bookings);
-        return response()->json(["bookings" => $response]);
+        $bookings = Booking::with([
+            'user',
+            'interests',
+            'kitchenstyles',
+            'dishes.dishimages'
+        ])->get();
+
+        return response()->json([
+            'bookings' => $bookings
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Handles multiple image upload.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        // return view('createbooking');
-    }
     public function upload(Request $request)
     {
         // $this->validate($request, [
         //     'files'    => 'required|mimes:jpg,jpeg,png,bmp|max:20000',
         // ]);
 
-        $uploadedFiles = $request->all();
-        
-        $i = 0;
-        $pathNames = array();
+        $uploaded_files = $request->all();
 
-        foreach ($uploadedFiles["files"] as $uploadedFile) 
-        {
-            $path = $uploadedFile->store('img', 'upload');
-            array_push($pathNames, $path);
-            $i++;           
+        $paths_array = [];
+
+        foreach ($uploaded_files["files"] as $uploaded_file) {
+            $path = $uploaded_file->store('img', 'upload');
+            array_push($paths_array, $path);
         }
 
-        return response()->json(["filenaam" => $pathNames]);
+        return response()->json([
+            "paths" => $paths_array
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store the newly created booking.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -80,13 +77,11 @@ class BookingController extends Controller
             'telephone_number'  => 'required|max:255',
         ]);
 
-        // dd($request->all());
-
         $booking = new Booking;
 
         $booking->title             = $request->menu_title;
         $booking->price             = $request->price;
-        // $booking->date              = $request->date;
+        $booking->date              = $request->date;
         $booking->street_number     = $request->address;
         $booking->postalcode        = $request->postal_code;
         $booking->city              = $request->city;
@@ -96,25 +91,22 @@ class BookingController extends Controller
 
         $booking->save();
 
-        
-        // Loop through all dishes here
-        $dishes = $request->dishes;
+        $input_dishes = $request->dishes;
 
-        foreach ($dishes as $newdish) 
-        {
+        foreach ($input_dishes as $input_dish) {
             $dish = new Dish();
-            $dish->name         = $newdish["dish_name"];
-            $dish->description  = $newdish["description"];
-            $dish->Booking()->associate($booking);
+            $dish->name         = $input_dish->dish_name;
+            $dish->description  = $input_dish->description;
+
+            $dish->booking()->associate($booking);
 
             $dish->save();
 
-            foreach ($newdish["dish_img"] as $newdishimage) 
-            {
-                $dish_image = new Dish_image();
+            foreach ($input_dish->dish_img as $input_dishimage) {
+                $dish_image = new DishImage();
 
-                $dish_image->image_url  = $newdishimage;
-                $dish_image->Dish()->associate($dish);
+                $dish_image->image_url  = $input_dishimage;
+                $dish_image->dish()->associate($dish);
 
                 $dish_image->save();
             }
@@ -122,19 +114,15 @@ class BookingController extends Controller
 
         $kitchenstyles = $request->kitchenstyles;
 
-        foreach ($kitchenstyles as $style) 
-        {
-            $style = Kitchenstyle::where('style',$style)->first();
+        foreach ($kitchenstyles as $style) {
+            $style = Kitchenstyle::where('style', $style)->first();
 
             DB::table('booking_kitchenstyle')->insert(['booking_id' => $booking->id, 'kitchenstyle_id' => $style->id]);
         }
-       
-        
-        // Loop through all interests here
-        $interests = $request->interests;
-        $arr_length = count($interests);
 
-        for ($x = 0; $x < $arr_length; $x++) {
+        $interests = $request->interests;
+
+        for ($x = 0; $x < count($interests); $x++) {
             $interest = Interest::where('interest', $interests[$x])->first();
             $interestid = $interest->id;
             DB::table('booking_interest')->insert(
@@ -142,67 +130,40 @@ class BookingController extends Controller
             );
         }
 
-        return response()->json(['status' => 'success']);
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified booking.
      *
-     * @param  int  $id
+     * @param \App\Booking
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Booking $booking)
     {
-        $booking = Booking::findOrFail($id);
-        $dishesarray = []; 
-        // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
-        $interests = $booking->interests()->get();;
-        $dishes = Dish::where('booking_id', $booking->id)->get();
-        $kitchenstyles = $booking->kitchenstyles()->get();
-        $bookingdates = Bookingdate::where('booking_id', $booking->id)->where('booking_date', '>', Carbon::now())->get();
-        $booking->bookingdates = $bookingdates;
-        // put interests in $user
-        // $user_id = $bookingdates[0]->host_id;
-        $user_id = $booking->user_id;
-        $user = User::where('id', $user_id)->first();
+        $booking = $booking->with([
+            'user',
+            'interests',
+            'kitchenstyles',
+            'dishes.dishimages'
+        ])->get();
 
-        foreach ($dishes as $dish) { // get dish images by dish for this booking
-            $dish_images = Dish_image::where('dish_id', $dish->id)->get();
-            // put dish_images in $dish and push to dishesarray
-            $dish->dish_images = $dish_images;
-            array_push($dishesarray, $dish);
-        }
-        // put user(s), kitchenstyle(s) and dishesarray in $booking
-        $booking->user          = $user;
-        $booking->kitchenstyles = $kitchenstyles;
-        $booking->dishes        = $dishesarray;
-        $booking->interests     = $interests;
-
-        return response()->json(["booking" => $booking]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return response()->json([
+            'booking' => $booking
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Booking $booking)
     {
-        $booking = Booking::find($id);
-
         $booking->price         = $request->price;
         $booking->date          = $request->date;
         $booking->street_number = $request->street_number;
@@ -210,105 +171,104 @@ class BookingController extends Controller
         $booking->city          = $request->city;
 
         $booking->save();
+
+        return response(200);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified booking.
      *
-     * @param  int  $id
+     * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {   
-        $booking = Booking::find($id);
-
-        $bookingdates = $booking->bookingdates()->get();
+    public function destroy(Booking $booking)
+    {
+        $bookingdates = $booking->bookingDates()->get();
 
         foreach ($bookingdates as $bookingdate) {
             $bookingdate->users()->detach();
         }
 
-        $booking->bookingdates()->delete();
+        $booking->bookingDates()->delete();
         $booking->interests()->detach();
         $booking->kitchenstyles()->detach();
 
         $dishes = $booking->dishes()->get();
 
         foreach ($dishes as $dish) {
-            $dish->dish_images()->delete();
+            $dish->dishImages()->delete();
             $dish->delete();
         }
 
         $booking->delete();
+
+        return response(200);
     }
 
-    public function detach($id, $userid)
+    /**
+     * Remove the specified booking.
+     *
+     * @param  \App\Booking  $booking
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function cancel(Booking $booking, User $user)
     {
-        $user = User::find($userid);
-        $user->bookingdates()->detach($id);
-
+        $user->bookingdates()->detach($booking->id);
         $user->save();
+
+        return response(200);
     }
 
+    /**
+     * Fetch all bookings for the specified location.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function search(Request $request)
     {
-        $location = $request->location;
+        $input = $request->location;
+        $location = preg_split('/[;, ]+/', $input);
 
-        $locations  = preg_split('/[;, ]+/', $location);
+        // $bookings = Booking::where('city', 'LIKE', $locations[0])->where('date', '>=', Carbon::now())->get();
+        $bookings = Booking::where('city', 'LIKE', $location[0])->with([
+            'user',
+            'interests',
+            'kitchenstyles',
+            'dishes.dishimages'
+        ])->get();
 
-        $bookings   = Booking::where('city', 'LIKE', $locations[0])
-                             /*->where('date', '>=', Carbon::now())*/->get();
-
-        $response = $this->addToEachBooking($bookings);
-        return response()->json(["bookings" => $response]);
+        return response()->json([
+            'bookings' => $bookings
+        ]);
     }
 
-    // aparte functie (properder)
-    public function addToEachBooking ($bookings) {
-
-        $bookingsarray  = [];
-
-        foreach ($bookings as $booking) 
-        {   
-            $dishesarray = []; 
-            // get user(s), interest(s), kitchenstyle(s) and dish(es) for each booking
-            $user           = User::where('id', $booking->host_id)->first();
-            $interests      = $booking->interests()->get();
-            $dishes         = Dish::where('booking_id', $booking->id)->get();
-            $kitchenstyles  = $booking->kitchenstyles()->get();
-            // put interests in $user
-
-            foreach ($dishes as $dish) { // get dish images by dish for this booking
-                $dish_images = Dish_Image::where('dish_id', $dish->id)->get();
-                // put dish_images in $dish and push to dishesarray
-                $dish->dish_images = $dish_images;
-                array_push($dishesarray, $dish);
-            }
-
-            // put user(s), kitchenstyle(s) and dishesarray in $booking
-            $booking->user          = $user;
-            $booking->dishes        = $dishesarray;
-            $booking->interests     = $interests;
-            $booking->kitchenstyles = $kitchenstyles;
-            // add this booking to bookingsarray
-            array_push($bookingsarray, $booking);
-        }
-
-        return $bookingsarray;
-    }
-
-    public function getUserBookings($id)
+    /**
+     * Fetch all bookings for the specified user.
+     *
+     * @todo FOR THE LOVE OF GOD REFACTOR THIS CODE.
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function getBookingsAsHost(User $user)
     {
-        $bookingdates = Bookingdate::where('host_id', $id)->get();
+        $bookingdates = $user->bookingDates()->get();
+
         $arr_requests = [];
         $bookings = [];
         $arr_id = [];
-        foreach($bookingdates as $bookingdate) {
+
+        foreach ($bookingdates as $bookingdate) {
             $booking = $bookingdate->booking;
             $booking->date_time = $bookingdate->booking_date;
-            array_push($bookings,$booking);
-            if(!in_array($booking->id, $arr_id)) {
-                $requests = RequestBooking::where("booking_id", $booking->id)->where('accepted', false)->where('declined', false)->get();
+            array_push($bookings, $booking);
+
+            if (!in_array($booking->id, $arr_id)) {
+                $requests = RequestBooking::where("booking_id", $booking->id)
+                    ->where('accepted', false)
+                    ->where('declined', false)
+                    ->get();
 
                 foreach ($requests as $request) {
                     $user = User::where('id', $request->user_id)->first();
@@ -322,31 +282,40 @@ class BookingController extends Controller
         }
 
         return response()->json(['bookings' => $bookings, "requests" => $arr_requests]);
-
     }
 
-    public function getGuestBookings($id) {
-        $user = User::where('id', $id)->first();
+    /**
+     * Fetch all bookings for the specified user.
+     *
+     * @todo FOR THE LOVE OF GOD REFACTOR THIS CODE.
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function getBookingsAsGuest(User $user)
+    {
         $requests = RequestBooking::where("user_id", $user->id)->get();
 
         $bookingdates_arr = [];
         $requests_arr = [];
 
-        foreach($user->bookingdates as $bookingdate) {
+        foreach ($user->bookingdates as $bookingdate) {
             $bookingdate->booking;
             $host = User::where('id', $bookingdate->host_id)->first();
             $bookingdate->host = $host;
             array_push($bookingdates_arr, $bookingdate);
         }
-        foreach($requests as $request) {
-                $requestbooking = Booking::where('id', $request->booking_id)->first();
-                $host = User::where('id', $requestbooking->host_id)->first();
-                $request->host = $host;
-                $request->booking = $requestbooking;
-                array_push($requests_arr, $request);
-            }
-        
-        return response()->json(["bookingdates" => $bookingdates_arr, "requests" => $requests]);
-    }
 
+        foreach ($requests as $request) {
+            $requestbooking = Booking::where('id', $request->booking_id)->first();
+            $host = User::where('id', $requestbooking->host_id)->first();
+            $request->host = $host;
+            $request->booking = $requestbooking;
+            array_push($requests_arr, $request);
+        }
+        
+        return response()->json([
+            'bookingdates' => $bookingdates_arr,
+            "requests" => $requests
+        ]);
+    }
 }

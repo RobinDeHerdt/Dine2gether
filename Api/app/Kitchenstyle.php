@@ -6,7 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kitchenstyle extends Model
 {
-    public function bookings () {
-    	return $this->belongsToMany('App\Booking');
+    /**
+     * A kitchenstyle belongs to many bookings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function bookings()
+    {
+        return $this->belongsToMany('App\Booking');
     }
 }

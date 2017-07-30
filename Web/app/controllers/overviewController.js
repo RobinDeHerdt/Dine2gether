@@ -5,66 +5,58 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 	var interestSvc = interestService;
 	var kitchenstyleSvc = kitchenstyleService;
 
-	vm.bookings = {};
+	vm.bookings = [];
 
 	vm.bookingImage = function(booking) {
-		return CONSTANTS.PUBLIC_BASE_URL  + "/" + booking.dishes[0].dish_images[0].image_url;
-	}
+		return CONSTANTS.PUBLIC_BASE_URL  + "/" + booking.dishes[0].dishimages[0].image_url;
+	};
 
 	vm.showFilteredInterests = function () {
-		var interestsarray = getInterestsFilter();
+		var selected_interests = getSelectedInterests();
+
 		return function (booking) {
-			if(booking.interests.length == 0 && interestsarray.length == 0) {
+			if(booking.interests.length > 0 && selected_interests.length > 0) {
+                for(var i = 0; i < booking.interests.length; i++) {
+                    for(var j = 0; j < selected_interests.length; j++) {
+                        if(booking.interests[i].id === selected_interests[j]) {
+                            return booking.interests[i].id === selected_interests[j];
+                        }
+                    }
+                }
+            } else {
 				return true;
-			} else {
-				for(var i in booking.interests) {
-					if(interestsarray.length != 0) {
-						for(var x=0; x<interestsarray.length; x++) {
-							if(booking.interests[i].interest == interestsarray[x]) {
-								return booking.interests[i].interest == interestsarray[x];
-							}
-						}
-					} else { return true; }
-				} 
 			}
 		}
-	}
+	};
 
 	vm.showFilteredKitchenStyles = function () {
-		var kitchenstylessarray = getKitchenStylesFilter();
-		var arr_x = []
+		var selected_kitchenstyles = getSelectedKitchenStyles();
+
 		return function (booking) {
-			if(booking.kitchenstyles.length == 0 && kitchenstylessarray.length == 0) {
-				return true;
-			} else {
-				for(var i in booking.kitchenstyles) {
-					if(kitchenstylessarray.length != 0) {
-						for(var x=0; x<kitchenstylessarray.length; x++) {
-							if(booking.kitchenstyles[i].style == kitchenstylessarray[x]) {
-								return booking.kitchenstyles[i].style == kitchenstylessarray[x]
-							}
+			if(booking.kitchenstyles.length > 0 && selected_kitchenstyles.length > 0) {
+                for(var i = 0; i < booking.kitchenstyles.length; i++) {
+					for(var j = 0; j < selected_kitchenstyles.length; j++) {
+						if(booking.kitchenstyles[i].id === selected_kitchenstyles[j]) {
+							return booking.kitchenstyles[i].id === selected_kitchenstyles[j];
 						}
-					} else { return true; }
-				} 
+					}
+                }
+            } else {
+				return true;
 			}
 		}
-	}
+	};
 
 	function loadBookings () {
 		if($stateParams.search) {
-			bookingSvc.getBookingsByLocation($stateParams.search)
-				.then(function (data) {
-					vm.bookings = data.data.bookings;
-				}, function(error) {
-					console.log(error);
-				});
-		} else {
-			bookingSvc.getBookings()
-				.success(function (data) {
-					vm.bookings = data.bookings;
-					console.log(data);
-				});
+			return bookingSvc.getBookingsByLocation($stateParams.search).then(function (data) {
+				vm.bookings = data.data.bookings;
+			});
 		}
+
+		return bookingSvc.getBookings().success(function (data) {
+			vm.bookings = data.bookings;
+		});
 	}
 
 	function loadInterests () {
@@ -81,24 +73,28 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 			});
 	}
 
-	function getInterestsFilter () {
-		var arr_interests = [];
+	function getSelectedInterests () {
+		var selected_interests = [];
+
 		angular.forEach(vm.interests, function (interest) {
 			if(interest.selected) {
-				arr_interests.push(interest.interest);
+                selected_interests.push(interest.id);
 			}
-		})
-		return arr_interests;
+		});
+
+		return selected_interests;
 	}
 
-	function getKitchenStylesFilter () {
-		var arr_kitchenstyles = [];
+	function getSelectedKitchenStyles () {
+		var selected_kitchenstyles = [];
+
 		angular.forEach(vm.kitchenstyles, function (kitchen) {
 			if(kitchen.selected) {
-				arr_kitchenstyles.push(kitchen.style);
+                selected_kitchenstyles.push(kitchen.id);
 			}
-		})
-		return arr_kitchenstyles;
+		});
+
+		return selected_kitchenstyles;
 	}
 
 	function _init () {
@@ -106,7 +102,6 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 		loadInterests();
 		loadKitchenStyles();
 	}
+
 	_init();
-
-
 });

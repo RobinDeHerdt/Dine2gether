@@ -11,14 +11,9 @@
 |
 */
 
-Route::get('/', function() {
-    return View::make('index'); // app/views/index.php
-});
-
 Route::get('/search', 'BookingController@search');
 
-Route::group(array('prefix' => 'api'), function() {
-	
+Route::group(array('prefix' => 'api'), function () {
     Route::post('authenticate/login', 'AuthenticateController@login');
     Route::get('authenticate/user', 'AuthenticateController@getUser');
     Route::post('authenticate/register', 'AuthenticateController@register');
@@ -27,16 +22,16 @@ Route::group(array('prefix' => 'api'), function() {
     Route::post('updateprofile/{id}', 'UserController@update');
 
     Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
-    Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail'); 
+    Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail');
     Route::post('sendconfirmationrequestmail', 'ConfirmationMailController@sendConfirmationRequestMail');
-    Route::post('sendbookingmails','ConfirmationMailController@sendBookingMails');
+    Route::post('sendbookingmails', 'ConfirmationMailController@sendBookingMails');
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
-    Route::delete('bookings/detach/{id}/user/{userid}','BookingController@detach');
+    Route::delete('bookings/cancel/{booking}/user/{user}', 'BookingController@cancel');
     Route::post('upload', 'BookingController@upload');
-    Route::get('bookingdetails/{id}', 'BookingController@show'); 
-    Route::get('userbookings/{id}', 'BookingController@getUserBookings');
-    Route::get('guestbookings/{id}', 'BookingController@getGuestBookings');
+    Route::get('bookingdetails/{booking}', 'BookingController@show');
+    Route::get('userbookings/{user}', 'BookingController@getBookingsAsHost');
+    Route::get('guestbookings/{user}', 'BookingController@getBookingsAsGuest');
 
     Route::get('user/{id}', 'UserController@index');
     Route::post('/profile/upload', 'UserController@upload');
@@ -45,7 +40,7 @@ Route::group(array('prefix' => 'api'), function() {
     Route::get('review/guests/{id}', 'ReviewController@getGuests');
     Route::get('review/hosts/{id}', 'ReviewController@getHosts');
     Route::get('user/{id}/reviews', 'ReviewController@index');
-    Route::post('createreview', 'ReviewController@store');  
+    Route::post('createreview', 'ReviewController@store');
     ;
     Route::get('interests', 'InterestController@index');
 
@@ -58,8 +53,7 @@ Route::group(array('prefix' => 'api'), function() {
 
     Route::post('getbookingdatebydate', 'BookingDateController@getBookingDateByDate');
     Route::post('createbookingdate', 'BookingDateController@createNewBookingDate');
-    Route::post('addtobookingdate','BookingDateController@addUserToBookingdate');
+    Route::post('addtobookingdate', 'BookingDateController@addUserToBookingdate');
 
     Route::get('kitchenstyles', 'KitchenstyleController@index');
-  	//Route::get('/createbooking', 'BookingController@create');
 });

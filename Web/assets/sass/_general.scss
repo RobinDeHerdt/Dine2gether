@@ -4,10 +4,15 @@ nav {
 	box-shadow: none !important;
 	top: 0;
 	z-index: 10;
-}
 
-.logo {
-	height: 64px;
+	.logo {
+		margin-top: 10px;
+		height: 40px;
+	}
+
+	li a {
+		font-size: 16px;
+	}
 }
 
 #modal1.modal {
@@ -16,35 +21,43 @@ nav {
 
 #home {
 	background-image: url("/dist/img/friendseating_edit.jpg");
-}
-#home-form {
-	margin-top: 10%;
+
+	#home-form {
+		margin-top: 10%;
+	}
+
+	input[type=text], #home input[type=text]:focus {
+		border-bottom: 1px solid #15f8a5 !important;
+		color: #fff;
+		font-size: 24px;
+		box-shadow: 0 1px 0 0 #15f8a5;
+	}
+
+	.branding h1 {
+		padding-top: 15%;
+		margin: 0;
+		font-size: 70pt;
+	}
+
+	.branding p {
+		font-size: 22px;
+		padding-top: 20px;
+	}
 }
 
-#home input[type=text], #home input[type=text]:focus {
-	border-bottom: 1px solid #15f8a5 !important;
-	color: #fff;
-	font-size: 24px;
-	box-shadow: 0 1px 0 0 #15f8a5;
-}
+.profile {
+	input[type=text], .profile input[type=text]:focus {
+		border-bottom: 1px solid #26a69a !important;
+		box-shadow: 0 1px 0 0 #26a69a;
+		color: #000;
+		font-size: 15px;
+		text-align: left;
+	}
 
-.profile input[type=text], .profile input[type=text]:focus {
-	border-bottom: 1px solid #26a69a !important;
-	box-shadow: 0 1px 0 0 #26a69a;
-	color: #000;
-	font-size: 15px;
-	text-align: left;
-}
-
-.profile input[type=text]:focus {
-	border-bottom: 1px solid #15f8a5 !important;
-	box-shadow: 0 1px 0 0 #15f8a5;
-}
-
-#home::-webkit-input-placeholder {
-	color: #fff;
-	font-size: 24px;
-	font-family: 'Open Sans', sans-serif;
+	input[type=text]:focus {
+		border-bottom: 1px solid #15f8a5 !important;
+		box-shadow: 0 1px 0 0 #15f8a5;
+	}
 }
 
 #searchbutton {
@@ -54,17 +67,6 @@ nav {
 .pac-container {
 	height: 120px;
 	overflow-y: scroll;
-}
-
-.branding h1 {
-	padding-top: 15%;
-	margin: 0;
-	font-size: 70pt;
-}
-
-.branding p {
-	font-size: 22px;
-	padding-top: 20px;
 }
 
 #createbookingpagination li {
@@ -85,7 +87,8 @@ nav {
 
 #filterwrapper {
 	position: fixed;
-	right: 80px;
+	right: 100px;
+	top: 125px;
 }
 
 span.badge {

@@ -28,10 +28,6 @@ class InterestsTableSeeder extends Seeder
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Movies',
-        ]);
-
-        DB::table('interests')->insert([
             'interest' => 'Books',
         ]);
 

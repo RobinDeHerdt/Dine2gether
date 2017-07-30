@@ -6,13 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dish extends Model
 {
-	public function booking()
+    /**
+     * A dish belongs to a booking.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function booking()
     {
         return $this->belongsTo('App\Booking');
     }
 
-    public function dish_images()
+    /**
+     * A dish has many images.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function dishImages()
     {
-        return $this->hasMany('App\Dish_Image');
+        return $this->hasMany('App\DishImage');
     }
 }

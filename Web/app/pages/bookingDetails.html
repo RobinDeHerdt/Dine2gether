@@ -67,7 +67,7 @@
  				</div>
  			</div>
  			<a ng-class="bookingdetails.request == 'pending' || bookingdetails.request == 'own_booking' ? 'disabled' : ''" ng-hide="bookingdetails.request == 'accepted'" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
- 			<p ng-if="bookingdetails.request == 'pending'">*You already sent a request. Please wait until the host has responded.</p>
+ 			<p ng-if="bookingdetails.request == 'pending'">*You've already sent a request. Please wait until the host has responded.</p>
  			<a ng-if="bookingdetails.request == 'accepted'" ui-sref="booknow({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Book now</a>
 		</div>
  	</div>
