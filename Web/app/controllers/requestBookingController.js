@@ -6,10 +6,11 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 	var loginSvc = loginService;
 
 	vm.user = loginSvc.getUser();
-	vm.booking = {};
+	vm.booking = [];
 
 	vm.sendRequest = function () {
 		var datetime = "";
+
 		if(vm.requestdata.selectedDate && !vm.daterequest) {
 			console.log(vm.requestdata.selectedDate);
 			datetime = vm.requestdata.selectedDate;
@@ -51,28 +52,28 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				})
 			});
 		}
-	}
+	};
 
 	vm.convertToDate = function (dateString) {
-		var convertedString = new Date(dateString);
-		return convertedString;
-	}
+		return new Date(dateString);
+	};
 
 	vm.resetSelect = function () {
 		$timeout(function() {
 			$('select:not([multiple])').material_select();
-		}, 1)
+		}, 1);
 		vm.daterequest = false;
-	}
+	};
 
 	function checkIfUserHasRequest() {
 		var data = {
 			user_id: vm.user.id,
 			booking_id: vm.booking.id
-		}
+		};
+
 		requestSvc.checkIfHasRequest(data).then(function (data) {
 			var request = data.data.request;
-				if (request.accepted == 0 && request.declined == 0) {
+				if (request.accepted === 0 && request.declined === 0) {
 					swal({ text: "You already sent a request. Please wait for the host to respond.", type: "error"}).then(function () {
 						window.location.href = "#/overview";
 					}, function () {
@@ -84,12 +85,14 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 	function loadBookingById() {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
-			console.log(data.data.booking);
-			vm.booking = data.data.booking;
+			vm.booking = data.data.booking[0];
+
 			$timeout(function() {
 				$('select:not([multiple])').material_select();
+
 				deleteEmptyoption();
-				if(vm.user.id == vm.booking.user.id) {
+
+				if(vm.user.id === vm.booking.user.id) {
 					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
 						window.location.href = "#/overview";
 					}, function () {
