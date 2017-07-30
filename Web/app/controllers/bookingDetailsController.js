@@ -20,17 +20,17 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $location,
 
     vm.userImage = function() {
     	console.log(vm.currentBooking);
-        return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.user.image;
+        return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
     };
 
     vm.dishImage = function(dish) {
-        return CONSTANTS.PUBLIC_BASE_URL + "/" + dish.dishimages[0].image_url;
+        return CONSTANTS.PUBLIC_BASE_URL + "/" + dish.dishimages[0].image_uri;
 	};
 
 	function getCurrentBooking () {
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
 			vm.currentBooking = data.data.booking[0];
-			vm.currentBooking.user.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.user.image;
+			vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
 			if(vm.user) {
 				if(vm.user.id === vm.currentBooking.user.id) {
 					vm.request = "own_booking";

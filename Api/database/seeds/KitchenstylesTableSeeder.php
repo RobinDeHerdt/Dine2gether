@@ -12,27 +12,48 @@ class KitchenstylesTableSeeder extends Seeder
     public function run()
     {
         DB::table('kitchenstyles')->insert([
-            'style' => 'Italian',
+            'name' => 'Italian',
         ]);
 
         DB::table('kitchenstyles')->insert([
-            'style' => 'Greek',
+            'name' => 'Greek',
         ]);
 
         DB::table('kitchenstyles')->insert([
-            'style' => 'Mexican',
+            'name' => 'Mexican',
         ]);
 
         DB::table('kitchenstyles')->insert([
-            'style' => 'Halal',
+            'name' => 'Halal',
         ]);
 
         DB::table('kitchenstyles')->insert([
-            'style' => 'Koosjer',
+            'name' => 'Koosjer',
         ]);
 
         DB::table('kitchenstyles')->insert([
-            'style' => 'Vegan',
+            'name' => 'Vegan',
+        ]);
+
+
+        DB::table('booking_kitchenstyle')->insert([
+            'booking_id' => 3,
+            'kitchenstyle_id' => 1,
+        ]);
+
+        DB::table('booking_kitchenstyle')->insert([
+            'booking_id' => 2,
+            'kitchenstyle_id' => 6,
+        ]);
+
+        DB::table('booking_kitchenstyle')->insert([
+            'booking_id' => 4,
+            'kitchenstyle_id' => 3,
+        ]);
+
+        DB::table('booking_kitchenstyle')->insert([
+            'booking_id' => 1,
+            'kitchenstyle_id' => 6,
         ]);
     }
 }

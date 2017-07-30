@@ -11,29 +11,29 @@
  						<div class="col s12 m4">
  							<div class="card">
  							   	<div class="card-image waves-effect waves-block waves-light">
- 							      	<img ng-src="{{bookingdetails.currentBooking.user.image}}" class="activator">
+ 							      	<img ng-src="{{bookingdetails.currentBooking.host.image}}" class="activator">
  							    </div>
  						  	</div>
  						</div>
  						<div class="col s12 m4">
- 							<h5>{{ bookingdetails.currentBooking.user.first_name + " " + bookingdetails.currentBooking.user.last_name }}</h5>
+ 							<h5>{{ bookingdetails.currentBooking.host.first_name + " " + bookingdetails.currentBooking.host.last_name }}</h5>
  							<h5>{{ bookingdetails.currentBooking.city }}</h5>
  							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
- 							<a href="/#/user/{{bookingdetails.currentBooking.user.id}}/reviews"><h5>Reviews about this user</h5></a>
+ 							<a href="/#/user/{{bookingdetails.currentBooking.host.id}}/reviews"><h5>Reviews about this host</h5></a>
  						</div>
  						<div class="col s12 m4">
  							<h5>Interests:</h5>
  							<ul class="collection">
- 								<li ng-if="!bookingdetails.currentBooking.interests.length" class="collection-item">No interests added</li>
-	 							<div ng-repeat="interest in bookingdetails.currentBooking.interests">
-								    <li class="collection-item">{{ interest.interest}}</li>
+ 								<li ng-if="!bookingdetails.currentBooking.host.interests.length" class="collection-item">No interests added</li>
+	 							<div ng-repeat="interest in bookingdetails.currentBooking.host.interests">
+								    <li class="collection-item">{{ interest.name}}</li>
 	  							</div>
   							</ul>
   							<h5>Kitchenstyles:</h5>
  							<ul class="collection">
  								<li ng-if="!bookingdetails.currentBooking.kitchenstyles.length">No style added</li>
 	 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
-  									<li class="collection-item">{{ style.style}}</li>
+  									<li class="collection-item">{{ style.name}}</li>
 	 							</div>
  							</ul>
  							<h5>Dates available:</h5>

@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('password');
             $table->boolean('activated')->default(false);
+            $table->string('token')->default(str_random(16));
             $table->rememberToken();
             $table->timestamps();
         });
@@ -37,8 +38,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('interests');
-        Schema::dropIfExists('reviews');
-        Schema::drop('users');
+        Schema::dropIfExists('users');
     }
 }

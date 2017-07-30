@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDishImagesTable extends Migration
+class CreateKitchenstylesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateDishImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dish_images', function (Blueprint $table) {
+        Schema::create('kitchenstyles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image_url');
-            
-            $table->integer('dish_id')->unsigned();
-            $table->foreign('dish_id')->references('id')->on('dishes');
-        
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreateDishImagesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('kitchenstyles');
     }
 }

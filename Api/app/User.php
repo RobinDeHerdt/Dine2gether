@@ -38,11 +38,31 @@ class User extends Authenticatable
     }
 
     /**
+     * A user belongs to many interests.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function interests()
+    {
+        return $this->belongsToMany('App\Interest', 'user_interest');
+    }
+
+    /**
      * A user has many reviews.
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function reviews()
+    public function receivedReviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    /**
+     * An author has many reviews.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function createdReviews()
     {
         return $this->hasMany('App\Review', 'author_id');
     }

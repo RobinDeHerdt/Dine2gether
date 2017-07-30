@@ -12,38 +12,21 @@ class ReviewsTableSeeder extends Seeder
     public function run()
     {
         DB::table('reviews')->insert([
-            'body' => 'Toffe avond.',
-            'author_id' => 5,
-            'receiver_id' => 1,
+            'body' => 'Awesome experience.',
+            'author_id' => 1,
+            'user_id' => 2,
         ]);
 
         DB::table('reviews')->insert([
-            'body' => 'Toffe avond.',
-            'author_id' => 4,
-            'receiver_id' => 1,
-        ]);
-        DB::table('reviews')->insert([
-            'body' => 'Toffe avond.',
+            'body' => 'Pretty bad.',
             'author_id' => 1,
-            'receiver_id' => 2,
-        ]);
-
-        DB::table('reviews')->insert([
-            'body' => 'Amai da trok op niks.',
-            'author_id' => 1,
-            'receiver_id' => 2,
-        ]);
-
-        DB::table('reviews')->insert([
-            'body' => 'You\'re fired!',
-            'author_id' => 1,
-            'receiver_id' => 5,
+            'user_id' => 2,
         ]);
 
         DB::table('reviews')->insert([
             'body' => 'Great experience.',
             'author_id' => 2,
-            'receiver_id' => 1,
+            'user_id' => 1,
         ]);
     }
 }

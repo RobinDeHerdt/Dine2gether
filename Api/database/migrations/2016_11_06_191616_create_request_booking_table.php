@@ -15,18 +15,13 @@ class CreateRequestBookingTable extends Migration
     {
         Schema::create('request_booking', function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('date_time');
             $table->boolean('accepted')->default(false);
-            $table->boolean('declined')->default(false);
-            $table->timestamps();
-
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('booking_id')->unsigned();
-            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->integer('bookingdate_id')->unsigned();
+            $table->foreign('bookingdate_id')->references('id')->on('bookingdates');
+            $table->timestamps();
         });
-
-    
     }
 
     /**
@@ -36,6 +31,6 @@ class CreateRequestBookingTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('request_booking');
     }
 }

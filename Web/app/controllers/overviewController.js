@@ -8,14 +8,14 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 	vm.bookings = [];
 
 	vm.bookingImage = function(booking) {
-		return CONSTANTS.PUBLIC_BASE_URL  + "/" + booking.dishes[0].dishimages[0].image_url;
+		return CONSTANTS.PUBLIC_BASE_URL  + "/" + booking.dishes[0].dishimages[0].image_uri;
 	};
 
 	vm.showFilteredInterests = function () {
 		var selected_interests = getSelectedInterests();
 
 		return function (booking) {
-			if(booking.interests.length > 0 && selected_interests.length > 0) {
+			if(booking.host.interests.length > 0 && selected_interests.length > 0) {
                 for(var i = 0; i < booking.interests.length; i++) {
                     for(var j = 0; j < selected_interests.length; j++) {
                         if(booking.interests[i].id === selected_interests[j]) {

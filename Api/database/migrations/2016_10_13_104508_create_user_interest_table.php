@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserBookingTable extends Migration
+class CreateUserInterestTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateUserBookingTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookingdate_user', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            
+        Schema::create('user_interest', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->integer('bookingdate_id')->unsigned();
-            $table->foreign('bookingdate_id')->references('id')->on('bookingdates');
+            $table->integer('interest_id')->unsigned();
+            $table->foreign('interest_id')->references('id')->on('interests');
         });
     }
 
@@ -31,6 +28,6 @@ class CreateUserBookingTable extends Migration
      */
     public function down()
     {
-        
+        Schema::dropIfExists('user_interest');
     }
 }

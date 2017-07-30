@@ -11,7 +11,7 @@
 						</div>
 						<div class="text_container col s7">
 							<h3>{{ booking.title }}</h3>
-							<p>{{ booking.user.first_name + " " + booking.user.last_name}}</p>
+							<p>{{ booking.host.first_name + " " + booking.host.last_name}}</p>
 							<p>Seats booked: {{booking.guests_booked}}/{{booking.max_guests}}</p>
 							<p>{{ booking.price | currency : "€"}}/person</p>
 							<a class="btn waves waves-light" href="#" ui-sref="bookingdetails({id: booking.id})">More information</a>
@@ -23,15 +23,15 @@
 				<h5>Interests</h5>
 				<ul class="interests-filter">
 					<li ng-repeat="interest in overview.interests">
-						<input type="checkbox" id="{{interest.interest}}" ng-model="interest.selected"/>
-	      				<label for="{{interest.interest}}">{{ interest.interest }}</label>
+						<input type="checkbox" id="{{interest.name}}" ng-model="interest.selected"/>
+	      				<label for="{{interest.name}}">{{ interest.name }}</label>
 					</li>
 				</ul>
 				<h5>Kitchen style</h5>
 				<ul class="kitchen-filter">
 					<li ng-repeat="kitchen in overview.kitchenstyles">
-						<input type="checkbox" id="{{kitchen.style}}" ng-model="kitchen.selected"/>
-	      				<label for="{{kitchen.style}}">{{ kitchen.style }}</label>
+						<input type="checkbox" id="{{kitchen.name}}" ng-model="kitchen.selected"/>
+	      				<label for="{{kitchen.name}}">{{ kitchen.name }}</label>
 					</li>
 				</ul>
 			</div>

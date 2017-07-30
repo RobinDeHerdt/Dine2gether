@@ -12,27 +12,43 @@ class InterestsTableSeeder extends Seeder
     public function run()
     {
         DB::table('interests')->insert([
-            'interest' => 'Music',
+            'name' => 'Music',
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Sports',
+            'name' => 'Sports',
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Animals',
+            'name' => 'Animals',
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Languages',
+            'name' => 'Languages',
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Books',
+            'name' => 'Books',
         ]);
 
         DB::table('interests')->insert([
-            'interest' => 'Movies',
+            'name' => 'Movies',
+        ]);
+
+
+        DB::table('user_interest')->insert([
+            'user_id' => 3,
+            'interest_id' => 1,
+        ]);
+
+        DB::table('user_interest')->insert([
+            'user_id' => 2,
+            'interest_id' => 2,
+        ]);
+
+        DB::table('user_interest')->insert([
+            'user_id' => 1,
+            'interest_id' => 3,
         ]);
     }
 }

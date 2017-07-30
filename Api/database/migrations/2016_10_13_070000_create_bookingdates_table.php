@@ -13,16 +13,12 @@ class CreateBookingdatesTable extends Migration
      */
     public function up()
     {
-        Schema::create("bookingdates", function(Blueprint $table) {
+        Schema::create("bookingdates", function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('booking_date');
-            $table->integer('guests_booked')->default(0);
-            $table->timestamps();
-
+            $table->datetime('date');
             $table->integer('booking_id')->unsigned();
             $table->foreign('booking_id')->references('id')->on('bookings');
-            $table->integer('host_id')->unsigned();
-            $table->foreign('host_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 
@@ -33,6 +29,6 @@ class CreateBookingdatesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('bookingdates');
     }
 }

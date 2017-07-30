@@ -11,9 +11,9 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function user()
+    public function host()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'host_id');
     }
 
     /**
@@ -34,16 +34,6 @@ class Booking extends Model
     public function bookingDates()
     {
         return $this->hasMany('App\Bookingdate');
-    }
-
-    /**
-     * A booking belongs to many interests.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function interests()
-    {
-        return $this->belongsToMany('App\Interest');
     }
 
     /**

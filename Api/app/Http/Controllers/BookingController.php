@@ -22,8 +22,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with([
-            'user',
-            'interests',
+            'host.interests',
             'kitchenstyles',
             'dishes.dishimages'
         ])->get();
@@ -144,8 +143,7 @@ class BookingController extends Controller
     public function show(Booking $booking)
     {
         $booking = Booking::where('id', $booking->id)->with([
-            'user',
-            'interests',
+            'host.interests',
             'kitchenstyles',
             'dishes.dishimages'
         ])->get();

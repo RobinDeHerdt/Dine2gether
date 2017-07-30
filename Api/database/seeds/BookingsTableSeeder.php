@@ -20,7 +20,7 @@ class BookingsTableSeeder extends Seeder
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Vlinderstraat 10',
             'postalcode' => 2220,
-            'user_id' => 1,
+            'host_id' => 1,
             'city' => 'Heist-op-den-Berg',
             'price' => 25.00,
         ]);
@@ -31,7 +31,7 @@ class BookingsTableSeeder extends Seeder
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Liersesteenweg 201A',
             'postalcode' => 2000,
-            'user_id' => 1,
+            'host_id' => 3,
             'city' => 'Antwerpen',
             'price' => 95.00,
         ]);
@@ -42,7 +42,7 @@ class BookingsTableSeeder extends Seeder
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Boekenstraat 180',
             'postalcode' => 5000,
-            'user_id' => 1,
+            'host_id' => 1,
             'city' => 'Hasselt',
             'price' => 99.99,
         ]);
@@ -52,7 +52,7 @@ class BookingsTableSeeder extends Seeder
             'max_guests' => 3,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Landweg 1',
-            'user_id' => 1,
+            'host_id' => 2,
             'postalcode' => 3999,
             'city' => 'Bavikhove',
             'price' => 1.95,
