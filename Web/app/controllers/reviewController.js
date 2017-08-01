@@ -1,12 +1,11 @@
 d2gApp.controller("reviewController", function (reviewService, authService, $stateParams, $location, $anchorScroll) {
 	vm = this;
+
 	var reviewSvc = reviewService;
-	var authSvc  = authService;
-	vm.selectedname = "...";
+
+	vm.selectedname = null;
 
 	function getGuests() {
-        vm.auth_user = authSvc.getUser();
-
 		reviewSvc.getGuests().then(function(data) {
 			vm.guestbookings = data.data.bookings;
 		});
@@ -14,7 +13,7 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 
 	function getHosts() {
 		reviewSvc.getHosts().then(function(data) {
-			vm.hostbookings = data.data.bookings;
+			vm.hostbookingdates = data.data.bookings;
 		});
 	}
 
@@ -22,7 +21,6 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 		reviewSvc.getReviewsByUser($stateParams.id).then(function(data) {
 			vm.reviews = data.data.reviews;
 			vm.user = data.data.user;
-			console.log(vm.user);
 		});
 	}
 
@@ -30,16 +28,16 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 		vm.selectedUser = id;
 		vm.selectedname = first_name + " " + last_name;
 
-		$location.hash('reviewtextarea');
-      	$anchorScroll();
+        setTimeout(function(){
+            $location.hash('reviewtextarea');
+            $anchorScroll();
+		}, 100);
 	};
 
 	vm.sendReview = function() {
-		var author = authSvc.getUser();
 		var review = { 
-			review 		: vm.reviewinput,
-			author 		: author,
-			guest_id 	: vm.selectedUser
+			review : vm.reviewinput,
+			user_id : vm.selectedUser
 		};
 
 		reviewSvc.postReview(review).then(function(data) {
@@ -73,7 +71,15 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 	};
 
 	function _init() {
-		loadReviews();
+		switch($location.url().split("#")[0]) {
+			case "/writereview":
+                getHosts();
+                getGuests();
+				break;
+			default:
+                loadReviews();
+                break;
+		}
 	}
 
 	_init();

@@ -7,11 +7,11 @@ d2gApp.service('reviewService', function ($http) {
 	};
 
 	svc.getGuests = function () {
-		return $http.get(CONSTANTS.API_BASE_URL + '/review/guests/' + id);
+		return $http.get(CONSTANTS.API_BASE_URL + '/review/guests');
 	};
 
 	svc.getHosts = function () {
-		return $http.get(CONSTANTS.API_BASE_URL + '/review/hosts/' + id);
+		return $http.get(CONSTANTS.API_BASE_URL + '/review/hosts');
 	};
 
 	svc.getReviewsByUser = function(id) {

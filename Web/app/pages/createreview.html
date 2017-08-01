@@ -1,55 +1,55 @@
 <main>
 	<div class="container under-header">
 		<h1>Write a review</h1>
-		<br>
-		<h5>Recent guests</h5>
-		<div class="row">
-			<div ng-repeat="guestbooking in review.guestbookings">
-		        <div class="col s12 m3" ng-repeat="guest in guestbooking.guests">
-		          <div class="card">
-		            <div class="card-image">
-		              <img ng-src="{{review.userImage(guest)}}">
-		              <span class="card-title">{{ guest.first_name + " " + guest.last_name }}</span>
-		            </div>
-		            <div class="card-content">
-						<strong>{{ guestbooking.booking.title }}</strong>
-		            </div>
-		            <div class="card-action">
-		              <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
-		            </div>
-		          </div>
-		        </div>
-		     </div>
-	     </div>
-	     <h5>Recent hosts</h5>
-	     <div class="row">
-	        <div class="col s12 m3" ng-repeat="host in review.hostbookings">
+		<h4>Recent guests</h4>
+		<div class="row" ng-repeat="booking in review.guestbookings">
+			<div class="col s12">
+				<h5>{{ booking.title }}</h5>
+			</div>
+			<div ng-repeat="bookingdate in booking.bookingdates">
+			<div class="col s12 m3" ng-repeat="guest in bookingdate.guests">
+			  <div class="card">
+				<div class="card-image">
+				  <img ng-src="{{review.userImage(guest)}}" class="review-profile-image">
+				</div>
+				<div class="card-content">
+					<strong>{{ guest.first_name + " " + guest.last_name }}</strong>
+				</div>
+				<div class="card-action">
+				  <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
+				</div>
+			  </div>
+			</div>
+			</div>
+		 </div>
+	     <h3>Recent hosts</h3>
+	     <div class="row" ng-repeat="bookingdate in review.hostbookingdates">
+	        <div class="col s12 m3">
 	          <div class="card">
 	            <div class="card-image">
-	              <img ng-src="{{review.userImage(host[0])}}">
-	              <span class="card-title">{{ host[0].first_name + " " + host[0].last_name }}</span>
+	              <img ng-src="{{review.userImage(bookingdate.booking.host)}}" class="review-profile-image">
 	            </div>
 	            <div class="card-content">
-	            	<strong>Host</strong>
-	            </div>
+					<strong>{{ bookingdate.booking.host.first_name + " " + bookingdate.booking.host.last_name }}</strong>
+				</div>
 	            <div class="card-action">
-	              <a class="btn waves waves-light" ng-click="review.getSelectedUser(host[0].id, host[0].first_name, host[0].last_name )">Write review</a>
+	              <a class="btn waves waves-light" ng-click="review.getSelectedUser(bookingdate.booking.host.id, bookingdate.booking.host.first_name, bookingdate.booking.host.last_name )">Write review</a>
 	            </div>
 	          </div>
 	        </div>
 	     </div>
-		<div class="row">
+		<div class="row mar-btm-xl" ng-show="review.selectedUser">
 			<div class="col s12">
 				<h1>Write review for {{ review.selectedname }}</h1>
 			</div>
-		</div>
-		<ul class="collection" ng-show="review.sendreviewerror">
-		    <li class="collection-item">{{review.sendreviewerror}}</li>
-		</ul>
-		<div class="row">
-			<a id="reviewtextarea"></a>
-			<textarea id="" class="materialize-textarea" placeholder="Write your review here" ng-model="review.reviewinput"></textarea>
-       		<a class="btn waves waves-light" ng-click="review.sendReview()">Submit review</a>
+			<ul class="collection col s12" ng-show="review.sendreviewerror">
+				<li class="collection-item">{{ review.sendreviewerror }}</li>
+			</ul>
+			<div class="col s12 mar-btm-xl">
+				<a id="reviewtextarea"></a>
+				<textarea id="" class="materialize-textarea" placeholder="Write your review here" ng-model="review.reviewinput"></textarea>
+				<a class="btn waves waves-light" ng-click="review.sendReview()">Submit review</a>
+			</div>
 		</div>
 	</div>
 </main>
