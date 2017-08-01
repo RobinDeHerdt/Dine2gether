@@ -12,20 +12,18 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 		}
 	}
 	
-	function getUserBookings () {
-		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
+	function getHostBookings () {
+		bookingSvc.getHostBookings().then(function (data) {
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
-
-		})
+		});
 	}
 
 	function getGuestBookings () {
-		bookingSvc.getGuestBookingsById(vm.user.id).then(function (data) {
+		bookingSvc.getGuestBookings().then(function (data) {
 			vm.guestbookingdates = data.data.bookingdates;
 			vm.guestrequests = data.data.requests;
-
-		}) 
+		});
 	}
 
 	vm.convertToDate = function (dateString) {
@@ -46,8 +44,7 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 					type: "success"
 				});
 
-				getUserBookings();
-
+				getHostBookings();
 			});
 
 		}, function () {
@@ -64,7 +61,7 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 				text: "Request was declined. We'll notificate the user",
 				type: "success"
 			});
-			getUserBookings();
+            getHostBookings();
 		}, function () {
 			swal({
 				text: "We're so sorry, for some reasons we couldn't decline this request. Please try again or contact us if this problem keeps occuring.",
@@ -76,7 +73,7 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 	vm.deleteBooking = function (id) {
 		bookingSvc.deleteBooking(id).then(function()
 		{
-			getUserBookings();
+            getHostBookings();
 		});
 	};
 
@@ -149,7 +146,7 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 			$location.path('/home');
 		} else {
 			loadUser();
-			getUserBookings();
+            getHostBookings();
 			getGuestBookings();
 		}
 	}

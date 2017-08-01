@@ -12,12 +12,6 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $location,
 		return new Date(dateString);
 	};
 
-	vm.redirect = function () {
-		if(vm.request !== "own_booking" && vm.request !== "pending") {
-			$location.path("requestbooking/"+ vm.currentBookingId);
-		}
-	};
-
     vm.userImage = function() {
     	console.log(vm.currentBooking);
         return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
@@ -31,35 +25,6 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $location,
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
 			vm.currentBooking = data.data.booking[0];
 			vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
-
-			if(vm.user) {
-				if(vm.user.id === vm.currentBooking.host.id) {
-					vm.request = "own_booking";
-				} else {
-					checkIfUserHasRequest();
-				}
-			}
-
-			console.log(vm.currentBooking);
-		});
-	}
-
-	function checkIfUserHasRequest() {
-		var data = {
-			user_id: vm.user.id,
-			booking_id: vm.currentBooking.id
-		};
-
-		requestSvc.checkIfHasRequest(data).then(function (data) {
-				if (data.data.request === "none") {
-					vm.request = "none";
-				} else if(data.data.request.accepted === 1) {
-					vm.request = "accepted";
-				} else if (data.data.request.declined === 1) {
-					vm.request = "declined";
-				} else {
-					vm.request = "pending";
-				}
 		});
 	}
 

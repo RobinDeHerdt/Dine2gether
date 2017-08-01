@@ -39,9 +39,15 @@
  							<h5>Dates available:</h5>
  							<ul class="collection">
  								<li class="collection-item" ng-if="!bookingdetails.currentBooking.bookingdates.length">No dates yet</li>
- 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.bookingdates"> <p>{{ bookingdetails.convertToDate(date.date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.date) | date: "HH:mm"}}<a ng-hide="bookingdetails.request == 'own_booking'" href=""><span class="secondary-colour white-text badge" data-badge-caption="request this"></span></a></p>
-								<p ng-if="date.guests_booked < bookingdetails.currentBooking.max_guests">seats booked:{{date.guests_booked}}/{{bookingdetails.currentBooking.max_guests}}</p>
-								<p ng-if="date.guests_booked == bookingdetails.currentBooking.max_guests" class="red-text">Fully booked!</p>
+ 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.bookingdates">
+									{{ bookingdetails.convertToDate(date.date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.date) | date: "HH:mm"}}
+									<a ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id" href="">
+										<span class="secondary-colour white-text badge" data-badge-caption="Send request"></span>
+									</a>
+									<br>
+									<span ng-if="date.guests.length < date.max_guests">Seats booked: {{ date.guests.length }}/{{ date.max_guests }}</span>
+									<span ng-if="date.guests.length == date.max_guests" class="red-text">Fully booked!</span>
+									<hr ng-if="last">
  								</li>
  							</ul>
  						</div>
@@ -59,7 +65,7 @@
  							    </div>
  							    <div class="card-content">
  							      <span class="card-title activator grey-text text-darken-4"><h5>{{dish.name}}</h5></span>
- 							    	<p>{{dish.description}}</p>
+ 							    	<p>{{ dish.description }}</p>
  							    </div>
  						  	</div>
  						</div>

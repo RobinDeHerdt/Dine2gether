@@ -30,8 +30,8 @@ Route::group(array('prefix' => 'api'), function () {
     Route::delete('bookings/cancel/{booking}/user/{user}', 'BookingController@cancel');
     Route::post('upload', 'BookingController@upload');
     Route::get('bookingdetails/{booking}', 'BookingController@show');
-    Route::get('userbookings/{user}', 'BookingController@getBookingsAsHost');
-    Route::get('guestbookings/{user}', 'BookingController@getBookingsAsGuest');
+    Route::get('hostbookings', 'BookingController@getBookingsAsHost');
+    Route::get('guestbookings', 'BookingController@getBookingsAsGuest');
 
     Route::get('user/{id}', 'UserController@index');
     Route::post('/profile/upload', 'UserController@upload');

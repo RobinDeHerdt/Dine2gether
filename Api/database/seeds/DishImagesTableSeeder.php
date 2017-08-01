@@ -22,7 +22,7 @@ class DishImagesTableSeeder extends Seeder
         ]);
 
         DB::table('dish_images')->insert([
-            'image_uri' => 'images/profile/foodImage3.jpg',
+            'image_uri' => 'images/foodImage3.jpg',
             'dish_id' => 3,
         ]);
 
@@ -49,6 +49,11 @@ class DishImagesTableSeeder extends Seeder
         DB::table('dish_images')->insert([
             'image_uri' => 'images/foodImage1.jpg',
             'dish_id' => 8,
+        ]);
+
+        DB::table('dish_images')->insert([
+            'image_uri' => 'images/foodImage4.jpg',
+            'dish_id' => 9,
         ]);
     }
 }

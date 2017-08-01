@@ -21,7 +21,6 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 
 	svc.login = function (credentials) {
 		$auth.login(credentials).then(function (data) {
-			//$cookies.putObject("token", data.data.token);
 			svc.token = data.data.token;
 			svc.setUser();
 		}, function (error) {
@@ -79,14 +78,12 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 	};
 
 	svc.updateProfile = function (id, data) {
-        console.log(data);
-    	return $http.post(CONSTANTS.API_BASE_URL + '/updateprofile/' + id, data, {headers: {"Bearer" : svc.token}});
+    	return $http.post(CONSTANTS.API_BASE_URL + '/updateprofile/' + id, data);
     };
 
 	svc.register = function (o_newuser) {
 		$http.post(CONSTANTS.API_BASE_URL + '/authenticate/register', o_newuser).success(function (data) {
 			sendActivationMail(data)
-			//svc.login({"email": o_newuser.email, "password": o_newuser.password});
 		});
 	};
 
@@ -119,7 +116,6 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 				});
 			console.log(data);
 		}, function (error) {
-			//alert met error
 			console.log(error);
 		});
 	}

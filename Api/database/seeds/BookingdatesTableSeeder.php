@@ -18,6 +18,12 @@ class BookingdatesTableSeeder extends Seeder
         ]);
 
         DB::table("bookingdates")->insert([
+            'date' => "2016-11-12 18:00:00",
+            'booking_id' => 1,
+            'max_guests' => 6,
+        ]);
+
+        DB::table("bookingdates")->insert([
             'date' => "2016-11-25 17:00:00",
             'booking_id' => 2,
             'max_guests' => 3,

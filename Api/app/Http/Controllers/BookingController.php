@@ -268,10 +268,10 @@ class BookingController extends Controller
      */
     public function getBookingsAsHost()
     {
-        $bookingdates = $this->user->bookings()->with('bookingdates')->get();
+        $bookings = $this->user->bookings()->with('bookingdates')->get();
 
         return response()->json([
-            'bookings' => $bookingdates
+            'bookings' => $bookings
         ]);
     }
 
@@ -282,10 +282,10 @@ class BookingController extends Controller
      */
     public function getBookingsAsGuest()
     {
-        $bookingdates = $this->user->acceptedBookings()->with('bookingdates')->get();
+        $bookingdates = $this->user->acceptedBookings()->with('booking')->get();
 
         return response()->json([
-            'bookings' => $bookingdates
+            'bookingdates' => $bookingdates
         ]);
     }
 }

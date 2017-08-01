@@ -23,12 +23,12 @@ d2gApp.service('bookingService', function($http) {
         return $http.delete(CONSTANTS.API_BASE_URL + '/bookings/' + id);
     };
 
-    svc.getBookingsByUserId = function (id) {
-        return $http.get(CONSTANTS.API_BASE_URL + '/userbookings/' + id);
+    svc.getHostBookings = function (id) {
+        return $http.get(CONSTANTS.API_BASE_URL + '/hostbookings');
     };
 
-    svc.getGuestBookingsById = function (id) {
-        return $http.get(CONSTANTS.API_BASE_URL + '/guestbookings/' +id);
+    svc.getGuestBookings = function (id) {
+        return $http.get(CONSTANTS.API_BASE_URL + '/guestbookings');
     };
 
     svc.detachBooking = function (id, userid) {

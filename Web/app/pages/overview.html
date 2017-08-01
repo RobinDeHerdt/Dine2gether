@@ -4,16 +4,16 @@
 		<div class="row">
 			<div id="bookingswrapper" class="col s10">
 				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
-					<div class="divider mar-top-l"></div>
+					<div class="divider mar-top-l" ng-if="!$first"></div>
 					<div class="wrapper row">
 						<div class="img_container left col s5 mar-top-l">
 							<img ng-src="{{ overview.bookingImage(booking) }}">
 						</div>
-						<div class="text_container col s7">
-							<h3>{{ booking.title }}</h3>
-							<p>{{ booking.host.first_name + " " + booking.host.last_name}}</p>
-							<p>Seats booked: {{booking.guests_booked}}/{{booking.max_guests}}</p>
-							<p>{{ booking.price | currency : "€"}}/person</p>
+						<div class="text_container col s7 mar-top-s">
+							<h4>{{ booking.title }}</h4>
+							<p>Hosted by {{ booking.host.first_name + " " + booking.host.last_name}}</p>
+							<p>In {{ booking.host.city }}</p>
+							<p>{{ booking.price | currency : "€"}} per person</p>
 							<a class="btn waves waves-light" href="#" ui-sref="bookingdetails({id: booking.id})">More information</a>
 						</div>
 					</div>
