@@ -6,6 +6,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	var authSvc 		= authService;
 	var kitchenstyleSvc = kitchenstyleService;
 
+    vm.bookingdates = [{}];
 	vm.numberOfPages = 5;
 	vm.currentPage = 1;
 	vm.dishes = [{
@@ -13,7 +14,6 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	}];
 
 	vm.addTemplateDish = function () {
-		console.log(vm.dishes);
 		var dish_nr = vm.dishes.length + 1;
 		vm.dishes.push({
 			number: dish_nr
@@ -30,24 +30,22 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 		var data = {
 			user_id: user.id,
 			menu_title: vm.menu_title,
-			date: vm.date,
 			price: vm.price,
 			address: vm.address,
 			postal_code: vm.postal_code,
 			city: vm.city,
 			telephone_number: vm.telephone_number,
-			interests:  getSelectedInterests(),
 			kitchenstyles:  getSelectedKitchenstyles(),
-			dishes: getDishes()
+			dishes: getDishes(),
+			dates: getBookingDates()
 		};
-		console.log(data);
+
 		bookingSvc.createBooking(data).then(function (data) {
 			if(data.data.status === 'success') {
 				$location.path('/overview');
 			}
 		}, function (error) {
 			console.log(error);
-			vm.errors = error.data;
 		});
 	};
 
@@ -78,28 +76,10 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 		} 
 	};
 
-	function loadInterests () {
-		interestSvc.getInterests().success(function (data) {
-			vm.interests = data.interests;
-		});
-	}
-
 	function loadKitchenstyles () {
 		kitchenstyleSvc.getKitchenStyles().success(function (data) {
 			vm.kitchenstyles = data.kitchenstyles;
 		});
-	}
-
-	function getSelectedInterests () {
-		var selected_interests = [];
-
-		angular.forEach(vm.interests, function (interest) {
-			if(interest.selected) {
-                selected_interests.push(interest.id);
-			}
-		});
-
-		return selected_interests;
 	}
 
 	function getSelectedKitchenstyles () {
@@ -112,6 +92,18 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 		});
 
 		return selected_kitchenstyles;
+	}
+
+	function getBookingDates() {
+		var arr_dates = [];
+
+		arr_dates.push({
+			date: vm.bookingdates.date,
+			time: vm.bookingdates.time,
+			max_guests : vm.bookingdates.max_guests
+		});
+
+		return arr_dates;
 	}
 
 	function getDishes () {

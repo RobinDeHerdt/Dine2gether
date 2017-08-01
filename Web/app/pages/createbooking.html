@@ -75,17 +75,17 @@
 								<li ng-show="create.currentPage == 4">
 									<div class="row">
 										<div class="col s12">
-											<h4>Dates</h4>
+											<h4>Date & time</h4>
 										</div>
 										<ul>
-											<li ng-repeat="dish in create.dishes">
-
+											<li ng-repeat="date in create.bookingdates">
+												<div class="input-field col s6">
+													<input type="date" class="datepicker" placeholder="Pick a date" ng-model="create.bookingdates.date">
+													<input type="time" class="timepicker" value="18:00:00" ng-model="create.bookingdates.time">
+													<input type="text" placeholder="Max guests" class="col s4" ng-model="create.bookingdates.max_guests">
+												</div>
 											</li>
 										</ul>
-										<div class="input-field col s6">
-											<input type="text" class="datepicker" placeholder="Pick a date" ng-model="dish.dish_name">
-											<input type="time" class="timepicker" value="18:00:00">
-										</div>
 									</div>
 								</li>
 								<li ng-show="create.currentPage == 5">

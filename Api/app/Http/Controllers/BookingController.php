@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
+use App\Bookingdate;
 use App\User;
 use App\Dish;
 use App\DishImage;
+use Carbon\Carbon;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -183,6 +185,33 @@ class BookingController extends Controller
             }
         }
 
+        $input_dates = $request->dates;
+
+        foreach ($input_dates as $input_date) {
+            $booking_date = new Bookingdate();
+
+            // Time
+            $carbon_time = Carbon::parse($input_date["time"]);
+
+            $hr  = $carbon_time->hour;
+            $min = $carbon_time->minute;
+            $sec = $carbon_time->second;
+
+            // Date
+            $carbon_date = Carbon::parse($input_date["date"]);
+
+            $yr  = $carbon_date->year;
+            $mnt = $carbon_date->month;
+            $day = $carbon_date->day;
+
+            $booking_date->date = Carbon::create($yr, $mnt, $day, $hr, $min, $sec);
+            $booking_date->max_guests = $input_date["max_guests"];
+
+            $booking_date->booking()->associate($booking);
+
+            $booking_date->save();
+        }
+
         $kitchenstyles = $request->kitchenstyles;
         $kitchenstyles_array = [];
 
@@ -228,7 +257,7 @@ class BookingController extends Controller
         $bookingdates = $booking->bookingDates()->get();
 
         foreach ($bookingdates as $bookingdate) {
-            $bookingdate->users()->detach();
+            $bookingdate->guests()->detach();
         }
 
         $booking->bookingDates()->delete();
