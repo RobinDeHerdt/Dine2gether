@@ -1,12 +1,21 @@
-d2gApp.controller("bookingDetailsController", function ($stateParams, $location, bookingService, requestService, authService) {
+d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, $location, bookingService, requestService, authService) {
 	var vm = this;
+
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
 	var authSvc = authService;
 
-	vm.user = authSvc.getUser();
+    vm.user = $cookies.getObject("user");
 	vm.currentBookingId = $stateParams.id;
 	vm.request = "";
+
+    vm.redirect = function () {
+    	if($cookies.getObject("user")) {
+            $location.path("requestbooking/"+ vm.currentBookingId);
+		} else {
+            authSvc.showLoginModal();
+		}
+    };
 
 	vm.convertToDate = function (dateString) {
 		return new Date(dateString);

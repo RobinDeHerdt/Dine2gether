@@ -84,6 +84,30 @@ class BookingController extends Controller
     }
 
     /**
+     * Fetch all bookings for the specified location.
+     * @todo only fetch bookings with bookingdates after "Carbon::now"
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $input = $request->location;
+        $location = preg_split('/[;, ]+/', $input);
+
+        $bookings = Booking::where('city', 'LIKE', $location[0])->with([
+            'host.interests',
+            'kitchenstyles',
+            'dishes.dishimages'
+        ])->get();
+
+        return response()->json([
+            'bookings' => $bookings
+        ]);
+    }
+
+
+    /**
      * Handles multiple image upload.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -235,30 +259,6 @@ class BookingController extends Controller
         $user->save();
 
         return response(200);
-    }
-
-    /**
-     * Fetch all bookings for the specified location.
-     * @todo only fetch bookings with bookingdates after "Carbon::now"
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function search(Request $request)
-    {
-        $input = $request->location;
-        $location = preg_split('/[;, ]+/', $input);
-
-        $bookings = Booking::where('city', 'LIKE', $location[0])->with([
-            'user',
-            'interests',
-            'kitchenstyles',
-            'dishes.dishimages'
-        ])->get();
-
-        return response()->json([
-            'bookings' => $bookings
-        ]);
     }
 
     /**

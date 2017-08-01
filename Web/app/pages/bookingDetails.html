@@ -61,10 +61,10 @@
  						<div class="col s12 m4">
  							<div class="card">
  							   	<div class="card-image waves-effect waves-block waves-light">
- 							      <img ng-src="{{bookingdetails.dishImage(dish)}}" class="activator">
+ 							      <img ng-src="{{ bookingdetails.dishImage(dish) }}" class="activator">
  							    </div>
  							    <div class="card-content">
- 							      <span class="card-title activator grey-text text-darken-4"><h5>{{dish.name}}</h5></span>
+ 							      <span class="card-title activator grey-text text-darken-4"><h5>{{ dish.name }}</h5></span>
  							    	<p>{{ dish.description }}</p>
  							    </div>
  						  	</div>
@@ -72,7 +72,7 @@
  					</div>
  				</div>
  			</div>
- 			<a ng-class="bookingdetails.request == 'pending' || bookingdetails.request == 'own_booking' ? 'disabled' : ''" ng-hide="bookingdetails.request == 'accepted'" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
+ 			<a ng-class="bookingdetails.request == 'pending' || bookingdetails.user.id === bookingdetails.currentBooking.host.id ? 'disabled' : ''" ng-hide="bookingdetails.request == 'accepted'" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
  			<p ng-if="bookingdetails.request == 'pending'">*You've already sent a request. Please wait until the host has responded.</p>
  			<a ng-if="bookingdetails.request == 'accepted'" ui-sref="booknow({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Book now</a>
 		</div>

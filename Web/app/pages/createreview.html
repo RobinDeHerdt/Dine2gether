@@ -6,24 +6,33 @@
 			<div class="col s12">
 				<h5>{{ booking.title }}</h5>
 			</div>
-			<div ng-repeat="bookingdate in booking.bookingdates">
-			<div class="col s12 m3" ng-repeat="guest in bookingdate.guests">
-			  <div class="card">
-				<div class="card-image">
-				  <img ng-src="{{review.userImage(guest)}}" class="review-profile-image">
-				</div>
-				<div class="card-content">
-					<strong>{{ guest.first_name + " " + guest.last_name }}</strong>
-				</div>
-				<div class="card-action">
-				  <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
-				</div>
-			  </div>
+			<div ng-if="booking.bookingdates.length <= 0" class="col s12">
+				<p>No results found</p>
 			</div>
+			<div ng-repeat="bookingdate in booking.bookingdates">
+				<div ng-if="bookingdate.guests.length <= 0" class="col s12">
+					<p>No results found</p>
+				</div>
+				<div class="col s12 m3" ng-repeat="guest in bookingdate.guests">
+				  <div class="card">
+					<div class="card-image">
+					  <img ng-src="{{review.userImage(guest)}}" class="review-profile-image">
+					</div>
+					<div class="card-content">
+						<strong>{{ guest.first_name + " " + guest.last_name }}</strong>
+					</div>
+					<div class="card-action">
+					  <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
+					</div>
+				  </div>
+				</div>
 			</div>
 		 </div>
 	     <h3>Recent hosts</h3>
 	     <div class="row" ng-repeat="bookingdate in review.hostbookingdates">
+			 <div class="col s12">
+				 <h5>{{ bookingdate.booking.title }}</h5>
+			 </div>
 	        <div class="col s12 m3">
 	          <div class="card">
 	            <div class="card-image">

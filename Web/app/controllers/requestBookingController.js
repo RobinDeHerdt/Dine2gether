@@ -3,7 +3,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 	var vm = this;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
-	var authSvc = authSvc;
+	var authSvc = authService;
 
 	vm.user = authSvc.getUser();
 	vm.booking = [];
@@ -30,8 +30,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				booking_id: vm.booking.id,
 				user_id: vm.host.id
 			};
-
-			console.log(data);
 
 			requestSvc.addRequest(data).then(function (data) {
 				swal({
@@ -93,9 +91,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 				if(vm.user.id === vm.booking.host.id) {
 					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
-						window.location.href = "#/overview";
-					}, function () {
-						window.location.href = "#/overview";
+                        window.history.back();
 					});
 				}
 
@@ -122,26 +118,22 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		var date = datetimesplit[0];
 		var datesplit = date.split("-");
 
-		console.log(datesplit);
-
 		var newdate = datesplit[2] + "/" + datesplit[1] + "/" + datesplit[0];
 		var time = datetimesplit[1].substring(0,5);
 
 		return [newdate, time];
 	}
+
 	function _init() {
-		if(vm.user) {
-			loadBookingById();
-		} else {
-			swal({
-				text: "You need to be logged in to request a meal",
-				type: "error"
-			}).then(function () {
-				window.location.href = "/";
-			}, function () {
-				window.location.href = "/";
-			});
-		}
+		loadBookingById();
+		// swal({
+		// 	text: "You need to be logged in to request a meal",
+		// 	type: "error"
+		// }).then(function () {
+		// 	window.location.href = "/";
+		// }, function () {
+		// 	window.location.href = "/";
+		// });
 	}
 
 	_init();
