@@ -126,14 +126,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 	function _init() {
 		loadBookingById();
-		// swal({
-		// 	text: "You need to be logged in to request a meal",
-		// 	type: "error"
-		// }).then(function () {
-		// 	window.location.href = "/";
-		// }, function () {
-		// 	window.location.href = "/";
-		// });
 	}
 
 	_init();
