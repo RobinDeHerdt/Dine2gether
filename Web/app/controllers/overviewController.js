@@ -16,10 +16,10 @@ d2gApp.controller("overviewController", function (bookingService, interestServic
 
 		return function (booking) {
 			if(booking.host.interests.length > 0 && selected_interests.length > 0) {
-                for(var i = 0; i < booking.interests.length; i++) {
+                for(var i = 0; i < booking.host.interests.length; i++) {
                     for(var j = 0; j < selected_interests.length; j++) {
-                        if(booking.interests[i].id === selected_interests[j]) {
-                            return booking.interests[i].id === selected_interests[j];
+                        if(booking.host.interests[i].id === selected_interests[j]) {
+                            return booking.host.interests[i].id === selected_interests[j];
                         }
                     }
                 }

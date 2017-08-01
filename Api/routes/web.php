@@ -37,9 +37,9 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('/profile/upload', 'UserController@upload');
 
     Route::delete('review/{id}', 'ReviewController@destroy');
-    Route::get('review/guests/{id}', 'ReviewController@getGuests');
-    Route::get('review/hosts/{id}', 'ReviewController@getHosts');
-    Route::get('user/{id}/reviews', 'ReviewController@index');
+    Route::get('review/guests/{user}', 'ReviewController@getGuests');
+    Route::get('review/hosts/{user}', 'ReviewController@getHosts');
+    Route::get('user/{user}/reviews', 'ReviewController@index');
     Route::post('createreview', 'ReviewController@store');
     ;
     Route::get('interests', 'InterestController@index');
@@ -47,9 +47,8 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('requestbooking', 'RequestController@storeRequest');
     Route::get('acceptrequest/{id}', 'RequestController@acceptRequest');
     Route::get('declinerequest/{id}', 'RequestController@declineRequest');
-    Route::get('deleterequest/{id}', 'RequestController@deleteRequest');
-    Route::post('hasrequest', 'RequestController@checkIfRequest');
-    Route::post('getrequest', 'RequestController@getRequestById');
+    Route::post('request/delete', 'RequestController@delete');
+    Route::post('request/get', 'RequestController@show');
 
     Route::post('getbookingdatebydate', 'BookingDateController@getBookingDateByDate');
     Route::post('createbookingdate', 'BookingDateController@createNewBookingDate');

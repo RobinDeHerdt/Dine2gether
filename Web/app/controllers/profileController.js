@@ -14,7 +14,6 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 	
 	function getUserBookings () {
 		bookingSvc.getBookingsByUserId(vm.user.id).then(function (data) {
-			console.log(data);
 			vm.hostbookings = data.data.bookings;
 			vm.hostrequests = data.data.requests;
 
@@ -23,17 +22,15 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 
 	function getGuestBookings () {
 		bookingSvc.getGuestBookingsById(vm.user.id).then(function (data) {
-			console.log(data);
 			vm.guestbookingdates = data.data.bookingdates;
 			vm.guestrequests = data.data.requests;
 
 		}) 
 	}
 
-	vm.convertToDate =function (dateString) {
-		var convertedString = new Date(dateString);
-  		return convertedString;
-	}
+	vm.convertToDate = function (dateString) {
+  		return new Date(dateString);
+	};
 
 	vm.acceptRequest = function (requestid, userid, bookingid) {
 		requestSvc.acceptRequest(requestid).then(function () {
@@ -41,12 +38,14 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				user_id: userid,
 				host_id: vm.user.id,
 				booking_id: bookingid
-			}
+			};
+
 			$http.post(CONSTANTS.API_BASE_URL + "/sendconfirmationrequestmail", data).then( function () {
 				swal({
 					text: "Request was accepted. User is booked and will get a notification.",
 					type: "success"
-				})
+				});
+
 				getUserBookings();
 
 			});
@@ -57,14 +56,14 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				type: "error"
 			})
 		})
-	}
+	};
 
 	vm.declineRequest = function (id) {
 		requestSvc.declineRequest(id).then(function () {
 			swal({
 				text: "Request was declined. We'll notificate the user",
 				type: "success"
-			})
+			});
 			getUserBookings();
 		}, function () {
 			swal({
@@ -72,14 +71,14 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				type: "error"
 			})
 		})
-	}
+	};
 
 	vm.deleteBooking = function (id) {
 		bookingSvc.deleteBooking(id).then(function()
 		{
 			getUserBookings();
 		});
-	}
+	};
 
 	vm.deleteUserRequest = function (id) {
 		requestSvc.deleteRequest(id).then(function () {
@@ -95,7 +94,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				type: "error"
 			})
 		});
-	}
+	};
 
 	vm.detachFromBooking = function (id, userid) {
 		var user = loginSvc.getUser();
@@ -103,7 +102,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 		{
 			getGuestBookings();
 		});
-	}
+	};
 
 	vm.saveProfile = function() {
 		var data = {
@@ -115,7 +114,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 			city: vm.user.city,
 		};
 		loginSvc.updateProfile(vm.user.id,data).then(function(data) {
-			if ( data.status == 200)
+			if ( data.status === 200)
 			{
 				vm.showsuccessmessage = true;
 				loginSvc.setUser();
@@ -123,7 +122,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 		}, function (error) {
 			vm.showerrormessage = true;
 		});
-	}
+	};
 
 	vm.uploadProfilePicture = function (file) {
 		Upload.upload({
@@ -138,11 +137,11 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				vm.user.image = data.data.filename;
 				vm.path = '';
 			}); 
-	}
+	};
 
     vm.userImage = function() {
         return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.user.image;
-    }
+    };
 
 	function _init() {
 		console.log(loginSvc.getUser());

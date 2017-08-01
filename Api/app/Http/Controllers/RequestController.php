@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\RequestBooking;
+use App\Bookingdate;
 use App\User;
 
 class RequestController extends Controller
 {
 	
-    public function storeRequest (Request $request) {
+    public function store(Request $request) {
 
-    	$requestbooking = new RequestBooking;
+    	$requestbooking = new BookingRequest;
 
     	$requestbooking->date_time = $request->datetime;
     	$requestbooking->booking_id = $request->booking_id;
@@ -24,7 +24,7 @@ class RequestController extends Controller
     }
 
     public function acceptRequest ($id) {
-    	$requestbooking = RequestBooking::where('id', $id)->first();
+    	$requestbooking = BookingRequest::where('id', $id)->first();
 
     	$requestbooking->accepted = true;
     	$requestbooking->save();
@@ -33,7 +33,7 @@ class RequestController extends Controller
     }
 
     public function declineRequest ($id) {
-    	$requestbooking = RequestBooking::where('id', $id)->first();
+    	$requestbooking = BookingRequest::where('id', $id)->first();
 
     	$requestbooking->declined = true;
     	$requestbooking->save();
@@ -41,31 +41,51 @@ class RequestController extends Controller
         return response()->json(["status"=>"succes"]);
     }
 
-    public function deleteRequest ($id) {
+    /**
+     * Delete.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function delete(Request $request)
+    {
+        $booking_id = $request->booking_id;
+        $user_id = $request->user_id;
 
-        $requestbooking = RequestBooking::where('id', $id)->delete();
+        Bookingdate::find($booking_id)
+            ->guests()
+            ->where('user_id', $user_id)
+            ->delete();
 
-        return response()->json(["status" => "success"]);
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
-    public function checkIfRequest (Request $request) {
+    /**
+     * Check if the authenticated has an open request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function show(Request $request)
+    {
+        $booking_id = $request->booking_id;
+        $user_id = $request->user_id;
 
-        $user_request = RequestBooking::where('user_id', $request->user_id)->where("booking_id", $request->booking_id)->first();
+        $booking_request = Bookingdate::find($booking_id)
+            ->guests()
+            ->where('user_id', $user_id)
+            ->get();
 
-        $response = "none";
-        if($user_request) {
-            $response = $user_request;
+        if ($booking_request) {
+            return response()->json([
+                'request' => $booking_request
+            ]);
         }
 
-        return response()->json(["request" => $response]);
+        return response()->json([
+            'request' => 'none'
+        ]);
     }
-
-    public function getRequestById (Request $request) {
-
-        $myrequest = RequestBooking::where('user_id', $request->user_id)->where('booking_id', $request->booking_id)->first();
-
-        return response()->json(["request" => $myrequest]);
-    }
-
-    
 }

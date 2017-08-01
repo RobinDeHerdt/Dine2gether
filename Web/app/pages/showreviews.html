@@ -15,13 +15,13 @@
       <div class="row">
   <div class="col s12 m12">
     <p ng-if="profile.guestbookings.length < 1">No bookings yet as a guest.</p>
-    <div ng-repeat="reviewObj in review.reviews">
+    <div ng-repeat="rev in review.reviews">
       <ul class="collection">
       <li class="collection-item avatar">
-         <img ng-src="{{review.userImage(reviewObj.user)}}" alt="" class="circle">
-        <span class="title"><a href="/#/user/{{reviewObj.author_id}}/reviews"><strong>{{reviewObj.user.first_name + " " + reviewObj.user.last_name }}</strong></a></span>
-        <p>{{reviewObj.body}}</p>
-        <a href="" class="secondary-content" ng-click="review.deleteReview(reviewObj.id)" ng-show="review.userid === reviewObj.author_id">
+         <img ng-src="{{review.userImage(rev.user)}}" alt="" class="circle">
+        <span class="title"><a href="/#/user/{{rev.author_id}}/reviews"><strong>{{rev.user.first_name + " " + reviewObj.user.last_name }}</strong></a></span>
+        <p>{{rev.body}}</p>
+        <a href="" class="secondary-content" ng-click="review.deleteReview(rev.id)" ng-show="review.userid === rev.author_id">
           <i class="material-icons">delete_forever</i>
         </a>
       </li>

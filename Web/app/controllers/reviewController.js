@@ -5,19 +5,16 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 	vm.selectedname = "...";
 
 	function getGuestsInfo() {
-		var user = loginSvc.getUser();
-		vm.user = user;
-		reviewSvc.getGuests(user.id).then(function(data)
-		{
+        vm.user = loginSvc.getUser();
+
+		reviewSvc.getGuests(vm.user.id).then(function(data) {
 			vm.guestbookings = data.data.bookings;
 			console.log(data.data.bookings);
 		});
 	}
 
 	function getHostsInfo() {
-		var user = loginSvc.getUser();
-		reviewSvc.getHosts(user.id).then(function(data)
-		{
+		reviewSvc.getHosts(vm.user.id).then(function(data) {
 			vm.hostbookings = data.data.bookings;
 			console.log(data);
 		});
@@ -25,8 +22,7 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 
 	function loadReviews() {
 		reviewSvc.getReviewsByUser($stateParams.id).then(function(data) {
-			var user = loginSvc.getUser();
-			vm.userid = user['id'];
+			vm.userid = vm.user['id'];
 			getUserById($stateParams.id);
 			vm.reviews  	= data.data.reviews;
 			console.log(data);
@@ -36,8 +32,7 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 	function getUserById(id) {
 		var token = loginSvc.token;
 
-		reviewSvc.getUserInfo(id, token).then(function(data)
-		{
+		reviewSvc.getUserInfo(id, token).then(function(data) {
 			vm.name = data.data.first_name + " " + data.data.last_name;
 		});
 	}
@@ -49,7 +44,7 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 
 		$location.hash('reviewtextarea');
       	$anchorScroll();
-	}
+	};
 
 	vm.sendReview = function()
 	{
@@ -57,12 +52,12 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 		var review = { 
 			review 		: vm.reviewinput,
 			author 		: author,
-			guest_id 	: vm.selectedUser,
+			guest_id 	: vm.selectedUser
 		};
 
 		reviewSvc.postReview(review).then(function(data)
 		{
-			if(data.status == 200)
+			if(data.status === 200)
 			{
 				$location.path('/user/'+ vm.selectedUser+'/reviews');
 			}
@@ -70,30 +65,30 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 			vm.sendreviewerror = error.data.review[0];
 			console.log(error);
 		});
-	}
+	};
 
     vm.bookingImage = function(user) {
 		return CONSTANTS.PUBLIC_BASE_URL + "/" + user.image;
-    }
+    };
 
     vm.userImage = function(user) {
         return CONSTANTS.PUBLIC_BASE_URL + "/" + user.image;
-    }
+    };
 
 	vm.deleteReview = function(id)
 	{
 		reviewSvc.deleteReviews(id).then(function(data)
 		{
-			if(data.status == 200)
+			if(data.status === 200)
 			{
 				loadReviews();
 			}
 		});
-	}
+	};
 
 	vm.goBack = function() {
 		window.history.back();
-	}
+	};
 
 	function _init() {
 		getGuestsInfo();

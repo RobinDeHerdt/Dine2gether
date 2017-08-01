@@ -10,14 +10,16 @@ use App\Interest;
 class InterestController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Fetch all interests.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $interests = Interest::all();
-        return response()->json(["interests" => $interests]);
-    }
 
+        return response()->json([
+            'interests' => $interests
+        ]);
+    }
 }

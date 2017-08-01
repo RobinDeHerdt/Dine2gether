@@ -31,14 +31,17 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $location,
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
 			vm.currentBooking = data.data.booking[0];
 			vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
+
 			if(vm.user) {
-				if(vm.user.id === vm.currentBooking.user.id) {
+				if(vm.user.id === vm.currentBooking.host.id) {
 					vm.request = "own_booking";
 				} else {
 					checkIfUserHasRequest();
 				}
 			}
-		})
+
+			console.log(vm.currentBooking);
+		});
 	}
 
 	function checkIfUserHasRequest() {

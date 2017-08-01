@@ -5,7 +5,7 @@
 		<h5>Recent guests</h5>
 		<div class="row">
 			<div ng-repeat="guestbooking in review.guestbookings">
-		        <div class="col s12 m3" ng-repeat="guest in guestbooking.users">
+		        <div class="col s12 m3" ng-repeat="guest in guestbooking.guests">
 		          <div class="card">
 		            <div class="card-image">
 		              <img ng-src="{{review.userImage(guest)}}">

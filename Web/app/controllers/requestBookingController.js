@@ -29,7 +29,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			var data = {
 				datetime: datetime,
 				booking_id: vm.booking.id,
-				user_id: vm.user.id
+				user_id: vm.host.id
 			};
 
 			console.log(data);
@@ -71,7 +71,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			booking_id: vm.booking.id
 		};
 
-		requestSvc.checkIfHasRequest(data).then(function (data) {
+		requestSvc.getRequest(data).then(function (data) {
 			var request = data.data.request;
 				if (request.accepted === 0 && request.declined === 0) {
 					swal({ text: "You already sent a request. Please wait for the host to respond.", type: "error"}).then(function () {
@@ -92,7 +92,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 				deleteEmptyoption();
 
-				if(vm.user.id === vm.booking.user.id) {
+				if(vm.user.id === vm.booking.host.id) {
 					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
 						window.location.href = "#/overview";
 					}, function () {

@@ -10,13 +10,16 @@ use App\Kitchenstyle;
 class KitchenstyleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Fetch all kitchenstyles.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $kitchenstyles = Kitchenstyle::all();
-        return response()->json(["kitchenstyles" => $kitchenstyles]);
+
+        return response()->json([
+            'kitchenstyles' => $kitchenstyles
+        ]);
     }
 }

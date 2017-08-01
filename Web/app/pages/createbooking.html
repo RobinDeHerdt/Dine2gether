@@ -62,30 +62,17 @@
 								<li ng-show="create.currentPage == 3">
 									<div class="row">
 										<div class="col s12">
-											<h4>Your interests</h4>
+											<h4>Kitchenstyles</h4>
 										</div>
-										<div class="input-field col s12">
-											<p ng-repeat="interest in create.interests">
-												<input type="checkbox" ng-model="interest.selected" id="{{ interest.interest }}" />
-												<label for="{{ interest.interest }}">{{interest.interest}}</label>
+										<div class="input-field col s6">
+											<p ng-repeat="kitchenstyle in create.kitchenstyles">
+												<input type="checkbox" ng-model="kitchenstyle.selected" id="{{ kitchenstyle.name }}" />
+												<label for="{{ kitchenstyle.name }}">{{kitchenstyle.name}}</label>
 											</p>
 										</div>
 									</div>
 								</li>
 								<li ng-show="create.currentPage == 4">
-									<div class="row">
-										<div class="col s12">
-											<h4>Kitchenstyles</h4>
-										</div>
-										<div class="input-field col s6">
-											<p ng-repeat="kitchenstyle in create.kitchenstyles">
-												<input type="checkbox" ng-model="kitchenstyle.selected" id="{{ kitchenstyle.style }}" />
-												<label for="{{ kitchenstyle.style }}">{{kitchenstyle.style}}</label>
-											</p>
-										</div>
-									</div>
-								</li>
-								<li ng-show="create.currentPage == 5">
 									<div class="row">
 										<div class="col s12">
 											<h4>Menu</h4>
@@ -140,7 +127,6 @@
 							<li tabindex="0" ng-click="create.currentPage = 2" ng-class="create.currentPage == 2 ? 'active' : waves-effect"><a>2</a></li>
 							<li tabindex="0" ng-click="create.currentPage = 3" ng-class="create.currentPage == 3 ? 'active' : waves-effect"><a>3</a></li>
 							<li tabindex="0" ng-click="create.currentPage = 4" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
-							<li tabindex="0" ng-click="create.currentPage = 5" ng-class="create.currentPage == 5 ? 'active' : waves-effect"><a>5</a></li>
 						</ul>
 					</div>
 				</div>

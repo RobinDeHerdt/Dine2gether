@@ -15,25 +15,16 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index(User $user)
     {
-        // $receiver   = User::with('receiverreviews')->where('id',$id)->first();
+        $reviews = $user->receivedReviews()->get();
 
-        $reviews = Review::where('receiver_id', $id)->with('user')->get();
-
-        return response()->json(['reviews' => $reviews]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([
+            'reviews' => $reviews
+        ]);
     }
 
     /**
@@ -56,82 +47,68 @@ class ReviewController extends Controller
         $review->author_id      = $request->author["id"];
 
         $review->save();
+
+        return response(200);
     }
 
     /**
-     * Display the specified resource.
+     * Get all guests  at your bookings.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function getGuests($id)
+    public function getGuests(User $user)
     {
-        $bookingdates = Bookingdate::where('host_id', $id)->with('users', 'booking')->get();
+        $bookings = $user->bookingDates()->with('guests')->get();
 
-        // $arrBooking = [];
-
-        // foreach ($bookingdates as $bookingdate) {
-        //     array_push($arrBooking, $bookingdate->with('booking')->get());
-        // }
-
-        return response()->json(['bookings' => $bookingdates]);
+        return response()->json([
+            'bookings' => $bookings
+        ]);
     }
 
-    public function getHosts($id)
+    /**
+     * Get all guests  at your bookings.
+     *
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function getHosts(User $user)
     {
-        $user = User::where('id', $id)->first();
-        $bookingdates = $user->bookingdates()->get();
-
-        $booking_arr = [];
-
-        foreach($bookingdates as $bookingdate) {
-            $host_id    = $bookingdate->host_id;
-            $hostInfo   = User::where('id', $host_id)->get();
-
-            array_push($booking_arr, $hostInfo);
-        }
+        $bookings = $user->bookingDates()->with('guests')->get();
         
-        return response()->json(["bookings" => $booking_arr]);
+        return response()->json([
+            'bookings' => $bookings
+        ]);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Update the specified review.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Review $review)
     {
-        $review = Review::find($id);
-
         $review->body           = $request->body;
         $review->rating         = $request->rating;
         $review->guest_id       = $request->guest_id;
 
         $review->save();
+
+        return response(200);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Review $review)
     {
-        $review = Review::find($id);
         $review->delete();
+
+        return response(200);
     }
 }

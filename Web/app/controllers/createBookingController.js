@@ -6,7 +6,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	var loginSvc 		= loginService;
 	var kitchenstyleSvc = kitchenstyleService;
 
-	vm.numberOfPages = 5;
+	vm.numberOfPages = 4;
 	vm.currentPage = 1;
 	vm.dishes = [{
 		number: 1

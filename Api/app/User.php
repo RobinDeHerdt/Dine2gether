@@ -28,13 +28,33 @@ class User extends Authenticatable
     ];
 
     /**
-     * A user belongs to a booking dates.
+     * A user belongs to many booking dates.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function bookingDates()
+    public function bookingdates()
     {
-        return $this->belongsToMany('App\Bookingdate', 'bookingdate_user', 'user_id', 'bookingdate_id');
+        return $this->belongsToMany('App\Bookingdate');
+    }
+
+    /**
+     * A user belongs to many booking dates.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function acceptedBookings()
+    {
+        return $this->belongsToMany('App\Bookingdate')->wherePivot('accepted', true);
+    }
+
+    /**
+     * A user belongs to many booking dates.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function bookingRequests()
+    {
+        return $this->belongsToMany('App\Bookingdate')->wherePivot('accepted', false);
     }
 
     /**
@@ -54,7 +74,17 @@ class User extends Authenticatable
      */
     public function receivedReviews()
     {
-        return $this->hasMany('App\Review');
+        return $this->hasMany('App\Review', 'user_id');
+    }
+
+    /**
+     * A host has many bookings.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function bookings()
+    {
+        return $this->hasMany('App\Booking', 'host_id');
     }
 
     /**

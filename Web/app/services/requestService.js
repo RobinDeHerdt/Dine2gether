@@ -15,14 +15,10 @@ d2gApp.service('requestService', function ($http) {
 	};
 
 	svc.deleteRequest = function(id) {
-		return $http.get(CONSTANTS.API_BASE_URL + '/deleterequest/' + id);
+		return $http.post(CONSTANTS.API_BASE_URL + '/request/delete', data);
 	};
 
-	svc.checkIfHasRequest = function (data) {
-		return $http.post(CONSTANTS.API_BASE_URL + '/hasrequest', data);
-	};
-
-	svc.getRequestById = function (data) {
-		return $http.post(CONSTANTS.API_BASE_URL + '/getrequest', data);
+	svc.getRequest = function (data) {
+		return $http.post(CONSTANTS.API_BASE_URL + '/request/get', data);
 	}
 });
