@@ -37,10 +37,10 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('/profile/upload', 'UserController@upload');
 
     Route::delete('review/{id}', 'ReviewController@destroy');
-    Route::get('review/guests/{user}', 'ReviewController@getGuests');
-    Route::get('review/hosts/{user}', 'ReviewController@getHosts');
+    Route::get('review/guests', 'ReviewController@getGuests');
+    Route::get('review/hosts', 'ReviewController@getHosts');
     Route::get('user/{user}/reviews', 'ReviewController@index');
-    Route::post('createreview', 'ReviewController@store');
+    Route::post('review/store', 'ReviewController@store');
     ;
     Route::get('interests', 'InterestController@index');
 

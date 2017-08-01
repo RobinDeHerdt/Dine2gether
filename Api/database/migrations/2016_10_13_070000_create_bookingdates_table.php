@@ -16,6 +16,7 @@ class CreateBookingdatesTable extends Migration
         Schema::create("bookingdates", function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('date');
+            $table->integer('max_guests');
             $table->integer('booking_id')->unsigned();
             $table->foreign('booking_id')->references('id')->on('bookings');
             $table->timestamps();

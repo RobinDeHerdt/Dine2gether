@@ -1,12 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-// use Carbon\Carbon
 
 class BookingsTableSeeder extends Seeder
 {
-	// $date = Carbon::now();
-
     /**
      * Run the database seeds.
      *
@@ -16,7 +13,6 @@ class BookingsTableSeeder extends Seeder
     {
         DB::table('bookings')->insert([
             'title' => 'Home cooked vegan meal',
-            'max_guests' => 5,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Vlinderstraat 10',
             'postalcode' => 2220,
@@ -27,7 +23,6 @@ class BookingsTableSeeder extends Seeder
 
         DB::table('bookings')->insert([
             'title' => 'Vegan meal',
-            'max_guests' => 10,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Liersesteenweg 201A',
             'postalcode' => 2000,
@@ -38,7 +33,6 @@ class BookingsTableSeeder extends Seeder
 
         DB::table('bookings')->insert([
             'title' => 'Italian home cooking',
-            'max_guests' => 4,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Boekenstraat 180',
             'postalcode' => 5000,
@@ -49,7 +43,6 @@ class BookingsTableSeeder extends Seeder
 
         DB::table('bookings')->insert([
             'title' => 'Sexy salsas',
-            'max_guests' => 3,
             'telephone_number' => '012/34.56.78',
             'street_number' => 'Landweg 1',
             'host_id' => 2,

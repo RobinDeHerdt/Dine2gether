@@ -1,18 +1,17 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, loginService, $stateParams, $location, $filter, $timeout) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, authService, $stateParams, $location, $filter, $timeout) {
 	
 	var vm = this;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
-	var loginSvc = loginService;
+	var authSvc = authSvc;
 
-	vm.user = loginSvc.getUser();
+	vm.user = authSvc.getUser();
 	vm.booking = [];
 
 	vm.sendRequest = function () {
 		var datetime = "";
 
 		if(vm.requestdata.selectedDate && !vm.daterequest) {
-			console.log(vm.requestdata.selectedDate);
 			datetime = vm.requestdata.selectedDate;
 		} else {
 			var today = new Date();

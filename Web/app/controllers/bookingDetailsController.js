@@ -1,10 +1,10 @@
-d2gApp.controller("bookingDetailsController", function ($stateParams, $location, bookingService, requestService, loginService) {
+d2gApp.controller("bookingDetailsController", function ($stateParams, $location, bookingService, requestService, authService) {
 	var vm = this;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
-	var loginSvc = loginService;
+	var authSvc = authService;
 
-	vm.user = loginSvc.getUser();
+	vm.user = authSvc.getUser();
 	vm.currentBookingId = $stateParams.id;
 	vm.request = "";
 

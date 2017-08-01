@@ -1,14 +1,14 @@
-d2gApp.controller("profileController", function (loginService, bookingService, requestService, $http, $location, $filter, Upload) {
+d2gApp.controller("profileController", function (authService, bookingService, requestService, $http, $location, $filter, Upload) {
 	var vm = this;
-	var loginSvc = loginService;
+	var authSvc = authService;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
 
 	var shouldHide = false;
 
 	function loadUser () {
-		if(loginSvc.getUser()) {
-			vm.user = loginSvc.getUser();
+		if(authSvc.getUser()) {
+			vm.user = authSvc.getUser();
 		}
 	}
 	
@@ -97,7 +97,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 	};
 
 	vm.detachFromBooking = function (id, userid) {
-		var user = loginSvc.getUser();
+		var user = authSvc.getUser();
 		bookingSvc.detachBooking(id, user.id).then(function()
 		{
 			getGuestBookings();
@@ -113,11 +113,11 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 			postalcode: vm.user.postalcode,
 			city: vm.user.city,
 		};
-		loginSvc.updateProfile(vm.user.id,data).then(function(data) {
+        authSvc.updateProfile(vm.user.id,data).then(function(data) {
 			if ( data.status === 200)
 			{
 				vm.showsuccessmessage = true;
-				loginSvc.setUser();
+                authSvc.setUser();
 			}
 		}, function (error) {
 			vm.showerrormessage = true;
@@ -133,7 +133,7 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
 				user_id	: vm.user.id
 			}
 			}).then(function (data) {
-				loginSvc.setUser();
+            authSvc.setUser();
 				vm.user.image = data.data.filename;
 				vm.path = '';
 			}); 
@@ -144,9 +144,8 @@ d2gApp.controller("profileController", function (loginService, bookingService, r
     };
 
 	function _init() {
-		console.log(loginSvc.getUser());
-		if(!loginSvc.getUser()) {
-			loginSvc.errorMessage = "You need to be logged in to see your profile";
+		if(!authSvc.getUser()) {
+            authSvc.errorMessage = "You need to be logged in to see your profile";
 			$location.path('/home');
 		} else {
 			loadUser();

@@ -1,4 +1,4 @@
-d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
+d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 	var svc = this;
 
 	svc.user = $cookies.getObject("user");
@@ -40,6 +40,17 @@ d2gApp.service('loginService', function ($http, $auth, $cookies, $location) {
 			}
 		});
 	};
+
+    svc.logout = function () {
+        $auth.logout()
+            .then(function (data) {
+                svc.user = null;
+                $cookies.remove("user");
+            }, function (error) {
+
+                console.log(error);
+            })
+    };
 
 	svc.setUser = function () {
 		$http.get(CONSTANTS.API_BASE_URL + '/authenticate/user').then(function (user) {

@@ -20,10 +20,11 @@ class ReviewController extends Controller
      */
     public function index(User $user)
     {
-        $reviews = $user->receivedReviews()->get();
+        $reviews = $user->receivedReviews()->with('author')->get();
 
         return response()->json([
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'user' => $user,
         ]);
     }
 

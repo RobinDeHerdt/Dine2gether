@@ -1,44 +1,32 @@
-d2gApp.controller("reviewController", function (reviewService, loginService, $stateParams, $location, $anchorScroll) {
+d2gApp.controller("reviewController", function (reviewService, authService, $stateParams, $location, $anchorScroll) {
 	vm = this;
 	var reviewSvc = reviewService;
-	var loginSvc  = loginService;
+	var authSvc  = authService;
 	vm.selectedname = "...";
 
-	function getGuestsInfo() {
-        vm.user = loginSvc.getUser();
+	function getGuests() {
+        vm.auth_user = authSvc.getUser();
 
-		reviewSvc.getGuests(vm.user.id).then(function(data) {
+		reviewSvc.getGuests().then(function(data) {
 			vm.guestbookings = data.data.bookings;
-			console.log(data.data.bookings);
 		});
 	}
 
-	function getHostsInfo() {
-		reviewSvc.getHosts(vm.user.id).then(function(data) {
+	function getHosts() {
+		reviewSvc.getHosts().then(function(data) {
 			vm.hostbookings = data.data.bookings;
-			console.log(data);
 		});
 	}
 
 	function loadReviews() {
 		reviewSvc.getReviewsByUser($stateParams.id).then(function(data) {
-			vm.userid = vm.user['id'];
-			getUserById($stateParams.id);
-			vm.reviews  	= data.data.reviews;
-			console.log(data);
+			vm.reviews = data.data.reviews;
+			vm.user = data.data.user;
+			console.log(vm.user);
 		});
 	}
 
-	function getUserById(id) {
-		var token = loginSvc.token;
-
-		reviewSvc.getUserInfo(id, token).then(function(data) {
-			vm.name = data.data.first_name + " " + data.data.last_name;
-		});
-	}
-
-	vm.getSelectedUser = function(id, first_name, last_name)
-	{
+	vm.getSelectedUser = function(id, first_name, last_name) {
 		vm.selectedUser = id;
 		vm.selectedname = first_name + " " + last_name;
 
@@ -46,19 +34,16 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
       	$anchorScroll();
 	};
 
-	vm.sendReview = function()
-	{
-		var author = loginSvc.getUser();
+	vm.sendReview = function() {
+		var author = authSvc.getUser();
 		var review = { 
 			review 		: vm.reviewinput,
 			author 		: author,
 			guest_id 	: vm.selectedUser
 		};
 
-		reviewSvc.postReview(review).then(function(data)
-		{
-			if(data.status === 200)
-			{
+		reviewSvc.postReview(review).then(function(data) {
+			if(data.status === 200) {
 				$location.path('/user/'+ vm.selectedUser+'/reviews');
 			}
 		}, function (error) {
@@ -75,12 +60,9 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
         return CONSTANTS.PUBLIC_BASE_URL + "/" + user.image;
     };
 
-	vm.deleteReview = function(id)
-	{
-		reviewSvc.deleteReviews(id).then(function(data)
-		{
-			if(data.status === 200)
-			{
+	vm.deleteReview = function(id) {
+		reviewSvc.deleteReviews(id).then(function(data) {
+			if(data.status === 200) {
 				loadReviews();
 			}
 		});
@@ -91,8 +73,6 @@ d2gApp.controller("reviewController", function (reviewService, loginService, $st
 	};
 
 	function _init() {
-		getGuestsInfo();
-		getHostsInfo();
 		loadReviews();
 	}
 

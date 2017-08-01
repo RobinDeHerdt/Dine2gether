@@ -17,7 +17,6 @@ class CreateBookingsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->double('price');
-            $table->integer('max_guests');
             $table->string('telephone_number');
             $table->string('street_number');
             $table->integer('postalcode');

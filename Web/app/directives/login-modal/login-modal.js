@@ -1,4 +1,4 @@
-d2gApp.directive("d2gLogin", function (loginService) {
+d2gApp.directive("d2gLogin", function (authService) {
 	return {
 		restrict: "E",
 		templateUrl: "app/directives/login-modal/login-modal.html",
@@ -6,18 +6,18 @@ d2gApp.directive("d2gLogin", function (loginService) {
 		scope: {},
 		bindToController: true,
 		controllerAs: "login",
-		controller: function (loginService) {
+		controller: function (authService) {
 			
 			var vm = this;
-			var loginSvc = loginService;
+			var authSvc = authService;
 
 			vm.login = function () {
 				var credentials = {
 					email: vm.email,
-					password: vm.password,
-				}
+					password: vm.password
+				};
 
-			loginSvc.login(credentials);
+                authSvc.login(credentials);
 			}
 		}
 	}

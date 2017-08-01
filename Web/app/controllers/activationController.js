@@ -1,10 +1,10 @@
-d2gApp.controller('activationController', function ($stateParams, $http, loginService) {
+d2gApp.controller('activationController', function ($stateParams, $http, authService) {
 	var vm = this;
-	var loginSvc = loginService;
+	var authSvc = authService;
 
 	function _init () {
 		var activationcode = {token: $stateParams.token};
-		loginSvc.activateUser(activationcode);
+        authSvc.activateUser(activationcode);
 	}
 
 	_init();

@@ -1,13 +1,13 @@
 <main>
 	<div class="container under-header profile">
 		<a href="" ng-click="review.goBack()"><h5>Back</h5></a>
-		<h1>Reviews for {{ review.name }} </h1>
+		<h1>Reviews for {{ review.user.first_name + ' ' + review.user.last_name }}</h1>
 		
 		<div class="row" ng-show="!review.reviews.length">
         <div class="col s12 m12">
           <div class="card">
             <div class="card-content">
-              <p >There are no reviews for this person yet.</p>
+              <p>There are no reviews for this person yet.</p>
             </div>
           </div>
         </div>
@@ -18,8 +18,8 @@
     <div ng-repeat="rev in review.reviews">
       <ul class="collection">
       <li class="collection-item avatar">
-         <img ng-src="{{review.userImage(rev.user)}}" alt="" class="circle">
-        <span class="title"><a href="/#/user/{{rev.author_id}}/reviews"><strong>{{rev.user.first_name + " " + reviewObj.user.last_name }}</strong></a></span>
+         <img ng-src="{{review.userImage(rev.author)}}" alt="" class="circle">
+        <span class="title"><a href="/#/user/{{rev.author_id}}/reviews"><strong>{{rev.author.first_name + " " + rev.author.last_name }}</strong></a></span>
         <p>{{rev.body}}</p>
         <a href="" class="secondary-content" ng-click="review.deleteReview(rev.id)" ng-show="review.userid === rev.author_id">
           <i class="material-icons">delete_forever</i>

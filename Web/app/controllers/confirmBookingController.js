@@ -1,12 +1,12 @@
-d2gApp.controller("ConfirmBookingController", function (loginService, bookingService, requestService, $stateParams, $location, $filter, $http) {
+d2gApp.controller("ConfirmBookingController", function (authService, bookingService, requestService, $stateParams, $location, $filter, $http) {
 
-	var loginSvc = loginService;
+	var authSvc = authService;
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
 	var vm = this;
 	var booking_id = $stateParams.id;
 
-	vm.user = loginSvc.getUser();
+	vm.user = authSvc.getUser();
 	vm.selected_guests = 1;
 	vm.showguesterror = false;
 	vm.bookingExists = false;
@@ -48,7 +48,8 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 		var data = {
 			user_id: vm.user.id,
 			booking_id: booking_id
-		}
+		};
+
 		console.log(data);
 		requestSvc.getRequestById(data).then(function (data) {
 			console.log(data);
@@ -77,10 +78,12 @@ d2gApp.controller("ConfirmBookingController", function (loginService, bookingSer
 		for(var i=0; i<vm.booking.bookingdates.length; i++) {
 			if(vm.request.date_time == vm.booking.bookingdates[i].booking_date) {
 				vm.bookingExists = true;
+
 				var data = {
 					booking_id: vm.booking.id, 
 					date_time: vm.booking.bookingdates[i].booking_date
-				}
+				};
+
 				bookingSvc.getBookingdateByDate(data).then(function (data) {
 					vm.bookingdate = data.data.bookingdate;
 					vm.booking.availableseats = vm.booking.max_guests - vm.bookingdate.guests_booked;

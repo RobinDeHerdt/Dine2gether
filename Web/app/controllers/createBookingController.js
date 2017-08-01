@@ -1,9 +1,9 @@
-d2gApp.controller("createBookingController", function (kitchenstyleService, interestService, bookingService, loginService, $location, $scope, Upload) {
+d2gApp.controller("createBookingController", function (kitchenstyleService, interestService, bookingService, authService, $location, $scope, Upload) {
 	var vm = this;
 
 	var interestSvc 	= interestService;
 	var bookingSvc 		= bookingService;	
-	var loginSvc 		= loginService;
+	var authSvc 		= authService;
 	var kitchenstyleSvc = kitchenstyleService;
 
 	vm.numberOfPages = 4;
@@ -25,7 +25,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	};
 
 	vm.createBooking = function () {
-		var user = loginSvc.getUser();
+		var user = authSvc.getUser();
 
 		var data = {
 			user_id: user.id,
@@ -38,7 +38,6 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 			telephone_number: vm.telephone_number,
 			interests:  getSelectedInterests(),
 			kitchenstyles:  getSelectedKitchenstyles(),
-			max_nr_guests: vm.max_nr_guests,
 			dishes: getDishes()
 		};
 		console.log(data);
@@ -82,14 +81,12 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	function loadInterests () {
 		interestSvc.getInterests().success(function (data) {
 			vm.interests = data.interests;
-			console.log(vm.interests);
 		})
 	}
 
 	function loadKitchenstyles () {
 		kitchenstyleSvc.getKitchenStyles().success(function (data) {
 			vm.kitchenstyles = data.kitchenstyles;
-			console.log(vm.kitchenstyles);
 		})
 	}
 
@@ -134,7 +131,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 
 	vm.getAddress = function()	{
 		if(vm.selectedAddress) {
-			var user = loginSvc.getUser(); 
+			var user = authSvc.getUser();
 			vm.address 		= user.street_number;
 			vm.postal_code 	= user.postalcode;
 			vm.city 		= user.city;
@@ -147,8 +144,8 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	};
 
 	function _init () {
-		if(!loginSvc.getUser()) {
-			loginSvc.errorMessage = "You need to be logged in to create a booking";
+		if(!authSvc.getUser()) {
+            authSvc.errorMessage = "You need to be logged in to create a booking";
 			$location.path('/home');
 		} else {
 			loadInterests();

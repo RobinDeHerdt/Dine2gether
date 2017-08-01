@@ -3,16 +3,48 @@
 namespace App\Http\Controllers;
 
 use App\Booking;
-use App\Bookingdate;
 use App\User;
 use App\Dish;
 use App\DishImage;
-use App\Interest;
-use App\Kitchenstyle;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
+    /**
+     * Contains the authenticated user.
+     *
+     * @var \App\User
+     */
+    private $user;
+
+    /**
+     * Constructor.
+     *
+     * Get the authenticated user and save it to the $user variable.
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            try {
+                if (!$this->user = JWTAuth::parseToken()->authenticate()) {
+                    return response()->json(['user_not_found'], 404);
+                }
+            } catch (TokenExpiredException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            } catch (TokenInvalidException $e) {
+                return response()->json(['token_invalid'], $e->getStatusCode());
+            } catch (JWTException $e) {
+                return response()->json(['token_absent'], $e->getStatusCode());
+            }
+
+            return $next($request);
+        })->except('index', 'show', 'search');
+    }
+
     /**
      * Fetch all bookings.
      *
@@ -28,6 +60,26 @@ class BookingController extends Controller
 
         return response()->json([
             'bookings' => $bookings
+        ]);
+    }
+
+    /**
+     * Display the specified booking.
+     *
+     * @param \App\Booking
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Booking $booking)
+    {
+        $booking = Booking::where('id', $booking->id)->with([
+            'host.interests',
+            'kitchenstyles',
+            'bookingdates.guests',
+            'dishes.dishimages'
+        ])->get();
+
+        return response()->json([
+            'booking' => $booking
         ]);
     }
 
@@ -67,7 +119,6 @@ class BookingController extends Controller
     {
         $this->validate($request, [
             'menu_title'        => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'max_nr_guests'     => 'required|numeric',
             'price'             => 'required|numeric',
             'address'           => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
             'postal_code'       => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
@@ -79,12 +130,10 @@ class BookingController extends Controller
 
         $booking->title             = $request->menu_title;
         $booking->price             = $request->price;
-        // $booking->date              = $request->date;
         $booking->street_number     = $request->address;
         $booking->postalcode        = $request->postal_code;
         $booking->city              = $request->city;
         $booking->host_id           = $request->user_id;
-        $booking->max_guests        = $request->max_nr_guests;
         $booking->telephone_number  = $request->telephone_number;
 
         $booking->save();
@@ -121,26 +170,6 @@ class BookingController extends Controller
 
         return response()->json([
             'status' => 'success'
-        ]);
-    }
-
-    /**
-     * Display the specified booking.
-     *
-     * @param \App\Booking
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Booking $booking)
-    {
-        $booking = Booking::where('id', $booking->id)->with([
-            'host.interests',
-            'kitchenstyles',
-            'bookingdates',
-            'dishes.dishimages'
-        ])->get();
-
-        return response()->json([
-            'booking' => $booking
         ]);
     }
 
@@ -233,14 +262,13 @@ class BookingController extends Controller
     }
 
     /**
-     * Fetch all bookings for the specified host.
+     * Fetch all hosted bookings for the authenticated user.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function getBookingsAsHost(User $user)
+    public function getBookingsAsHost()
     {
-        $bookingdates = $user->bookings()->with('bookingdates')->get();
+        $bookingdates = $this->user->bookings()->with('bookingdates')->get();
 
         return response()->json([
             'bookings' => $bookingdates
@@ -248,14 +276,13 @@ class BookingController extends Controller
     }
 
     /**
-     * Fetch all bookings for the specified guest.
+     * Fetch all attended bookings for the authenticated user.
      *
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function getBookingsAsGuest(User $user)
+    public function getBookingsAsGuest()
     {
-        $bookingdates = $user->acceptedBookings()->with('bookingdates')->get();
+        $bookingdates = $this->user->acceptedBookings()->with('bookingdates')->get();
 
         return response()->json([
             'bookings' => $bookingdates

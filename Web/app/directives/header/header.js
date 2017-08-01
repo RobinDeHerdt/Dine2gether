@@ -6,16 +6,16 @@ d2gApp.directive("d2gHeader", function () {
 		scope: {},
 		bindToController: true,
 		controllerAs: "header",
-		controller: function ($scope, loginService, $auth, $cookies, $rootScope, $location) {
+		controller: function ($scope, authService, $auth, $cookies, $rootScope, $location) {
 			var vm = this;
-			var loginSvc = loginService;
+			var authSvc = authService;
 			
-			$scope.$watch(loginSvc.getUser, function (user) {
+			$scope.$watch(authSvc.getUser, function (user) {
 				vm.user = user;
 			});			
 			$rootScope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, 
 				fromParams) {
-    				if(toState.url == "/home") {
+    				if(toState.url === "/home") {
     					vm.navtext = {"color": "#fff"};
     					vm.navstyle = {'background-color': "transparent"};
     				} else {
@@ -24,31 +24,21 @@ d2gApp.directive("d2gHeader", function () {
     				}
   			});
 
-
 			vm.showLogin = function () {
-				  loginSvc.showLoginModal();
-			}
+                authSvc.showLoginModal();
+			};
 
 			vm.showRegister = function () {
-				loginSvc.showRegisterModal();
-			}
+                authSvc.showRegisterModal();
+			};
 
 			vm.logout = function () {
-				$cookies.remove("user");
-				loginSvc.user = null;
-				$location.path("home");
-			}
+                authSvc.logout();
+			};
 
 			vm.register = function () {
-				loginSvc.register();
-			}
-
-			function _init() {
-				
-			}
-
-			_init();
-
+                authSvc.register();
+			};
 		}
 	}
 });
