@@ -67,12 +67,13 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 					confirmButtonText: 'Resend activation mail',
 					cancelButtonText: "Okay, I'll check"
 				}).then(function() {
-					sendActivationMail(user.data.user);
+					sendActivationMail();
 				});
-			} else {
-				$cookies.putObject("user", data.data.user);
-				svc.user = $cookies.getObject("user");
 			}
+
+			$cookies.putObject("user", data.data.user);
+			svc.user = $cookies.getObject("user");
+
 		});
 	};
 
@@ -82,42 +83,32 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 
 	svc.register = function (user) {
         $auth.signup(user).then(function(data) {
-            svc.setUser(false);
             $auth.setToken(data);
+
+			swal({
+				title: 'Welcome',
+				text: "Welcome to the team! We've sent an activation mail to your mailbox.",
+				type: 'success',
+				confirmButtonColor: '#108610',
+				confirmButtonText: 'Got it!'
+			});
+
+            svc.setUser(false);
 		}).catch(function(data) {
 			console.log(data);
 		});
 	};
 
-	svc.activateUser = function (token) {
-		$http.post(CONSTANTS.API_BASE_URL + '/user/activate', token).then(function (data) {
-			if(data.data !== "") {
-				$cookies.putObject("user", data.data);
-				svc.user = $cookies.getObject("user");
-				$location.path("home");
-			} else {
-				swal({
-				  title: "Wrong activation link",
-				  text: "Sorry, we couldn't find a user with this activation link",
-				  type: "error"
-				});
-			}
-		}, function (error) {
-			console.log(data);
-		})
-	};
-
-	function sendActivationMail (user) {
-		$http.post(CONSTANTS.API_BASE_URL + '/sendactivationmail', user).then(function (data) {
-			console.log(data);
-			swal({
-				  title: "Mail sent",
-				  text: data.data.info,
-				  type: "info",
-				});
-			console.log(data);
-		}, function (error) {
-			console.log(error);
-		});
-	}
+    function sendActivationMail (user) {
+        $http.post(CONSTANTS.API_BASE_URL + '/user/activation/send').then(function (data) {
+            console.log(data);
+            swal({
+                title: "Mail sent",
+                text: data.data.info,
+                type: "info"
+            });
+        }, function (error) {
+            console.log(error);
+        });
+    };
 });

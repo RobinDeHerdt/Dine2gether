@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ActivateUser;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -11,6 +12,8 @@ use App\User;
 
 class AuthenticateController extends Controller
 {
+    private $mailer;
+
     /**
      * Constructor.
      *
@@ -63,7 +66,7 @@ class AuthenticateController extends Controller
     /**
      * Registers users.
      *
-     * @return \App\User
+     * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
     {
@@ -74,8 +77,11 @@ class AuthenticateController extends Controller
         $user->email = $request->email;
         $user->city = $request->city;
         $user->password = bcrypt($request->password);
+        $user->token = str_random(16);
 
         $user->save();
+
+        Mail::to($user->email)->send(new ActivateUser($user));
 
         $token = JWTAuth::fromUser($user);
 

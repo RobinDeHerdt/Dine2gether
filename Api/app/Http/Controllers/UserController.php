@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Mail\ActivateUser;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
-use App\ActivationService;
-use Illuminate\Mail\Mailer;
-use Illuminate\Mail\Message;
-use Illuminate\Support\Facades\Mail;
 use App\User;
 
 class UserController extends Controller
@@ -29,11 +27,8 @@ class UserController extends Controller
      *
      * Get the authenticated user and save it to the $user variable.
      */
-    public function __construct(ActivationService $activationService, Request $request, Mailer $mailer)
+    public function __construct(Request $request)
     {
-        $this->activationService = $activationService;
-        $this->mailer = $mailer;
-
         $this->middleware(function ($request, $next) {
             try {
                 if (!$this->user = JWTAuth::parseToken()->authenticate()) {
@@ -48,23 +43,37 @@ class UserController extends Controller
             }
 
             return $next($request);
-        });
+        })->except('activate');
     }
 
     /**
-     * Activate the authenticated user.
+     * Compare the token the user sent us with the token stored in the database.
+     * If true, give the user the 'active' status.
      *
+     * @param  \App\User  $user
+     * @param  string  $token
      * @return \Illuminate\Http\Response
      */
-    public function activate(Request $request)
+    public function activate(User $user, $token)
     {
-        if ($user = $this->activationService->activateUser($request->token)) {
-            return response()->json($user);
+        if ($user->activated === true) {
+            return response([
+                'status' => 'already-activated'
+            ]);
         } else {
-            abort(404);
+            if ($user->token === $token) {
+                $user->activated = true;
+                $user->save();
+
+                return response([
+                    'status' => 'success'
+                ]);
+            }
         }
 
-        return response(200);
+        return response([
+            'status' => 'failed'
+        ]);
     }
 
     /**
@@ -122,6 +131,22 @@ class UserController extends Controller
         $this->user->city = $request->city;
 
         $this->user->save();
+
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
+
+    /**
+     * Update the authenticated in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function sendActivationMail(Request $request)
+    {
+        Mail::to($this->user->email)->send(new ActivateUser($this->user));
 
         return response()->json([
             'status' => 'success'

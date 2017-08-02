@@ -17,13 +17,12 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('authenticate/login', 'AuthenticateController@login');
     Route::post('authenticate/register', 'AuthenticateController@register');
     Route::get('authenticate/logout', 'AuthenticateController@logout');
-    Route::post('user/activate', 'UserController@activate');
+    Route::get('user/{user}/activate/{token}', 'UserController@activate');
     Route::get('user', 'UserController@show');
     Route::post('user/update', 'UserController@update');
     Route::post('user/upload', 'UserController@upload');
 
-    Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
-    Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail');
+    Route::post('user/activation/send', 'UserController@sendActivationMail');
     Route::post('sendconfirmationrequestmail', 'ConfirmationMailController@sendConfirmationRequestMail');
     Route::post('sendbookingmails', 'ConfirmationMailController@sendBookingMails');
 

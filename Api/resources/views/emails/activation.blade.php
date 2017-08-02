@@ -600,7 +600,7 @@
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                         
-                            <h1 style="text-align: center;">Hey {{$username}},</h1>
+                            <h1 style="text-align: center;">Hey {{ $user->first_name }},</h1>
 
 <p style="text-align: center;">We are so happy to hear that you'd like to join our awesome community.<br>
 But before we you can share your delicious meals,<br>
@@ -628,7 +628,7 @@ you have to activate your account.*</p>
                     <tbody>
                         <tr>
                             <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
-                                <a class="mcnButton " title="Activate your account" href="{{$link}}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Activate your account</a>
+                                <a class="mcnButton " title="Activate your account" href="{{ env('APP_API_URL') }}/api/user/{{ $user->id }}/activate/{{ $user->token }}" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">Activate your account</a>
                             </td>
                         </tr>
                     </tbody>

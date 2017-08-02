@@ -11,9 +11,12 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
     vm.currentBookingId = $stateParams.id;
 
 	vm.sendRequest = function () {
+		console.log(vm.requestdata);
 		if(!vm.propose_date) {
+            $('select').material_select();
+
             var data = {
-                bookingdate_id: vm.requestdata.date,
+                bookingdate_id: vm.requestdata.selectedDate,
 				booking_id: vm.currentBookingId,
 				message: vm.requestdata.message
             };
@@ -38,47 +41,49 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		}
 
         requestSvc.addRequest(data).then(function (data) {
-        	console.log(data);
-        	// Check if 'exists'.
-            swal({
-                title: "Your request was sent",
-                text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
-                type: "success"
-            }).then(function () {
-                window.location.href = "#/dashboard";
-            }, function () {
-                window.location.href = "#/dashboard";
-            });
+        	switch(data.data.status) {
+				case "success":
+                    swal({
+                        title: "Your request was sent",
+                        text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
+                        type: "success"
+                    }).then(function () {
+                        window.location.href = "#/dashboard";
+                    }, function () {
+                        window.location.href = "#/dashboard";
+                    });
+
+                    break;
+
+				case "exists":
+                    swal({
+						text: "You've already sent a request. Please wait for the host to respond.",
+						type: "error"
+                    });
+
+					break;
+
+				default:
+                    swal({
+                        title: "Couldn't send request",
+                        text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
+                        type: "error"
+                    });
+
+                    break;
+			}
         }, function (error) {
             swal({
                 title: "Couldn't send request",
                 text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
                 type: "error"
-            })
+            });
         });
 	};
 
 	vm.convertToDate = function (dateString) {
 		return new Date(dateString);
 	};
-
-	function checkIfUserHasRequest() {
-		var data = {
-			user_id: vm.user.id,
-			booking_id: vm.booking.id
-		};
-
-		requestSvc.getRequest(data).then(function (data) {
-			var request = data.data.request;
-				if (request.accepted === 0 && request.declined === 0) {
-					swal({ text: "You already sent a request. Please wait for the host to respond.", type: "error"}).then(function () {
-						window.location.href = "#/overview";
-					}, function () {
-						window.location.href = "#/overview";
-					});
-				}
-		});
-	}
 
 	function loadBookingById() {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
@@ -92,8 +97,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
                         window.history.back();
 					});
 				}
-
-				checkIfUserHasRequest();
 			}, 50)
 			
 		}, function (error) {

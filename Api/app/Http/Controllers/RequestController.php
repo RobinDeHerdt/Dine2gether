@@ -53,10 +53,7 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         // Check if request exists.
-        $exists = Booking::find($request->booking_id)->whereHas('bookingdates', function ($q) use ($request) {
-            $q->where('user_id', $this->user->id)
-              ->where('bookingdate_id', $request->bookingdate_id);
-        })->exists();
+        $exists = $this->user->bookingdates->contains($request->bookingdate_id);
 
         if ($exists) {
             return response()->json([
@@ -84,7 +81,7 @@ class RequestController extends Controller
         ]);
 
         return response()->json([
-            'status' => 'succes'
+            'status' => 'success'
         ]);
     }
 
