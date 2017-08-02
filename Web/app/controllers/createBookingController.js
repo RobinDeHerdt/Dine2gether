@@ -12,23 +12,27 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
         return;
     }
 
-    vm.bookingdates = [{}];
 	vm.numberOfPages = 5;
 	vm.currentPage = 1;
-	vm.dishes = [{
-		number: 1
-	}];
+
+	vm.dishes = [{}];
+    vm.dates = [{}];
+
+    vm.addTemplateDate = function () {
+        vm.dates.push({});
+    };
 
 	vm.addTemplateDish = function () {
-		var dish_nr = vm.dishes.length + 1;
-		vm.dishes.push({
-			number: dish_nr
-		});
+        vm.dishes.push({});
 	};
 
-	vm.deleteLastDish = function () {
-		vm.dishes.pop();
+	vm.deleteDish = function (index) {
+        vm.dishes.splice(index, 1);
 	};
+
+    vm.deleteDate = function (index) {
+        vm.dates.splice(index, 1);
+    };
 
 	vm.createBooking = function () {
 		var user = authSvc.getUser();
@@ -103,11 +107,15 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 	function getBookingDates() {
 		var arr_dates = [];
 
-		arr_dates.push({
-			date: vm.bookingdates.date,
-			time: vm.bookingdates.time,
-			max_guests : vm.bookingdates.max_guests
-		});
+        for(var i = 0; i < vm.dates.length; i++) {
+            arr_dates.push({
+                date: vm.dates[i].bookingdate,
+                time: vm.dates[i].time,
+                max_guests: vm.dates[i].max_guests
+            });
+        }
+
+        console.log(arr_dates);
 
 		return arr_dates;
 	}
@@ -116,13 +124,14 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 		var arr_dishes = [];
 
 		for(var i = 0; i < vm.dishes.length; i++) {
-
 			arr_dishes.push({
 				dish_name: vm.dishes[i].dish_name,
 				description: vm.dishes[i].descr,
 				dish_img: vm.dishes[i].img
-			})
+			});
 		}
+
+		console.log(arr_dishes);
 
 		return arr_dishes;
 	}
