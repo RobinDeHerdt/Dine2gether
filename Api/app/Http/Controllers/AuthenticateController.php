@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use AppHttpControllersController;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuthExceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use App\User;
 
 class AuthenticateController extends Controller
@@ -62,37 +61,26 @@ class AuthenticateController extends Controller
     }
 
     /**
-     * Get the authenticated user.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getUser()
-    {
-        try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['token_expired'], $e->getStatusCode());
-        }
-
-        return response()->json([
-            'user' => $user
-        ]);
-    }
-
-    /**
      * Registers users.
      *
      * @return \App\User
      */
     public function register(Request $request)
     {
-        $user = $request->all();
+        $user = new User();
 
-        $password = bcrypt($request->input('password'));
-        $newuser['password'] = $password;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->city = $request->city;
+        $user->password = bcrypt($request->password);
 
-        return User::create($user);
+        $user->save();
+
+        $token = JWTAuth::fromUser($user);
+
+        return response()->json([
+            'token' => $token
+        ]);
     }
 }

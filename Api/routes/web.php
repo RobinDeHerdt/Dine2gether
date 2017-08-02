@@ -15,11 +15,12 @@ Route::get('/search', 'BookingController@search');
 
 Route::group(array('prefix' => 'api'), function () {
     Route::post('authenticate/login', 'AuthenticateController@login');
-    Route::get('authenticate/user', 'AuthenticateController@getUser');
     Route::post('authenticate/register', 'AuthenticateController@register');
     Route::get('authenticate/logout', 'AuthenticateController@logout');
-    Route::post('user/activation', 'Auth\LoginController@activateUser');
-    Route::post('updateprofile/{id}', 'UserController@update');
+    Route::post('user/activate', 'UserController@activate');
+    Route::get('user', 'UserController@show');
+    Route::post('user/update', 'UserController@update');
+    Route::post('user/upload', 'UserController@upload');
 
     Route::post('sendactivationmail', 'ActivationMailController@sendActivationMail');
     Route::post('resendactivationmail', 'ActivationMailController@resendActivationMail');
@@ -33,16 +34,14 @@ Route::group(array('prefix' => 'api'), function () {
     Route::get('hostbookings', 'BookingController@getBookingsAsHost');
     Route::get('guestbookings', 'BookingController@getBookingsAsGuest');
 
-    Route::get('user/{id}', 'UserController@index');
-    Route::post('/profile/upload', 'UserController@upload');
-
     Route::delete('review/{id}', 'ReviewController@destroy');
     Route::get('review/guests', 'ReviewController@getGuests');
     Route::get('review/hosts', 'ReviewController@getHosts');
     Route::get('user/{user}/reviews', 'ReviewController@index');
     Route::post('review/store', 'ReviewController@store');
-    ;
+
     Route::get('interests', 'InterestController@index');
+    Route::get('kitchenstyles', 'KitchenstyleController@index');
 
     Route::post('requestbooking', 'RequestController@storeRequest');
     Route::get('acceptrequest/{id}', 'RequestController@acceptRequest');
@@ -53,6 +52,4 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('getbookingdatebydate', 'BookingDateController@getBookingDateByDate');
     Route::post('createbookingdate', 'BookingDateController@createNewBookingDate');
     Route::post('addtobookingdate', 'BookingDateController@addUserToBookingdate');
-
-    Route::get('kitchenstyles', 'KitchenstyleController@index');
 });

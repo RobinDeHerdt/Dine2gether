@@ -28,13 +28,13 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 				swal({
 				  title: "Login Failed",
 				  text: "You've entered the wrong emailaddress or password, please try again.",
-				  type: "error",
+				  type: "error"
 				});
 			} else {
 				swal({
 				  title: "Oops",
 				  text: "Something went wrong. We couldn't get you logged in. Try again, or contact user if this problem keeps occuring",
-				  type: "error",
+				  type: "error"
 				});
 			}
 		});
@@ -46,51 +46,52 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
                 svc.user = null;
                 $cookies.remove("user");
             }, function (error) {
-
                 console.log(error);
             })
     };
-
-	svc.setUser = function () {
-		$http.get(CONSTANTS.API_BASE_URL + '/authenticate/user').then(function (user) {
-			if(user.data.user.activated == 0) {
-				swal({
-				  title: 'Activate your account',
-				  text: "You haven't activated your account yet. Please check your mailbox.",
-				  type: 'error',
-				  showCancelButton: true,
-				  confirmButtonColor: '#108610',
-				  cancelButtonColor: '#9e9e9e',
-				  confirmButtonText: 'Resend activation mail',
-				  cancelButtonText: "Okay, I'll check"
-				}).then(function() {
-				    sendActivationMail(user.data.user);
-				})
-			} else {
-				$cookies.putObject("user", user.data.user);
-				svc.user = $cookies.getObject("user");
-			}
-		});
-	};
 
 	svc.getUser = function () {
 		return svc.user;
 	};
 
-	svc.updateProfile = function (id, data) {
-    	return $http.post(CONSTANTS.API_BASE_URL + '/updateprofile/' + id, data);
+    svc.setUser = function(checkIfActivated) {
+    	$http.get(CONSTANTS.API_BASE_URL + '/user').then(function (data) {
+			if(checkIfActivated && data.data.user.activated === 0) {
+				swal({
+					title: 'Activate your account',
+					text: "You haven't activated your account yet. Please check your mailbox.",
+					type: 'error',
+					showCancelButton: true,
+					confirmButtonColor: '#108610',
+					cancelButtonColor: '#9e9e9e',
+					confirmButtonText: 'Resend activation mail',
+					cancelButtonText: "Okay, I'll check"
+				}).then(function() {
+					sendActivationMail(user.data.user);
+				});
+			} else {
+				$cookies.putObject("user", data.data.user);
+				svc.user = $cookies.getObject("user");
+			}
+		});
+	};
+
+	svc.updateProfile = function (data) {
+    	return $http.post(CONSTANTS.API_BASE_URL + '/user/update', data);
     };
 
-	svc.register = function (o_newuser) {
-		$http.post(CONSTANTS.API_BASE_URL + '/authenticate/register', o_newuser).success(function (data) {
-			sendActivationMail(data)
+	svc.register = function (user) {
+        $auth.signup(user).then(function(data) {
+            svc.setUser(false);
+            $auth.setToken(data);
+		}).catch(function(data) {
+			console.log(data);
 		});
 	};
 
 	svc.activateUser = function (token) {
-		$http.post(CONSTANTS.API_BASE_URL + '/user/activation', token).then(function (data) {
+		$http.post(CONSTANTS.API_BASE_URL + '/user/activate', token).then(function (data) {
 			if(data.data !== "") {
-				console.log(data);
 				$cookies.putObject("user", data.data);
 				svc.user = $cookies.getObject("user");
 				$location.path("home");
@@ -98,7 +99,7 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
 				swal({
 				  title: "Wrong activation link",
 				  text: "Sorry, we couldn't find a user with this activation link",
-				  type: "error",
+				  type: "error"
 				});
 			}
 		}, function (error) {

@@ -5,94 +5,105 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use AppHttpControllersController;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuthExceptions\JWTException;
-use App\User;   
-use Response;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use App\ActivationService;
+use Illuminate\Mail\Mailer;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Mail;
+use App\User;
 
 class UserController extends Controller
 {
+    /**
+     * Contains the authenticated user.
+     *
+     * @var \App\User
+     */
+    private $user;
 
-    public function __construct()
+    /**
+     * Constructor.
+     *
+     * Get the authenticated user and save it to the $user variable.
+     */
+    public function __construct(ActivationService $activationService, Request $request, Mailer $mailer)
     {
-        // Apply the jwt.auth middleware to all methods in this controller
-        // except for the authenticate method. We don't want to prevent
-        // the user from retrieving their token if they don't already have it
-        $this->middleware('jwt.auth', ['except' => ['create']]);
+        $this->activationService = $activationService;
+        $this->mailer = $mailer;
+
+        $this->middleware(function ($request, $next) {
+            try {
+                if (!$this->user = JWTAuth::parseToken()->authenticate()) {
+                    return response()->json(['user_not_found'], 404);
+                }
+            } catch (TokenExpiredException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            } catch (TokenInvalidException $e) {
+                return response()->json(['token_invalid'], $e->getStatusCode());
+            } catch (JWTException $e) {
+                return response()->json(['token_absent'], $e->getStatusCode());
+            }
+
+            return $next($request);
+        });
     }
 
-    public function index($id)
+    /**
+     * Activate the authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function activate(Request $request)
     {
-        $user = User::find($id);
+        if ($user = $this->activationService->activateUser($request->token)) {
+            return response()->json($user);
+        } else {
+            abort(404);
+        }
 
-        return Response::json($user);
+        return response(200);
     }
 
+    /**
+     * Get the authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return response()->json([
+            'user' => $this->user
+        ]);
+    }
+
+    /**
+     * Upload a new profile picture.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function upload(Request $request)
     {
-        $user = User::find($request->user_id);
-
         $path = $request->file->store('images/profile', 'upload');
-        
-        $user->image  = $path;
 
-        $user->save();
+        $this->user->image = $path;
+        $this->user->save();
 
-        return response()->json(['filename' => $path]);
+        return response()->json([
+            'filename' => $path
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Update the authenticated in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        // Store happens in RegisterController
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'first_name'    => 'required|max:255|regex:/(^[A-Za-z0-9 -]+$)+/',
@@ -103,28 +114,17 @@ class UserController extends Controller
             'city'          => 'max:255',
         ]);
 
-        $user = User::find($id);
+        $this->user->first_name = $request->first_name;
+        $this->user->last_name = $request->last_name;
+        $this->user->email = $request->email;
+        $this->user->street_number = $request->street_number;
+        $this->user->postalcode = $request->postalcode;
+        $this->user->city = $request->city;
 
-        $user->first_name           = $request->first_name;
-        $user->last_name            = $request->last_name;
-        $user->email                = $request->email;
-        $user->street_number        = $request->street_number;
-        $user->postalcode           = $request->postalcode;
-        $user->city                 = $request->city;
+        $this->user->save();
 
-        $user->save();
-
-        return response()->json(['status' => 'success']);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 }

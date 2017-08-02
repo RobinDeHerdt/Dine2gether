@@ -4,9 +4,14 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
 
-	var shouldHide = false;
+    if(!authSvc.getUser()) {
+        authSvc.showLoginModal();
+        $location.path('/home');
 
-	function loadUser () {
+        return;
+    }
+
+    function loadUser () {
 		if(authSvc.getUser()) {
 			vm.user = authSvc.getUser();
 		}
@@ -108,9 +113,10 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 			email: vm.user.email,
 			street_number: vm.user.street_number,
 			postalcode: vm.user.postalcode,
-			city: vm.user.city,
+			city: vm.user.city
 		};
-        authSvc.updateProfile(vm.user.id,data).then(function(data) {
+
+        authSvc.updateProfile(data).then(function(data) {
 			if ( data.status === 200)
 			{
 				vm.showsuccessmessage = true;
@@ -123,10 +129,9 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 
 	vm.uploadProfilePicture = function (file) {
 		Upload.upload({
-			url: CONSTANTS.API_BASE_URL + '/profile/upload',
-			data: 
-			{
-				file	: file,
+			url: CONSTANTS.API_BASE_URL + '/user/upload',
+			data: {
+				file : file,
 				user_id	: vm.user.id
 			}
 			}).then(function (data) {
@@ -141,14 +146,10 @@ d2gApp.controller("profileController", function (authService, bookingService, re
     };
 
 	function _init() {
-		if(!authSvc.getUser()) {
-            authSvc.errorMessage = "You need to be logged in to see your profile";
-			$location.path('/home');
-		} else {
-			loadUser();
-            getHostBookings();
-			getGuestBookings();
-		}
+		loadUser();
+		getHostBookings();
+		getGuestBookings();
 	}
+
 	_init();
 });

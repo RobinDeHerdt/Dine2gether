@@ -1,6 +1,7 @@
 d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
  
  $authProvider.loginUrl = CONSTANTS.API_BASE_URL + '/authenticate/login';
+ $authProvider.signupUrl = CONSTANTS.API_BASE_URL + '/authenticate/register';
 
  $urlRouterProvider.otherwise("/home");
 
