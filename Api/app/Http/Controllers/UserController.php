@@ -57,23 +57,17 @@ class UserController extends Controller
     public function activate(User $user, $token)
     {
         if ($user->activated === true) {
-            return response([
-                'status' => 'already-activated'
-            ]);
+            return redirect(env('APP_URL') . '/#/home?status=already-activated');
         } else {
             if ($user->token === $token) {
                 $user->activated = true;
                 $user->save();
 
-                return response([
-                    'status' => 'success'
-                ]);
+                return redirect(env('APP_URL') . '/#/home?status=activated');
             }
         }
 
-        return response([
-            'status' => 'failed'
-        ]);
+        return redirect(env('APP_URL') . '/#/home?status=failed');
     }
 
     /**
