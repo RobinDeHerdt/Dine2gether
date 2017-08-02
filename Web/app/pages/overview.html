@@ -2,6 +2,14 @@
 	<div class="container under-header overview">
 		<h1>Bookings</h1>
 		<div class="row">
+			<form>
+				<div class="input-field col s8">
+					<input ng-keyup="$event.keyCode == 13 ? overview.checkIfInputLocation() : null" id="autocomplete" type="text" placeholder="Where'd you like to eat?" name="location" validate ng-model="overview.search_string"/>
+				</div>
+				<div class="input-field col s4">
+					<a class="waves-effect waves-light btn" ng-click="overview.checkIfInputLocation()"><i class="material-icons md-48 md-dark">search</i></a>
+				</div>
+			</form>
 			<div id="bookingswrapper" class="col s10">
 				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
 					<div class="divider mar-top-l" ng-if="!$first"></div>

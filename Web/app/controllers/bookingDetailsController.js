@@ -11,7 +11,7 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
 
     vm.redirect = function () {
     	if($cookies.getObject("user")) {
-            $location.path("requestbooking/"+ vm.currentBookingId);
+            $location.path("booking/" + vm.currentBookingId + "/request");
 		} else {
             authSvc.showLoginModal();
 		}
@@ -22,7 +22,6 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
 	};
 
     vm.userImage = function() {
-    	console.log(vm.currentBooking);
         return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
     };
 
@@ -32,7 +31,6 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
 
 	function getCurrentBooking () {
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
-			console.log(data.data);
 			vm.currentBooking = data.data.booking[0];
 			vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
 		});

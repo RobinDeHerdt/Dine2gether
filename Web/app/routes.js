@@ -32,7 +32,7 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 		controller: "bookingDetailsController as bookingdetails"
 	})
 	.state("requestbooking", {
-		url: "/requestbooking/:id",
+		url: "/booking/:id/request",
 		templateUrl: "app/pages/requestbooking.html",
 		controller: "requestBookingController as request"
 	})
@@ -42,7 +42,7 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 		controller: "ConfirmBookingController as confirmbooking"
 	})
 	.state("createbooking", {
-		url: "/createbooking",
+		url: "/booking/create",
 		templateUrl: "app/pages/createbooking.html",
 		controller: "createBookingController as create"
 	})

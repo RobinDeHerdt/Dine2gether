@@ -1,5 +1,4 @@
 d2gApp.controller("homeController", function ($location) {
-
 	var vm = this;
 
 	function autoComplete () {
@@ -14,20 +13,11 @@ d2gApp.controller("homeController", function ($location) {
 		});
 	}
 
-	function _init () {
-		//console.log("Logging homeController");
-	}
-
 	vm.checkIfInputLocation = function () {
-		if($("#autocomplete").val().trim() != "") {
-			$location.path('/overview/'+$("#autocomplete").val());
-		} else {
-			$location.path('/overview');
+		if($("#autocomplete").val().trim() !== "") {
+			$location.path('/overview/' + $("#autocomplete").val());
 		}
-	}
+	};
 
 	autoComplete();
-	_init();
-
-
 });

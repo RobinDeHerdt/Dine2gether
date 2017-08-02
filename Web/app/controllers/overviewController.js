@@ -1,11 +1,33 @@
-d2gApp.controller("overviewController", function (bookingService, interestService, kitchenstyleService, $scope, $stateParams) {
+d2gApp.controller("overviewController", function (bookingService, interestService, kitchenstyleService, $scope, $location, $stateParams) {
 
 	var vm = this;
 	var bookingSvc = bookingService;
 	var interestSvc = interestService;
 	var kitchenstyleSvc = kitchenstyleService;
 
+    vm.search_string = $stateParams.search;
+
 	vm.bookings = [];
+
+    function autoComplete () {
+        var input = document.getElementById('autocomplete');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                return;
+            }
+        });
+    }
+
+    vm.checkIfInputLocation = function () {
+        if($("#autocomplete").val().trim() !== "") {
+            $location.path('/overview/' + $("#autocomplete").val());
+        }
+    };
+
+    autoComplete();
 
 	vm.bookingImage = function(booking) {
 		return CONSTANTS.PUBLIC_BASE_URL  + "/" + booking.dishes[0].dishimages[0].image_uri;

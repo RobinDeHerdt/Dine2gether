@@ -42,9 +42,9 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function acceptedBookingDates()
+    public function declinedBookingDates()
     {
-        return $this->belongsToMany('App\Bookingdate')->wherePivot('accepted', true);
+        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'declined');
     }
 
     /**
@@ -52,9 +52,19 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function bookingDateRequests()
+    public function acceptedBookingDates()
     {
-        return $this->belongsToMany('App\Bookingdate')->wherePivot('accepted', false);
+        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'accepted');
+    }
+
+    /**
+     * A user belongs to many booking dates.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function pendingBookingDates()
+    {
+        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'pending');
     }
 
     /**
