@@ -72,7 +72,7 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 
 	function _init() {
 		switch($location.url().split("#")[0]) {
-			case "/writereview":
+			case "/review/create":
                 getHosts();
                 getGuests();
 				break;

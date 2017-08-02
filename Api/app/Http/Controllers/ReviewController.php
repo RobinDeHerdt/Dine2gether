@@ -88,6 +88,38 @@ class ReviewController extends Controller
     }
 
     /**
+     * Update the specified review.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Review $review)
+    {
+        $review->body = $request->body;
+        $review->rating = $request->rating;
+        $review->user_id = $request->user_id;
+        $review->author_id = $this->user->id;
+
+        $review->save();
+
+        return response(200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Review $review)
+    {
+        $review->delete();
+
+        return response(200);
+    }
+
+    /**
      * Get all guests at your bookings.
      *
      * @return \Illuminate\Http\Response
@@ -108,41 +140,10 @@ class ReviewController extends Controller
      */
     public function getHosts()
     {
-        $bookings = $this->user->acceptedBookings()->with('booking.host')->get();
+        $bookings = $this->user->acceptedBookingDates()->with('booking.host')->get();
 
         return response()->json([
             'bookings' => $bookings
         ]);
-    }
-
-    /**
-     * Update the specified review.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Review $review)
-    {
-        $review->body           = $request->body;
-        $review->rating         = $request->rating;
-        $review->guest_id       = $request->guest_id;
-
-        $review->save();
-
-        return response(200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Review  $review
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Review $review)
-    {
-        $review->delete();
-
-        return response(200);
     }
 }
