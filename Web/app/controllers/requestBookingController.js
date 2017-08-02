@@ -11,7 +11,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
     vm.currentBookingId = $stateParams.id;
 
 	vm.sendRequest = function () {
-		console.log(vm.requestdata);
 		if(!vm.propose_date) {
             $('select').material_select();
 
@@ -48,8 +47,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
                         text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
                         type: "success"
                     }).then(function () {
-                        window.location.href = "#/dashboard";
-                    }, function () {
                         window.location.href = "#/dashboard";
                     });
 
