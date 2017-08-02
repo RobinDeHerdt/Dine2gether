@@ -1,65 +1,65 @@
 d2gApp.controller("requestBookingController", function (bookingService, requestService, authService, $stateParams, $location, $filter, $timeout) {
 	
 	var vm = this;
+
 	var bookingSvc = bookingService;
 	var requestSvc = requestService;
 	var authSvc = authService;
 
 	vm.user = authSvc.getUser();
 	vm.booking = [];
+    vm.currentBookingId = $stateParams.id;
 
 	vm.sendRequest = function () {
-		var datetime = "";
-
-		if(vm.requestdata.selectedDate && !vm.daterequest) {
-			datetime = vm.requestdata.selectedDate;
+		if(!vm.propose_date) {
+            var data = {
+                bookingdate_id: vm.requestdata.date,
+				booking_id: vm.currentBookingId,
+				message: vm.requestdata.message
+            };
 		} else {
-			var today = new Date();
-			if(vm.requestdata.newdate < today) {
-				vm.showdate_error = true;
-				return false;
+			if(vm.requestdata.proposed_date > new Date()) {
+                var datetime = $filter('date')(vm.requestdata.proposed_date, "yyyy-MM-dd") + " " + $filter('date')(vm.requestdata.proposed_time, "HH:mm:ss");
+
+                var data = {
+                    bookingdate: datetime,
+                    booking_id: vm.currentBookingId,
+                    message: vm.requestdata.message
+                };
 			} else {
-				datetime = $filter('date')(vm.requestdata.newdate, "yyyy-MM-dd") + " " + $filter('date')(vm.requestdata.newtime, "HH:mm:ss");
-				vm.showdate_error = false;
+                swal({
+                    title: "Invalid date",
+                    text: "The requested date lies in the past.",
+                    type: "error"
+                });
+
+                return;
 			}
 		}
 
-		if(!vm.showdate_error) {
-			var data = {
-				datetime: datetime,
-				booking_id: vm.booking.id,
-				user_id: vm.host.id
-			};
-
-			requestSvc.addRequest(data).then(function (data) {
-				swal({
-					title: "Your request was sent",
-					text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
-					type: "success"
-				}).then(function () {
-					window.location.href = "#/overview";
-				}, function () {
-					window.location.href = "#/overview";
-				});
-			}, function (error) {
-				swal({
-					title: "Couldn't send request",
-					text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
-					type: "error"
-				})
-			});
-		}
+        requestSvc.addRequest(data).then(function (data) {
+        	console.log(data);
+        	// Check if 'exists'.
+            swal({
+                title: "Your request was sent",
+                text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
+                type: "success"
+            }).then(function () {
+                window.location.href = "#/dashboard";
+            }, function () {
+                window.location.href = "#/dashboard";
+            });
+        }, function (error) {
+            swal({
+                title: "Couldn't send request",
+                text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
+                type: "error"
+            })
+        });
 	};
 
 	vm.convertToDate = function (dateString) {
 		return new Date(dateString);
-	};
-
-	vm.resetSelect = function () {
-		$timeout(function() {
-			$('select:not([multiple])').material_select();
-		}, 1);
-		vm.daterequest = false;
 	};
 
 	function checkIfUserHasRequest() {
@@ -87,8 +87,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 			$timeout(function() {
 				$('select:not([multiple])').material_select();
 
-				deleteEmptyoption();
-
 				if(vm.user.id === vm.booking.host.id) {
 					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
                         window.history.back();
@@ -105,12 +103,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				type: "error"
 			});
 		});
-	}
-
-	function deleteEmptyoption() {
-		setTimeout(function () {
-			$('.ng-empty').first().remove();
-		}, 1000)
 	}
 
 	function splitDateTime(datetime) {

@@ -12,7 +12,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
         return;
     }
 
-	vm.numberOfPages = 5;
+	vm.numberOfPages = 6;
 	vm.currentPage = 1;
 
 	vm.dishes = [{}];

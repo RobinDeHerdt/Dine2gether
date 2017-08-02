@@ -4,45 +4,114 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\Bookingdate;
-use App\User;
+Use App\Booking;
 
 class RequestController extends Controller
 {
-	
-    public function store(Request $request) {
+    /**
+     * Contains the authenticated user.
+     *
+     * @var \App\User
+     */
+    private $user;
 
-    	$requestbooking = new BookingRequest;
+    /**
+     * Constructor.
+     *
+     * Get the authenticated user and save it to the $user variable.
+     */
+    public function __construct(Request $request)
+    {
+        $this->middleware(function ($request, $next) {
+            try {
+                if (!$this->user = JWTAuth::parseToken()->authenticate()) {
+                    return response()->json(['user_not_found'], 404);
+                }
+            } catch (TokenExpiredException $e) {
+                return response()->json(['token_expired'], $e->getStatusCode());
+            } catch (TokenInvalidException $e) {
+                return response()->json(['token_invalid'], $e->getStatusCode());
+            } catch (JWTException $e) {
+                return response()->json(['token_absent'], $e->getStatusCode());
+            }
 
-    	$requestbooking->date_time = $request->datetime;
-    	$requestbooking->booking_id = $request->booking_id;
-    	$requestbooking->user_id = $request->user_id;
-
-    	$requestbooking->save();
-        
-        return response()->json(["status"=>"succes"]);
+            return $next($request);
+        });
     }
 
-    public function acceptRequest ($id) {
-    	$requestbooking = BookingRequest::where('id', $id)->first();
+    /**
+     * Create a booking request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function store(Request $request)
+    {
+        // Check if request exists.
+        $exists = Booking::find($request->booking_id)->whereHas('bookingdates', function ($q) use ($request) {
+            $q->where('user_id', $this->user->id)
+              ->where('bookingdate_id', $request->bookingdate_id);
+        })->exists();
 
-    	$requestbooking->accepted = true;
-    	$requestbooking->save();
+        if ($exists) {
+            return response()->json([
+                'status' => 'exists'
+            ]);
+        }
 
-        return response()->json(["status"=>"succes"]);
+        if ($request->bookingdate_id) {
+            // Request an seat.
+            $bookingdate_id = $request->bookingdate_id;
+        } else {
+            // Propose a new date.
+            $bookingdate = new Bookingdate();
+
+            $bookingdate->date = $request->bookingdate;
+            $bookingdate->booking_id = $request->booking_id;
+
+            $bookingdate->save();
+
+            $bookingdate_id = $bookingdate->id;
+        }
+
+        $this->user->bookingdates()->attach($bookingdate_id, [
+            'optional_message' => $request->message
+        ]);
+
+        return response()->json([
+            'status' => 'succes'
+        ]);
     }
 
-    public function declineRequest ($id) {
-    	$requestbooking = BookingRequest::where('id', $id)->first();
-
-    	$requestbooking->declined = true;
-    	$requestbooking->save();
-
+    /**
+     * Accept a guest request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function acceptRequest(Request $request)
+    {
         return response()->json(["status"=>"succes"]);
     }
 
     /**
-     * Delete.
+     * Decline a guest request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function declineRequest(Request $request)
+    {
+        return response()->json(["status"=>"succes"]);
+    }
+
+    /**
+     * Delete the request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany

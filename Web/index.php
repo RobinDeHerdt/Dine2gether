@@ -28,6 +28,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqb4o2PhbYGnWwwkdXJLmIjC-al6f7eEw&libraries=places"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min.js"></script>
+    <script src="https://use.fontawesome.com/24f215a663.js" async ></script>
 
     <!-- Application scripts -->
     <script src="dist/js/scripts.js"></script>

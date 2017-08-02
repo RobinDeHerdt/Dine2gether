@@ -43,7 +43,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::get('interests', 'InterestController@index');
     Route::get('kitchenstyles', 'KitchenstyleController@index');
 
-    Route::post('requestbooking', 'RequestController@storeRequest');
+    Route::post('request', 'RequestController@store');
     Route::get('acceptrequest/{id}', 'RequestController@acceptRequest');
     Route::get('declinerequest/{id}', 'RequestController@declineRequest');
     Route::post('request/delete', 'RequestController@delete');

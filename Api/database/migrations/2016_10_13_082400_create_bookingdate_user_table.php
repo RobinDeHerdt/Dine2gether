@@ -18,6 +18,7 @@ class CreateBookingdateUserTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('bookingdate_id')->unsigned();
             $table->foreign('bookingdate_id')->references('id')->on('bookingdates');
+            $table->string('optional_message')->nullable();
             $table->string('status')->default('pending');
         });
     }
