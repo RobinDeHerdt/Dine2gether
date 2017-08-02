@@ -30,7 +30,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
     Route::delete('bookings/cancel/{booking}/user/{user}', 'BookingController@cancel');
     Route::post('upload', 'BookingController@upload');
-    Route::get('bookingdetails/{booking}', 'BookingController@show');
+    Route::get('booking/{booking}', 'BookingController@show');
     Route::get('hostbookings', 'BookingController@getBookingsAsHost');
     Route::get('guestbookings', 'BookingController@getBookingsAsGuest');
 

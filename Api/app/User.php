@@ -42,7 +42,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function acceptedBookings()
+    public function acceptedBookingDates()
     {
         return $this->belongsToMany('App\Bookingdate')->wherePivot('accepted', true);
     }
@@ -52,7 +52,7 @@ class User extends Authenticatable
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function bookingRequests()
+    public function bookingDateRequests()
     {
         return $this->belongsToMany('App\Bookingdate')->wherePivot('accepted', false);
     }
@@ -74,7 +74,7 @@ class User extends Authenticatable
      */
     public function receivedReviews()
     {
-        return $this->hasMany('App\Review', 'user_id');
+        return $this->hasMany('App\Review');
     }
 
     /**

@@ -32,6 +32,7 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
 
 	function getCurrentBooking () {
 		bookingSvc.getBookingById(vm.currentBookingId).then(function (data) {
+			console.log(data.data);
 			vm.currentBooking = data.data.booking[0];
 			vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
 		});

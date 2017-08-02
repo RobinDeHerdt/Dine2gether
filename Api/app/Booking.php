@@ -13,7 +13,7 @@ class Booking extends Model
      */
     public function host()
     {
-        return $this->belongsTo('App\User', 'host_id');
+        return $this->belongsTo('App\User');
     }
 
     /**

@@ -79,7 +79,7 @@
 				<div ng-repeat="bookingdate in profile.guestbookingdates">
 				  <ul class="collection">
 					<li class="collection-item">
-					  <span class="title"><a href="/#/booking/{{bookingdate.id}}/details"><strong>{{bookingdate.booking.title}}</strong></a></span>
+					  <span class="title"><a href="/#/booking/{{bookingdate.booking.id}}/details"><strong>{{bookingdate.booking.title}}</strong></a></span>
 					  <p>{{ profile.convertToDate(bookingdate.date) | date:"dd/MM/yyyy"}} at {{ profile.convertToDate(bookingdate.date) | date:"HH:mm"}}</p>
 					  <p>{{ bookingdate.host.first_name}} {{bookingdate.host.last_name}}</p>
 					  <p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>

@@ -7,12 +7,11 @@ d2gApp.service('bookingService', function($http) {
     };
 
     svc.getBookingsByLocation = function (location) {
-        var url = CONSTANTS.PUBLIC_BASE_URL + '/search?location='+location;
-        return $http.get(url);
+        return $http.get(CONSTANTS.PUBLIC_BASE_URL + '/search?location=' + location);
     };
     
     svc.getBookingById = function (id) {
-        return $http.get(CONSTANTS.API_BASE_URL +  '/bookingdetails/' + id);
+        return $http.get(CONSTANTS.API_BASE_URL +  '/booking/' + id);
     };
 
     svc.createBooking = function (data) {

@@ -1,10 +1,16 @@
-d2gApp.controller("createBookingController", function (kitchenstyleService, interestService, bookingService, authService, $location, $scope, Upload) {
+d2gApp.controller("createBookingController", function (kitchenstyleService, bookingService, authService, $location, $scope, Upload) {
 	var vm = this;
 
-	var interestSvc 	= interestService;
 	var bookingSvc 		= bookingService;	
 	var authSvc 		= authService;
 	var kitchenstyleSvc = kitchenstyleService;
+
+    if(!authSvc.getUser()) {
+        authSvc.showLoginModal();
+        $location.path('/home');
+
+        return;
+    }
 
     vm.bookingdates = [{}];
 	vm.numberOfPages = 5;
@@ -136,27 +142,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, inte
 	};
 
 	function _init () {
-		if(!authSvc.getUser()) {
-            swal({
-            	text: "You need to be logged in to create a booking",
-            	type: "error"
-            }).then(function () {
-                $location.path('/home');
-            }, function () {
-                $location.path('/home');
-            });
-		} else {
-			loadKitchenstyles();
-		}
-
-        $('.datepicker').pickadate({
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15, // Creates a dropdown of 15 years to control year,
-            today: 'Today',
-            clear: 'Clear',
-            close: 'Ok',
-            closeOnSelect: true // Close upon selecting a date
-        });
+		loadKitchenstyles();
 	}
 
 	_init();
