@@ -46,7 +46,7 @@
 									</a>
 									<br>
 									<span ng-if="date.guests.length < date.max_guests">Seats booked: {{ date.guests.length }}/{{ date.max_guests }}</span>
-									<span ng-if="date.guests.length == date.max_guests" class="red-text">Fully booked!</span>
+									<span ng-if="date.guests.length >= date.max_guests" class="red-text">Fully booked!</span>
 									<hr ng-if="last">
  								</li>
  							</ul>

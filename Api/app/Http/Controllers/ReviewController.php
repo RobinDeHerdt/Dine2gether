@@ -114,9 +114,17 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        $review->delete();
+        if ($this->user->id === $review->author_id) {
+            $review->delete();
 
-        return response(200);
+            return response([
+                'status' => 'success'
+            ]);
+        }
+
+        return response([
+            'status' => 'failed'
+        ]);
     }
 
     /**

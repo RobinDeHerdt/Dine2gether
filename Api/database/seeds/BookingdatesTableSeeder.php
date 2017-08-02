@@ -15,24 +15,28 @@ class BookingdatesTableSeeder extends Seeder
             'date' => "2016-11-11 19:00:00",
             'booking_id' => 1,
             'max_guests' => 5,
+            'host_approved' => true
         ]);
 
         DB::table("bookingdates")->insert([
             'date' => "2016-11-12 18:00:00",
             'booking_id' => 1,
             'max_guests' => 6,
+            'host_approved' => true
         ]);
 
         DB::table("bookingdates")->insert([
             'date' => "2016-11-25 17:00:00",
             'booking_id' => 2,
             'max_guests' => 3,
+            'host_approved' => true
         ]);
 
         DB::table("bookingdates")->insert([
             'date' => "2016-11-25 17:00:00",
             'booking_id' => 3,
             'max_guests' => 17,
+            'host_approved' => false
         ]);
 
         DB::table('bookingdate_user')->insert([
@@ -56,7 +60,8 @@ class BookingdatesTableSeeder extends Seeder
         DB::table('bookingdate_user')->insert([
             'user_id' => 3,
             'bookingdate_id' => 1,
-            'status' => 'accepted',
+            'status' => 'pending',
+            'optional_message' => 'Hey there! I\'d like to join'
         ]);
 
         DB::table('bookingdate_user')->insert([

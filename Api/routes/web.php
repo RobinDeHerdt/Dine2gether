@@ -34,7 +34,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::get('hostbookings', 'BookingController@getBookingsAsHost');
     Route::get('guestbookings', 'BookingController@getBookingsAsGuest');
 
-    Route::delete('review/{id}', 'ReviewController@destroy');
+    Route::post('review/{review}/delete', 'ReviewController@destroy');
     Route::get('review/guests', 'ReviewController@getGuests');
     Route::get('review/hosts', 'ReviewController@getHosts');
     Route::get('user/{user}/reviews', 'ReviewController@index');

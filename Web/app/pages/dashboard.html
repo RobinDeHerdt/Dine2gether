@@ -53,16 +53,27 @@
 				<div ng-repeat="booking in profile.hostbookings">
 				  <ul class="collection">
 					<li class="collection-item">
-					  <span class="title"><a href="/#/booking/{{booking.id}}/details"><strong>{{booking.title}}</strong></a></span>
-					  <ul>
-						<li ng-repeat="bookingdate in booking.bookingdates">
-						  {{ profile.convertToDate(bookingdate.date) | date:"dd/MM/yyyy" }} at {{ profile.convertToDate(bookingdate.date) | date:"HH:mm" }}
-						</li>
-					  </ul>
-					  <p>{{ booking.postalcode + " " + booking.city}}</p>
-					  <p>{{ booking.street_number}}</p>
-					  <p>{{ "€" + booking.price + "/person"}}</p>
-					  <a href="" class="secondary-content" ng-click="profile.deleteBooking(booking.id)"><i class="material-icons">delete_forever</i></a>
+						<div class="row">
+							<div class="col s10">
+								<a href="/#/booking/{{booking.id}}/details"><h6>{{booking.title}}</h6></a>
+								<strong>Dates</strong>
+								<ul>
+									<li ng-repeat="bookingdate in booking.bookingdates">
+										{{ profile.convertToDate(bookingdate.date) | date:"dd/MM/yyyy" }} at {{ profile.convertToDate(bookingdate.date) | date:"HH:mm" }}
+									</li>
+								</ul>
+								<strong>Address</strong>
+								<p>{{ booking.postalcode + " " + booking.city}}</p>
+								<p>{{ booking.street_number}}</p>
+								<strong>Price</strong>
+								<p>{{ "€" + booking.price + "/person"}}</p>
+							</div>
+							<div class="col s2 mar-top-s">
+								<a href="" class="secondary-content" ng-click="profile.deleteBooking(booking.id)" title="Delete booking">
+									<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+								</a>
+							</div>
+						</div>
 					</li>
 				  </ul>
 				</div>
@@ -85,7 +96,7 @@
 					  <p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>
 					  <p>{{ bookingdate.booking.street_number}}</p>
 					  <p>{{ "€" + bookingdate.booking.price + "/person"}}</p>
-					  <a href="" class="secondary-content" ng-click="profile.detachFromBooking(bookingdate.booking.id)"><i class="material-icons">delete_forever</i></a>
+					  <a href="" class="secondary-content" ng-click="profile.detachFromBooking(bookingdate.booking.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
 					</li>
 				  </ul>
 				</div>

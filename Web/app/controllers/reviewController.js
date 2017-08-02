@@ -2,8 +2,10 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 	vm = this;
 
 	var reviewSvc = reviewService;
+	var authSvc = authService;
 
 	vm.selectedname = null;
+	vm.authenticated_user = authSvc.getUser();
 
 	function getGuests() {
 		reviewSvc.getGuests().then(function(data) {
@@ -59,11 +61,24 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
     };
 
 	vm.deleteReview = function(id) {
-		reviewSvc.deleteReviews(id).then(function(data) {
-			if(data.status === 200) {
+        swal({
+            title: 'Are you sure you want to delete this?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+			reviewSvc.deleteReviews(id).then(function() {
+                swal(
+                    'Deleted!',
+                    'Your comment has been deleted.',
+                    'success'
+                );
 				loadReviews();
-			}
-		});
+			});
+        });
 	};
 
 	vm.goBack = function() {

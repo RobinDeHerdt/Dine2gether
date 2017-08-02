@@ -76,10 +76,24 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 	};
 
 	vm.deleteBooking = function (id) {
-		bookingSvc.deleteBooking(id).then(function()
-		{
-            getHostBookings();
-		});
+        swal({
+            title: 'Are you sure you want to delete this?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then(function () {
+            bookingSvc.deleteBooking(id).then(function() {
+                swal(
+                    'Deleted!',
+                    'Your booking has been deleted.',
+                    'success'
+                );
+                getHostBookings();
+            });
+        });
 	};
 
 	vm.deleteUserRequest = function (id) {

@@ -17,7 +17,7 @@ class CreateBookingdatesTable extends Migration
             $table->increments('id');
             $table->datetime('date');
             $table->integer('max_guests')->nullable();
-            $table->boolean('accepted')->default(false);
+            $table->boolean('host_approved')->default(false);
             $table->integer('booking_id')->unsigned();
             $table->foreign('booking_id')->references('id')->on('bookings');
             $table->timestamps();
