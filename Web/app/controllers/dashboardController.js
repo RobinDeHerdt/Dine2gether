@@ -96,26 +96,45 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
-    vm.deleteUserRequest = function (id) {
-        requestSvc.deleteRequest(id).then(function () {
-            swal({
-                title: "Request deleted",
-                type: "success"
-            });
-            getGuestBookings();
-        }, function () {
-            swal({
-                title: "Couldn't delete request",
-                text: "We couldn't delete your request. Try again later or contact us if this problem keeps occuring",
-                type: "error"
+    vm.cancelRequest = function (id) {
+        swal({
+            title: 'Confirm cancellation?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then(function () {
+            requestSvc.cancelRequest(id).then(function () {
+                swal(
+                    'Cancelled',
+                    'Your request was cancelled.',
+                    'success'
+                );
+                getGuestBookings();
             });
         });
     };
 
-    vm.detachFromBooking = function (id, userid) {
-        var user = authSvc.getUser();
-        bookingSvc.detachBooking(id, user.id).then(function () {
-            getGuestBookings();
+    vm.cancelSeat = function (bookingdate_id) {
+        swal({
+            title: 'Are you sure you want to cancel?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, cancel it!'
+        }).then(function () {
+            bookingSvc.cancelSeat(bookingdate_id).then(function () {
+                swal(
+                    'Cancelled',
+                    'You have cancelled this booking.',
+                    'success'
+                );
+                getGuestBookings();
+            });
         });
     };
 

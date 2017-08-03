@@ -14,8 +14,8 @@ d2gApp.service('requestService', function ($http) {
 		return $http.get(CONSTANTS.API_BASE_URL + '/declinerequest/' + id);
 	};
 
-	svc.deleteRequest = function(id) {
-		return $http.post(CONSTANTS.API_BASE_URL + '/request/delete', data);
+	svc.cancelRequest = function(id) {
+		return $http.post(CONSTANTS.API_BASE_URL + '/bookingdate/' + id + '/cancel');
 	};
 
 	svc.getRequest = function (data) {

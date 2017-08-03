@@ -27,7 +27,6 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('sendbookingmails', 'ConfirmationMailController@sendBookingMails');
 
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
-    Route::delete('bookings/cancel/{booking}/user/{user}', 'BookingController@cancel');
     Route::post('upload', 'BookingController@upload');
     Route::get('booking/{booking}', 'BookingController@show');
     Route::get('hostbookings', 'BookingController@getBookingsAsHost');
@@ -48,7 +47,6 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('request/delete', 'RequestController@delete');
     Route::post('request/get', 'RequestController@show');
 
-    Route::post('getbookingdatebydate', 'BookingDateController@getBookingDateByDate');
-    Route::post('createbookingdate', 'BookingDateController@createNewBookingDate');
-    Route::post('addtobookingdate', 'BookingDateController@addUserToBookingdate');
+    Route::post('bookingdate/{bookingdate}/guests/add', 'BookingdateController@addGuest');
+    Route::post('bookingdate/{bookingdate}/cancel', 'BookingdateController@cancel');
 });

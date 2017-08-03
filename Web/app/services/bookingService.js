@@ -30,8 +30,8 @@ d2gApp.service('bookingService', function($http) {
         return $http.get(CONSTANTS.API_BASE_URL + '/guestbookings');
     };
 
-    svc.detachBooking = function (id, userid) {
-        return $http.delete(CONSTANTS.API_BASE_URL + '/bookings/cancel/' + id + '/user/' + userid);
+    svc.cancelSeat = function (id) {
+        return $http.post(CONSTANTS.API_BASE_URL + '/bookingdate/' + id + '/cancel');
     };
 
     svc.getBookingdateByDate = function (data) {

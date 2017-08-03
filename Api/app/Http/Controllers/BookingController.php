@@ -276,21 +276,6 @@ class BookingController extends Controller
     }
 
     /**
-     * Remove the specified booking.
-     *
-     * @param  \App\Booking  $booking
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function cancel(Booking $booking, User $user)
-    {
-        $user->bookingdates()->detach($booking->id);
-        $user->save();
-
-        return response(200);
-    }
-
-    /**
      * Fetch all hosted bookings for the authenticated user.
      *
      * @return \Illuminate\Http\Response
