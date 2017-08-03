@@ -79,10 +79,12 @@ class UserController extends Controller
      */
     public function bookings(User $user)
     {
-        $bookings = $user->bookings()->with('bookingdates.guests')->get();
+        $bookings = $user->bookings()->with('bookingdates')->get();
+        $latest_reviews = $user->receivedReviews()->take(3)->get();
 
         return response()->json([
             'bookings' => $bookings,
+            'latest_reviews' => $latest_reviews,
             'user' => $user
         ]);
     }
