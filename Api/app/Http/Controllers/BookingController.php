@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Booking;
 use App\Bookingdate;
-use App\User;
+use Carbon\Carbon;
 use App\Dish;
 use App\DishImage;
-use Carbon\Carbon;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -54,7 +53,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::with([
+        $bookings = Booking::whereHas('bookingdates', function ($q) {
+            $q->where('date', '>', Carbon::now());
+        })->with([
             'host.interests',
             'kitchenstyles',
             'dishes.dishimages'
@@ -97,7 +98,9 @@ class BookingController extends Controller
         $input = $request->location;
         $location = preg_split('/[;, ]+/', $input);
 
-        $bookings = Booking::where('city', 'LIKE', $location[0])->with([
+        $bookings = Booking::where('city', 'LIKE', $location[0])->whereHas('bookingdates', function ($q) {
+            $q->where('date', '>', Carbon::now());
+        })->with([
             'host.interests',
             'kitchenstyles',
             'dishes.dishimages'
