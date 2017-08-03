@@ -56,6 +56,11 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 		templateUrl: "app/pages/showreviews.html",
 		controller: "reviewController as review"
 	})
+	.state("publicprofile", {
+		url: "/user/:id/profile",
+		templateUrl: "app/pages/public-profile.html",
+		controller: "publicProfileController as public"
+	})
 	.state("dashboard", {
 		url: "/dashboard",
 		templateUrl: "app/pages/dashboard.html",

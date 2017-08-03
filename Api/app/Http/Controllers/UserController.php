@@ -43,7 +43,7 @@ class UserController extends Controller
             }
 
             return $next($request);
-        })->except('activate');
+        })->except('activate', 'bookings');
     }
 
     /**
@@ -70,6 +70,28 @@ class UserController extends Controller
         }
 
         return redirect($url . 'failed');
+    }
+
+    /**
+     * Fetch bookings where the specified user is host.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bookings(User $user)
+    {
+        $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages' => function ($q) {
+            $q->first();
+        }])->get();
+
+        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author')->take(3)->get();
+
+        $user = $user->with('interests')->first();
+
+        return response()->json([
+            'bookings' => $bookings,
+            'latest_reviews' => $latest_reviews,
+            'user' => $user
+        ]);
     }
 
     /**
