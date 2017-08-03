@@ -76,7 +76,7 @@ class BookingController extends Controller
         $booking = Booking::where('id', $booking->id)->with([
             'host.interests',
             'kitchenstyles',
-            'bookingdates.guests',
+            'hostapprovedbookingdates.guests',
             'dishes.dishimages'
         ])->get();
 

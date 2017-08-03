@@ -38,8 +38,8 @@
  							</ul>
  							<h5>Dates available:</h5>
  							<ul class="collection">
- 								<li class="collection-item" ng-if="!bookingdetails.currentBooking.bookingdates.length">No dates yet</li>
- 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.bookingdates">
+ 								<li class="collection-item" ng-if="!bookingdetails.currentBooking.hostapprovedbookingdates.length">No dates yet</li>
+ 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.hostapprovedbookingdates">
 									{{ bookingdetails.convertToDate(date.date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.date) | date: "HH:mm"}}
 									<a ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id" href="">
 										<span class="secondary-colour white-text badge" data-badge-caption="Send request"></span>

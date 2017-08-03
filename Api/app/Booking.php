@@ -31,6 +31,16 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
+    public function hostApprovedBookingdates()
+    {
+        return $this->hasMany('App\Bookingdate')->where('host_approved', true);
+    }
+
+    /**
+     * A booking has many bookingdates.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
     public function bookingDates()
     {
         return $this->hasMany('App\Bookingdate');
