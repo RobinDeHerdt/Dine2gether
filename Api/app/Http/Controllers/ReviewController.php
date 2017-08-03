@@ -48,7 +48,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Fetch all the specified users' reviews.
      *
      * @param \App\User  $user
      * @return \Illuminate\Http\Response
@@ -64,7 +64,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store the newly created review.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -72,8 +72,8 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'review'     => 'required|max:1024|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'user_id'   => 'required|numeric',
+            'review' => 'required|max:1024|regex:/(^[A-Za-z0-9 -]+$)+/',
+            'user_id' => 'required|numeric',
         ]);
 
         $review = new Review;
@@ -107,7 +107,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified review.
      *
      * @param  \App\Review  $review
      * @return \Illuminate\Http\Response
@@ -128,7 +128,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Get all guests at your bookings.
+     * Get all bookings where the authenticated user is a host.
      *
      * @return \Illuminate\Http\Response
      */
@@ -142,7 +142,7 @@ class ReviewController extends Controller
     }
 
     /**
-     * Get all guests  at your bookings.
+     * Get all bookings where the authenticated user is a guest.
      *
      * @return \Illuminate\Http\Response
      */

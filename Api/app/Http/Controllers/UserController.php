@@ -96,13 +96,14 @@ class UserController extends Controller
 
     /**
      * Get the authenticated user.
+     * Fetch the authenticated user.
      *
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
         return response()->json([
-            'user' => $this->user
+            'user' => $this->user->makeVisible('email', 'street_number')
         ]);
     }
 
@@ -157,7 +158,7 @@ class UserController extends Controller
 
 
     /**
-     * Update the authenticated in storage.
+     * Send an activation e-mail to the authenticated user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
