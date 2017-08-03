@@ -19,6 +19,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::get('authenticate/logout', 'AuthenticateController@logout');
     Route::get('user/{user}/activate/{token}', 'UserController@activate');
     Route::get('user', 'UserController@show');
+    Route::get('user/{user}/bookings', 'UserController@bookings');
     Route::post('user/update', 'UserController@update');
     Route::post('user/upload', 'UserController@upload');
 

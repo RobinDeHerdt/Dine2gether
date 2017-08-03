@@ -43,7 +43,7 @@ class UserController extends Controller
             }
 
             return $next($request);
-        })->except('activate');
+        })->except('activate', 'bookings');
     }
 
     /**
@@ -70,6 +70,21 @@ class UserController extends Controller
         }
 
         return redirect($url . 'failed');
+    }
+
+    /**
+     * Fetch bookings where the specified user is host.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function bookings(User $user)
+    {
+        $bookings = $user->bookings()->with('bookingdates.guests')->get();
+
+        return response()->json([
+            'bookings' => $bookings,
+            'user' => $user
+        ]);
     }
 
     /**
