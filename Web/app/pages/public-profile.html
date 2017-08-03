@@ -3,19 +3,22 @@
 		<div class="col s12">
 			<h1>{{public.user.first_name}}'s' Profile</h1>
 		</div>
-		<div class="col s7" id="bookings-wrapper">
+		<h4 ng-if="!public.bookings.length">{{public.user.first_name}} has no bookings yet...</h4>
+		<div  ng-if="public.bookings.length" class="col s7" id="bookings-wrapper">
 			<h4>Join me for a delicious meal</h4>
 			<div id="bookings">
 				<div ng-repeat="booking in public.bookings" class="col s6">
-					<div class="card booking">
-						<div class="card-image">
-							<img ng-src="{{booking.dishes[0].dishimages[0].image_uri ? booking.dishes[0].dishimages[0].image_uri : 'images/no-image.jpg'}}" alt="">
+					<a ui-sref="bookingdetails({id: public.booking.id})">
+						<div class="card booking">
+							<div class="card-image">
+								<img ng-src="{{booking.dishes[0].dishimages[0].image_uri ? booking.dishes[0].dishimages[0].image_uri : 'images/no-image.jpg'}}" alt="">
+							</div>
+							<div class="card-content">
+								<span class="card-title activator grey-text text-darken-4 roboto">{{booking.title}}</span>
+								<p><span class="bold">Price</span> &euro; {{booking.price}}</p>
+							</div>
 						</div>
-						<div class="card-content">
-							<span class="card-title activator grey-text text-darken-4">{{booking.title}}</span>
-							<p><span class="bold">Price</span> &euro; {{booking.price}}</p>
-						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -37,16 +40,18 @@
 			</div>
 		</div>
 		<!-- last 3 reviews for this host -->
-		<div class="col s7" id="latestreviews">
+		<div ng-if="public.reviews.length" class="col s7" id="latestreviews">
 			<h4>What others think of me:</h4>
 			<ul class="collection">
 				<li ng-repeat="review in public.reviews" class="collection-item avatar">
 					<img ng-src="{{review.author.image}}" alt="" class="circle">
-					<span class="title">{{ review.author.first_name }} {{review.author.last_name}}</span>
+					<a href="#" ui-sref="publicprofile({id:review.author.id})"><span class="title">{{ review.author.first_name }} {{review.author.last_name}}</span></a>
 					<p>{{review.body}}</p>
 				</li>
 			</ul>
 		</div>
+
+		<h4 ng-if="public.bookings.length && !public.reviews.length">{{public.user.first_name}} has not been reviewed yet...</h4>
 
 	</div>
 	
