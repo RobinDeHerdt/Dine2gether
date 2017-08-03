@@ -1,4 +1,4 @@
-d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
+d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 	var svc = this;
 
 	svc.user = $cookies.getObject("user");
@@ -45,9 +45,10 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $location) {
             .then(function (data) {
                 svc.user = null;
                 $cookies.remove("user");
+                $state.go('home');
             }, function (error) {
                 console.log(error);
-            })
+            });
     };
 
 	svc.getUser = function () {
