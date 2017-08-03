@@ -47,9 +47,15 @@ class BookingdatesTableSeeder extends Seeder
         ]);
 
         DB::table('bookingdate_user')->insert([
-            'user_id' => 1,
-            'bookingdate_id' => 3,
-            'status' => 'declined',
+            'user_id' => 3,
+            'bookingdate_id' => 2,
+            'status' => 'accepted',
+        ]);
+
+        DB::table('bookingdate_user')->insert([
+            'user_id' => 2,
+            'bookingdate_id' => 2,
+            'status' => 'pending',
         ]);
 
         DB::table('bookingdate_user')->insert([
@@ -69,11 +75,6 @@ class BookingdatesTableSeeder extends Seeder
             'bookingdate_id' => 1,
             'status' => 'pending',
             'optional_message' => 'Hey there! I\'d like to join'
-        ]);
-
-        DB::table('bookingdate_user')->insert([
-            'user_id' => 2,
-            'bookingdate_id' => 2,
         ]);
     }
 }

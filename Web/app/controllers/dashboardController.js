@@ -20,7 +20,6 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
     function getHostBookings() {
         bookingSvc.getHostBookings().then(function (data) {
             vm.hostbookings = data.data.bookings;
-            vm.hostrequests = data.data.requests;
         });
     }
 

@@ -282,7 +282,7 @@ class BookingController extends Controller
      */
     public function getBookingsAsHost()
     {
-        $bookings = $this->user->bookings()->with('bookingdates')->get();
+        $bookings = $this->user->bookings()->with('bookingdates.guests')->get();
 
         return response()->json([
             'bookings' => $bookings

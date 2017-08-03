@@ -13,7 +13,7 @@ class Bookingdate extends Model
      */
     public function guests()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\User')->withPivot('status', 'optional_message');
     }
 
     /**

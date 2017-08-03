@@ -107,9 +107,18 @@ span.badge {
 .row.no-mar-btm {
 	margin-bottom: 0;
 }
+.collection {
+	.collection-action-btn {
+		position: absolute;
+		bottom: 15px;
+		right: 20px;
+	}
 
-.collection-action-btn {
-	position: absolute;
-	bottom: 15px;
-	right: 20px;
+	.collection-title {
+		font-size: 18px;
+	}
+
+	.collection-item {
+		padding: 20px 20px;
+	}
 }
