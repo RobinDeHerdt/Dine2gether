@@ -45,14 +45,13 @@ class RequestController extends Controller
     }
 
     /**
-     * Create a booking request.
+     * Create a request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function store(Request $request)
     {
-        // Check if request exists.
         $exists = $this->user->bookingdates->contains($request->bookingdate_id);
 
         if ($exists) {
@@ -62,7 +61,7 @@ class RequestController extends Controller
         }
 
         if ($request->bookingdate_id) {
-            // Request an seat.
+            // Select an existing date.
             $bookingdate_id = $request->bookingdate_id;
         } else {
             // Propose a new date.

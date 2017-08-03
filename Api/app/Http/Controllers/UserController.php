@@ -80,7 +80,7 @@ class UserController extends Controller
     public function bookings(User $user)
     {
         $bookings = $user->bookings()->with('bookingdates')->get();
-        $latest_reviews = $user->receivedReviews()->take(3)->get();
+        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->take(3)->get();
 
         return response()->json([
             'bookings' => $bookings,
@@ -90,7 +90,7 @@ class UserController extends Controller
     }
 
     /**
-     * Get the authenticated user.
+     * Fetch the authenticated user.
      *
      * @return \Illuminate\Http\Response
      */
@@ -152,7 +152,7 @@ class UserController extends Controller
 
 
     /**
-     * Update the authenticated in storage.
+     * Send an activation e-mail to the authenticated user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
