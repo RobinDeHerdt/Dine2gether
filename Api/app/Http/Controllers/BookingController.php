@@ -313,8 +313,11 @@ class BookingController extends Controller
     {
         $bookingdates = $this->user->acceptedBookingDates()->with('booking')->get();
 
+        $requests = $this->user->pendingBookingDates()->with('booking.host')->get();
+
         return response()->json([
-            'bookingdates' => $bookingdates
+            'bookingdates' => $bookingdates,
+            'requests' => $requests
         ]);
     }
 }

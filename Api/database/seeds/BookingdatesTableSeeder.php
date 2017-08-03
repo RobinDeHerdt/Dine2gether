@@ -19,24 +19,31 @@ class BookingdatesTableSeeder extends Seeder
         ]);
 
         DB::table("bookingdates")->insert([
-            'date' => "2016-11-12 18:00:00",
+            'date' => "2017-11-12 18:00:00",
             'booking_id' => 1,
             'max_guests' => 6,
             'host_approved' => true
         ]);
 
         DB::table("bookingdates")->insert([
-            'date' => "2016-11-25 17:00:00",
+            'date' => "2017-11-25 17:00:00",
             'booking_id' => 2,
             'max_guests' => 3,
             'host_approved' => true
         ]);
 
         DB::table("bookingdates")->insert([
-            'date' => "2016-11-25 17:00:00",
+            'date' => "2017-11-25 17:00:00",
             'booking_id' => 3,
-            'max_guests' => 17,
+            'max_guests' => 7,
             'host_approved' => false
+        ]);
+
+        DB::table("bookingdates")->insert([
+            'date' => "2017-09-25 17:00:00",
+            'booking_id' => 4,
+            'max_guests' => 6,
+            'host_approved' => true
         ]);
 
         DB::table('bookingdate_user')->insert([

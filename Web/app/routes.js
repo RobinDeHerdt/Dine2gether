@@ -59,6 +59,6 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 	.state("dashboard", {
 		url: "/dashboard",
 		templateUrl: "app/pages/dashboard.html",
-		controller: "profileController as profile"
+		controller: "dashboardController as dashboard"
 	})
 });

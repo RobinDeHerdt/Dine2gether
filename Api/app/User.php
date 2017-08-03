@@ -64,7 +64,7 @@ class User extends Authenticatable
      */
     public function pendingBookingDates()
     {
-        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'pending');
+        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'pending')->withPivot('status');
     }
 
     /**

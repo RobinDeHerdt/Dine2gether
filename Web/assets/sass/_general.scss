@@ -103,3 +103,13 @@ nav {
 span.badge {
 	border-radius: 5px !important;
 }
+
+.row.no-mar-btm {
+	margin-bottom: 0;
+}
+
+.collection-action-btn {
+	position: absolute;
+	bottom: 15px;
+	right: 20px;
+}
