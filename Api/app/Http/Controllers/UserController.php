@@ -97,7 +97,7 @@ class UserController extends Controller
     public function show()
     {
         return response()->json([
-            'user' => $this->user
+            'user' => $this->user->makeVisible('email', 'street_number')
         ]);
     }
 
