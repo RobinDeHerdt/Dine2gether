@@ -30,13 +30,13 @@
 											<li ng-repeat="guest in date.guests">
 												<div ng-switch="guest.pivot.status">
 													<div ng-switch-when="pending">
-														<span><a href="/#/user/{{ guest.id }}/reviews"><strong>{{ guest.first_name + " " + guest.last_name}}</strong></a> (pending request)</span>
-														&middot; <a href="" ng-click="dashboard.acceptRequest(date.id, guest.id, date.booking.id)" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></a>
-														&middot; <a href="" ng-click="dashboard.declineRequest(date.id)" title="Decline"><i class="fa fa-times" aria-hidden="true"></i></a>
+														<span><a href="/#/user/{{ guest.id }}/reviews"><i class="fa fa-refresh" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a> (pending request)</span>
+														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, true)" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></a>
+														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, false)" title="Decline"><i class="fa fa-times" aria-hidden="true"></i></a>
 														<p ng-show="guest.pivot.optional_message">Message: {{ guest.pivot.optional_message }}</p>
 													</div>
 													<div ng-switch-when="accepted">
-														<span><a href="/#/user/{{ guest.id }}/reviews"><strong>{{ guest.first_name + " " + guest.last_name}}</strong></a></span>
+														<span><a href="/#/user/{{ guest.id }}/reviews"><i class="fa fa-check" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a></span>
 													</div>
 												</div>
 											</li>

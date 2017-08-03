@@ -34,44 +34,38 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         return new Date(dateString);
     };
 
-    vm.acceptRequest = function (requestid, userid, bookingid) {
-        requestSvc.acceptRequest(requestid).then(function () {
-            var data = {
-                user_id: userid,
-                host_id: vm.user.id,
-                booking_id: bookingid
-            };
+    vm.handleRequest = function (bookingdate_id, guest_id, guest_fn, guest_ln, status) {
+        var data = {
+            guest_id: guest_id,
+            status: status
+        };
 
-            $http.post(CONSTANTS.API_BASE_URL + "/sendconfirmationrequestmail", data).then(function () {
-                swal({
-                    text: "Request was accepted. User is booked and will get a notification.",
-                    type: "success"
-                });
+        var swal_text = "";
 
+        if (status) {
+            swal_text = "accept " + guest_fn + " " + guest_ln;
+        } else {
+            swal_text = "decline " + guest_fn + " " + guest_ln;
+        }
+
+        swal({
+            title: 'Confirm',
+            text: "Are you sure you want to " + swal_text + "?",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then(function () {
+            requestSvc.handleRequest(bookingdate_id, data).then(function () {
                 getHostBookings();
+            }, function () {
+                swal({
+                    text: "We're sorry, we couldn't handle this request. Please try again or contact us if this problem keeps occuring.",
+                    type: "error"
+                });
             });
-
-        }, function () {
-            swal({
-                text: "We're so sorry, for some reasons we couldn't accept this request. Please try again or contact us if this problem keeps occuring.",
-                type: "error"
-            })
-        })
-    };
-
-    vm.declineRequest = function (id) {
-        requestSvc.declineRequest(id).then(function () {
-            swal({
-                text: "Request was declined. We'll notificate the user",
-                type: "success"
-            });
-            getHostBookings();
-        }, function () {
-            swal({
-                text: "We're so sorry, for some reasons we couldn't decline this request. Please try again or contact us if this problem keeps occuring.",
-                type: "error"
-            })
-        })
+        });
     };
 
     vm.deleteBooking = function (id) {

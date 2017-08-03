@@ -86,25 +86,23 @@ class RequestController extends Controller
     }
 
     /**
-     * Accept a guest request.
+     * Handle a guest request.
      *
+     * @param \App\Bookingdate  $bookingdate
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
-    public function acceptRequest(Request $request)
+    public function handleRequest(Bookingdate $bookingdate, Request $request)
     {
-        return response()->json(["status"=>"succes"]);
-    }
+        if ($request->status) {
+            $bookingdate->guests()->updateExistingPivot($request->guest_id, ['status' => 'accepted']);
+        } else {
+            $bookingdate->guests()->updateExistingPivot($request->guest_id, ['status' => 'declined']);
+        }
 
-    /**
-     * Decline a guest request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function declineRequest(Request $request)
-    {
-        return response()->json(["status"=>"succes"]);
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     /**

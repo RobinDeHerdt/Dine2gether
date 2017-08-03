@@ -42,11 +42,10 @@ Route::group(array('prefix' => 'api'), function () {
     Route::get('kitchenstyles', 'KitchenstyleController@index');
 
     Route::post('request', 'RequestController@store');
-    Route::get('acceptrequest/{id}', 'RequestController@acceptRequest');
-    Route::get('declinerequest/{id}', 'RequestController@declineRequest');
     Route::post('request/delete', 'RequestController@delete');
     Route::post('request/get', 'RequestController@show');
 
+    Route::post('bookingdate/{bookingdate}/request', 'RequestController@handleRequest');
     Route::post('bookingdate/{bookingdate}/guests/add', 'BookingdateController@addGuest');
     Route::post('bookingdate/{bookingdate}/cancel', 'BookingdateController@cancel');
 });

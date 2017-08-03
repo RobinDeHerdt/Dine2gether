@@ -6,12 +6,8 @@ d2gApp.service('requestService', function ($http) {
 		return $http.post(CONSTANTS.API_BASE_URL + '/request', data);
 	};
 
-	svc.acceptRequest = function (id) {
-		return $http.get(CONSTANTS.API_BASE_URL + '/acceptrequest/'+ id );
-	};
-
-	svc.declineRequest = function (id) {
-		return $http.get(CONSTANTS.API_BASE_URL + '/declinerequest/' + id);
+	svc.handleRequest = function (bookingdate_id, data) {
+		return $http.post(CONSTANTS.API_BASE_URL + '/bookingdate/' + bookingdate_id + '/request', data);
 	};
 
 	svc.cancelRequest = function(id) {
