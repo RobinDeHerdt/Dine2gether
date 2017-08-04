@@ -79,13 +79,14 @@ class UserController extends Controller
      */
     public function bookings(User $user)
     {
-        $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages' => function ($q) {
-            $q->first();
-        }])->get();
+        $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages'])->get();
 
-        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author')->take(3)->get();
+        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author', 'booking')->take(3)->get();
 
-        $user = $user->with('interests')->first();
+        $user->has_more_reviews = false;
+        if(count($user->receivedReviews()->get()) > 3) $user->has_more_reviews = true;
+
+        $user = $user->load('interests');
 
         return response()->json([
             'bookings' => $bookings,
