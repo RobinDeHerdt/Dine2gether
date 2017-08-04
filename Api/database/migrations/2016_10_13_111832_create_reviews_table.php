@@ -20,6 +20,8 @@ class CreateReviewsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users');
+            $table->integer('booking_id')->unsigned();
+            $table->foreign('booking_id')->references('id')->on('bookings');
             $table->timestamps();
         });
     }

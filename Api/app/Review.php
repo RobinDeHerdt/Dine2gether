@@ -25,4 +25,16 @@ class Review extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * A review belongs to a booking.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function booking()
+    {
+        return $this->belongsTo('App\Booking');
+    }
+
+
 }

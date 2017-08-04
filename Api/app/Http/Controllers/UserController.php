@@ -81,7 +81,7 @@ class UserController extends Controller
     {
         $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages'])->get();
 
-        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author')->take(3)->get();
+        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author', 'booking')->get();
 
         $user = $user->load('interests');
 

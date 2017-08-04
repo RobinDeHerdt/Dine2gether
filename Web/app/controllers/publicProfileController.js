@@ -1,4 +1,4 @@
-d2gApp.controller("publicProfileController", function (bookingService, $stateParams) { 
+d2gApp.controller("publicProfileController", function (bookingService, $stateParams, $filter) { 
 
 	var vm = this;
 	var bookingSvc = bookingService;
@@ -12,6 +12,13 @@ d2gApp.controller("publicProfileController", function (bookingService, $statePar
 	}, function (error) {	
 		console.log("Error occured")
 	});
+
+	vm.toDate = function (datestring) {
+		var date = $filter('date')(new Date(datestring), 'MMM d yyyy');
+		console.log(date);	
+		return date;
+	}
+
 
 
 
