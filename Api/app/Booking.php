@@ -51,7 +51,7 @@ class Booking extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
-    public function receivedReviews()
+    public function reviews()
     {
         return $this->hasMany('App\Review');
     }

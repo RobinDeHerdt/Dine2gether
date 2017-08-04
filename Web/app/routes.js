@@ -28,7 +28,7 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 	})
 	.state("bookingdetails", {
 		url: "/booking/:id/details",
-		templateUrl: "app/pages/bookingDetails.html",
+		templateUrl: "app/pages/bookingdetails.html",
 		controller: "bookingDetailsController as bookingdetails"
 	})
 	.state("requestbooking", {
@@ -58,7 +58,7 @@ d2gApp.config(function ($stateProvider, $urlRouterProvider, $authProvider) {
 	})
 	.state("publicprofile", {
 		url: "/user/:id/profile",
-		templateUrl: "app/pages/public-profile.html",
+		templateUrl: "app/pages/publicprofile.html",
 		controller: "publicProfileController as public"
 	})
 	.state("dashboard", {

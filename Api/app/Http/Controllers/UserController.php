@@ -75,16 +75,22 @@ class UserController extends Controller
     /**
      * Fetch bookings where the specified user is host.
      *
+     * @param \App\User
      * @return \Illuminate\Http\Response
      */
     public function bookings(User $user)
     {
         $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages'])->get();
 
-        $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author', 'booking')->take(3)->get();
+        $latest_reviews = $user->receivedReviews()
+            ->orderBy('created_at', 'desc')
+            ->with(['author', 'booking'])
+            ->take(3)
+            ->get();
 
-        $user->has_more_reviews = false;
-        if(count($user->receivedReviews()->get()) > 3) $user->has_more_reviews = true;
+        if ($user->receivedReviews()->count() > 3) {
+            $user->has_more_reviews = true;
+        }
 
         $user = $user->load('interests');
 

@@ -88,7 +88,6 @@ class BookingController extends Controller
 
     /**
      * Fetch all bookings for the specified location.
-     * @todo only fetch bookings with bookingdates after "Carbon::now"
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
