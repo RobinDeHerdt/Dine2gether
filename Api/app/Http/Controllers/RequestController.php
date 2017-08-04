@@ -94,9 +94,15 @@ class RequestController extends Controller
     public function handleRequest(Bookingdate $bookingdate, Request $request)
     {
         if ($request->status) {
-            $bookingdate->guests()->updateExistingPivot($request->guest_id, ['status' => 'accepted']);
+            $bookingdate->guests()->updateExistingPivot($request->guest_id, [
+                'status' => 'accepted',
+                'optional_message' => $request->message
+            ]);
         } else {
-            $bookingdate->guests()->updateExistingPivot($request->guest_id, ['status' => 'declined']);
+            $bookingdate->guests()->updateExistingPivot($request->guest_id, [
+                'status' => 'declined',
+                'optional_message' => $request->message
+            ]);
         }
 
         return response()->json([

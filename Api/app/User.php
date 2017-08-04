@@ -34,7 +34,7 @@ class User extends Authenticatable
      */
     public function bookingdates()
     {
-        return $this->belongsToMany('App\Bookingdate');
+        return $this->belongsToMany('App\Bookingdate')->withPivot('status', 'optional_message');
     }
 
     /**
@@ -44,7 +44,9 @@ class User extends Authenticatable
      */
     public function declinedBookingDates()
     {
-        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'declined');
+        return $this->belongsToMany('App\Bookingdate')
+            ->wherePivot('status', 'declined')
+            ->withPivot('status', 'optional_message');
     }
 
     /**
@@ -54,7 +56,9 @@ class User extends Authenticatable
      */
     public function acceptedBookingDates()
     {
-        return $this->belongsToMany('App\Bookingdate')->wherePivot('status', 'accepted');
+        return $this->belongsToMany('App\Bookingdate')
+            ->wherePivot('status', 'accepted')
+            ->withPivot('status', 'optional_message');
     }
 
     /**

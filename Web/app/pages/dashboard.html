@@ -77,6 +77,9 @@
 								<p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>
 								<p>{{ bookingdate.booking.street_number}}</p>
 								<p>{{ "€" + bookingdate.booking.price + "/person"}}</p>
+								<div ng-show="bookingdate.pivot.optional_message">
+									<span><strong>Message from the host:</strong> {{ bookingdate.pivot.optional_message }}</span>
+								</div>
 							</div>
 							<div class="col s2">
 								<a href="" class="collection-action-btn" ng-click="dashboard.cancelSeat(bookingdate.id)" title="Cancel booking"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>

@@ -264,7 +264,8 @@ class BookingController extends Controller
 
         $booking->bookingDates()->delete();
         $booking->kitchenstyles()->detach();
-
+        $booking->reviews()->delete();
+        
         $dishes = $booking->dishes()->get();
 
         foreach ($dishes as $dish) {

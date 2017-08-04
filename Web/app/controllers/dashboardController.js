@@ -35,29 +35,29 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
     };
 
     vm.handleRequest = function (bookingdate_id, guest_id, guest_fn, guest_ln, status) {
-        var data = {
-            guest_id: guest_id,
-            status: status
-        };
-
-        var swal_text = "";
-
-        if (status) {
-            swal_text = "accept " + guest_fn + " " + guest_ln;
-        } else {
-            swal_text = "decline " + guest_fn + " " + guest_ln;
-        }
-
         swal({
-            title: 'Confirm',
-            text: "Are you sure you want to " + swal_text + "?",
+            title: (status) ? 'Accept' : 'Decline',
+            input: 'textarea',
+            text: "Have a message for " + guest_fn + " " + guest_ln + "?",
+            inputPlaceholder: "Optional message",
             type: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Confirm'
-        }).then(function () {
+        }).then(function (input) {
+            var data = {
+                guest_id: guest_id,
+                status: status,
+                message: input
+            };
+
             requestSvc.handleRequest(bookingdate_id, data).then(function () {
+                swal({
+                    title: 'Success',
+                    text: 'Guest accepted',
+                    type: 'success'
+                });
                 getHostBookings();
             }, function () {
                 swal({
@@ -70,20 +70,20 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
 
     vm.deleteBooking = function (id) {
         swal({
-            title: 'Are you sure you want to delete this?',
-            text: "You won't be able to revert this!",
+            title: 'Remove booking',
+            text: "Are you sure you want to delete your booking? Your guests will be notified if you do.",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Confirm'
         }).then(function () {
             bookingSvc.deleteBooking(id).then(function () {
-                swal(
-                    'Deleted!',
-                    'Your booking has been deleted.',
-                    'success'
-                );
+                swal({
+                    title: 'Deleted',
+                    text: 'Your booking has been deleted',
+                    type: 'success'
+                });
                 getHostBookings();
             });
         });
@@ -91,20 +91,20 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
 
     vm.cancelRequest = function (id) {
         swal({
-            title: 'Confirm cancellation?',
-            text: "You won't be able to revert this!",
+            title: 'Confirm cancellation',
+            text: "Are you sure you want to cancel your request?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, cancel it!'
+            confirmButtonText: 'Confirm'
         }).then(function () {
             requestSvc.cancelRequest(id).then(function () {
-                swal(
-                    'Cancelled',
-                    'Your request was cancelled.',
-                    'success'
-                );
+                swal({
+                    title: 'Cancelled',
+                    text: 'Your request was cancelled',
+                    type: 'success'
+                });
                 getGuestBookings();
             });
         });
@@ -113,19 +113,19 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
     vm.cancelSeat = function (bookingdate_id) {
         swal({
             title: 'Are you sure you want to cancel?',
-            text: "You won't be able to revert this!",
+            text: "The host will be notified",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, cancel it!'
+            confirmButtonText: 'Confirm'
         }).then(function () {
             bookingSvc.cancelSeat(bookingdate_id).then(function () {
-                swal(
-                    'Cancelled',
-                    'You have cancelled this booking.',
-                    'success'
-                );
+                swal({
+                    title: 'Cancelled',
+                    text: 'You have cancelled this booking',
+                    type: 'success'
+                });
                 getGuestBookings();
             });
         });
