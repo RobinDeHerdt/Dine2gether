@@ -46,6 +46,16 @@ class Booking extends Model
         return $this->hasMany('App\Bookingdate');
     }
 
+     /**
+     * A booking has many reviews.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
     /**
      * A booking belongs to many kitchenstyles.
      *

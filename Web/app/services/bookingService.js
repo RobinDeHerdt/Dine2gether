@@ -44,5 +44,9 @@ d2gApp.service('bookingService', function($http) {
 
     svc.addUserToBookingdate = function (data) {
         return $http.post(CONSTANTS.API_BASE_URL + '/addtobookingdate', data);
-    }
+    };
+
+    svc.getUserBookingsAndReviews = function (id) {
+        return $http.get(CONSTANTS.API_BASE_URL + '/user/' + id);
+    };
 });

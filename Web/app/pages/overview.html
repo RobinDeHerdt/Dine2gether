@@ -19,7 +19,7 @@
 						</div>
 						<div class="text_container col s7 mar-top-s">
 							<h4>{{ booking.title }}</h4>
-							<p>Hosted by {{ booking.host.first_name + " " + booking.host.last_name}}</p>
+							<p>Hosted by <a href="#" ui-sref="publicprofile({id:booking.host.id})">{{ booking.host.first_name + " " + booking.host.last_name}}</a></p>
 							<p>In {{ booking.city }}</p>
 							<p>{{ booking.price | currency : "€"}} per person</p>
 							<a class="btn waves waves-light" href="#" ui-sref="bookingdetails({id: booking.id})">More information</a>
