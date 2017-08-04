@@ -1,7 +1,8 @@
-d2gApp.controller("profileController", function (authService, bookingService, requestService, $http, $location, $filter, Upload) {
+d2gApp.controller("profileController", function (authService, bookingService, interestService, requestService, $http, $location, $filter, Upload) {
 	var vm = this;
 
 	var authSvc = authService;
+	var interestSvc = interestService;
 
     function _init() {
         if(!authSvc.getUser()) {
@@ -11,13 +12,37 @@ d2gApp.controller("profileController", function (authService, bookingService, re
             return;
         }
 
-        loadUser();
+        vm.user = authSvc.getUser();
+
+        interestSvc.getInterests().then(function(data) {
+        	vm.interests = data.data.interests;
+
+            interestSvc.getAuthUserInterests().then(function(data) {
+                vm.userInterests = data.data.userinterests;
+
+                vm.interests.forEach(function(interest){
+                    vm.userInterests.forEach(function(userInterest){
+                        if(userInterest.id === interest.id){
+                            interest.selected = true;
+                        }
+                    });
+                });
+            });
+		});
     }
 
-    function loadUser () {
-		if(authSvc.getUser()) {
-			vm.user = authSvc.getUser();
-		}
+	function getSelectedInterests () {
+		var selected_interests = [];
+
+		angular.forEach(vm.interests, function (interest) {
+			if(interest.selected) {
+				selected_interests.push(interest.id);
+			}
+		});
+
+		console.log(selected_interests);
+
+		return selected_interests;
 	}
 
 	vm.saveProfile = function() {
@@ -27,7 +52,8 @@ d2gApp.controller("profileController", function (authService, bookingService, re
 			email: vm.user.email,
 			street_number: vm.user.street_number,
 			postalcode: vm.user.postalcode,
-			city: vm.user.city
+			city: vm.user.city,
+			interests: getSelectedInterests()
 		};
 
         authSvc.updateProfile(data).then(function(data) {

@@ -88,7 +88,6 @@ class BookingController extends Controller
 
     /**
      * Fetch all bookings for the specified location.
-     * @todo only fetch bookings with bookingdates after "Carbon::now"
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -120,9 +119,9 @@ class BookingController extends Controller
      */
     public function upload(Request $request)
     {
-        // $this->validate($request, [
-        //     'files'    => 'required|mimes:jpg,jpeg,png,bmp|max:20000',
-        // ]);
+         $this->validate($request, [
+             'files.*' => 'file|image|max:1000',
+         ]);
 
         $uploaded_files = $request->all();
 
@@ -230,7 +229,7 @@ class BookingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified booking.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Booking  $booking

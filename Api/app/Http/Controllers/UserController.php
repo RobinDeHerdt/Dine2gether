@@ -97,7 +97,7 @@ class UserController extends Controller
     public function show()
     {
         return response()->json([
-            'user' => $this->user->makeVisible('email', 'street_number')
+            'user' => $this->user->makeVisible(['email', 'street_number'])
         ]);
     }
 
@@ -109,6 +109,10 @@ class UserController extends Controller
      */
     public function upload(Request $request)
     {
+        $this->validate($request, [
+            'file' => 'file|image|max:2000',
+        ]);
+
         $path = $request->file->store('images/profile', 'upload');
 
         $this->user->image = $path;
@@ -136,6 +140,8 @@ class UserController extends Controller
             'city'          => 'max:255',
         ]);
 
+        $this->user->interests()->sync($request->interests);
+
         $this->user->first_name = $request->first_name;
         $this->user->last_name = $request->last_name;
         $this->user->email = $request->email;
@@ -147,6 +153,20 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 'success'
+        ]);
+    }
+
+    /**
+     * Fetch the interests for the authenticated user.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function interests()
+    {
+        $interests = $this->user->interests()->get();
+
+        return response()->json([
+            'userinterests' => $interests->makeHidden(['name', 'pivot'])
         ]);
     }
 
