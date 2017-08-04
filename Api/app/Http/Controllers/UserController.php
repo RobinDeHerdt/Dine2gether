@@ -79,13 +79,11 @@ class UserController extends Controller
      */
     public function bookings(User $user)
     {
-        $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages' => function ($q) {
-            $q->first();
-        }])->get();
+        $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages'])->get();
 
         $latest_reviews = $user->receivedReviews()->orderBy('created_at', 'desc')->with('author')->take(3)->get();
 
-        $user = $user->with('interests')->first();
+        $user = $user->load('interests');
 
         return response()->json([
             'bookings' => $bookings,

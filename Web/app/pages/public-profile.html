@@ -8,7 +8,7 @@
 			<h4>Join me for a delicious meal</h4>
 			<div id="bookings">
 				<div ng-repeat="booking in public.bookings" class="col s6">
-					<a ui-sref="bookingdetails({id: public.booking.id})">
+					<a ui-sref="bookingdetails({id: booking.id})">
 						<div class="card booking">
 							<div class="card-image">
 								<img ng-src="{{booking.dishes[0].dishimages[0].image_uri ? booking.dishes[0].dishimages[0].image_uri : 'images/no-image.jpg'}}" alt="">
