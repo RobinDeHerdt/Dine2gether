@@ -70,7 +70,7 @@ class BookingController extends Controller
      * Display the specified booking.
      * Only fetch future bookingdates.
      *
-     * @param \App\Booking
+     * @param  \App\Booking
      * @return \Illuminate\Http\Response
      */
     public function show(Booking $booking)

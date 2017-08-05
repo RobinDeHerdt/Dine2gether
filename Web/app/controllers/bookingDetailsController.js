@@ -30,6 +30,16 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
         return CONSTANTS.PUBLIC_BASE_URL + "/" + dish.dishimages[0].image_uri;
 	};
 
+    vm.guestsForThisDate = function(date) {
+        var guests = [];
+
+        angular.forEach(date.guests, function (guest) {
+            guests.push(guest.id);
+        });
+
+        return guests;
+    };
+
 	function getCurrentBooking () {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
 			vm.currentBooking = data.data.booking[0];

@@ -77,7 +77,7 @@ class RequestController extends Controller
         }
 
         $this->user->bookingdates()->attach($bookingdate_id, [
-            'optional_message' => $request->message
+            'optional_message_guest' => $request->message
         ]);
 
         return response()->json([
@@ -89,7 +89,7 @@ class RequestController extends Controller
      * Handle a guest request.
      * @todo Notify the specified guest.
      *
-     * @param \App\Bookingdate  $bookingdate
+     * @param  \App\Bookingdate  $bookingdate
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
@@ -103,7 +103,7 @@ class RequestController extends Controller
 
             $bookingdate->guests()->updateExistingPivot($request->guest_id, [
                 'status' => 'accepted',
-                'optional_message' => $request->message
+                'optional_message_host' => $request->message
             ]);
         } else {
             if (!$bookingdate->host_approved) {
@@ -113,7 +113,7 @@ class RequestController extends Controller
 
             $bookingdate->guests()->updateExistingPivot($request->guest_id, [
                 'status' => 'declined',
-                'optional_message' => $request->message
+                'optional_message_host' => $request->message
             ]);
         }
 

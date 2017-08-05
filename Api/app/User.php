@@ -34,7 +34,11 @@ class User extends Authenticatable
      */
     public function bookingdates()
     {
-        return $this->belongsToMany('App\Bookingdate')->withPivot('status', 'optional_message');
+        return $this->belongsToMany('App\Bookingdate')->withPivot(
+            'status',
+            'optional_message_guest',
+            'optional_message_host'
+        );
     }
 
     /**
@@ -46,7 +50,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Bookingdate')
             ->wherePivot('status', 'declined')
-            ->withPivot('status', 'optional_message');
+            ->withPivot(
+                'status',
+                'optional_message_guest',
+                'optional_message_host'
+            );
     }
 
     /**
@@ -58,7 +66,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Bookingdate')
             ->wherePivot('status', 'accepted')
-            ->withPivot('status', 'optional_message');
+            ->withPivot(
+                'status',
+                'optional_message_guest',
+                'optional_message_host'
+            );
     }
 
     /**

@@ -29,7 +29,10 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 				  title: "Login Failed",
 				  text: "You've entered the wrong emailaddress or password, please try again.",
 				  type: "error"
+				}).then(function() {
+                    svc.showLoginModal();
 				});
+
 			} else {
 				swal({
 				  title: "Oops",

@@ -67,7 +67,7 @@ class BookingdatesTableSeeder extends Seeder
             'user_id' => 3,
             'bookingdate_id' => 1,
             'status' => 'pending',
-            'optional_message' => 'Hey there! I\'d like to join'
+            'optional_message_guest' => 'Hey there! I\'d like to join'
         ]);
     }
 }

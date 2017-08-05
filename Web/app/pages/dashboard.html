@@ -25,16 +25,16 @@
 									<div ng-repeat="date in booking.bookingdates">
 										<strong>{{ dashboard.convertToDate(date.date) | date:"dd/MM/yyyy" }} at {{ dashboard.convertToDate(date.date) | date:"HH:mm" }}</strong>
 										<strong>{{ date.host_approved ? '' : '(proposed date)'}}</strong>
-										<strong>{{ date.max_guests ? '(max ' + date.max_guests + ' guests)' : ''}}</strong>
+										<strong>{{ date.max_guests ? ' &middot; ' + date.guests.length + '/' + date.max_guests + ' guests' : ''}}</strong>
 										&middot; <a href="" ng-click="dashboard.deleteBookingdate(date.id)"><i class="fa fa-times" aria-hidden="true"></i> Remove date</a>
 										<ul>
 											<li ng-repeat="guest in date.guests">
 												<div ng-switch="guest.pivot.status">
 													<div ng-switch-when="pending">
 														<span><a ui-sref="publicprofile({id:guest.id})"><i class="fa fa-refresh" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a> (pending request)</span>
-														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, true)" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></a>
+														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, date.host_approved, true)" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></a>
 														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, false)" title="Decline"><i class="fa fa-times" aria-hidden="true"></i></a>
-														<p ng-show="guest.pivot.optional_message">Message: {{ guest.pivot.optional_message }}</p>
+														<p ng-show="guest.pivot.optional_message_guest">Message: {{ guest.pivot.optional_message_guest }}</p>
 													</div>
 													<div ng-switch-when="accepted">
 														<span><a ui-sref="publicprofile({id:guest.id})"><i class="fa fa-check" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a></span>
@@ -125,8 +125,11 @@
 											<span>Hosted: <a ui-sref="publicprofile({id:guestrequest.booking.host.id})"><strong>{{guestrequest.booking.host.first_name + " " + guestrequest.booking.host.last_name}}</strong></a></span>
 											<p>Date and time: {{ dashboard.convertToDate(guestrequest.date) | date:"dd/MM/yyyy" }} at {{dashboard.convertToDate(guestrequest.date) | date:"HH:mm" }}</p>
 											<br>
-											<div ng-show="guestrequest.pivot.optional_message">
-												<span>Message from the host: {{ guestrequest.pivot.optional_message }}</span>
+											<div ng-show="guestrequest.pivot.optional_message_guest">
+												<span>Your message: {{ guestrequest.pivot.optional_message_guest }}</span>
+											</div>
+											<div ng-show="guestrequest.pivot.optional_message_host">
+												<span>Message from the host: {{ guestrequest.pivot.optional_message_host }}</span>
 											</div>
 										</div>
 										<div class="col s2">

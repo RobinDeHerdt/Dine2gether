@@ -38,6 +38,10 @@ d2gApp.service('bookingService', function($http) {
         return $http.post(CONSTANTS.API_BASE_URL + '/bookingdate/create', data);
     };
 
+    svc.updateBookingdate = function (id, data) {
+        return $http.post(CONSTANTS.API_BASE_URL + '/bookingdate/' + id + '/update', data);
+    };
+
     svc.deleteBookingdate = function (id) {
         return $http.post(CONSTANTS.API_BASE_URL + '/bookingdate/' + id + '/delete');
     };

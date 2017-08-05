@@ -75,7 +75,7 @@ class UserController extends Controller
     /**
      * Fetch bookings where the specified user is host.
      *
-     * @param \App\User
+     * @param  \App\User
      * @return \Illuminate\Http\Response
      */
     public function bookings(User $user)
@@ -192,10 +192,9 @@ class UserController extends Controller
     /**
      * Send an activation e-mail to the authenticated user.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function sendActivationMail(Request $request)
+    public function sendActivationMail()
     {
         Mail::to($this->user->email)->send(new ActivateUser($this->user));
 

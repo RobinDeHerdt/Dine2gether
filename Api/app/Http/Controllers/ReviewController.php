@@ -90,8 +90,8 @@ class ReviewController extends Controller
     /**
      * Update the specified review.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Review  $review
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Review $review)

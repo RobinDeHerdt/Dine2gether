@@ -82,7 +82,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
-    vm.handleRequest = function (bookingdate_id, guest_id, guest_fn, guest_ln, status) {
+    vm.handleRequest = function (bookingdate_id, guest_id, guest_fn, guest_ln, host_approved, status) {
         swal({
             title: (status) ? 'Accept' : 'Decline',
             input: 'textarea',
@@ -101,11 +101,37 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             };
 
             requestSvc.handleRequest(bookingdate_id, data).then(function () {
-                swal({
-                    title: 'Success',
-                    text: (status) ? 'Guest accepted' : 'Guest declined',
-                    type: 'success'
-                });
+                if(status && !host_approved) {
+                    swal({
+                        title: 'success',
+                        type: 'success',
+                        text: 'Set a max number of guests',
+                        input: 'text',
+                        inputPlaceholder: 'Max amount of guests'
+                    }).then(function(max_guests) {
+                        data = {
+                            max_guests: max_guests
+                        };
+
+                        bookingSvc.updateBookingdate(bookingdate_id, data).then(function() {
+                            swal({
+                                title: 'Success',
+                                text: 'Changes were saved!',
+                                type: 'success'
+                            });
+
+                            getHostBookings();
+                        });
+                    });
+                } else {
+                    swal({
+                        title: 'Success',
+                        text: (status) ? 'Guest accepted' : 'Guest declined',
+                        type: 'success'
+                    });
+                }
+
+
                 getHostBookings();
             }, function () {
                 swal({

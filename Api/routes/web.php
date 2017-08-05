@@ -57,6 +57,7 @@ Route::group(array('prefix' => 'api'), function () {
     // Bookingdate related routes.
     Route::post('bookingdate/create', 'BookingdateController@store');
     Route::post('bookingdate/{bookingdate}/delete', 'BookingdateController@delete');
+    Route::post('bookingdate/{bookingdate}/update', 'BookingdateController@update');
     Route::post('bookingdate/{bookingdate}/request', 'RequestController@handleRequest');
     Route::post('bookingdate/{bookingdate}/cancel', 'BookingdateController@cancel');
 });

@@ -12,27 +12,10 @@ use App\User;
 
 class AuthenticateController extends Controller
 {
-    private $mailer;
-
     /**
-     * Constructor.
+     * Authenticates users.
      *
-     * Apply the jwt.auth middleware to all methods in this controller
-     * except for the authenticate method. We don't want to prevent
-     * the user from retrieving their token if they don't already have it
-     */
-    public function __construct()
-    {
-        $this->middleware('jwt.auth', [
-            'except' => [
-                'login',
-                'register'
-            ]]);
-    }
-
-    /**
-     * Logs in users.
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request)
@@ -57,7 +40,7 @@ class AuthenticateController extends Controller
             ], 500);
         }
 
-        // If no errors are encountered, return a JWT.
+        // Return a JWT.
         return response()->json([
             'token' => $token
         ]);
@@ -66,6 +49,7 @@ class AuthenticateController extends Controller
     /**
      * Registers users.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
@@ -85,6 +69,7 @@ class AuthenticateController extends Controller
 
         $token = JWTAuth::fromUser($user);
 
+        // Return a JWT.
         return response()->json([
             'token' => $token
         ]);
