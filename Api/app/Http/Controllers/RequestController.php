@@ -47,7 +47,7 @@ class RequestController extends Controller
     /**
      * Create a request.
      *
-     * @todo Notify the specified guest.
+     * @todo Notify the host.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
@@ -96,11 +96,21 @@ class RequestController extends Controller
     public function handleRequest(Bookingdate $bookingdate, Request $request)
     {
         if ($request->status) {
+            if (!$bookingdate->host_approved) {
+                $bookingdate->host_approved = true;
+                $bookingdate->save();
+            }
+
             $bookingdate->guests()->updateExistingPivot($request->guest_id, [
                 'status' => 'accepted',
                 'optional_message' => $request->message
             ]);
         } else {
+            if (!$bookingdate->host_approved) {
+                $bookingdate->guests()->detach();
+                $bookingdate->delete();
+            }
+
             $bookingdate->guests()->updateExistingPivot($request->guest_id, [
                 'status' => 'declined',
                 'optional_message' => $request->message

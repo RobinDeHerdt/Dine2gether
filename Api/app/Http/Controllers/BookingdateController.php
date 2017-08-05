@@ -79,23 +79,6 @@ class BookingdateController extends Controller
     }
 
     /**
-     * Add the authenticated user as a guest to the specified booking date.
-     *
-     * @todo Notify the host through email.
-     * @param \App\Bookingdate
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function addGuest(Bookingdate $bookingdate, Request $request)
-    {
-        $bookingdate->guests()->attach($request->guest_id);
-
-        return response()->json([
-            'status' => 'success'
-        ]);
-    }
-
-    /**
      * Remove the authenticated user as a guest from the specified booking date.
      *
      * @todo Notify the host through email.

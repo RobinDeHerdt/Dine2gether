@@ -96,7 +96,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             requestSvc.handleRequest(bookingdate_id, data).then(function () {
                 swal({
                     title: 'Success',
-                    text: 'Guest accepted',
+                    text: (status) ? 'Guest accepted' : 'Guest declined',
                     type: 'success'
                 });
                 getHostBookings();
