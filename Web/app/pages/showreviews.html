@@ -1,6 +1,6 @@
 <main>
 	<div class="container under-header profile">
-		<a href="" ng-click="review.goBack()"><h5>Back</h5></a>
+		<a ui-sref="publicprofile({id:review.user.id})"><h5>View {{ review.user.first_name }}'s profile</h5></a>
 		<h1>Reviews for {{ review.user.first_name + ' ' + review.user.last_name }}</h1>
 		
 		<div class="row" ng-show="!review.reviews.length">

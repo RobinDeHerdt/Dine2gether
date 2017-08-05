@@ -1,10 +1,9 @@
-d2gApp.controller("reviewController", function (reviewService, authService, $stateParams, $location, $anchorScroll) {
+d2gApp.controller("reviewController", function (reviewService, authService, $stateParams, $location, $state) {
 	vm = this;
 
 	var reviewSvc = reviewService;
 	var authSvc = authService;
 
-	vm.selectedname = null;
 	vm.authenticated_user = authSvc.getUser();
 
 	function getGuests() {
@@ -26,30 +25,37 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 		});
 	}
 
-	vm.getSelectedUser = function(id, first_name, last_name) {
-		vm.selectedUser = id;
-		vm.selectedname = first_name + " " + last_name;
+	vm.reviewUser = function(user_id, booking_id, user_fn, user_ln, booking_title) {
+		swal({
+            title: 'Review',
+            text: 'Write your review for ' + user_fn + ' ' + user_ln + ' regarding "' + booking_title + '"',
+			input: 'textarea',
+            width: 750,
+            padding: 50,
+			inputPlaceholder: 'Write review',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Save'
+        }).then(function (review) {
+            var data = {
+                user: user_id,
+                booking: booking_id,
+				review: review
+            };
 
-        setTimeout(function(){
-            $location.hash('reviewtextarea');
-            $anchorScroll();
-		}, 100);
-	};
-
-	vm.sendReview = function() {
-		var review = { 
-			review : vm.reviewinput,
-			user_id : vm.selectedUser
-		};
-
-		reviewSvc.postReview(review).then(function(data) {
-			if(data.status === 200) {
-				$location.path('/user/'+ vm.selectedUser+'/reviews');
-			}
-		}, function (error) {
-			vm.sendreviewerror = error.data.review[0];
-			console.log(error);
-		});
+            reviewSvc.createReview(data).then(function() {
+                swal({
+                    title: 'Success!',
+                    text: 'Your review was posted.',
+                    type: 'success'
+                }).then(function() {
+                    $state.go('reviews', {id:user_id});
+				});
+            }, function (error) {
+				console.log(error);
+            });
+        });
 	};
 
     vm.bookingImage = function(user) {
@@ -62,13 +68,13 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 
 	vm.deleteReview = function(id) {
         swal({
-            title: 'Are you sure you want to delete this?',
+            title: 'Are you sure you want to remove your review?',
             text: "You won't be able to revert this!",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Confirm delete'
         }).then(function () {
 			reviewSvc.deleteReviews(id).then(function() {
                 swal(

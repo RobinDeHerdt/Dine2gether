@@ -8,9 +8,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Http\Requests;
-use App\Bookingdate;
-use App\Booking;
+use Carbon\Carbon;
 use App\Review;
 use App\User;
 
@@ -72,15 +70,17 @@ class ReviewController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'review' => 'required|max:1024|regex:/(^[A-Za-z0-9 -]+$)+/',
-            'user_id' => 'required|numeric',
+            'review' => 'required|max:1024',
+            'booking' => 'required|numeric',
+            'user' => 'required|numeric'
         ]);
 
         $review = new Review;
 
-        $review->body           = $request->review;
-        $review->user_id        = $request->user_id;
-        $review->author_id      = $this->user->id;
+        $review->body = $request->review;
+        $review->user_id = $request->user;
+        $review->booking_id = $request->booking;
+        $review->author_id = $this->user->id;
 
         $review->save();
 
@@ -128,13 +128,16 @@ class ReviewController extends Controller
     }
 
     /**
-     * Get all bookings where the authenticated user is a host.
+     * Get all past bookings where the authenticated user is a host.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getGuests()
+    public function guests()
     {
-        $bookings = $this->user->bookings()->with('bookingdates.guests')->get();
+        $bookings = $this->user->bookings()->with(['bookingdates' => function ($q) {
+            $q->where('date', '<', Carbon::now());
+            $q->with('guests');
+        }])->get();
 
         return response()->json([
             'bookings' => $bookings
@@ -142,13 +145,16 @@ class ReviewController extends Controller
     }
 
     /**
-     * Get all bookings where the authenticated user is a guest.
+     * Get all past bookings where the authenticated user is a guest.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getHosts()
+    public function hosts()
     {
-        $bookings = $this->user->acceptedBookingDates()->with('booking.host')->get();
+        $bookings = $this->user->acceptedBookingDates()
+            ->where('date', '<', Carbon::now())
+            ->with('booking.host')
+            ->get();
 
         return response()->json([
             'bookings' => $bookings

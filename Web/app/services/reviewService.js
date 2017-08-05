@@ -2,7 +2,7 @@ d2gApp.service('reviewService', function ($http) {
 	
 	var svc = this;
 
-	svc.postReview = function (data) {
+	svc.createReview = function (data) {
 		return $http.post(CONSTANTS.API_BASE_URL + '/review/store', data);
 	};
 

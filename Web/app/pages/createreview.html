@@ -1,7 +1,8 @@
 <main>
 	<div class="container under-header">
 		<h1>Write a review</h1>
-		<h4>Recent guests</h4>
+		<h4 class="mar-top-xl">Recent guests</h4>
+		<div class="divider mar-btm-l mar-top-l"></div>
 		<div ng-hide="review.guestbookings.length">
 			<p>No results found</p>
 		</div>
@@ -14,7 +15,7 @@
 			</div>
 			<div ng-repeat="bookingdate in booking.bookingdates" class="row">
 				<div class="col s12">
-					<p>On {{ bookingdate.date }}: </p>
+					<strong>On {{ bookingdate.date }}: </strong>
 				</div>
 				<div ng-hide="bookingdate.guests.length" class="col s12">
 					<p>No results found</p>
@@ -25,49 +26,38 @@
 					  <img ng-src="{{review.userImage(guest)}}" class="review-profile-image">
 					</div>
 					<div class="card-content">
-						<strong>{{ guest.first_name + " " + guest.last_name }}</strong>
+						<a ui-sref="publicprofile({id:guest.id})">{{ guest.first_name + " " + guest.last_name }}</a>
 					</div>
 					<div class="card-action">
-					  <a class="btn waves waves-light center-align" ng-click="review.getSelectedUser(guest.id, guest.first_name, guest.last_name )">Write review</a>
+					  <a class="btn waves waves-light center-align" ng-click="review.reviewUser(guest.id, booking.id, guest.first_name, guest.last_name, booking.title)">Write review</a>
 					</div>
 				  </div>
 				</div>
 			</div>
 		 </div>
-		<h4>Recent hosts</h4>
+		<h4 class="mar-top-xl">Recent hosts</h4>
+		<div class="divider mar-btm-l mar-top-l"></div>
 		<div ng-hide="review.hostbookingdates.length" class="col s12 mar-btm-xl">
 			<p>No results found</p>
 		</div>
-		<div class="row" ng-repeat="bookingdate in review.hostbookingdates">
-			 <div class="col s12">
-				 <h5>{{ bookingdate.booking.title }}</h5>
-			 </div>
-	         <div class="col s12 m3">
+		<div class="row">
+		<div ng-repeat="bookingdate in review.hostbookingdates">
+	         <div class="col s12 m4">
 	          	<div class="card">
 					<div class="card-image">
 					  <img ng-src="{{review.userImage(bookingdate.booking.host)}}" class="review-profile-image">
 					</div>
 					<div class="card-content">
 						<strong>{{ bookingdate.booking.host.first_name + " " + bookingdate.booking.host.last_name }}</strong>
+						<br><span>Hosted </span>
+						<br><span>on <strong>{{ bookingdate.date }}</strong></span>
 					</div>
 					<div class="card-action">
-					  	<a class="btn waves waves-light" ng-click="review.getSelectedUser(bookingdate.booking.host.id, bookingdate.booking.host.first_name, bookingdate.booking.host.last_name )">Write review</a>
+					  	<a class="btn waves waves-light" ng-click="review.reviewUser(guest.id, booking.id, guest.first_name, guest.last_name, booking.title)">Write review</a>
 					</div>
 	          	</div>
 	        </div>
 	     </div>
-		<!--<div class="row mar-btm-xl" ng-show="review.selectedUser">-->
-			<!--<div class="col s12">-->
-				<!--<h1>Write review for {{ review.selectedname }}</h1>-->
-			<!--</div>-->
-			<!--<ul class="collection col s12" ng-show="review.sendreviewerror">-->
-				<!--<li class="collection-item">{{ review.sendreviewerror }}</li>-->
-			<!--</ul>-->
-			<!--<div class="col s12 mar-btm-xl">-->
-				<!--<a id="reviewtextarea"></a>-->
-				<!--<textarea id="" class="materialize-textarea" placeholder="Write your review here" ng-model="review.reviewinput"></textarea>-->
-				<!--<a class="btn waves waves-light" ng-click="review.sendReview()">Submit review</a>-->
-			<!--</div>-->
-		<!--</div>-->
+		</div>
 	</div>
 </main>
