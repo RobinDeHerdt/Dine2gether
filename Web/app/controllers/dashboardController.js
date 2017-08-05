@@ -34,6 +34,47 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         return new Date(dateString);
     };
 
+    vm.deleteBookingdate = function (id) {
+        swal({
+            title: 'Remove date',
+            text: "Are you sure you want to delete this date? Your guests will be notified if you do.",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+        }).then(function () {
+            bookingSvc.deleteBookingdate(id).then(function () {
+                swal({
+                    title: 'Deleted',
+                    text: 'This date has been deleted',
+                    type: 'success'
+                });
+                getHostBookings();
+            });
+        });
+    };
+
+    vm.createBookingdate = function (id) {
+        var data = {
+            date: vm.createbookingdate,
+            time: vm.createbookingtime,
+            max_guests: vm.createbookingmax,
+            booking_id: id
+        };
+
+        bookingSvc.createBookingdate(data).then(function() {
+            swal({
+                title: 'Success',
+                text: 'Date created',
+                type: 'success'
+            });
+
+            vm.showCreateBookingdateForm = false;
+            getHostBookings();
+        });
+    };
+
     vm.handleRequest = function (bookingdate_id, guest_id, guest_fn, guest_ln, status) {
         swal({
             title: (status) ? 'Accept' : 'Decline',

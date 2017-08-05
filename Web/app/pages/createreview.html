@@ -5,14 +5,17 @@
 		<div ng-hide="review.guestbookings.length">
 			<p>No results found</p>
 		</div>
-		<div class="row" ng-repeat="booking in review.guestbookings">
+		<div ng-repeat="booking in review.guestbookings">
 			<div class="col s12">
 				<h5>{{ booking.title }}</h5>
 			</div>
 			<div ng-hide="booking.bookingdates.length" class="col s12">
 				<p>No results found</p>
 			</div>
-			<div ng-repeat="bookingdate in booking.bookingdates">
+			<div ng-repeat="bookingdate in booking.bookingdates" class="row">
+				<div class="col s12">
+					<p>On {{ bookingdate.date }}: </p>
+				</div>
 				<div ng-hide="bookingdate.guests.length" class="col s12">
 					<p>No results found</p>
 				</div>
@@ -53,18 +56,18 @@
 	          	</div>
 	        </div>
 	     </div>
-		<div class="row mar-btm-xl" ng-show="review.selectedUser">
-			<div class="col s12">
-				<h1>Write review for {{ review.selectedname }}</h1>
-			</div>
-			<ul class="collection col s12" ng-show="review.sendreviewerror">
-				<li class="collection-item">{{ review.sendreviewerror }}</li>
-			</ul>
-			<div class="col s12 mar-btm-xl">
-				<a id="reviewtextarea"></a>
-				<textarea id="" class="materialize-textarea" placeholder="Write your review here" ng-model="review.reviewinput"></textarea>
-				<a class="btn waves waves-light" ng-click="review.sendReview()">Submit review</a>
-			</div>
-		</div>
+		<!--<div class="row mar-btm-xl" ng-show="review.selectedUser">-->
+			<!--<div class="col s12">-->
+				<!--<h1>Write review for {{ review.selectedname }}</h1>-->
+			<!--</div>-->
+			<!--<ul class="collection col s12" ng-show="review.sendreviewerror">-->
+				<!--<li class="collection-item">{{ review.sendreviewerror }}</li>-->
+			<!--</ul>-->
+			<!--<div class="col s12 mar-btm-xl">-->
+				<!--<a id="reviewtextarea"></a>-->
+				<!--<textarea id="" class="materialize-textarea" placeholder="Write your review here" ng-model="review.reviewinput"></textarea>-->
+				<!--<a class="btn waves waves-light" ng-click="review.sendReview()">Submit review</a>-->
+			<!--</div>-->
+		<!--</div>-->
 	</div>
 </main>

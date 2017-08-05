@@ -22,10 +22,10 @@
 									<br>
 									<p>{{ "€" + booking.price + "/person"}}</p>
 									<br>
-									<strong>Guests</strong>
-									<br>
 									<div ng-repeat="date in booking.bookingdates">
-										<p>{{ dashboard.convertToDate(date.date) | date:"dd/MM/yyyy" }} at {{ dashboard.convertToDate(date.date) | date:"HH:mm" }}</p>
+										<strong>{{ dashboard.convertToDate(date.date) | date:"dd/MM/yyyy" }} at {{ dashboard.convertToDate(date.date) | date:"HH:mm" }}</strong>
+										<strong>(max {{ date.max_guests }} guests)</strong>
+										&middot; <a href="" ng-click="dashboard.deleteBookingdate(date.id)"><i class="fa fa-times" aria-hidden="true"></i> Remove date</a>
 										<ul>
 											<li ng-repeat="guest in date.guests">
 												<div ng-switch="guest.pivot.status">
@@ -46,6 +46,9 @@
 										</ul>
 										<br>
 									</div>
+								  <div ng-hide="booking.bookingdates.length">
+									  <span>No dates set yet.</span>
+								  </div>
 								</div>
 								<div class="col s2">
 									<a href="" class="collection-action-btn" ng-click="dashboard.deleteBooking(booking.id)" title="Delete booking">
@@ -53,6 +56,20 @@
 									</a>
 								</div>
 							</div>
+							<div ng-show="dashboard.showCreateBookingdateForm">
+								<input type="date" ng-model="dashboard.createbookingdate" class="col s3" required>
+								<input type="time" ng-model="dashboard.createbookingtime" class="col s3" required>
+								<input type="number" ng-model="dashboard.createbookingmax" class="col s2 offset-s1" required placeholder="Max guests">
+								<div class="col s2">
+									<a class="btn waves waves-light" ng-click="dashboard.createBookingdate(booking.id)">Save</a>
+								</div>
+								<div class="col s1">
+									<a href="" ng-click="dashboard.showCreateBookingdateForm = false" title="Close">
+										<i class="fa fa-times" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
+							<a href="" ng-click="dashboard.showCreateBookingdateForm = true" ng-hide="dashboard.showCreateBookingdateForm">Add a date & time</a>
 						</li>
 					  </ul>
 				  </div>

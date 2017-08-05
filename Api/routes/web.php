@@ -47,6 +47,8 @@ Route::group(array('prefix' => 'api'), function () {
     Route::post('request/delete', 'RequestController@delete');
     Route::post('request/get', 'RequestController@show');
 
+    Route::post('bookingdate/create', 'BookingdateController@store');
+    Route::post('bookingdate/{bookingdate}/delete', 'BookingdateController@delete');
     Route::post('bookingdate/{bookingdate}/request', 'RequestController@handleRequest');
     Route::post('bookingdate/{bookingdate}/guests/add', 'BookingdateController@addGuest');
     Route::post('bookingdate/{bookingdate}/cancel', 'BookingdateController@cancel');

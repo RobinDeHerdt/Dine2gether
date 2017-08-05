@@ -47,6 +47,7 @@ class RequestController extends Controller
     /**
      * Create a request.
      *
+     * @todo Notify the specified guest.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
@@ -86,6 +87,7 @@ class RequestController extends Controller
 
     /**
      * Handle a guest request.
+     * @todo Notify the specified guest.
      *
      * @param \App\Bookingdate  $bookingdate
      * @param  \Illuminate\Http\Request  $request
@@ -113,6 +115,7 @@ class RequestController extends Controller
     /**
      * Delete the request.
      *
+     * @todo Notify the host.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
@@ -132,7 +135,7 @@ class RequestController extends Controller
     }
 
     /**
-     * Check if the authenticated has an open request.
+     * Fetch the open request if it exists.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany

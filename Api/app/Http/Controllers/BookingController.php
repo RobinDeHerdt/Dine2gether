@@ -231,6 +231,7 @@ class BookingController extends Controller
     /**
      * Update the specified booking.
      *
+     * @todo Notify all guests through email.
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
@@ -251,6 +252,7 @@ class BookingController extends Controller
     /**
      * Remove the specified booking.
      *
+     * @todo Notify all guests through email.
      * @param  \App\Booking  $booking
      * @return \Illuminate\Http\Response
      */
@@ -279,13 +281,17 @@ class BookingController extends Controller
     }
 
     /**
-     * Fetch all hosted bookings for the authenticated user.
+     * Fetch future bookings where the authenticated user is a host.
+     * Don't return bookingdates from the past
      *
      * @return \Illuminate\Http\Response
      */
     public function getBookingsAsHost()
     {
-        $bookings = $this->user->bookings()->with('bookingdates.guests')->get();
+        $bookings = $this->user->bookings()->with(['bookingdates' => function ($q) {
+            $q->where('date', '>', Carbon::now());
+            $q->with('guests');
+        }])->get();
 
         return response()->json([
             'bookings' => $bookings
@@ -293,14 +299,21 @@ class BookingController extends Controller
     }
 
     /**
-     * Fetch all attended bookings for the authenticated user.
+     * Fetch future bookings where the authenticated user is a guest.
      *
      * @return \Illuminate\Http\Response
      */
     public function getBookingsAsGuest()
     {
-        $bookingdates = $this->user->acceptedBookingDates()->with('booking')->get();
-        $requests = $this->user->bookingdates()->with('booking.host')->get();
+        $bookingdates = $this->user->acceptedBookingDates()
+            ->where('date', '>', Carbon::now())
+            ->with('booking')
+            ->get();
+
+        $requests = $this->user->bookingdates()
+            ->where('date', '>', Carbon::now())
+            ->with('booking.host')
+            ->get();
 
         return response()->json([
             'bookingdates' => $bookingdates,
