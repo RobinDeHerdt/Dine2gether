@@ -44,13 +44,13 @@
 			<ul class="collection">
 				<li ng-repeat="review in public.reviews" class="collection-item avatar">
 					<img ng-src="{{ public.userImage(review.author) }}" alt="" class="circle">
-					<a href="#" ui-sref="publicprofile({id:review.author_id})"><span class="title">{{ review.author.first_name + " " + review.author.last_name}}</span></a>
+					<a ui-sref="publicprofile({id:review.author_id})"><span class="title">{{ review.author.first_name + " " + review.author.last_name}}</span></a>
 					<p class="italic"><span class="bold">Meal: </span>{{review.booking.title}}</p>
 					<p class="mar-top-m">{{review.body}}</p>
 					<p class="secondary-content">{{ public.toDate(review.created_at) }}</p>
 				</li>
 			</ul>
-			<a ng-if="public.user.has_more_reviews" href="#" ui-sref="reviews({id:public.user.id})">See all reviews about me...</a>
+			<a ng-if="public.user.has_more_reviews" ui-sref="reviews({id:public.user.id})">See all reviews about me...</a>
 		</div>
 		<h4 ng-if="public.bookings.length && !public.reviews.length">{{public.user.first_name}} has not been reviewed yet...</h4>
 	</div>

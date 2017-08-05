@@ -19,7 +19,7 @@
           <ul class="collection">
             <li class="collection-item avatar">
                <img ng-src="{{review.userImage(rev.author)}}" alt="" class="circle">
-                <span class="title"><a href="/#/user/{{rev.author_id}}/reviews"><strong>{{rev.author.first_name + " " + rev.author.last_name }}</strong></a></span>
+                <a ui-sref="publicprofile({id:rev.author_id})"><strong>{{rev.author.first_name + " " + rev.author.last_name }}</strong></a>
                 <a href="" ng-click="review.deleteReview(rev.id)" ng-show="review.authenticated_user.id == rev.author_id" title="Remove comment"> &middot; <i class="fa fa-trash-o" aria-hidden="true"></i></a>
                 <p>{{rev.body}}</p>
             </li>

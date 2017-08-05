@@ -300,8 +300,7 @@ class BookingController extends Controller
     public function getBookingsAsGuest()
     {
         $bookingdates = $this->user->acceptedBookingDates()->with('booking')->get();
-
-        $requests = $this->user->pendingBookingDates()->with('booking.host')->get();
+        $requests = $this->user->bookingdates()->with('booking.host')->get();
 
         return response()->json([
             'bookingdates' => $bookingdates,

@@ -1,6 +1,6 @@
  <main>
  	<div class="container under-header bookingdetails">
- 			<a href="/#/overview"><h5>Back</h5></a>
+ 			<a ui-sref="overview"><h5>Back to overview</h5></a>
  			<h1>{{ bookingdetails.currentBooking.title}}</h1>
  			<br>
  			<h3>About the host</h3>
@@ -16,10 +16,10 @@
  						  	</div>
  						</div>
  						<div class="col s12 m4">
- 							<a href="#" ui-sref="publicprofile({id:bookingdetails.currentBooking.host.id})"><h5>{{ bookingdetails.currentBooking.host.first_name + " " + bookingdetails.currentBooking.host.last_name }}</h5></a>
+ 							<a ui-sref="publicprofile({id:bookingdetails.currentBooking.host.id})"><h5>{{ bookingdetails.currentBooking.host.first_name + " " + bookingdetails.currentBooking.host.last_name }}</h5></a>
  							<h5>{{ bookingdetails.currentBooking.city }}</h5>
  							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
- 							<a href="/#/user/{{bookingdetails.currentBooking.host.id}}/reviews"><h5>Reviews about this host</h5></a>
+ 							<a ui-sref="reviews({id:bookingdetails.currentBooking.host.id})"><h5>Reviews about this host</h5></a>
  						</div>
  						<div class="col s12 m4">
  							<h5>Interests:</h5>
