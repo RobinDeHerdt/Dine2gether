@@ -41,7 +41,7 @@
  								<li class="collection-item" ng-if="!bookingdetails.currentBooking.hostapprovedbookingdates.length">No dates yet</li>
  								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.hostapprovedbookingdates">
 									{{ bookingdetails.convertToDate(date.date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.date) | date: "HH:mm"}}
-									<a ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id" href="">
+									<a href="" ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id" ng-click="bookingdetails.redirect(date.id)">
 										<span class="secondary-colour white-text badge" data-badge-caption="Send request"></span>
 									</a>
 									<br>
@@ -72,9 +72,7 @@
  					</div>
  				</div>
  			</div>
- 			<a ng-class="bookingdetails.request == 'pending' || bookingdetails.user.id === bookingdetails.currentBooking.host.id ? 'disabled' : ''" ng-hide="bookingdetails.request == 'accepted'" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
- 			<p ng-if="bookingdetails.request == 'pending'">*You've already sent a request. Please wait until the host has responded.</p>
- 			<a ng-if="bookingdetails.request == 'accepted'" ui-sref="booknow({id: bookingdetails.currentBookingId})" class="btn mar-btm-l">Book now</a>
+ 			<a ng-class="bookingdetails.user.id === bookingdetails.currentBooking.host.id ? 'disabled' : ''" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
 		</div>
  	</div>
  </main>

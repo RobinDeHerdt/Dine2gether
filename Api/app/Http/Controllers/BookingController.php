@@ -68,6 +68,7 @@ class BookingController extends Controller
 
     /**
      * Display the specified booking.
+     * Only fetch future bookingdates.
      *
      * @param \App\Booking
      * @return \Illuminate\Http\Response
@@ -77,8 +78,11 @@ class BookingController extends Controller
         $booking = Booking::where('id', $booking->id)->with([
             'host.interests',
             'kitchenstyles',
-            'hostapprovedbookingdates.guests',
-            'dishes.dishimages'
+            'dishes.dishimages',
+            'hostapprovedbookingdates' => function ($q) {
+                $q->where('date', '>', Carbon::now());
+                $q->with('guests');
+            }
         ])->get();
 
         return response()->json([

@@ -80,7 +80,10 @@ class UserController extends Controller
      */
     public function bookings(User $user)
     {
-        $bookings = $user->bookings()->with(['bookingdates', 'dishes.dishimages'])->get();
+        $bookings = $user->bookings()->with([
+            'bookingdates',
+            'dishes.dishimages'
+        ])->get();
 
         $latest_reviews = $user->receivedReviews()
             ->orderBy('created_at', 'desc')
@@ -110,7 +113,9 @@ class UserController extends Controller
     public function show()
     {
         return response()->json([
-            'user' => $this->user->makeVisible(['email', 'street_number'])
+            'user' => $this->user->makeVisible([
+                'email', 'street_number'
+            ])
         ]);
     }
 

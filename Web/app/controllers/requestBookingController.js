@@ -8,7 +8,21 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
 	vm.user = authSvc.getUser();
 	vm.booking = [];
-    vm.currentBookingId = $stateParams.id;
+	vm.requestdata = [];
+	vm.propose_date = false;
+
+    function _init() {
+        loadBookingById(function() {
+        	// @todo Figure out why this is necessary.
+            $timeout(function(){
+                if (param = $location.search().date) {
+                    $('#dateselect').val(param);
+                    vm.requestdata.selectedDate = param;
+                }
+                $('#dateselect').material_select();
+            }, 1);
+		});
+    }
 
 	vm.sendRequest = function () {
 		if(!vm.propose_date) {
@@ -16,7 +30,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
             var data = {
                 bookingdate_id: vm.requestdata.selectedDate,
-				booking_id: vm.currentBookingId,
+				booking_id: $stateParams.id,
 				message: vm.requestdata.message
             };
 		} else {
@@ -25,7 +39,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 
                 var data = {
                     bookingdate: datetime,
-                    booking_id: vm.currentBookingId,
+                    booking_id: $stateParams.id,
                     message: vm.requestdata.message
                 };
 			} else {
@@ -82,20 +96,20 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		return new Date(dateString);
 	};
 
-	function loadBookingById() {
+	function loadBookingById(callback) {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
 			vm.booking = data.data.booking[0];
 
-			$timeout(function() {
-				$('select:not([multiple])').material_select();
+			if(vm.user.id === vm.booking.host.id) {
+				swal({
+					text: "Why would you want to request your own booking? That's weird...",
+					type: "error"
+				}).then(function () {
+					window.history.back();
+				});
+			}
 
-				if(vm.user.id === vm.booking.host.id) {
-					swal({ text: "Why would you want to request your own booking? That's weird...", type: "error"}).then(function () {
-                        window.history.back();
-					});
-				}
-			}, 50)
-			
+            callback();
 		}, function (error) {
 			swal({
 				title: "Oops",
@@ -114,10 +128,6 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		var time = datetimesplit[1].substring(0,5);
 
 		return [newdate, time];
-	}
-
-	function _init() {
-		loadBookingById();
 	}
 
 	_init();
