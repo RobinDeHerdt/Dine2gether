@@ -72,6 +72,13 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
 
             vm.showCreateBookingdateForm = false;
             getHostBookings();
+        }, function (error) {
+
+            swal({
+                title: 'Error',
+                text: 'Something was not quite right. Check the form again.' ,
+                type: 'error'
+            });
         });
     };
 

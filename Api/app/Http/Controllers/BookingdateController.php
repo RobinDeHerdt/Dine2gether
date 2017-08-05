@@ -51,6 +51,13 @@ class BookingdateController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'time' => 'required',
+            'date' => 'required|date|after:today',
+            'max_guests' => 'required|numeric|max:3',
+            'booking_id' => 'required|numeric',
+        ]);
+
         $bookingdate = new Bookingdate();
 
         $carbon_time = Carbon::parse($request->time);
