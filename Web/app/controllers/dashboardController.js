@@ -142,6 +142,18 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
+    vm.getGuestCount = function(guests) {
+        var guestcount = 0;
+
+        angular.forEach(guests, function(guest) {
+            if(guest.pivot.status === "accepted") {
+                guestcount++;
+            }
+        });
+
+        return guestcount;
+    };
+
     vm.deleteBooking = function (id) {
         swal({
             title: 'Remove booking',
@@ -186,8 +198,8 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
 
     vm.cancelSeat = function (bookingdate_id) {
         swal({
-            title: 'Are you sure you want to cancel?',
-            text: "The host will be notified",
+            title: 'Confirm cancellation',
+            text: "Your host will be notified.",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -197,7 +209,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             bookingSvc.cancelSeat(bookingdate_id).then(function () {
                 swal({
                     title: 'Cancelled',
-                    text: 'You have cancelled this booking',
+                    text: 'Cancellation successful',
                     type: 'success'
                 });
                 getGuestBookings();
