@@ -94,6 +94,12 @@ class BookingdateController extends Controller
      */
     public function update(Bookingdate $bookingdate, Request $request)
     {
+        if ($request->max_guests < $bookingdate->guests()->count()) {
+            return response()->json([
+                'status' => 'under_guest_limit'
+            ]);
+        }
+
         if ($request->date && $request->time) {
             $this->validate($request, [
                 'time' => 'required',
@@ -118,6 +124,7 @@ class BookingdateController extends Controller
             $bookingdate->date = Carbon::create($yr, $mnt, $day, $hr, $min, $sec);
             $bookingdate->host_approved = true;
             $bookingdate->max_guests = $request->max_guests;
+
             $bookingdate->save();
 
             return response()->json([

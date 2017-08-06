@@ -77,12 +77,20 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             max_guests: $('#edit-max-' + id).val()
         };
 
-        bookingSvc.updateBookingdate(id, data).then(function() {
-            swal({
-                title: 'Success',
-                text: 'Changes were saved!',
-                type: 'success'
-            });
+        bookingSvc.updateBookingdate(id, data).then(function(data) {
+            if(data.data.status === 'under_guest_limit') {
+                swal({
+                    title: 'Error',
+                    text: 'Max guests can\'t be lower than your current amount of accepted guests.',
+                    type: 'error'
+                });
+            } else {
+                swal({
+                    title: 'Success',
+                    text: 'Changes were saved!',
+                    type: 'success'
+                });
+            }
 
             getHostBookings();
         }, function(error) {
