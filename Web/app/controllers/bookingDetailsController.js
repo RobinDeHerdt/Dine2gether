@@ -40,6 +40,18 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
         return guests;
     };
 
+    vm.getGuestCount = function(guests) {
+        var guestcount = 0;
+
+        angular.forEach(guests, function(guest) {
+            if(guest.pivot.status === "accepted") {
+                guestcount++;
+            }
+        });
+
+        return guestcount;
+    };
+
 	function getCurrentBooking () {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
 			vm.currentBooking = data.data.booking[0];

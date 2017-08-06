@@ -44,11 +44,10 @@
 									<a href="" ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id || bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" ng-click="bookingdetails.redirect(date.id)">
 										<span class="secondary-colour white-text badge" data-badge-caption="Send request"></span>
 									</a>
-									<span ng-if="date.guests.length >= date.max_guests" class="red-text">Fully booked!</span>
-									<span ng-show="bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" class="secondary-colour white-text badge" data-badge-caption="Signed up!"></span>
+									<span ng-show="bookingdetails.getGuestCount(date.guests) >= date.max_guests" class="white-text red badge">Fully booked!</span>
+									<span ng-show="bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" class="grey white-text badge" data-badge-caption="Request sent"></span>
 									<br>
-									<span ng-show="date.guests.length < date.max_guests">Seats booked: {{ date.guests.length }}/{{ date.max_guests }}</span>
-									<hr ng-if="last">
+									<span ng-show="bookingdetails.getGuestCount(date.guests) < date.max_guests">Seats booked: {{ bookingdetails.getGuestCount(date.guests) }}/{{ date.max_guests }}</span>
 								</li>
  							</ul>
  						</div>
