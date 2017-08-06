@@ -57,22 +57,26 @@
 									</a>
 								</div>
 							</div>
-							<div ng-show="dashboard.showCreateBookingdateForm">
-								<input type="date" ng-model="dashboard.createbookingdate" class="col s3" required>
-								<input type="time" ng-model="dashboard.createbookingtime" class="col s3" required>
-								<input type="number" ng-model="dashboard.createbookingmax" class="col s2 offset-s1" required placeholder="Max guests">
-								<div class="col s2">
-									<a class="btn btn-flat" ng-click="dashboard.createBookingdate(booking.id)">Save</a>
-								</div>
-								<div class="col s1">
-									<a href="" ng-click="dashboard.showCreateBookingdateForm = false" title="Close">
-										<i class="fa fa-times" aria-hidden="true"></i>
-									</a>
-								</div>
-							</div>
-							<a href="" ng-click="dashboard.showCreateBookingdateForm = true" ng-hide="dashboard.showCreateBookingdateForm">Add a date & time</a>
+							<a href="" ng-click="dashboard.showBookingdate(booking.id)" ng-hide="dashboard.showCreateBookingdateForm === booking.id">Add a date & time</a>
 						</li>
 					  </ul>
+					  <div id="modal-create-date-{{ booking.id }}" class="modal modal-create-date">
+						  <div class="modal-content">
+							  <div class="row">
+								  <div class="col s12">
+							  		<h5>Add a date to "{{ booking.title }}"</h5>
+								  </div>
+							  </div>
+							  <input type="date" class="col s12" ng-model="dashboard.createbookingdate" required>
+							  <input type="time" class="col s12" ng-model="dashboard.createbookingtime" required>
+							  <input type="number" class="col s12" ng-model="dashboard.createbookingmax" placeholder="Max guests" required>
+							  <div class="row no-mar-btm">
+								  <div class="col s12">
+									  <a class="modal-action modal-close waves-effect waves-light btn" ng-click="dashboard.createBookingdate(booking.id)">Save</a>
+								  </div>
+							  </div>
+						  </div>
+					  </div>
 				  </div>
 			  	</div>
 			</div>

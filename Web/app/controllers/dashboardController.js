@@ -1,4 +1,4 @@
-d2gApp.controller("dashboardController", function (authService, bookingService, requestService, $http, $location) {
+d2gApp.controller("dashboardController", function (authService, bookingService, requestService, $state) {
     var vm = this;
 
     var authSvc = authService;
@@ -8,7 +8,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
     function _init() {
         if(!authSvc.getUser()) {
             authSvc.showLoginModal();
-            $location.path('/home');
+            $state.go('');
 
             return;
         }
@@ -55,6 +55,10 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
+    vm.showBookingdate = function(id) {
+        $('#modal-create-date-' + id).openModal();
+    };
+
     vm.createBookingdate = function (id) {
         var data = {
             date: vm.createbookingdate,
@@ -76,8 +80,10 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
 
             swal({
                 title: 'Error',
-                text: 'Something was not quite right. Check the form again.' ,
+                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
                 type: 'error'
+            }).then(function() {
+                $('#modal-create-date-' + id).openModal();
             });
         });
     };

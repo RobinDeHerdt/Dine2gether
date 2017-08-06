@@ -54,7 +54,7 @@ class BookingdateController extends Controller
         $this->validate($request, [
             'time' => 'required',
             'date' => 'required|date|after:today',
-            'max_guests' => 'required|numeric|max:3',
+            'max_guests' => 'required|numeric|max:100',
             'booking_id' => 'required|numeric',
         ]);
 

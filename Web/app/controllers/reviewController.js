@@ -90,6 +90,13 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 	function _init() {
 		switch($location.url().split("#")[0]) {
 			case "/review/create":
+                if(!authSvc.getUser()) {
+                    authSvc.showLoginModal();
+                    $state.go('home');
+
+                    return;
+                }
+
                 getHosts();
                 getGuests();
 				break;

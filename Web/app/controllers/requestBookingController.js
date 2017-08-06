@@ -1,4 +1,4 @@
-d2gApp.controller("requestBookingController", function (bookingService, requestService, authService, $stateParams, $location, $filter, $timeout) {
+d2gApp.controller("requestBookingController", function (bookingService, requestService, authService, $stateParams, $location, $state, $filter, $timeout) {
 	
 	var vm = this;
 
@@ -61,7 +61,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
                         text: "Your request is on its way. You'll get a notification as soon as the host responds to your request",
                         type: "success"
                     }).then(function () {
-                        window.location.href = "#/dashboard";
+                        $state.go('dashboard');
                     });
 
                     break;
