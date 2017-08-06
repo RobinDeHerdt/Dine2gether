@@ -7,7 +7,7 @@ d2gApp.controller("profileController", function (authService, bookingService, in
     function _init() {
         if(!authSvc.getUser()) {
             authSvc.showLoginModal();
-            $location.path('/home');
+            $state.go('home');
 
             return;
         }

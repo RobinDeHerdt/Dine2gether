@@ -1,4 +1,4 @@
-d2gApp.controller("createBookingController", function (kitchenstyleService, bookingService, authService, $location, $scope, Upload) {
+d2gApp.controller("createBookingController", function (kitchenstyleService, bookingService, authService, $state, $scope, Upload) {
 	var vm = this;
 
 	var bookingSvc 		= bookingService;	
@@ -7,12 +7,11 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 
     if(!authSvc.getUser()) {
         authSvc.showLoginModal();
-        $location.path('/home');
+		$state.go('home');
 
         return;
     }
 
-	vm.numberOfPages = 6;
 	vm.currentPage = 1;
 
 	vm.dishes = [{}];
@@ -52,7 +51,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 
 		bookingSvc.createBooking(data).then(function (data) {
 			if(data.data.status === 'success') {
-				$location.path('/overview');
+				$state.go('overview');
 			}
 		}, function (error) {
 			console.log(error);
@@ -107,15 +106,13 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 	function getBookingDates() {
 		var arr_dates = [];
 
-        for(var i = 0; i < vm.dates.length; i++) {
+        angular.forEach(vm.dates, function(date) {
             arr_dates.push({
-                date: vm.dates[i].bookingdate,
-                time: vm.dates[i].time,
-                max_guests: vm.dates[i].max_guests
+				date: date.bookingdate,
+				time: date.time,
+				max_guests: date.max_guests
             });
-        }
-
-        console.log(arr_dates);
+		});
 
 		return arr_dates;
 	}
@@ -123,15 +120,13 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 	function getDishes () {
 		var arr_dishes = [];
 
-		for(var i = 0; i < vm.dishes.length; i++) {
-			arr_dishes.push({
-				dish_name: vm.dishes[i].dish_name,
-				description: vm.dishes[i].descr,
-				dish_img: vm.dishes[i].img
-			});
-		}
-
-		console.log(arr_dishes);
+        angular.forEach(vm.dishes, function(dish) {
+            arr_dishes.push({
+                dish_name: dish.dish_name,
+                description: dish.descr,
+                dish_img: dish.img
+            });
+        });
 
 		return arr_dishes;
 	}
@@ -142,8 +137,7 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 			vm.address 		= user.street_number;
 			vm.postal_code 	= user.postalcode;
 			vm.city 		= user.city;
-		} else
-		{
+		} else {
 			vm.address 		= '';
 			vm.postal_code 	= '';
 			vm.city 		= '';

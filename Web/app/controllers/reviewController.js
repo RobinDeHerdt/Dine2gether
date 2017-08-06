@@ -87,10 +87,6 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
         });
 	};
 
-	vm.goBack = function() {
-		window.history.back();
-	};
-
 	function _init() {
 		switch($location.url().split("#")[0]) {
 			case "/review/create":

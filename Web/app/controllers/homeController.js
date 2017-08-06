@@ -1,7 +1,6 @@
 d2gApp.controller("homeController", function ($location) {
 	var vm = this;
 
-
 	if ($location.url() !== "/home") {
         var fullQueryString = $location.url().split("?")[1];
 
@@ -33,7 +32,6 @@ d2gApp.controller("homeController", function ($location) {
 			}
         }
 	}
-
 
 	function autoComplete () {
   		var input = document.getElementById('autocomplete');
