@@ -26,6 +26,7 @@
 										<strong>{{ dashboard.convertToDate(date.date) | date:"dd/MM/yyyy" }} at {{ dashboard.convertToDate(date.date) | date:"HH:mm" }}</strong>
 										<strong>{{ date.host_approved ? '' : '(proposed date)'}}</strong>
 										<strong>{{ date.max_guests ? ' &middot; ' + dashboard.getGuestCount(date.guests) + '/' + date.max_guests + ' guests' : ''}}</strong>
+										&middot; <a href="" ng-click="dashboard.showBookingdateEditForm(date.id)"><i class="fa fa-pencil" aria-hidden="true"></i> Edit date</a>
 										&middot; <a href="" ng-click="dashboard.deleteBookingdate(date.id)"><i class="fa fa-times" aria-hidden="true"></i> Remove date</a>
 										<ul>
 											<li ng-repeat="guest in date.guests">
@@ -46,6 +47,28 @@
 											</li>
 										</ul>
 										<br>
+										<div id="modal-edit-date-{{ date.id }}" class="modal modal-edit-date">
+											<div class="modal-content">
+												<div class="row">
+													<div class="col s12">
+														<h5>Edit date</h5>
+													</div>
+												</div>
+												<div class="row" ng-show="dashboard.getGuestCount(date.guests)">
+													<div class="col s12">
+														<p>Your guests will be notified when you change date or time</p>
+													</div>
+												</div>
+												<input type="date" class="col s12" id="edit-date-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).date }}" required>
+												<input type="time" class="col s12" id="edit-time-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).time }}" required>
+												<input type="number" class="col s12" id="edit-max-{{ date.id }}" value="{{ date.max_guests }}" placeholder="Max guests" required>
+												<div class="row no-mar-btm">
+													<div class="col s12">
+														<a class="modal-action modal-close waves-effect waves-light btn" ng-click="dashboard.updateBookingdate(date.id)">Save</a>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								  <div ng-hide="booking.bookingdates.length">
 									  <span>No dates set yet.</span>
@@ -57,7 +80,7 @@
 									</a>
 								</div>
 							</div>
-							<a href="" ng-click="dashboard.showBookingdate(booking.id)" ng-hide="dashboard.showCreateBookingdateForm === booking.id">Add a date & time</a>
+							<a href="" ng-click="dashboard.showBookingdateCreateForm(booking.id)">Add a date & time</a>
 						</li>
 					  </ul>
 					  <div id="modal-create-date-{{ booking.id }}" class="modal modal-create-date">

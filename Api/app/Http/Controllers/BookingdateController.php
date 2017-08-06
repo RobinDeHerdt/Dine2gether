@@ -116,6 +116,9 @@ class BookingdateController extends Controller
             $day = $carbon_date->day;
 
             $bookingdate->date = Carbon::create($yr, $mnt, $day, $hr, $min, $sec);
+            $bookingdate->host_approved = true;
+            $bookingdate->max_guests = $request->max_guests;
+            $bookingdate->save();
 
             return response()->json([
                 'status' => 'success'

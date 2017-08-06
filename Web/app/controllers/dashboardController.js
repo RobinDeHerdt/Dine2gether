@@ -8,7 +8,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
     function _init() {
         if(!authSvc.getUser()) {
             authSvc.showLoginModal();
-            $state.go('');
+            $state.go('home');
 
             return;
         }
@@ -34,6 +34,68 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         return new Date(dateString);
     };
 
+    vm.showBookingdateCreateForm = function(booking_id) {
+        $('#modal-create-date-' + booking_id).openModal();
+    };
+
+    vm.showBookingdateEditForm = function(bookingdate_id) {
+        Materialize.updateTextFields();
+        $("#modal-edit-date-" + bookingdate_id).openModal();
+    };
+
+    vm.createBookingdate = function (id) {
+        var data = {
+            date: vm.createbookingdate,
+            time: vm.createbookingtime,
+            max_guests: vm.createbookingmax,
+            booking_id: id
+        };
+
+        bookingSvc.createBookingdate(data).then(function() {
+            swal({
+                title: 'Success',
+                text: 'Date created',
+                type: 'success'
+            });
+            getHostBookings();
+        }, function () {
+            swal({
+                title: 'Error',
+                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
+                type: 'error'
+            }).then(function() {
+                $('#modal-create-date-' + id).openModal();
+            });
+        });
+    };
+
+    vm.updateBookingdate = function(id) {
+        // @todo Temp fix. Clean this up using angular models.
+        var data = {
+            date: $('#edit-date-' + id).val(),
+            time: $('#edit-time-' + id).val(),
+            max_guests: $('#edit-max-' + id).val()
+        };
+
+        bookingSvc.updateBookingdate(id, data).then(function() {
+            swal({
+                title: 'Success',
+                text: 'Changes were saved!',
+                type: 'success'
+            });
+
+            getHostBookings();
+        }, function(error) {
+            swal({
+                title: 'Error',
+                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
+                type: 'error'
+            }).then(function() {
+                $('#modal-edit-date-' + id).openModal();
+            });
+        });
+    };
+
     vm.deleteBookingdate = function (id) {
         swal({
             title: 'Remove date',
@@ -51,39 +113,6 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
                     type: 'success'
                 });
                 getHostBookings();
-            });
-        });
-    };
-
-    vm.showBookingdate = function(id) {
-        $('#modal-create-date-' + id).openModal();
-    };
-
-    vm.createBookingdate = function (id) {
-        var data = {
-            date: vm.createbookingdate,
-            time: vm.createbookingtime,
-            max_guests: vm.createbookingmax,
-            booking_id: id
-        };
-
-        bookingSvc.createBookingdate(data).then(function() {
-            swal({
-                title: 'Success',
-                text: 'Date created',
-                type: 'success'
-            });
-
-            vm.showCreateBookingdateForm = false;
-            getHostBookings();
-        }, function (error) {
-
-            swal({
-                title: 'Error',
-                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
-                type: 'error'
-            }).then(function() {
-                $('#modal-create-date-' + id).openModal();
             });
         });
     };
@@ -221,6 +250,18 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
                 getGuestBookings();
             });
         });
+    };
+
+    vm.splitDateTime = function(datetime) {
+        var datetimesplit = datetime.split(" ");
+
+        var date = datetimesplit[0];
+        var time = datetimesplit[1];
+
+        return {
+            date: date,
+            time: time
+        };
     };
 
     _init();
