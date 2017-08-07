@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RequestAccepted;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\Bookingdate;
-Use App\Booking;
 
 class RequestController extends Controller
 {
@@ -100,6 +100,10 @@ class RequestController extends Controller
                 $bookingdate->host_approved = true;
                 $bookingdate->save();
             }
+
+            $host = $bookingdate->booking->host()->first();
+
+            Mail::to($this->user->email)->send(new RequestAccepted($this->user, $host, $bookingdate));
 
             $bookingdate->guests()->updateExistingPivot($request->guest_id, [
                 'status' => 'accepted',

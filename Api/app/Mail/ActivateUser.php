@@ -40,7 +40,7 @@ class ActivateUser extends Mailable
             ->subject('Welcome to Dine2gether!')
             ->view('emails.activation')
             ->with([
-                'user' => $this->user->name,
+                'user' => $this->user,
             ]);
     }
 }

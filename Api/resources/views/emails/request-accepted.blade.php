@@ -618,7 +618,7 @@
                         
                             <h1 style="text-align: center;">Enjoy you meal 2gether!</h1>
 
-<p style="text-align: center;">Hi {{$username}}! How are you? We're just passing by to tell you that {{$host->first_name}} is happily expecting you for a delicious meal and some nice stories.<br>
+<p style="text-align: center;">Hi {{ $user->first_name }}! How are you? We're just passing by to tell you that {{$host->first_name}} is happily expecting you for a delicious meal and some nice stories.<br>
 You'll find your host's contact info below.<br>
 If you have any more questions, don't hesitate to ask us!<br>
 <br>
@@ -694,22 +694,21 @@ City:
 				<td valign="top" width="389" style="width:389px;">
 				<![endif]-->
                 <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:389px;" width="100%" class="mcnTextContentContainer">
-                    <tbody><tr>
-                        
+                    <tbody>
+					<tr>
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:9px; padding-right:18px;">
-                        
-                            {{$host->first_name}}<br>
-{{$host->last_name}}<br>
-{{$host->email}}<br>
-{{$booking->telephone_number}}<br>
-<br>
-{{$date}} at {{$time}}<br>
-{{$booking->street_number}}<br>
-{{$booking->postalcode}}<br>
-{{$booking->city}}
+                            {{ $host->first_name }}<br>
+							{{ $host->last_name }}<br>
+							{{ $host->email }}<br>
+							{{ $booking->telephone_number }}<br><br>
+							{{ $datetime }}<br>
+							{{ $booking->street_number}}<br>
+							{{ $booking->postalcode }}<br>
+							{{ $booking->city }}
                         </td>
                     </tr>
-                </tbody></table>
+                	</tbody>
+				</table>
 				<!--[if mso]>
 				</td>
 				<![endif]-->
