@@ -194,7 +194,7 @@ class BookingController extends Controller
         $input_dates = $request->dates;
 
         foreach ($input_dates as $input_date) {
-            $booking_date = new Bookingdate();
+            $bookingdate = new Bookingdate();
 
             // Time
             $carbon_time = Carbon::parse($input_date["time"]);
@@ -210,12 +210,13 @@ class BookingController extends Controller
             $mnt = $carbon_date->month;
             $day = $carbon_date->day;
 
-            $booking_date->date = Carbon::create($yr, $mnt, $day, $hr, $min, $sec);
-            $booking_date->max_guests = $input_date["max_guests"];
+            $bookingdate->date = Carbon::create($yr, $mnt, $day, $hr, $min, $sec);
+            $bookingdate->max_guests = $input_date["max_guests"];
+            $bookingdate->host_approved = true;
 
-            $booking_date->booking()->associate($booking);
+            $bookingdate->booking()->associate($booking);
 
-            $booking_date->save();
+            $bookingdate->save();
         }
 
         $kitchenstyles = $request->kitchenstyles;

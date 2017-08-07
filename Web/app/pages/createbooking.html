@@ -102,8 +102,8 @@
 											</div>
 											<div class="row">
 												<div class="input-field col s12">
-													<input type="date" class="datepicker" class="col s6" placeholder="Pick a date" ng-model="date.bookingdate">
-													<input type="time" class="timepicker" class="col s6" value="18:00:00" ng-model="date.time">
+													<input type="text" class="datepicker" class="col s6" ng-model="date.bookingdate">
+													<input type="text" class="timepicker" class="col s6" ng-model="date.time">
 													<input type="number" placeholder="Max guests" class="col s4" ng-model="date.max_guests">
 												</div>
 											</div>
@@ -191,7 +191,7 @@
 								<li tabindex="0" ng-click="create.currentPage = 1" ng-class="create.currentPage == 1 ? 'active' : waves-effect"><a>1</a></li>
 								<li tabindex="0" ng-click="create.currentPage = 2" ng-class="create.currentPage == 2 ? 'active' : waves-effect"><a>2</a></li>
 								<li tabindex="0" ng-click="create.currentPage = 3" ng-class="create.currentPage == 3 ? 'active' : waves-effect"><a>3</a></li>
-								<li tabindex="0" ng-click="create.currentPage = 4" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
+								<li tabindex="0" ng-click="create.currentPage = 4; create.initDatePickers()" ng-class="create.currentPage == 4 ? 'active' : waves-effect"><a>4</a></li>
 								<li tabindex="0" ng-click="create.currentPage = 5" ng-class="create.currentPage == 5 ? 'active' : waves-effect"><a>5</a></li>
 								<li tabindex="0" ng-click="create.currentPage = 6" ng-class="create.currentPage == 6 ? 'active' : waves-effect"><a>6</a></li>
 							</ul>

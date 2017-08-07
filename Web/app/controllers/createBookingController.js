@@ -1,4 +1,4 @@
-d2gApp.controller("createBookingController", function (kitchenstyleService, bookingService, authService, $state, $scope, Upload) {
+d2gApp.controller("createBookingController", function (kitchenstyleService, bookingService, authService, $state, $scope, $timeout, Upload) {
 	var vm = this;
 
 	var bookingSvc 		= bookingService;	
@@ -17,9 +17,38 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 	vm.dishes = [{}];
     vm.dates = [{}];
 
+    function _init () {
+		loadKitchenstyles();
+    }
+
     vm.addTemplateDate = function () {
         vm.dates.push({});
+        $timeout(function() {
+            vm.initDatePickers();
+		}, 50);
     };
+
+    vm.initDatePickers = function() {
+        $('.datepicker').pickadate({
+            selectMonths: true,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: true,
+            format: 'dd-mm-yyyy'
+        });
+
+		$('.timepicker').pickatime({
+			default: 'now',
+			fromnow: 0,
+			twelvehour: false,
+			donetext: 'OK',
+			cleartext: 'Clear',
+			canceltext: 'Cancel',
+			autoclose: false,
+			ampmclickable: true
+		});
+	};
 
 	vm.addTemplateDish = function () {
         vm.dishes.push({});
@@ -143,10 +172,6 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 			vm.city 		= '';
 		}
 	};
-
-	function _init () {
-		loadKitchenstyles();
-	}
 
 	_init();
 });
