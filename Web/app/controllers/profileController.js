@@ -59,7 +59,7 @@ d2gApp.controller("profileController", function (authService, bookingService, in
         authSvc.updateProfile(data).then(function(data) {
 			if ( data.status === 200) {
 				vm.showsuccessmessage = true;
-                authSvc.setUser();
+                authSvc.setUser(false);
 			}
 		}, function (error) {
 			vm.showerrormessage = true;
@@ -74,7 +74,7 @@ d2gApp.controller("profileController", function (authService, bookingService, in
 				user_id	: vm.user.id
 			}
 			}).then(function (data) {
-            authSvc.setUser();
+            authSvc.setUser(false);
 				vm.user.image = data.data.filename;
 				vm.path = '';
 			}); 

@@ -22,7 +22,7 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 	svc.login = function (credentials) {
 		$auth.login(credentials).then(function (data) {
 			svc.token = data.data.token;
-			svc.setUser();
+			svc.setUser(true);
 		}, function (error) {
 			if(error.data.error = "invalid_credentials") {
 				swal({
@@ -64,7 +64,7 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 				swal({
 					title: 'Activate your account',
 					text: "You haven't activated your account yet. Please check your mailbox.",
-					type: 'error',
+					type: 'info',
 					showCancelButton: true,
 					confirmButtonColor: '#108610',
 					cancelButtonColor: '#9e9e9e',
@@ -103,12 +103,11 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 		});
 	};
 
-    function sendActivationMail (user) {
+    function sendActivationMail () {
         $http.post(CONSTANTS.API_BASE_URL + '/user/activation/send').then(function (data) {
-            console.log(data);
             swal({
                 title: "Mail sent",
-                text: data.data.info,
+                text: "Click the activation link inside to activate your account",
                 type: "info"
             });
         }, function (error) {

@@ -26,11 +26,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::get('user/{user}/activate/{token}', 'UserController@activate');
     Route::post('user/update', 'UserController@update');
     Route::post('user/upload', 'UserController@upload');
-
-    // Email related routes.
     Route::post('user/activation/send', 'UserController@sendActivationMail');
-    Route::post('sendconfirmationrequestmail', 'ConfirmationMailController@sendConfirmationRequestMail');
-    Route::post('sendbookingmails', 'ConfirmationMailController@sendBookingMails');
 
     // Booking related routes.
     Route::resource('bookings', 'BookingController', ['only' => ['index', 'store', 'destroy']]);
