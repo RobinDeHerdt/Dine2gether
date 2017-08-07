@@ -30,17 +30,63 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     }
 
+    vm.initDatePickers = function() {
+        $('.datepicker').pickadate({
+            selectMonths: true,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: true,
+            format: 'dd-mm-yyyy'
+        });
+
+        $('.timepicker').pickatime({
+            default: 'now',
+            fromnow: 0,
+            twelvehour: false,
+            donetext: 'OK',
+            cleartext: 'Clear',
+            canceltext: 'Cancel',
+            autoclose: false,
+            ampmclickable: true
+        });
+    };
+
+    vm.initEditDatePickers = function() {
+        $('.edit-datepicker').pickadate({
+            selectMonths: true,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: true,
+            format: 'dd-mm-yyyy',
+        });
+
+        $('.edit-timepicker').pickatime({
+            fromnow: 0,
+            twelvehour: false,
+            donetext: 'OK',
+            cleartext: 'Clear',
+            canceltext: 'Cancel',
+            autoclose: false,
+            ampmclickable: true
+        });
+    };
+
+
     vm.convertToDate = function (dateString) {
         return new Date(dateString);
     };
 
     vm.showBookingdateCreateForm = function(booking_id) {
-        $('#modal-create-date-' + booking_id).openModal();
+        $('#modal-create-date-' + booking_id).modal();
+        $('#modal-create-date-' + booking_id).modal('open');
     };
 
     vm.showBookingdateEditForm = function(bookingdate_id) {
         Materialize.updateTextFields();
-        $("#modal-edit-date-" + bookingdate_id).openModal();
+        $("#modal-edit-date-" + bookingdate_id).modal();
+        $("#modal-edit-date-" + bookingdate_id).modal('open');
     };
 
     vm.createBookingdate = function (id) {
@@ -64,7 +110,8 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
                 text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
                 type: 'error'
             }).then(function() {
-                $('#modal-create-date-' + id).openModal();
+                $('#modal-create-date-' + id).modal();
+                $('#modal-create-date-' + id).modal('open');
             });
         });
     };
@@ -99,7 +146,8 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
                 text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
                 type: 'error'
             }).then(function() {
-                $('#modal-edit-date-' + id).openModal();
+                $('#modal-edit-date-' + id).modal();
+                $('#modal-edit-date-' + id).modal('open');
             });
         });
     };
@@ -265,6 +313,9 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
 
         var date = datetimesplit[0];
         var time = datetimesplit[1];
+
+        datesplit = date.split("-");
+        date = datesplit[2] + "-" + datesplit[1] + "-" + datesplit[0];
 
         return {
             date: date,

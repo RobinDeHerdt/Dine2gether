@@ -4,20 +4,25 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 	svc.user = $cookies.getObject("user");
 
 	svc.showLoginModal = function () {
-		$("#login-modal").openModal();
+		$('#login-modal').modal();
+		$("#login-modal").modal('open');
 	};
 
 	svc.closeLoginModal = function () {
-		$("#login-modal").closeModal();
+        $('#login-modal').modal();
+        $("#login-modal").modal('close');
 	};
 
 	svc.showRegisterModal = function () {
-		$("#register-modal").openModal();
-	};
+		$("#register-modal").modal();
+        $("#register-modal").modal('open');
+
+    };
 
 	svc.closeRegisterModal = function () {
-		$("#register-modal").closeModal();
-	};
+		$("#register-modal").modal();
+        $("#register-modal").modal('close');
+    };
 
 	svc.login = function (credentials) {
 		$auth.login(credentials).then(function (data) {
