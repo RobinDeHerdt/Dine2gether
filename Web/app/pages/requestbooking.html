@@ -13,11 +13,11 @@
 						<select ng-model="request.requestdata.selectedDate" id="dateselect">
 							<option ng-repeat="date in request.booking.hostapprovedbookingdates" value="{{ date.id }}">{{request.convertToDate(date.date) | date: "dd/MM/yyyy"}} at {{request.convertToDate(date.date) | date: "HH:mm"}}</option>
 						</select>
-						<a href="" ng-click="request.propose_date = true">Request another date and/or time</a>
+						<a href="" ng-click="request.propose_date = true; request.initDatePickers()">Request another date and/or time</a>
 					</div>
 					<div ng-show="request.propose_date">
-						<input ng-model="request.requestdata.proposed_date" type="date" class="col s6">
-						<input ng-model="request.requestdata.proposed_time" type="time" class="col s6">
+						<input ng-model="request.requestdata.proposed_date" type="text" placeholder="Date" class="datepicker col s6">
+						<input ng-model="request.requestdata.proposed_time" type="text" placeholder="Time" class="timepicker col s6">
 						<a href="" ng-click="request.propose_date = false">Choose from available dates</a>
 					</div>
 				</div>

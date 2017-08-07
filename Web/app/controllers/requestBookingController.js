@@ -12,7 +12,7 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 	vm.propose_date = false;
 
     function _init() {
-        loadBookingById(function() {
+        loadBooking(function() {
         	// @todo Figure out why this is necessary.
             $timeout(function(){
                 if (param = $location.search().date) {
@@ -34,7 +34,9 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 				message: vm.requestdata.message
             };
 		} else {
-			if(vm.requestdata.proposed_date > new Date()) {
+			var proposed_date = new Date(vm.requestdata.proposed_date);
+
+			if(proposed_date > new Date()) {
                 var datetime = $filter('date')(vm.requestdata.proposed_date, "yyyy-MM-dd") + " " + $filter('date')(vm.requestdata.proposed_time, "HH:mm:ss");
 
                 var data = {
@@ -96,7 +98,29 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
 		return new Date(dateString);
 	};
 
-	function loadBookingById(callback) {
+    vm.initDatePickers = function() {
+        $('.datepicker').pickadate({
+            selectMonths: true,
+            today: 'Today',
+            clear: 'Clear',
+            close: 'Ok',
+            closeOnSelect: true,
+            format: 'yyyy-mm-dd'
+        });
+
+        $('.timepicker').pickatime({
+            default: 'now',
+            fromnow: 0,
+            twelvehour: false,
+            donetext: 'OK',
+            cleartext: 'Clear',
+            canceltext: 'Cancel',
+            autoclose: false,
+            ampmclickable: true
+        });
+    };
+
+	function loadBooking(callback) {
 		bookingSvc.getBookingById($stateParams.id).then(function (data) {
 			vm.booking = data.data.booking[0];
 
