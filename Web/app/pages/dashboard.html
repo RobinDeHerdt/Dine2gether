@@ -59,8 +59,8 @@
 														<p>Your guests will be notified when you change date or time</p>
 													</div>
 												</div>
-												<input type="text" class="edit-datepicker col s12" id="edit-date-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).date }}" required>
-												<input type="text" class="edit-timepicker col s12" id="edit-time-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).time }}" required>
+												<input type="text" class="edit-datepicker col s12" id="edit-date-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).date }}" placeholder="Date" required>
+												<input type="text" class="edit-timepicker col s12" id="edit-time-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).time }}" placeholder="Time" required>
 												<input type="number" class="col s12" id="edit-max-{{ date.id }}" value="{{ date.max_guests }}" placeholder="Max guests" required>
 												<div class="row no-mar-btm">
 													<div class="col s12">
@@ -90,8 +90,8 @@
 							  		<h5>Add a date to "{{ booking.title }}"</h5>
 								  </div>
 							  </div>
-							  <input type="text" class="datepicker col s12" ng-model="dashboard.createbookingdate" required>
-							  <input type="text" class="timepicker col s12" ng-model="dashboard.createbookingtime" required>
+							  <input type="text" class="datepicker col s12" ng-model="dashboard.createbookingdate" placeholder="Date" required>
+							  <input type="text" class="timepicker col s12" ng-model="dashboard.createbookingtime" placeholder="Time" required>
 							  <input type="number" class="col s12" ng-model="dashboard.createbookingmax" placeholder="Max guests" required>
 							  <div class="row no-mar-btm">
 								  <div class="col s12">
