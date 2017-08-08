@@ -145,9 +145,6 @@
 								<li class="collection-item">
 									<div class="row no-mar-btm">
 										<div class="col s10">
-											<span ng-show="guestrequest.pivot.status === 'pending'" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
-											<span ng-show="guestrequest.pivot.status === 'accepted'" class="badge green darken-1 white-text" data-badge-caption="Accepted"></span>
-											<span ng-show="guestrequest.pivot.status === 'declined'" class="badge red darken-1 white-text" data-badge-caption="Declined"></span>
 											<p>Booking: <a ui-sref="bookingdetails({id:guestrequest.booking.id})"><strong>{{ guestrequest.booking.title}}</strong></a></p>
 											<span>Hosted: <a ui-sref="publicprofile({id:guestrequest.booking.host.id})"><strong>{{guestrequest.booking.host.first_name + " " + guestrequest.booking.host.last_name}}</strong></a></span>
 											<p>Date and time: {{ dashboard.convertToDate(guestrequest.date) | date:"dd/MM/yyyy" }} at {{dashboard.convertToDate(guestrequest.date) | date:"HH:mm" }}</p>
@@ -160,6 +157,9 @@
 											</div>
 										</div>
 										<div class="col s2">
+											<span ng-show="guestrequest.pivot.status === 'pending'" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
+											<span ng-show="guestrequest.pivot.status === 'accepted'" class="badge green darken-1 white-text" data-badge-caption="Accepted"></span>
+											<span ng-show="guestrequest.pivot.status === 'declined'" class="badge red darken-1 white-text" data-badge-caption="Declined"></span>
 											<a href="" class="collection-action-btn" ng-click="dashboard.cancelRequest(guestrequest.id)" title="Delete request">
 												<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
 											</a>

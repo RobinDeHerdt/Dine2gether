@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SeatCancelled;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
@@ -153,6 +155,14 @@ class BookingdateController extends Controller
      */
     public function cancel(Bookingdate $bookingdate)
     {
+        $host = $bookingdate->booking->host()->first();
+
+        Mail::to($host->email)->send(new SeatCancelled(
+            $this->user,
+            $host,
+            $bookingdate
+        ));
+
         $this->user->bookingdates()->detach($bookingdate->id);
 
         return response(200);
