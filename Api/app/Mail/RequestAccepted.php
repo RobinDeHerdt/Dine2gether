@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Bookingdate;
 use App\User;
+use App\Booking;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -29,7 +30,7 @@ class RequestAccepted extends Mailable
     private $host;
 
     /**
-     * Host instance.
+     * Booking instance.
      *
      * @var \App\Booking  $booking
      */
