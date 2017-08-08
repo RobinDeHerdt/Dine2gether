@@ -618,7 +618,7 @@
                         
                             <h1 style="text-align: center;">Enjoy you meal 2gether!</h1>
 
-<p style="text-align: center;">Hi {{ $user->first_name }}! How are you? We're just passing by to tell you that {{$host->first_name}} is happily expecting you for a delicious meal and some nice stories.<br>
+<p style="text-align: center;">Hi {{ $user->first_name }}! How are you? We're just passing by to tell you that {{ $host->first_name }} is happily expecting you for a delicious meal and some nice stories.<br>
 You'll find your host's contact info below.<br>
 If you have any more questions, don't hesitate to ask us!<br>
 <br>
@@ -673,16 +673,16 @@ Kind regards from D2G<br>
                     <tbody><tr>
                         
                         <td valign="top" class="mcnTextContent" style="padding-top:0; padding-left:18px; padding-bottom:9px; padding-right:18px;">
-                        
                             First name:<br>
-Last name:<br>
-Email address:<br>
-Phone number:<br>
-<br>
-Date &amp; time:<br>
-Street:<br>
-Postal code:<br>
-City:
+                            Last name:<br>
+                            Email address:<br>
+                            Phone number:<br>
+                            <br>
+                            Date &amp; time:<br>
+                            Street:<br>
+                            Postal code:<br>
+                            City:<br><br>
+                            Message:
                         </td>
                     </tr>
                 </tbody></table>
@@ -704,7 +704,8 @@ City:
 							{{ $datetime }}<br>
 							{{ $booking->street_number}}<br>
 							{{ $booking->postalcode }}<br>
-							{{ $booking->city }}
+							{{ $booking->city }}<br><br>
+                            {{ $host_message ? $host_message : '/'}}
                         </td>
                     </tr>
                 	</tbody>

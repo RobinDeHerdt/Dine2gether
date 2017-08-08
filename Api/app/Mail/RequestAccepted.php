@@ -43,18 +43,27 @@ class RequestAccepted extends Mailable
     private $datetime;
 
     /**
+     * Message instance
+     *
+     * @var string $message
+     */
+    private $message;
+
+    /**
      * Create a new message instance.
      *
      * @param \App\User  $user
      * @param \App\User  $host
      * @param \App\Bookingdate  $bookingdate
+     * @param string  $message
      */
-    public function __construct(User $user, User $host, Bookingdate $bookingdate)
+    public function __construct(User $user, User $host, Bookingdate $bookingdate, $message)
     {
         $this->user = $user;
         $this->host = $host;
         $this->booking = $bookingdate->booking->first();
         $this->datetime = Carbon::parse($bookingdate->date)->format('l jS \\of F Y h:i A');
+        $this->message = $message;
     }
 
     /**
@@ -71,7 +80,8 @@ class RequestAccepted extends Mailable
                 'user' => $this->user,
                 'host' => $this->host,
                 'booking' => $this->booking,
-                'datetime' => $this->datetime
+                'datetime' => $this->datetime,
+                'host_message' => $this->message
             ]);
     }
 }

@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use App\Bookingdate;
+use App\User;
 
 class RequestController extends Controller
 {
@@ -87,8 +88,8 @@ class RequestController extends Controller
 
     /**
      * Handle a guest request.
-     * @todo Notify the specified guest.
      *
+     * @todo Add validation.
      * @param  \App\Bookingdate  $bookingdate
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
@@ -101,14 +102,19 @@ class RequestController extends Controller
                 $bookingdate->save();
             }
 
-            $host = $bookingdate->booking->host()->first();
+            $guest = User::find($request->guest_id);
 
-            Mail::to($this->user->email)->send(new RequestAccepted($this->user, $host, $bookingdate));
-
-            $bookingdate->guests()->updateExistingPivot($request->guest_id, [
+            $bookingdate->guests()->updateExistingPivot($guest->id, [
                 'status' => 'accepted',
                 'optional_message_host' => $request->message
             ]);
+
+            Mail::to($this->user->email)->send(new RequestAccepted(
+                $guest,
+                $this->user,
+                $bookingdate,
+                $request->message
+            ));
         } else {
             if (!$bookingdate->host_approved) {
                 $bookingdate->guests()->detach();
