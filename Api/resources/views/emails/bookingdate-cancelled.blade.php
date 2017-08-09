@@ -95,10 +95,6 @@
                 vertical-align: bottom;
             }
 
-            .mcnTextContent {
-                word-break: break-word;
-            }
-
             .mcnTextContent img {
                 height: auto !important;
             }
@@ -674,8 +670,9 @@
                                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px;">
                                                                 <h1 style="text-align: center;">Cancellation</h1>
                                                                 <p style="text-align: center; font-size: 16px; line-height: 150%; margin-top: 30px;">
-                                                                    Hi {{ $host->first_name }}! We're sorry to inform you that {{ $user->first_name }} has cancelled has cancelled "{{ $booking->title }}"
+                                                                    Hi {{ $user->first_name }}! We're sorry to inform you that your host {{ $host->first_name }} has cancelled "{{ $booking->title }}"
                                                                      on {{ $date . ' (' . $time . ')' }}.<br><br>
+                                                                    You can always request another date on the booking's page if you want.
                                                                     Kind regards from D2G<br>
                                                                 </p>
                                                             </td>
@@ -689,14 +686,29 @@
                                             </tr>
                                             </tbody>
                                         </table>
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width:100%;">
+                                            <tbody class="mcnButtonBlockOuter">
+                                            <tr>
+                                            <td style="padding-top:0; padding-right:18px; padding-bottom:18px; padding-left:18px;" valign="top" align="center" class="mcnButtonBlockInner">
+                                                <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-radius: 3px;background-color: #00C77C;">
+                                                    <tbody>
+                                                    <tr>
+                                                    <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial; font-size: 16px; padding: 15px;">
+                                                        <a class="mcnButton " title="Activate your account" href="{{ env('APP_URL') }}/#/booking/{{ $booking->id }}/details" target="_blank" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;">View booking</a>
+                                                    </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </td>
                                     </tr>
                                 </table>
                             </td>
                             </tr>
                         </table>
-                    </td>
-                    </tr>
                     <tr>
                     <td align="center" valign="top" id="templateFooter">
                         <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
@@ -738,6 +750,8 @@
                                                             <tr>
                                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;">
                                                                 <em>Copyright © 2016 Dine2Gether, All rights reserved.</em><br>
+                                                                <br>
+                                                                *If you didn't register yourself to our website, you can just ignore this mail.
                                                             </td>
                                                             </tr>
                                                             </tbody>

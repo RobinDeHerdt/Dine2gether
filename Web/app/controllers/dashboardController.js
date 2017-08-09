@@ -165,7 +165,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             bookingSvc.deleteBookingdate(id).then(function () {
                 swal({
                     title: 'Deleted',
-                    text: 'This date has been deleted',
+                    text: 'This date has been deleted. All your guests were notified.',
                     type: 'success'
                 });
                 getHostBookings();
@@ -300,7 +300,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             bookingSvc.cancelSeat(bookingdate_id).then(function () {
                 swal({
                     title: 'Cancelled',
-                    text: 'Cancellation successful',
+                    text: 'Cancellation successful. Your host was notified.',
                     type: 'success'
                 });
                 getGuestBookings();

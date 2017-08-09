@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SeatCancelled extends Mailable
+class BookingdateCancelled extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,35 +19,35 @@ class SeatCancelled extends Mailable
      *
      * @var \App\User  $user
      */
-    private $user;
+    public $user;
 
     /**
      * Host instance.
      *
-     * @var \App\User  $user
+     * @var \App\User  $host
      */
-    private $host;
+    public $host;
 
     /**
      * Date instance.
      *
      * @var Carbon $date
      */
-    private $date;
+    public $date;
 
     /**
      * Time instance.
      *
      * @var Carbon $time
      */
-    private $time;
+    public $time;
 
     /**
      * Booking instance.
      *
      * @var \App\Booking $booking
      */
-    private $booking;
+    public $booking;
 
     /**
      * Create a new message instance.
@@ -73,8 +73,8 @@ class SeatCancelled extends Mailable
     public function build()
     {
         return $this->from('info@d2g.com')
-            ->subject($this->user->first_name . ' has cancelled "' . $this->booking->title . '" on '. $this->date)
-            ->view('emails.seat-cancelled')
+            ->subject($this->host->first_name . ' has cancelled "' . $this->booking->title . '" on '. $this->date)
+            ->view('emails.bookingdate-cancelled')
             ->with([
                 'user' => $this->user,
                 'host' => $this->host,

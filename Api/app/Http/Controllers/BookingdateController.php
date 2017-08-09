@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingdateCancelled;
 use App\Mail\SeatCancelled;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -149,7 +150,6 @@ class BookingdateController extends Controller
     /**
      * Remove the authenticated user as a guest from the specified booking date.
      *
-     * @todo Notify the host through email.
      * @param  \App\Bookingdate  $bookingdate
      * @return \Illuminate\Http\Response
      */
@@ -171,12 +171,22 @@ class BookingdateController extends Controller
     /**
      * Remove the specified booking date.
      *
-     * @todo Notify all guests through email.
      * @param  \App\Bookingdate  $bookingdate
      * @return \Illuminate\Http\Response
      */
     public function delete(Bookingdate $bookingdate)
     {
+        $guests = $bookingdate->guests()->get();
+        $host = $bookingdate->booking->host()->first();
+
+        foreach ($guests as $guest) {
+            Mail::to($guest->email)->send(new BookingdateCancelled(
+                $guest,
+                $host,
+                $bookingdate
+            ));
+        }
+
         $bookingdate->guests()->detach();
         $bookingdate->delete();
 
