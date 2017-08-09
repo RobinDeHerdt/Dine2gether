@@ -104,7 +104,26 @@ d2gApp.service('authService', function ($http, $auth, $cookies, $state) {
 
             svc.setUser(false);
 		}).catch(function(data) {
-			console.log(data);
+
+			var html = "";
+
+			for (var field in data.data)  {
+                html += "<ul>";
+
+				for (var i = 0; i < data.data[field].length; i++) {
+					html += "<li>" + data.data[field][i] + "</li>"
+                }
+
+                html += "</ul>";
+			}
+
+            swal({
+                title: "Please check the following errors:",
+                html: html,
+                type: "error"
+            }).then(function() {
+				svc.showRegisterModal();
+			});
 		});
 	};
 

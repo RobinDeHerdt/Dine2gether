@@ -53,6 +53,14 @@ class AuthenticateController extends Controller
      */
     public function register(Request $request)
     {
+        $this->validate($request, [
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|max:255|email|unique:users',
+            'city' => 'required|max:255',
+            'password' => 'required'
+        ]);
+
         $user = new User();
 
         $user->first_name = $request->first_name;
