@@ -83,7 +83,24 @@ d2gApp.controller("createBookingController", function (kitchenstyleService, book
 				$state.go('overview');
 			}
 		}, function (error) {
-			console.log(error);
+			var html = "";
+
+            for (var field in error.data)  {
+                html += "<ul>";
+
+                for (var i = 0; i < error.data[field].length; i++) {
+                    html += "<li>" + error.data[field][i] + "</li>"
+                }
+
+                html += "</ul>";
+            }
+
+            swal({
+                html: html,
+                type: "error"
+            });
+
+            vm.currentPage = 1;
 		});
 	};
 

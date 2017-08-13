@@ -60,11 +60,11 @@
  					<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
  						<div class="col s12 m4">
  							<div class="card">
- 							   	<div class="card-image waves-effect waves-block waves-light">
- 							      <img ng-src="{{ bookingdetails.dishImage(dish) }}" class="activator">
+ 							   	<div class="card-image">
+ 							      <img ng-src="{{ bookingdetails.dishImage(dish) }}">
  							    </div>
  							    <div class="card-content">
- 							      <span class="card-title activator grey-text text-darken-4"><h5>{{ dish.name }}</h5></span>
+ 							      <span class="card-title grey-text text-darken-4"><h5>{{ dish.name }}</h5></span>
  							    	<p>{{ dish.description }}</p>
  							    </div>
  						  	</div>
