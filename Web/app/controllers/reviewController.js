@@ -68,18 +68,18 @@ d2gApp.controller("reviewController", function (reviewService, authService, $sta
 
 	vm.deleteReview = function(id) {
         swal({
-            title: 'Are you sure you want to remove your review?',
-            text: "You won't be able to revert this!",
+            title: 'Delete confirmation',
+            text: "Are you sure you want to delete your review?",
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirm delete'
+            confirmButtonText: 'Confirm'
         }).then(function () {
 			reviewSvc.deleteReviews(id).then(function() {
                 swal(
                     'Deleted!',
-                    'Your comment has been deleted.',
+                    'Your review has been deleted.',
                     'success'
                 );
 				loadReviews();
