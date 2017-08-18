@@ -147,9 +147,7 @@
                                                             <tbody>
                                                             <tr>
                                                             <td valign="top" class="mcnTextContent" style="padding-top:0; padding-right:18px; padding-bottom:9px; padding-left:18px; text-align: center;">
-                                                                <em>Copyright © 2016 Dine2Gether, All rights reserved.</em><br>
-                                                                <br>
-                                                                *If you didn't register yourself to our website, you can just ignore this mail.
+                                                                <em>© Dine2Gether {{ date("Y") }}, All rights reserved.</em><br>
                                                             </td>
                                                             </tr>
                                                             </tbody>

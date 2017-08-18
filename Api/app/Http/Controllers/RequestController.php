@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewRequest;
 use App\Mail\RequestAccepted;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -48,7 +49,6 @@ class RequestController extends Controller
     /**
      * Create a request.
      *
-     * @todo Notify the host.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
@@ -65,6 +65,8 @@ class RequestController extends Controller
         if ($request->bookingdate_id) {
             // Select an existing date.
             $bookingdate_id = $request->bookingdate_id;
+
+            $bookingdate = Bookingdate::find($bookingdate_id);
         } else {
             // Propose a new date.
             $bookingdate = new Bookingdate();
@@ -76,6 +78,14 @@ class RequestController extends Controller
 
             $bookingdate_id = $bookingdate->id;
         }
+
+        $host = $bookingdate->booking->host()->first();
+
+        Mail::to($host->email)->send(new NewRequest(
+            $this->user,
+            $host,
+            $bookingdate
+        ));
 
         $this->user->bookingdates()->attach($bookingdate_id, [
             'optional_message_guest' => $request->message
@@ -135,7 +145,6 @@ class RequestController extends Controller
     /**
      * Delete the request.
      *
-     * @todo Notify the host.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
