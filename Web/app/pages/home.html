@@ -1,20 +1,20 @@
 <main>
-	<div id="home" class="max-width max-height img-bg">
-		<div class="branding container">
-			<h1 class="center-align white-text">Dine2Gether</h1>
-			<p class="center-align primary-colour-text">Share food with your next best friends!</p>
-		</div>
-		<div id="home-form" class="container pad-top-m pad-btm-m pad-left-l pad-right-l center">
-			<div class="row">
-				<form>
-			        <div class="input-field col s7 offset-s2">
-			          	<input ng-keyup="$event.keyCode == 13 ? home.checkIfInputLocation() : null" id="autocomplete" type="text" placeholder="Where'd you like to eat?" name="location" validate/>
-			        </div>
-			        <div class="input-field col s2">
-			        	<a class="waves-effect waves-light btn" ng-click="home.checkIfInputLocation()" id="searchbutton"><i class="material-icons md-48 md-dark">search</i></a>
-			        </div>
-		        </form>
-		    </div>
-		</div>
-	</div>
+    <div id="home" class="max-width max-height img-bg">
+        <div class="branding container">
+            <h1 class="center-align white-text">Dine2Gether</h1>
+            <p class="center-align primary-colour-text">Share food with your next best friends!</p>
+        </div>
+        <div id="home-form" class="container pad-top-m pad-btm-m pad-left-l pad-right-l center">
+            <div class="row">
+                <form>
+                    <div class="input-field col s7 offset-s2">
+                        <input ng-keyup="$event.keyCode == 13 ? home.checkIfInputLocation() : null" id="autocomplete" type="text" placeholder="Where'd you like to eat?" name="location" validate/>
+                    </div>
+                    <div class="input-field col s2">
+                        <a class="waves-effect waves-light btn" ng-click="home.checkIfInputLocation()" id="searchbutton"><i class="material-icons md-48 md-dark">search</i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>

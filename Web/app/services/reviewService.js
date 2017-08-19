@@ -1,24 +1,24 @@
 d2gApp.service('reviewService', function ($http) {
-	
-	var svc = this;
 
-	svc.createReview = function (data) {
-		return $http.post(CONSTANTS.API_BASE_URL + '/review/store', data);
-	};
+    var svc = this;
 
-	svc.getGuests = function () {
-		return $http.get(CONSTANTS.API_BASE_URL + '/review/guests');
-	};
+    svc.createReview = function (data) {
+        return $http.post(CONSTANTS.API_BASE_URL + '/review/store', data);
+    };
 
-	svc.getHosts = function () {
-		return $http.get(CONSTANTS.API_BASE_URL + '/review/hosts');
-	};
+    svc.getGuests = function () {
+        return $http.get(CONSTANTS.API_BASE_URL + '/review/guests');
+    };
 
-	svc.getReviewsByUser = function(id) {
-		return $http.get(CONSTANTS.API_BASE_URL + '/user/' + id + '/reviews');
-	};
+    svc.getHosts = function () {
+        return $http.get(CONSTANTS.API_BASE_URL + '/review/hosts');
+    };
 
-	svc.deleteReviews = function(id) {
-		return $http.post(CONSTANTS.API_BASE_URL + '/review/' + id + '/delete');
-	}
+    svc.getReviewsByUser = function (id) {
+        return $http.get(CONSTANTS.API_BASE_URL + '/user/' + id + '/reviews');
+    };
+
+    svc.deleteReviews = function (id) {
+        return $http.post(CONSTANTS.API_BASE_URL + '/review/' + id + '/delete');
+    }
 });

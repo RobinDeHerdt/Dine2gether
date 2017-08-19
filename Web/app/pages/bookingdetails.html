@@ -1,78 +1,79 @@
- <main>
- 	<div class="container under-header bookingdetails">
- 			<a ui-sref="overview"><h5>Back to overview</h5></a>
- 			<h1>{{ bookingdetails.currentBooking.title}}</h1>
- 			<br>
- 			<h3>About the host</h3>
- 			<div class="row">
- 				<div class="card">
- 					<div class="col s12">
- 						<div class="row">
- 						<div class="col s12 m4">
- 							<div class="card">
- 							   	<div class="card-image waves-effect waves-block waves-light">
- 							      	<img ng-src="{{bookingdetails.currentBooking.host.image}}" class="activator">
- 							    </div>
- 						  	</div>
- 						</div>
- 						<div class="col s12 m4">
- 							<a ui-sref="publicprofile({id:bookingdetails.currentBooking.host.id})"><h5>{{ bookingdetails.currentBooking.host.first_name + " " + bookingdetails.currentBooking.host.last_name }}</h5></a>
- 							<h5>{{ bookingdetails.currentBooking.city }}</h5>
- 							<!-- <h5>Joined on: {{ bookingdetails.currentBooking.user.created_at | date:'dd-MM-yyyy' }}</h5> -->
- 							<a ui-sref="reviews({id:bookingdetails.currentBooking.host.id})"><h5>Reviews about this host</h5></a>
- 						</div>
- 						<div class="col s12 m4">
- 							<h5>Interests:</h5>
- 							<ul class="collection">
- 								<li ng-if="!bookingdetails.currentBooking.host.interests.length" class="collection-item">No interests added</li>
-	 							<div ng-repeat="interest in bookingdetails.currentBooking.host.interests">
-								    <li class="collection-item">{{ interest.name}}</li>
-	  							</div>
-  							</ul>
-  							<h5>Kitchenstyles:</h5>
- 							<ul class="collection">
- 								<li ng-if="!bookingdetails.currentBooking.kitchenstyles.length">No style added</li>
-	 							<div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
-  									<li class="collection-item">{{ style.name}}</li>
-	 							</div>
- 							</ul>
- 							<h5>Dates available:</h5>
- 							<ul class="collection">
- 								<li class="collection-item" ng-if="!bookingdetails.currentBooking.hostapprovedbookingdates.length">No dates yet</li>
- 								<li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.hostapprovedbookingdates">
-									<span>{{ bookingdetails.convertToDate(date.date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.date) | date: "HH:mm"}}</span>
-									<a href="" ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id || bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" ng-click="bookingdetails.redirect(date.id)">
-										<span class="secondary-colour white-text badge" data-badge-caption="Send request"></span>
-									</a>
-									<span ng-show="bookingdetails.getGuestCount(date.guests) >= date.max_guests" class="white-text red badge">Fully booked!</span>
-									<span ng-show="bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" class="grey white-text badge" data-badge-caption="Request sent"></span>
-									<br>
-									<span ng-show="bookingdetails.getGuestCount(date.guests) < date.max_guests">Seats booked: {{ bookingdetails.getGuestCount(date.guests) }}/{{ date.max_guests }}</span>
-								</li>
- 							</ul>
- 						</div>
- 					</div>
- 				</div>
- 			</div>
- 			<h3>Menu</h3>
- 			<div class="row">
- 				<div class="card">
- 					<div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
- 						<div class="col s12 m4">
- 							<div class="card">
- 							   	<div class="card-image">
- 							      <img ng-src="{{ bookingdetails.dishImage(dish) }}">
- 							    </div>
- 							    <div class="card-content">
- 							      <span class="card-title grey-text text-darken-4"><h5>{{ dish.name }}</h5></span>
- 							    	<p>{{ dish.description }}</p>
- 							    </div>
- 						  	</div>
- 						</div>
- 					</div>
- 				</div>
- 			</div>
- 			<a ng-class="bookingdetails.user.id === bookingdetails.currentBooking.host.id ? 'disabled' : ''" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
-		</div>
- 	</div>
- </main>
+<main>
+    <div class="container under-header bookingdetails">
+        <a ui-sref="overview"><h5>Back to overview</h5></a>
+        <h1>{{ bookingdetails.currentBooking.title}}</h1>           <br>
+        <h3>About the host</h3>
+        <div class="row">
+            <div class="card">
+                <div class="col s12">
+                    <div class="row">
+                        <div class="col s12 m4">
+                            <div class="card">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img ng-src="{{bookingdetails.currentBooking.host.image}}" class="activator">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4">
+                            <a ui-sref="publicprofile({id:bookingdetails.currentBooking.host.id})">
+                                <h5>{{ bookingdetails.currentBooking.host.first_name + " " + bookingdetails.currentBooking.host.last_name }}</h5>
+                            </a>
+                            <h5>{{ bookingdetails.currentBooking.city }}</h5>
+                            <a ui-sref="reviews({id:bookingdetails.currentBooking.host.id})">
+                                <h5>Reviews about this host</h5></a>
+                        </div>
+                        <div class="col s12 m4">
+                            <h5>Interests:</h5>
+                            <ul class="collection">
+                                <li ng-if="!bookingdetails.currentBooking.host.interests.length" class="collection-item">No interests added</li>
+                                <div ng-repeat="interest in bookingdetails.currentBooking.host.interests">
+                                    <li class="collection-item">{{ interest.name}}</li>
+                                </div>
+                            </ul>
+                            <h5>Kitchenstyles:</h5>
+                            <ul class="collection">
+                                <li ng-if="!bookingdetails.currentBooking.kitchenstyles.length">No style added</li>
+                                <div ng-repeat="style in bookingdetails.currentBooking.kitchenstyles">
+                                    <li class="collection-item">{{ style.name}}</li>
+                                </div>
+                            </ul>
+                            <h5>Dates available:</h5>
+                            <ul class="collection">
+                                <li class="collection-item" ng-if="!bookingdetails.currentBooking.hostapprovedbookingdates.length">No dates yet</li>
+                                <li class="collection-item" ng-repeat="date in bookingdetails.currentBooking.hostapprovedbookingdates">
+                                    <span>{{ bookingdetails.convertToDate(date.date) | date: "dd/MM/yyyy" }} at {{bookingdetails.convertToDate(date.date) | date: "HH:mm"}}</span>
+                                    <a href="" ng-hide="bookingdetails.user.id === bookingdetails.currentBooking.host.id || bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" ng-click="bookingdetails.redirect(date.id)">
+                                        <span class="secondary-colour white-text badge" data-badge-caption="Send request"></span>
+                                    </a>
+                                    <span ng-show="bookingdetails.getGuestCount(date.guests) >= date.max_guests" class="white-text red badge">Fully booked!</span>
+                                    <span ng-show="bookingdetails.guestsForThisDate(date).indexOf(bookingdetails.user.id) > -1" class="grey white-text badge" data-badge-caption="Request sent"></span>
+                                    <br>
+                                    <span ng-show="bookingdetails.getGuestCount(date.guests) < date.max_guests">Seats booked: {{ bookingdetails.getGuestCount(date.guests) }}/{{ date.max_guests }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h3>Menu</h3>
+            <div class="row">
+                <div class="card">
+                    <div class="dish" ng-repeat="dish in bookingdetails.currentBooking.dishes">
+                        <div class="col s12 m4">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img ng-src="{{ bookingdetails.dishImage(dish) }}">
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title grey-text text-darken-4"><h5>{{ dish.name }}</h5></span>
+                                    <p>{{ dish.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a ng-class="bookingdetails.user.id === bookingdetails.currentBooking.host.id ? 'disabled' : ''" ng-click="bookingdetails.redirect()" class="btn mar-btm-l">Send request</a>
+        </div>
+    </div>
+</main>

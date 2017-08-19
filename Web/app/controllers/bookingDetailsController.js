@@ -1,36 +1,36 @@
 d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, $location, bookingService, authService) {
-	var vm = this;
+    var vm = this;
 
-	var bookingSvc = bookingService;
-	var authSvc = authService;
+    var bookingSvc = bookingService;
+    var authSvc = authService;
 
     vm.user = authSvc.getUser();
 
     vm.redirect = function ($querystring) {
-    	if(authSvc.getUser()) {
-    		if($querystring) {
+        if (authSvc.getUser()) {
+            if ($querystring) {
                 $location.path("booking/" + $stateParams.id + "/request").search({date: $querystring});
-			} else {
+            } else {
                 $location.path("booking/" + $stateParams.id + "/request");
-			}
-		} else {
+            }
+        } else {
             authSvc.showLoginModal();
-		}
+        }
     };
 
-	vm.convertToDate = function (dateString) {
-		return new Date(dateString);
-	};
+    vm.convertToDate = function (dateString) {
+        return new Date(dateString);
+    };
 
-    vm.userImage = function() {
+    vm.userImage = function () {
         return CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
     };
 
-    vm.dishImage = function(dish) {
+    vm.dishImage = function (dish) {
         return CONSTANTS.PUBLIC_BASE_URL + "/" + dish.dishimages[0].image_uri;
-	};
+    };
 
-    vm.guestsForThisDate = function(date) {
+    vm.guestsForThisDate = function (date) {
         var guests = [];
 
         angular.forEach(date.guests, function (guest) {
@@ -40,11 +40,11 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
         return guests;
     };
 
-    vm.getGuestCount = function(guests) {
+    vm.getGuestCount = function (guests) {
         var guestcount = 0;
 
-        angular.forEach(guests, function(guest) {
-            if(guest.pivot.status === "accepted") {
+        angular.forEach(guests, function (guest) {
+            if (guest.pivot.status === "accepted") {
                 guestcount++;
             }
         });
@@ -52,15 +52,16 @@ d2gApp.controller("bookingDetailsController", function ($stateParams, $cookies, 
         return guestcount;
     };
 
-	function getCurrentBooking () {
-		bookingSvc.getBookingById($stateParams.id).then(function (data) {
-			vm.currentBooking = data.data.booking[0];
-			vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
-		});
-	}
+    function getCurrentBooking() {
+        bookingSvc.getBookingById($stateParams.id).then(function (data) {
+            vm.currentBooking = data.data.booking[0];
+            vm.currentBooking.host.image = CONSTANTS.PUBLIC_BASE_URL + "/" + vm.currentBooking.host.image;
+        });
+    }
 
-	function _init() {
-		getCurrentBooking();
-	}
-	_init();
+    function _init() {
+        getCurrentBooking();
+    }
+
+    _init();
 });

@@ -1,23 +1,23 @@
-d2gApp.service('bookingService', function($http) {
+d2gApp.service('bookingService', function ($http) {
 
-	var svc = this;
+    var svc = this;
 
-	svc.getBookings = function () {
-		return $http.get(CONSTANTS.API_BASE_URL + '/bookings');
+    svc.getBookings = function () {
+        return $http.get(CONSTANTS.API_BASE_URL + '/bookings');
     };
 
     svc.getBookingsByLocation = function (location) {
         return $http.get(CONSTANTS.PUBLIC_BASE_URL + '/search?location=' + location);
     };
-    
+
     svc.getBookingById = function (id) {
-        return $http.get(CONSTANTS.API_BASE_URL +  '/booking/' + id);
+        return $http.get(CONSTANTS.API_BASE_URL + '/booking/' + id);
     };
 
     svc.createBooking = function (data) {
-    	return $http.post(CONSTANTS.API_BASE_URL + '/bookings', data);
+        return $http.post(CONSTANTS.API_BASE_URL + '/bookings', data);
     };
-    
+
     svc.deleteBooking = function (id) {
         return $http.delete(CONSTANTS.API_BASE_URL + '/bookings/' + id);
     };

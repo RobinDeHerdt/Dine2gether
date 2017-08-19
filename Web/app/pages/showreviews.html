@@ -1,31 +1,32 @@
 <main>
-	<div class="container under-header profile">
-		<a ui-sref="publicprofile({id:review.user.id})"><h5>View {{ review.user.first_name }}'s profile</h5></a>
-		<h1>Reviews for {{ review.user.first_name + ' ' + review.user.last_name }}</h1>
-		
-		<div class="row" ng-show="!review.reviews.length">
-        <div class="col s12 m12">
-          <div class="card">
-            <div class="card-content">
-              <p>There are no reviews for this person yet.</p>
+    <div class="container under-header profile">
+        <a ui-sref="publicprofile({id:review.user.id})"><h5>View {{ review.user.first_name }}'s profile</h5></a>
+        <h1>Reviews for {{ review.user.first_name + ' ' + review.user.last_name }}</h1>
+
+        <div class="row" ng-show="!review.reviews.length">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content">
+                        <p>There are no reviews for this person yet.</p>
+                    </div>
+                </div>
             </div>
-          </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <p ng-if="profile.guestbookings.length">No bookings yet as a guest.</p>
+                <div ng-repeat="rev in review.reviews">
+                    <ul class="collection">
+                        <li class="collection-item avatar">
+                            <img ng-src="{{review.userImage(rev.author)}}" alt="" class="circle">
+                            <a ui-sref="publicprofile({id:rev.author_id})"><strong>{{rev.author.first_name + " " + rev.author.last_name }}</strong></a>
+                            <a href="" ng-click="review.deleteReview(rev.id)" ng-show="review.authenticated_user.id == rev.author_id" title="Remove comment"> &middot;
+                                <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            <p>{{rev.body}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-      <div class="col s12 m12">
-        <p ng-if="profile.guestbookings.length">No bookings yet as a guest.</p>
-        <div ng-repeat="rev in review.reviews">
-          <ul class="collection">
-            <li class="collection-item avatar">
-               <img ng-src="{{review.userImage(rev.author)}}" alt="" class="circle">
-                <a ui-sref="publicprofile({id:rev.author_id})"><strong>{{rev.author.first_name + " " + rev.author.last_name }}</strong></a>
-                <a href="" ng-click="review.deleteReview(rev.id)" ng-show="review.authenticated_user.id == rev.author_id" title="Remove comment"> &middot; <i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                <p>{{rev.body}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 </main>

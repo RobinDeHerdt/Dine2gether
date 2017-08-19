@@ -1,18 +1,18 @@
 d2gApp.controller("homeController", function ($location) {
-	var vm = this;
+    var vm = this;
 
-	if ($location.url() !== "/home") {
+    if ($location.url() !== "/home") {
         var fullQueryString = $location.url().split("?")[1];
 
         if (fullQueryString.split("=")[0] === "status") {
-        	switch(fullQueryString.split("=")[1]) {
-				case "activated":
+            switch (fullQueryString.split("=")[1]) {
+                case "activated":
                     swal({
                         title: "Account activation",
                         text: "Your account was successfully activated.",
                         type: "success"
                     });
-					break;
+                    break;
 
                 case "already-activated":
                     swal({
@@ -22,34 +22,34 @@ d2gApp.controller("homeController", function ($location) {
                     });
                     break;
 
-				default:
+                default:
                     swal({
                         title: "Account activation",
                         text: "Something went wrong when activating your account.",
                         type: "error"
                     });
                     break;
-			}
+            }
         }
-	}
+    }
 
-	function autoComplete () {
-  		var input = document.getElementById('autocomplete');
-  		var autocomplete = new google.maps.places.Autocomplete(input);
-	  	autocomplete.addListener('place_changed', function() {
-	    	var place = autocomplete.getPlace();
-		    if (!place.geometry) {
-		      	window.alert("Autocomplete's returned place contains no geometry");
-		      	return;
-	    	}
-		});
-	}
+    function autoComplete() {
+        var input = document.getElementById('autocomplete');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("Autocomplete's returned place contains no geometry");
+                return;
+            }
+        });
+    }
 
-	vm.checkIfInputLocation = function () {
-		if($("#autocomplete").val().trim() !== "") {
-			$location.path('/overview/' + $("#autocomplete").val());
-		}
-	};
+    vm.checkIfInputLocation = function () {
+        if ($("#autocomplete").val().trim() !== "") {
+            $location.path('/overview/' + $("#autocomplete").val());
+        }
+    };
 
-	autoComplete();
+    autoComplete();
 });

@@ -6,7 +6,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
     var requestSvc = requestService;
 
     function _init() {
-        if(!authSvc.getUser()) {
+        if (!authSvc.getUser()) {
             authSvc.showLoginModal();
             $state.go('home');
 
@@ -30,7 +30,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     }
 
-    vm.initDatePickers = function() {
+    vm.initDatePickers = function () {
         $('.datepicker').pickadate({
             selectMonths: true,
             today: 'Today',
@@ -52,7 +52,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
-    vm.initEditDatePickers = function() {
+    vm.initEditDatePickers = function () {
         $('.edit-datepicker').pickadate({
             selectMonths: true,
             today: 'Today',
@@ -78,12 +78,12 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         return new Date(dateString);
     };
 
-    vm.showBookingdateCreateForm = function(booking_id) {
+    vm.showBookingdateCreateForm = function (booking_id) {
         $('#modal-create-date-' + booking_id).modal();
         $('#modal-create-date-' + booking_id).modal('open');
     };
 
-    vm.showBookingdateEditForm = function(bookingdate_id) {
+    vm.showBookingdateEditForm = function (bookingdate_id) {
         Materialize.updateTextFields();
         $("#modal-edit-date-" + bookingdate_id).modal();
         $("#modal-edit-date-" + bookingdate_id).modal('open');
@@ -97,7 +97,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             booking_id: id
         };
 
-        bookingSvc.createBookingdate(data).then(function() {
+        bookingSvc.createBookingdate(data).then(function () {
             swal({
                 title: 'Success',
                 text: 'Date created',
@@ -107,16 +107,16 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         }, function () {
             swal({
                 title: 'Error',
-                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
+                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.',
                 type: 'error'
-            }).then(function() {
+            }).then(function () {
                 $('#modal-create-date-' + id).modal();
                 $('#modal-create-date-' + id).modal('open');
             });
         });
     };
 
-    vm.updateBookingdate = function(id) {
+    vm.updateBookingdate = function (id) {
         // @todo Temp fix. Clean this up using angular models.
         var data = {
             date: $('#edit-date-' + id).val(),
@@ -124,8 +124,8 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             max_guests: $('#edit-max-' + id).val()
         };
 
-        bookingSvc.updateBookingdate(id, data).then(function(data) {
-            if(data.data.status === 'under_guest_limit') {
+        bookingSvc.updateBookingdate(id, data).then(function (data) {
+            if (data.data.status === 'under_guest_limit') {
                 swal({
                     title: 'Error',
                     text: 'Max guests can\'t be lower than your current amount of accepted guests.',
@@ -140,12 +140,12 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             }
 
             getHostBookings();
-        }, function(error) {
+        }, function (error) {
             swal({
                 title: 'Error',
-                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.' ,
+                text: 'Something was not quite right. Check the form again. Make sure the selected date is in the future.',
                 type: 'error'
-            }).then(function() {
+            }).then(function () {
                 $('#modal-edit-date-' + id).modal();
                 $('#modal-edit-date-' + id).modal('open');
             });
@@ -192,19 +192,19 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
             };
 
             requestSvc.handleRequest(bookingdate_id, data).then(function () {
-                if(status && !host_approved) {
+                if (status && !host_approved) {
                     swal({
                         title: 'success',
                         type: 'success',
                         text: 'Set a max number of guests',
                         input: 'text',
                         inputPlaceholder: 'Max amount of guests'
-                    }).then(function(max_guests) {
+                    }).then(function (max_guests) {
                         data = {
                             max_guests: max_guests
                         };
 
-                        bookingSvc.updateBookingdate(bookingdate_id, data).then(function() {
+                        bookingSvc.updateBookingdate(bookingdate_id, data).then(function () {
                             swal({
                                 title: 'Success',
                                 text: 'Changes were saved!',
@@ -233,11 +233,11 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
-    vm.getGuestCount = function(guests) {
+    vm.getGuestCount = function (guests) {
         var guestcount = 0;
 
-        angular.forEach(guests, function(guest) {
-            if(guest.pivot.status === "accepted") {
+        angular.forEach(guests, function (guest) {
+            if (guest.pivot.status === "accepted") {
                 guestcount++;
             }
         });
@@ -308,7 +308,7 @@ d2gApp.controller("dashboardController", function (authService, bookingService, 
         });
     };
 
-    vm.splitDateTime = function(datetime) {
+    vm.splitDateTime = function (datetime) {
         var datetimesplit = datetime.split(" ");
 
         var date = datetimesplit[0];

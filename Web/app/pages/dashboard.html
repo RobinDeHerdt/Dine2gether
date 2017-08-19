@@ -1,186 +1,183 @@
 <main>
-	<div class="container under-header profile">
-		<h1>Dashboard</h1>
-		<div class="row">
-		  <div class="col s12 m12">
-			<div class="card">
-			  <div class="card-content black-text">
-				<span class="card-title">My hosted bookings</span>
-				  <p ng-hide="dashboard.hostbookings.length">You haven't received any requests recently.</p>
-				  <div ng-repeat="booking in dashboard.hostbookings">
-					  <ul class="collection">
-						<li class="collection-item">
-							<div class="row no-mar-btm">
-								<div class="col s10">
-									<a ui-sref="bookingdetails({id:booking.id})" class="collection-title"><strong>{{ booking.title}}</strong></a>
-									<br><br>
-									<strong>Address</strong>
-									<p>{{ booking.postalcode + " " + booking.city}}</p>
-									<p>{{ booking.street_number}}</p>
-									<br>
-									<strong>Price</strong>
-									<br>
-									<p>{{ "€" + booking.price + "/person"}}</p>
-									<br>
-									<div ng-repeat="date in booking.bookingdates">
-										<strong>{{ dashboard.convertToDate(date.date) | date:"dd/MM/yyyy" }} at {{ dashboard.convertToDate(date.date) | date:"HH:mm" }}</strong>
-										<strong>{{ date.host_approved ? '' : '(proposed date)'}}</strong>
-										<strong>{{ date.max_guests ? ' &middot; ' + dashboard.getGuestCount(date.guests) + '/' + date.max_guests + ' guests' : ''}}</strong>
-										&middot; <a href="" ng-click="dashboard.showBookingdateEditForm(date.id); dashboard.initEditDatePickers();"><i class="fa fa-pencil" aria-hidden="true"></i> Edit date</a>
-										&middot; <a href="" ng-click="dashboard.deleteBookingdate(date.id)"><i class="fa fa-times" aria-hidden="true"></i> Remove date</a>
-										<ul>
-											<li ng-repeat="guest in date.guests">
-												<div ng-switch="guest.pivot.status">
-													<div ng-switch-when="pending">
-														<span><a ui-sref="publicprofile({id:guest.id})"><i class="fa fa-refresh" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a> (pending request)</span>
-														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, date.host_approved, true)" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></a>
-														&middot; <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, false)" title="Decline"><i class="fa fa-times" aria-hidden="true"></i></a>
-														<p ng-show="guest.pivot.optional_message_guest">Message: {{ guest.pivot.optional_message_guest }}</p>
-													</div>
-													<div ng-switch-when="accepted">
-														<span><a ui-sref="publicprofile({id:guest.id})"><i class="fa fa-check" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a></span>
-													</div>
-												</div>
-											</li>
-											<li ng-hide="date.guests.length">
-												<span>No guests yet.</span>
-											</li>
-										</ul>
-										<br>
-										<div id="modal-edit-date-{{ date.id }}" class="modal modal-edit-date modal-create-date">
-											<div class="modal-content">
-												<div class="row">
-													<div class="col s12">
-														<h5>Edit date</h5>
-													</div>
-												</div>
-												<div class="row" ng-show="dashboard.getGuestCount(date.guests)">
-													<div class="col s12">
-														<p>Your guests will be notified when you change date or time</p>
-													</div>
-												</div>
-												<input type="text" class="edit-datepicker col s12" id="edit-date-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).date }}" placeholder="Date" required>
-												<input type="text" class="edit-timepicker col s12" id="edit-time-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).time }}" placeholder="Time" required>
-												<input type="number" class="col s12" id="edit-max-{{ date.id }}" value="{{ date.max_guests }}" placeholder="Max guests" required>
-												<div class="row no-mar-btm">
-													<div class="col s12">
-														<a class="modal-action modal-close waves-effect waves-light btn" ng-click="dashboard.updateBookingdate(date.id)">Save</a>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								  <div ng-hide="booking.bookingdates.length">
-									  <span>No dates set yet.</span>
-								  </div>
-								</div>
-								<div class="col s2">
-									<a href="" class="collection-action-btn" ng-click="dashboard.deleteBooking(booking.id)" title="Delete booking">
-										<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
-									</a>
-								</div>
-							</div>
-							<a href="" ng-click="dashboard.showBookingdateCreateForm(booking.id); dashboard.initDatePickers()">Add a date & time</a>
-						</li>
-					  </ul>
-					  <div id="modal-create-date-{{ booking.id }}" class="modal modal-create-date">
-						  <div class="modal-content">
-							  <div class="row">
-								  <div class="col s12">
-							  		<h5>Add a date to "{{ booking.title }}"</h5>
-								  </div>
-							  </div>
-							  <input type="text" class="datepicker col s12" ng-model="dashboard.createbookingdate" placeholder="Date" required>
-							  <input type="text" class="timepicker col s12" ng-model="dashboard.createbookingtime" placeholder="Time" required>
-							  <input type="number" class="col s12" ng-model="dashboard.createbookingmax" placeholder="Max guests" required>
-							  <div class="row no-mar-btm">
-								  <div class="col s12">
-									  <a class="modal-action modal-close waves-effect waves-light btn" ng-click="dashboard.createBookingdate(booking.id)">Save</a>
-								  </div>
-							  </div>
-						  </div>
-					  </div>
-				  </div>
-			  	</div>
-			</div>
-		  </div>
-		</div>
-		<div class="row">
-		  <div class="col s12 m12">
-			<div class="card">
-			  <div class="card-content black-text">
-				<span class="card-title">My bookings as a guest</span>
-				<p ng-hide="dashboard.guestbookingdates.length">No bookings yet as a guest.</p>
-				<div ng-repeat="bookingdate in dashboard.guestbookingdates">
-				  <ul class="collection">
-					<li class="collection-item">
-						<div class="row no-mar-btm">
-							<div class="col s10">
-								<span class="title"><a ui-sref="bookingdetails({id:bookingdate.booking.id})"><strong>{{bookingdate.booking.title}}</strong></a></span>
-								<p>{{ dashboard.convertToDate(bookingdate.date) | date:"dd/MM/yyyy"}} at {{ dashboard.convertToDate(bookingdate.date) | date:"HH:mm"}}</p>
-								<p>{{ bookingdate.host.first_name}} {{bookingdate.host.last_name}}</p>
-								<p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>
-								<p>{{ bookingdate.booking.street_number}}</p>
-								<p>{{ "€" + bookingdate.booking.price + "/person"}}</p>
-							</div>
-							<div class="col s2">
-								<a href="" class="collection-action-btn" ng-click="dashboard.cancelSeat(bookingdate.id)" title="Cancel"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
-							</div>
-						</div>
-					</li>
-				  </ul>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-		<div class="row">
-			<div class="col s12 m12">
-				<div class="card">
-					<div class="card-content black-text">
-						<span class="card-title">Sent requests</span>
-						<p ng-hide="dashboard.guestrequests.length">You haven't sent any requests recently.</p>
-						<div ng-repeat="guestrequest in dashboard.guestrequests">
-							<ul class="collection">
-								<li class="collection-item">
-									<div class="row no-mar-btm">
-										<div class="col s10">
-											<p>Booking: <a ui-sref="bookingdetails({id:guestrequest.booking.id})"><strong>{{ guestrequest.booking.title}}</strong></a></p>
-											<span>Hosted: <a ui-sref="publicprofile({id:guestrequest.booking.host.id})"><strong>{{guestrequest.booking.host.first_name + " " + guestrequest.booking.host.last_name}}</strong></a></span>
-											<p>Date and time: {{ dashboard.convertToDate(guestrequest.date) | date:"dd/MM/yyyy" }} at {{dashboard.convertToDate(guestrequest.date) | date:"HH:mm" }}</p>
-											<br>
-											<div ng-show="guestrequest.pivot.optional_message_guest">
-												<span>Your message: {{ guestrequest.pivot.optional_message_guest }}</span>
-											</div>
-											<div ng-show="guestrequest.pivot.optional_message_host">
-												<span>Message from the host: {{ guestrequest.pivot.optional_message_host }}</span>
-											</div>
-										</div>
-										<div class="col s2">
-											<span ng-show="guestrequest.pivot.status === 'pending'" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
-											<span ng-show="guestrequest.pivot.status === 'accepted'" class="badge green darken-1 white-text" data-badge-caption="Accepted"></span>
-											<span ng-show="guestrequest.pivot.status === 'declined'" class="badge red darken-1 white-text" data-badge-caption="Declined"></span>
-											<a href="" class="collection-action-btn" ng-click="dashboard.cancelRequest(guestrequest.id)" title="Delete request">
-												<i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
-											</a>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-		  <div class="col s12 m12">
-			<div class="card">
-			  <div class="card-content black-text">
-				<span class="card-title">Reviews</span>
-			    <a ui-sref="createreview"><h6>Write reviews for your guests or hosts here</h6></a>
-			  </div>
-			</div>
-		  </div>
-		</div>
-	</div>
+    <div class="container under-header profile">
+        <h1>Dashboard</h1>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content black-text">
+                        <span class="card-title">My hosted bookings</span>
+                        <p ng-hide="dashboard.hostbookings.length">You haven't received any requests recently.</p>
+                        <div ng-repeat="booking in dashboard.hostbookings">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <div class="row no-mar-btm">
+                                        <div class="col s10">
+                                            <a ui-sref="bookingdetails({id:booking.id})" class="collection-title"><strong>{{ booking.title}}</strong></a>
+                                            <br><br> <strong>Address</strong>
+                                            <p>{{ booking.postalcode + " " + booking.city}}</p>
+                                            <p>{{ booking.street_number}}</p><br>
+                                            <strong>Price</strong> <br>
+                                            <p>{{ "€" + booking.price + "/person"}}</p>
+                                            <br>
+                                            <div ng-repeat="date in booking.bookingdates">
+                                                <strong>{{ dashboard.convertToDate(date.date) | date:"dd/MM/yyyy" }} at {{ dashboard.convertToDate(date.date) | date:"HH:mm" }}</strong>
+                                                <strong>{{ date.host_approved ? '' : '(proposed date)'}}</strong>
+                                                <strong>{{ date.max_guests ? ' &middot; ' + dashboard.getGuestCount(date.guests) + '/' + date.max_guests + ' guests' : ''}}</strong> &middot;
+                                                <a href="" ng-click="dashboard.showBookingdateEditForm(date.id); dashboard.initEditDatePickers();"><i class="fa fa-pencil" aria-hidden="true"></i> Edit date</a> &middot;
+                                                <a href="" ng-click="dashboard.deleteBookingdate(date.id)"><i class="fa fa-times" aria-hidden="true"></i> Remove date</a>
+                                                <ul>
+                                                    <li ng-repeat="guest in date.guests">
+                                                        <div ng-switch="guest.pivot.status">
+                                                            <div ng-switch-when="pending">
+                                                                <span><a ui-sref="publicprofile({id:guest.id})"><i class="fa fa-refresh" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a> (pending request)</span> &middot;
+                                                                <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, date.host_approved, true)" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></a> &middot;
+                                                                <a href="" ng-click="dashboard.handleRequest(date.id, guest.id, guest.first_name, guest.last_name, false)" title="Decline"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                                <p ng-show="guest.pivot.optional_message_guest">Message: {{ guest.pivot.optional_message_guest }}</p>
+                                                            </div>
+                                                            <div ng-switch-when="accepted">
+                                                                <span><a ui-sref="publicprofile({id:guest.id})"><i class="fa fa-check" aria-hidden="true"></i> <strong> {{ guest.first_name + " " + guest.last_name}}</strong></a></span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-hide="date.guests.length">
+                                                        <span>No guests yet.</span>
+                                                    </li>
+                                                </ul>
+                                                <br>
+                                                <div id="modal-edit-date-{{ date.id }}" class="modal modal-edit-date modal-create-date">
+                                                    <div class="modal-content">
+                                                        <div class="row">
+                                                            <div class="col s12">
+                                                                <h5>Edit date</h5>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row" ng-show="dashboard.getGuestCount(date.guests)">
+                                                            <div class="col s12">
+                                                                <p>Your guests will be notified when you change date or time</p>
+                                                            </div>
+                                                        </div>
+                                                        <input type="text" class="edit-datepicker col s12" id="edit-date-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).date }}" placeholder="Date" required>
+                                                        <input type="text" class="edit-timepicker col s12" id="edit-time-{{ date.id }}" value="{{ dashboard.splitDateTime(date.date).time }}" placeholder="Time" required>
+                                                        <input type="number" class="col s12" id="edit-max-{{ date.id }}" value="{{ date.max_guests }}" placeholder="Max guests" required>
+                                                        <div class="row no-mar-btm">
+                                                            <div class="col s12">
+                                                                <a class="modal-action modal-close waves-effect waves-light btn" ng-click="dashboard.updateBookingdate(date.id)">Save</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div ng-hide="booking.bookingdates.length">
+                                                <span>No dates set yet.</span>
+                                            </div>
+                                        </div>
+                                        <div class="col s2">
+                                            <a href="" class="collection-action-btn" ng-click="dashboard.deleteBooking(booking.id)" title="Delete booking">
+                                                <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> </a>
+                                        </div>
+                                    </div>
+                                    <a href="" ng-click="dashboard.showBookingdateCreateForm(booking.id); dashboard.initDatePickers()">Add a date & time</a>
+                                </li>
+                            </ul>
+                            <div id="modal-create-date-{{ booking.id }}" class="modal modal-create-date">
+                                <div class="modal-content">
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <h5>Add a date to "{{ booking.title }}"</h5>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="datepicker col s12" ng-model="dashboard.createbookingdate" placeholder="Date" required>
+                                    <input type="text" class="timepicker col s12" ng-model="dashboard.createbookingtime" placeholder="Time" required>
+                                    <input type="number" class="col s12" ng-model="dashboard.createbookingmax" placeholder="Max guests" required>
+                                    <div class="row no-mar-btm">
+                                        <div class="col s12">
+                                            <a class="modal-action modal-close waves-effect waves-light btn" ng-click="dashboard.createBookingdate(booking.id)">Save</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content black-text">
+                        <span class="card-title">My bookings as a guest</span>
+                        <p ng-hide="dashboard.guestbookingdates.length">No bookings yet as a guest.</p>
+                        <div ng-repeat="bookingdate in dashboard.guestbookingdates">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <div class="row no-mar-btm">
+                                        <div class="col s10">
+                                            <span class="title"><a ui-sref="bookingdetails({id:bookingdate.booking.id})"><strong>{{bookingdate.booking.title}}</strong></a></span>
+                                            <p>{{ dashboard.convertToDate(bookingdate.date) | date:"dd/MM/yyyy"}} at {{ dashboard.convertToDate(bookingdate.date) | date:"HH:mm"}}</p>
+                                            <p>{{ bookingdate.host.first_name}} {{bookingdate.host.last_name}}</p>
+                                            <p>{{ bookingdate.booking.postalcode + " " + bookingdate.booking.city}}</p>
+                                            <p>{{ bookingdate.booking.street_number}}</p>
+                                            <p>{{ "€" + bookingdate.booking.price + "/person"}}</p>
+                                        </div>
+                                        <div class="col s2">
+                                            <a href="" class="collection-action-btn" ng-click="dashboard.cancelSeat(bookingdate.id)" title="Cancel"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content black-text">
+                        <span class="card-title">Sent requests</span>
+                        <p ng-hide="dashboard.guestrequests.length">You haven't sent any requests recently.</p>
+                        <div ng-repeat="guestrequest in dashboard.guestrequests">
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <div class="row no-mar-btm">
+                                        <div class="col s10">
+                                            <p>Booking:
+                                                <a ui-sref="bookingdetails({id:guestrequest.booking.id})"><strong>{{ guestrequest.booking.title}}</strong></a>
+                                            </p>
+                                            <span>Hosted: <a ui-sref="publicprofile({id:guestrequest.booking.host.id})"><strong>{{guestrequest.booking.host.first_name + " " + guestrequest.booking.host.last_name}}</strong></a></span>
+                                            <p>Date and time: {{ dashboard.convertToDate(guestrequest.date) | date:"dd/MM/yyyy" }} at {{dashboard.convertToDate(guestrequest.date) | date:"HH:mm" }}</p>
+                                            <br>
+                                            <div ng-show="guestrequest.pivot.optional_message_guest">
+                                                <span>Your message: {{ guestrequest.pivot.optional_message_guest }}</span>
+                                            </div>
+                                            <div ng-show="guestrequest.pivot.optional_message_host">
+                                                <span>Message from the host: {{ guestrequest.pivot.optional_message_host }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col s2">
+                                            <span ng-show="guestrequest.pivot.status === 'pending'" class="badge grey lighten-1 white-text" data-badge-caption="No response yet"></span>
+                                            <span ng-show="guestrequest.pivot.status === 'accepted'" class="badge green darken-1 white-text" data-badge-caption="Accepted"></span>
+                                            <span ng-show="guestrequest.pivot.status === 'declined'" class="badge red darken-1 white-text" data-badge-caption="Declined"></span>
+                                            <a href="" class="collection-action-btn" ng-click="dashboard.cancelRequest(guestrequest.id)" title="Delete request">
+                                                <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i> </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12">
+                <div class="card">
+                    <div class="card-content black-text">
+                        <span class="card-title">Reviews</span> <a ui-sref="createreview">
+                        <h6>Write reviews for your guests or hosts here</h6></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>

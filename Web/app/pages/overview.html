@@ -1,51 +1,53 @@
 <main>
-	<div class="container under-header overview">
-		<h1>Bookings</h1>
-		<div class="row">
-			<form>
-				<div class="input-field col s8">
-					<input ng-keyup="$event.keyCode == 13 ? overview.checkIfInputLocation() : null" id="autocomplete" type="text" placeholder="Where'd you like to eat?" name="location" validate ng-model="overview.search_string"/>
-				</div>
-				<div class="input-field col s4">
-					<a class="waves-effect waves-light btn" ng-click="overview.checkIfInputLocation()"><i class="material-icons md-48 md-dark">search</i></a>
-				</div>
-			</form>
-			<div id="bookingswrapper" class="col s10">
-				<div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
-					<div class="divider mar-top-l" ng-if="!$first"></div>
-					<div class="wrapper row">
-						<div class="img_container left col s5 mar-top-l">
-							<img ng-src="{{ overview.bookingImage(booking) }}">
-						</div>
-						<div class="text_container col s7 mar-top-s">
-							<h4>{{ booking.title }}</h4>
-							<p>Hosted by <a ui-sref="publicprofile({id:booking.host.id})">{{ booking.host.first_name + " " + booking.host.last_name}}</a></p>
-							<p>In {{ booking.city }}</p>
-							<p>{{ booking.price | currency : "€"}} per person</p>
-							<a class="btn waves waves-light" ui-sref="bookingdetails({id: booking.id})">More information</a>
-						</div>
-					</div>
-				</div>
-				<div ng-hide="overview.bookings.length" class="mar-top-l">
-					<h5>No results found</h5>
-				</div>
-			</div>
-			<div id="filterwrapper" class="col s2">
-				<h5>Interests</h5>
-				<ul class="interests-filter">
-					<li ng-repeat="interest in overview.interests">
-						<input type="checkbox" id="{{interest.name}}" ng-model="interest.selected"/>
-	      				<label for="{{interest.name}}">{{ interest.name }}</label>
-					</li>
-				</ul>
-				<h5>Kitchen style</h5>
-				<ul class="kitchen-filter">
-					<li ng-repeat="kitchen in overview.kitchenstyles">
-						<input type="checkbox" id="{{kitchen.name}}" ng-model="kitchen.selected"/>
-	      				<label for="{{kitchen.name}}">{{ kitchen.name }}</label>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
+    <div class="container under-header overview">
+        <h1>Bookings</h1>
+        <div class="row">
+            <form>
+                <div class="input-field col s8">
+                    <input ng-keyup="$event.keyCode == 13 ? overview.checkIfInputLocation() : null" id="autocomplete" type="text" placeholder="Where'd you like to eat?" name="location" validate ng-model="overview.search_string"/>
+                </div>
+                <div class="input-field col s4">
+                    <a class="waves-effect waves-light btn" ng-click="overview.checkIfInputLocation()"><i class="material-icons md-48 md-dark">search</i></a>
+                </div>
+            </form>
+            <div id="bookingswrapper" class="col s10">
+                <div ng-repeat="booking in overview.bookings | filter:overview.showFilteredInterests() | filter: overview.showFilteredKitchenStyles()" class="mar-top-xl mar-btm-xl">
+                    <div class="divider mar-top-l" ng-if="!$first"></div>
+                    <div class="wrapper row">
+                        <div class="img_container left col s5 mar-top-l">
+                            <img ng-src="{{ overview.bookingImage(booking) }}">
+                        </div>
+                        <div class="text_container col s7 mar-top-s">
+                            <h4>{{ booking.title }}</h4>
+                            <p>Hosted by
+                                <a ui-sref="publicprofile({id:booking.host.id})">{{ booking.host.first_name + " " + booking.host.last_name}}</a>
+                            </p>
+                            <p>In {{ booking.city }}</p>
+                            <p>{{ booking.price | currency : "€"}} per person</p>
+                            <a class="btn waves waves-light" ui-sref="bookingdetails({id: booking.id})">More information</a>
+                        </div>
+                    </div>
+                </div>
+                <div ng-hide="overview.bookings.length" class="mar-top-l">
+                    <h5>No results found</h5>
+                </div>
+            </div>
+            <div id="filterwrapper" class="col s2">
+                <h5>Interests</h5>
+                <ul class="interests-filter">
+                    <li ng-repeat="interest in overview.interests">
+                        <input type="checkbox" id="{{interest.name}}" ng-model="interest.selected"/>
+                        <label for="{{interest.name}}">{{ interest.name }}</label>
+                    </li>
+                </ul>
+                <h5>Kitchen style</h5>
+                <ul class="kitchen-filter">
+                    <li ng-repeat="kitchen in overview.kitchenstyles">
+                        <input type="checkbox" id="{{kitchen.name}}" ng-model="kitchen.selected"/>
+                        <label for="{{kitchen.name}}">{{ kitchen.name }}</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </main>
