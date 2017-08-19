@@ -127,6 +127,10 @@ span.badge {
 		padding: 20px;
 	}
 }
+.card-image img {
+	height: 300px;
+	object-fit: cover;
+}
 #pp-container {
 	a { 
 		font-family: "Roboto", sans-serif !important; 
@@ -134,9 +138,4 @@ span.badge {
 	}
 	.card-title { line-height: 30px; }
 	#user-info .collection-item { padding: 10px 20px; }
-
-	.card-image img {
-		height: 200px;
-    	object-fit: cover;
-	}
 }

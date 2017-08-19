@@ -12,6 +12,7 @@ d2gApp.directive("d2gLogin", function (authService) {
 			var authSvc = authService;
 
 			vm.login = function () {
+				$('#login-modal').modal('close');
 				var credentials = {
 					email: vm.email,
 					password: vm.password
