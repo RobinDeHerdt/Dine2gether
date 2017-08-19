@@ -25,6 +25,8 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
     }
 
 	vm.sendRequest = function () {
+        vm.buttonDisabled = true;
+
 		if(!vm.propose_date) {
             $('select').material_select();
 
@@ -51,11 +53,15 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
                     type: "error"
                 });
 
+                vm.buttonDisabled = false;
+
                 return;
 			}
 		}
 
         requestSvc.addRequest(data).then(function (data) {
+            vm.buttonDisabled = false;
+
         	switch(data.data.status) {
 				case "success":
                     swal({
@@ -91,6 +97,8 @@ d2gApp.controller("requestBookingController", function (bookingService, requestS
                 text: "We're very sorry, but something went wrong. We couldn't send your request. You can try again later, or contact us if this problem keeps occuring",
                 type: "error"
             });
+
+            vm.buttonDisabled = false;
         });
 	};
 
